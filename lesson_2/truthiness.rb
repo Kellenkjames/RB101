@@ -136,7 +136,6 @@ end
 # Presumably, the find_name method will either return a valid object, or it will return nil or false. Writing code like that is dangrous and can be easily misunderstood by others as equality comparison, rather than assignment. 
 
 # More common, you'll see code like this:
-
 name = find_name
 
 if name && name.valid?
