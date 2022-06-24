@@ -114,8 +114,8 @@ END
 =end 
 
 def sum_integers(num1, num2)
-sum = num1 + num2
-sum
+  sum = num1 + num2
+  sum
 end 
 
 puts sum_integers(20, 30)
@@ -154,8 +154,8 @@ END
 =end 
 
 def str_concat(str)
-a = [1, 2, 3]
-a.concat(str)
+  a = [1, 2, 3]
+  a.concat(str)
 end
 
 p str_concat(["Hello", "This", "Is", "RB101", "Programming", "Foundations"])
@@ -196,11 +196,11 @@ END
 =end
 
 def every_other(arr)
-new_arr = arr.select { |x| arr.index(x) % 2 == 0 }
-new_arr
+  new_arr = arr.select { |x| arr.index(x) % 2 == 0 }
+  new_arr
 end    
 
-puts every_other([1, 3, 5, 7, 9, 12])
+p every_other([1,4,7,2,5]) # => [1,7,5]
 
 #-------------------------------------------------------------
 
@@ -210,8 +210,46 @@ puts every_other([1, 3, 5, 7, 9, 12])
 
 Basic Pseudo-Code 
 
- 
+Given a method that determines the index of the 3rd occurrence of a given character in a string. For instance, if the given character is 'x' and the string is 'axbxcdxex', the method should return 6 (the index of the 3rd 'x'). If the given character does not occur at least 3 times, return nil
+
+Define a method that accepts a character and string arguments 
+  - create a variable to store return value 
+  - invoke method to find index of 3rd occurence of a given character
+  - if the given character does not occur at least 3 times
+    - return nil 
+  - otherwise
+    - return stored value to variable
 
 END
 
 Formal Pseudo-Code
+
+START
+
+# Given a method that determines the index of the 3rd occurrence of a given character in a string. 
+
+SET output = nil 
+
+def index_of_third(char, str)
+  output = str.index(char)
+  if output.count < 3
+    nil 
+  else
+    output 
+  end
+end  
+
+END 
+
+=end
+
+def index_of_third(char, str)
+  output = str.index(char)
+#   if output.count
+#     nil 
+#   else
+#     output 
+#   end
+# end 
+
+puts index_of_third("x", "axbxcdxex")
