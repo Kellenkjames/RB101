@@ -1,3 +1,5 @@
+# Truthiness
+
 # In Ruby, booleans are represented by the true and false objects. Like everything else in Ruby, boolean objects also have real classes behind them, and you can call methods on true and false.
 true.class              # => TrueClass
 true.nil?                 # => false
