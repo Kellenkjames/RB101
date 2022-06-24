@@ -102,3 +102,51 @@ true && 3/0
 # Relying on the short circut behvaior can be dangerous, but it's sometimes handy. We'll see some examples of its use in common Ruby code below. 
 
 #                                                                                                 
+
+# Truthiness 
+
+# Truthiness differes from "true" in that Ruby considers more than the "true" object to be "truthy". In fact, Ruby is a very liberal language and considers everything to be truthy other than false and nil. 
+
+# This means that we can use any expression in a conditional, or with logical operators, and as long as it doesn't evaluate to false or nil, it is considered true. 
+
+# Note: An expression that Ruby consideres true is NOT the same as the true object. This is what "truthiness" means. 
+
+# Example
+num = 5
+
+if num
+  puts "valid number"
+else 
+  puts "error!"
+end 
+
+# If you didn't know Ruby at all, your might guess that the above should either output "error!", or the program should generate an error of some sort. But if you run that code, it will actually output "valid number". 
+
+# The reason is because Ruby considers any integer to be "truthy". It does not, however, mean that the "num" variable from above is equal to true: 
+num = 5
+num == true              # => false 
+
+# This means that even the integer 0 is considered truthy, which is not the case in some other languages. Rubyists take advantage of truthiness in Ruby to write some interesting code. For example, sometimes you'll see assignment in a conditional or logical operator. 
+if name = find_name
+  puts "got a name"
+else 
+  puts "couldn't find it"
+end 
+
+# Presumably, the find_name method will either return a valid object, or it will return nil or false. Writing code like that is dangrous and can be easily misunderstood by others as equality comparison, rather than assignment. 
+
+# More common, you'll see code like this:
+
+name = find_name
+
+if name && name.valid?
+  puts "great name!"
+else 
+  puts "either couldn't find name or it's invalid"
+end 
+
+# The if conditional above is checking that "name" is not "nil", then checking the validity of "name". It's doing this by relying on the && short circut behavior to not execute name.valid? if name is nil. 
+
+# Remember that && short circuits if it encounters a false, and nil is considered "falsy"
+
+# Rember this Rule: Everything in Ruby is considered "truthy" except for false and nil. 
