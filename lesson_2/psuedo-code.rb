@@ -76,7 +76,7 @@ find_greatest([100, 6, 5, 10, 25, 87])
 
 #-------------------------------------------------------------
 
-# Example1)
+# Example 1)
 
 =begin
 
@@ -122,3 +122,43 @@ end
 
 puts sum_integers(20, 30)
 
+#-------------------------------------------------------------
+
+# Example 2)
+
+=begin
+
+Basic Pseudo-Code 
+
+a method that takes an array of strings, and returns a string that is all those strings concatenated together
+
+Given a method that takes an array of strings, returns a string that is all those strings concatenated together
+
+Define a method that takes an array of strings:
+  - create a variable and assign to arr with hard-coded values i.e. [1, 2, 3]
+  - invoke the concat method on the variable and ary of strings as argument 
+  - return value 
+
+Formal Pseudo-Code
+
+START
+
+# Given a method that takes an array of strings, returns a string that is all those strings concatenated together
+
+SET output = str.concat
+
+def str_concat(str)
+  a = [1, 2, 3]
+  a.concat(str)
+end
+
+END
+
+=end 
+
+def str_concat(str)
+  a = [1, 2, 3]
+  a.concat(str)
+end
+
+p str_concat(["Hello", "This", "Is", "RB101", "Programming", "Foundations"])
