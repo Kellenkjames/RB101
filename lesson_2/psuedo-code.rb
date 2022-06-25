@@ -87,9 +87,9 @@ Given a method, return the sum of two integers.
 Define a method with that accepts two parameters:
 - pass the first parameter into method body
 - pass the second paramter into method body
-- create variable to store sum output
+- create variable to store sum str
 - add the sum of first & second parameter
-- store the reuslt back into the sum output variable
+- store the reuslt back into the sum str variable
 
 Call the method with different arguments 
 
@@ -142,7 +142,7 @@ START
 
 # Given a method that takes an array of strings, returns a string that is all those strings concatenated together
 
-SET output = str.concat
+SET str = str.concat
 
 def str_concat(str)
 a = [1, 2, 3]
@@ -212,13 +212,18 @@ Basic Pseudo-Code
 
 Given a method that determines the index of the 3rd occurrence of a given character in a string. For instance, if the given character is 'x' and the string is 'axbxcdxex', the method should return 6 (the index of the 3rd 'x'). If the given character does not occur at least 3 times, return nil
 
-Define a method that accepts a character and string arguments 
-  - create a variable to store return value 
-  - invoke method to find index of 3rd occurence of a given character
-  - if the given character does not occur at least 3 times
-    - return nil 
-  - otherwise
-    - return stored value to variable
+Define a method that accepts a two arguments
+  - pass two args into method (char, str)
+  - invoke split method on string to reutrn sub array of strings
+    - store sub array of strings in variable called "arr"
+  - invoke count method on arr variable
+    - store return value in variable called "count"
+  - If count is less than 3
+    - return nil
+  - Else 
+    - Iterate and find the index of the 3rd "char"
+
+    Return "index" and display to user 
 
 END
 
@@ -228,28 +233,72 @@ START
 
 # Given a method that determines the index of the 3rd occurrence of a given character in a string. 
 
-SET output = nil 
+SET arr = str.split("")
+SET count = arr.count(char)
 
-def index_of_third(char, str)
-  output = str.index(char)
-  if output.count < 3
-    nil 
+def index_char(char, str)
+  arr = str.split("")
+
+  count = arr.count(char) 
+
+  if count < 3
+    return nil 
   else
-    output 
-  end
-end  
+    Iterate and find the index of the 3rd "char"  
+  end 
+end 
 
 END 
 
 =end
 
-def index_of_third(char, str)
-  output = str.index(char)
-#   if output.count
-#     nil 
-#   else
-#     output 
-#   end
-# end 
+def index_char(char, str)
+  # Split string into character sub array
+  arr = str.split("")
 
-puts index_of_third("x", "axbxcdxex")
+  # Find number of occurences 
+  count = arr.count(char) 
+
+  if count < 3
+    return nil 
+  else
+      # Iterate and find the index of the 3rd "char"
+      arr  
+  end 
+end 
+
+p index_char("x", "axbxcdxex")
+
+#-------------------------------------------------------------
+
+# Example 5)
+
+=begin
+
+Basic Pseudo-Code 
+
+# Given a method that takes two arrays of numbers and returns the result of merging the arrays. The elements of the first array should become the elements at the even indexes of the returned array, while the elements of the second array should become the elements at the odd indexes. For instance:
+
+merge([1, 2, 3], [4, 5, 6]) # => [1, 4, 2, 5, 3, 6]
+
+Define a method that accepts two arrays as arguments: 
+- create empty arry and store in a variable 
+- store arrOne arg in a variable 
+- store arrTwo arg in a variable
+- 
+
+Formal Pseudo-Code
+
+START
+
+# Given a method that takes two arrays of numbers and returns the result of merging the arrays.
+
+def merged_arrays(arrOne, arrTwo)
+  merge_arr =[]
+
+end 
+
+
+END 
+
+=end
