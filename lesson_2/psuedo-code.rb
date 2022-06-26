@@ -34,11 +34,11 @@ SET iterator = 1
 SET saved_number = value within numbers collection at space 1
 
 WHILE iterator <= length of numbers 
-SET current_number = value within numbers collection at space "iterator"
-IF saved_number >= current_number
-go to the next iteration
-ELSE
-saved_number = current_number
+  SET current_number = value within numbers collection at space "iterator"
+  IF saved_number >= current_number
+    go to the next iteration
+  ELSE
+    saved_number = current_number
 
 iterator = iterator + 1
 
@@ -103,11 +103,11 @@ SET parameters (num1, num2)
 SET sum = num1 + num2 
 
 def sum_integers(num1, num2)
-sum = num1 + num2
-sum 
+  sum = num1 + num2
+  sum 
 end 
 
-PUTS sum_integers(5, 10)
+PRINT sum_integers(5, 10)
 
 END 
 
@@ -142,12 +142,12 @@ START
 
 # Given a method that takes an array of strings, returns a string that is all those strings concatenated together
 
-SET str = str.concat
-
-def str_concat(str)
-a = [1, 2, 3]
-a.concat(str)
+SET str_concat(str)
+  a = [1, 2, 3]
+  a.concat(str)
 end
+
+PRINT str_concat(["Hello", "This", "Is", "RB101", "Programming", "Foundations"])
 
 END
 
@@ -184,11 +184,9 @@ START
 
 # Given a method that takes an array of integers and returns a new array with every other element from the original array, staring with the first element.
 
-SET new_arr = arr filter method 
-
-def every_other(arr)
-new_arr = arr.select {|x| arr.index(x) % 2 ==0 }
-new arr
+SET every_other(arr)
+  SET new_arr = arr.select {|x| arr.index(x) % 2 ==0 }
+  new arr
 end 
 
 END 
@@ -210,7 +208,7 @@ p every_other([1,4,7,2,5]) # => [1,7,5]
 
 Basic Pseudo-Code 
 
-Given a method that determines the index of the 3rd occurrence of a given character in a string. For instance, if the given character is 'x' and the string is 'axbxcdxex', the method should return 6 (the index of the 3rd 'x'). If the given character does not occur at least 3 times, return nil
+Given a method that determines the index of the 3rd occurrence of a given character in a string. For instance, if the given character is 'x' and the string is 'axbxcdxex', the method should return 6 (the index of the 3rd 'x'). If the given character does not occur at least 3 times, return nil.
 
 Define a method that accepts a two arguments
   - pass two args into method (char, str)
@@ -218,9 +216,9 @@ Define a method that accepts a two arguments
     - store sub array of strings in variable called "arr"
   - invoke count method on arr variable
     - store return value in variable called "count"
-  - If count is less than 3
+  - IF count is less than 3
     - return nil
-  - Else 
+  - ELSE 
     - Iterate and find the index of the 3rd "char"
 
     Return "index" and display to user 
@@ -233,26 +231,24 @@ START
 
 # Given a method that determines the index of the 3rd occurrence of a given character in a string. 
 
-SET arr = str.split("")
-SET count = arr.count(char)
+def index_count(char, str)
+  SET arr = str.split("")
+  SET count = arr.count(char) 
 
-def index_char(char, str)
-  arr = str.split("")
-
-  count = arr.count(char) 
-
-  if count < 3
+  IF count is less than 3
     return nil 
-  else
+  ELSE
     Iterate and find the index of the 3rd "char"  
   end 
 end 
+
+PRINT index_count("x", "axbxcdxex")
 
 END 
 
 =end
 
-def index_char(char, str)
+def index_count(char, str)
   # Split string into character sub array
   arr = str.split("")
 
@@ -267,7 +263,7 @@ def index_char(char, str)
   end 
 end 
 
-p index_char("x", "axbxcdxex")
+p index_count("x", "axbxcdxex")
 
 #-------------------------------------------------------------
 
@@ -281,24 +277,38 @@ Basic Pseudo-Code
 
 merge([1, 2, 3], [4, 5, 6]) # => [1, 4, 2, 5, 3, 6]
 
-Define a method that accepts two arrays as arguments: 
+Define a method "merge" that accepts two arrays as arguments: 
 - create empty arry and store in a variable 
 - store arrOne arg in a variable 
 - store arrTwo arg in a variable
-- 
+- push arrOne to empty arr
+- push arrTwo to empty arr
+- call arr.flatten method on arr
+
 
 Formal Pseudo-Code
 
 START
 
-# Given a method that takes two arrays of numbers and returns the result of merging the arrays.
+# Given a method that takes two arrays of numbers and returns the result of merging the arrays where the elements of the first array should become the elements at the even indexes of the returned array, while the elements of the second array should become the elements at the odd indexes. 
 
-def merged_arrays(arrOne, arrTwo)
-  merge_arr =[]
+SET merge(arrOne, arrTwo)
+  SET arr = []
+
+  arr.push(arrOne, arrTwo)
+  arr.flatten # => [1, 2, 3, 4, 5, 6]
+  
+  arr.each_index do |x|
+    IF x.even? 
+      SET elements of the first arr to the elements at the even indexes 
+    ELSE 
+      SET elements of the second arr to the elements at the odd indexes  
+  end 
 
 end 
-
-
+  
 END 
+
+PRINT merge([1, 2, 3], [4, 5, 6]) # => [1, 4, 2, 5, 3, 6]
 
 =end
