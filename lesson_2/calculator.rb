@@ -2,9 +2,9 @@
 
 =begin 
 
-  Requirements:
+  * Requirements:
 
-  Build a command line calculator program that does the following:
+  TODO Build a command line calculator program that does the following:
     - asks for two numbers
     - asks for the type of operation to perform: add, subtract, multiply or divide
     - displays the result 
