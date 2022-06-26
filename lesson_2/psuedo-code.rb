@@ -279,12 +279,13 @@ merge([1, 2, 3], [4, 5, 6]) # => [1, 4, 2, 5, 3, 6]
 
 Define a method "merge" that accepts two arrays as arguments: 
 - create empty arry and store in a variable 
-- store arrOne arg in a variable 
-- store arrTwo arg in a variable
 - push arrOne to empty arr
 - push arrTwo to empty arr
 - call arr.flatten method on arr
-
+- if elements are from the first array
+  - set to the even indexes of the returned arr
+- otherwise, the elements are from the second arr
+  - set to the odd indexes of the returned arr
 
 Formal Pseudo-Code
 
