@@ -16,9 +16,17 @@ def prompt(message)
   puts("=> #{message}")
 end
 
-#*  Bonus feature: Better integer validation  
+# *  Bonus feature: Better integer validation
 def valid_number?(num_string)
-  num_string.to_i.to_s == num_string && num_string.to_i >= 0 
+  # validate integers
+  num_string.to_i.to_s == num_string && num_string.to_i >= 0
+end
+
+# * Bonus feature: Number validation
+def number?(num_string)
+  # integers or floats
+  valid_number?(num_string) || num_string.to_f.to_s ==
+    num_string && num_string.to_f >= 0
 end
 
 def operation_to_message(op)
@@ -49,7 +57,7 @@ loop do # main loop
   loop do
     prompt("What's the first number?")
     number1 = gets.chomp
-    break if valid_number?(number1)
+    break if number?(number1)
 
     prompt("Hmm... that doesn't look like a valid number")
   end
@@ -58,7 +66,7 @@ loop do # main loop
   loop do
     prompt("What's the second number?")
     number2 = gets.chomp
-    break if valid_number?(number2)
+    break if number?(number2)
 
     prompt("Hmm... that doesn't look like a valid number")
   end
