@@ -1,5 +1,9 @@
 # Calculator + Refactor
 
+# Load messages 
+require 'yaml'
+config = YAML.load_file('config.yml')
+
 =begin
 
   * Requirements:
@@ -44,12 +48,12 @@ def operation_to_message(op)
   puts "Now code can be run safely after case statement"
 end
 
-prompt("Welcome to Calculator! Enter your name:")
+prompt(config["en"]["welcome_msg"])
 
 name = nil
 loop do
   name = gets.chomp
-  name.empty? ? prompt("Make sure to use a valid name.") : break
+  name.empty? ? prompt(config["en"]["valid_name"]) : break
 end
 
 prompt("Hi #{name}!")
@@ -57,20 +61,20 @@ prompt("Hi #{name}!")
 loop do # main loop
   number1 = nil
   loop do
-    prompt("What's the first number?")
+    prompt(config["en"]["first_number"])
     number1 = gets.chomp
     break if number?(number1)
 
-    prompt("Hmm... that doesn't look like a valid number")
+    prompt(config["en"]["invalid_number"])
   end
 
   number2 = nil
   loop do
-    prompt("What's the second number?")
+    prompt(config["en"]["second_number"])
     number2 = gets.chomp
     break if number?(number2)
 
-    prompt("Hmm... that doesn't look like a valid number")
+    prompt(config["en"]["invalid_number"])
   end
 
   operator_prompt = <<-MSG
