@@ -16,8 +16,9 @@ def prompt(message)
   puts("=> #{message}")
 end
 
-def valid_number?(num)
-  num.to_i != 0
+#*  Bonus feature: Better integer validation  
+def valid_number?(num_string)
+  num_string.to_i.to_s == num_string && num_string.to_i >= 0 
 end
 
 def operation_to_message(op)
