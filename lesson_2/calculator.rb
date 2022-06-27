@@ -30,16 +30,18 @@ def number?(num_string)
 end
 
 def operation_to_message(op)
+  # * Bonus feature: Adding explicit returns in case statement
   case op
   when '1'
-    'Adding'
+    return 'Adding'
   when '2'
-    'Subtracting'
+    return 'Subtracting'
   when '3'
-    'Multiplying'
+    return 'Multiplying'
   when '4'
-    'Dividing'
+    return 'Dividing'
   end
+  puts "Now code can be run safely after case statement"
 end
 
 prompt("Welcome to Calculator! Enter your name:")
