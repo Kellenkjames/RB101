@@ -77,14 +77,12 @@ loop do # main loop
     prompt(config["en"]["invalid_number"])
   end
 
-  operator_prompt = <<-MSG
-    What operation would you like to perform? 
-    1) add
-    2) subtract
-    3) multiply
-    4) divide 
-  MSG
-
+  operator_prompt = "#{config["en"]["operation"]}
+    #{config["en"]["add"]}
+    #{config["en"]["subtract"]}
+    #{config["en"]["multiply"]}
+    #{config["en"]["divide"]}"
+  
   prompt(operator_prompt)
 
   operator = nil
