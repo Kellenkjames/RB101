@@ -52,6 +52,7 @@ mapped_and_tapped = mapped_array.tap { |value| p 'hello' } # 'hello'
 mapped_and_tapped # => [2, 3, 4]
 
 #---------------------------------
+#* Relevant use case 
 
 (1..10)                                         .tap { |x| p x } # 1..10
   .to_a                                         .tap { |x| p x } # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
