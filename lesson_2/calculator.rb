@@ -20,13 +20,11 @@ def prompt(message)
   puts("=> #{message}")
 end
 
-# *  Bonus feature: Better integer validation
 def valid_number?(num_string)
   # validate integers
   num_string.to_i.to_s == num_string && num_string.to_i >= 0
 end
 
-# * Bonus feature: Number validation
 def number?(num_string)
   # integers or floats
   valid_number?(num_string) || num_string.to_f.to_s ==
@@ -34,7 +32,6 @@ def number?(num_string)
 end
 
 def operation_to_message(op)
-  # * Bonus feature: Adding explicit returns in case statement
   case op
   when '1'
     return 'Adding'
@@ -90,10 +87,10 @@ loop do # main loop
     operator = gets.chomp
     break if %w(1 2 3 4).include?(operator)
 
-    prompt("Must choose 1, 2, 3, or 4")
+    prompt(config["en"]["must_choose"]])
   end
 
-  prompt("#{operation_to_message(operator)} the two numbers...")
+  prompt("#{operation_to_message(operator)} #{config["en"]["two_numbers"]}")
 
   result =
     case operator

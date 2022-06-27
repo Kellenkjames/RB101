@@ -10,7 +10,9 @@ en: {
   add: "1) add",
   subtract: "2) subtract",
   multiply: "3) multiply",
-  divide: "4) divide"
+  divide: "4) divide",
+  must_choose: "Must choose 1, 2, 3, or 4",
+  two_numbers: "the two numbers...",
 }
 
 
