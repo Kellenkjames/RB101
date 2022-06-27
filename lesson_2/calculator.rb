@@ -9,16 +9,14 @@
     - asks for the type of operation to perform: add, subtract, multiply or divide
     - displays the result 
 
-    Use the Kernel.gets() method to retrieve user input, and use Kernel.puts() method to display output. Remember that Kernel.gets() includes the newline, so you have to call chomp() to remove it: Kernel.gets().chomp()
-
 =end
 
 def prompt(message)
-  Kernel.puts("=> #{message}")
+  puts("=> #{message}")
 end
 
 def valid_number?(num)
-  num.to_i() != 0 # if the number is not zero, it's valid
+  num.to_i != 0 
 end
 
 def operation_to_message(op)
@@ -38,9 +36,9 @@ prompt("Welcome to Calculator! Enter your name:")
 
 name = nil 
 loop do 
-  name = Kernel.gets().chomp()
+  name = gets.chomp
   
-  name.empty?() ? prompt("Make sure to use a valid name.") : break
+  name.empty? ? prompt("Make sure to use a valid name.") : break
 end 
 
 prompt("Hi #{name}!")
@@ -49,7 +47,7 @@ loop do # main loop
   number1 = nil 
   loop do 
     prompt("What's the first number?")
-    number1 = Kernel.gets().chomp()
+    number1 = gets.chomp
 
     break if valid_number?(number1)
     prompt("Hmm... that doesn't look like a valid number")
@@ -58,7 +56,7 @@ loop do # main loop
   number2 = nil 
   loop do 
     prompt("What's the second number?")
-    number2 = Kernel.gets().chomp()
+    number2 = gets.chomp
     
     break if valid_number?(number2)
     prompt("Hmm... that doesn't look like a valid number")
@@ -76,7 +74,7 @@ loop do # main loop
 
   operator = nil 
   loop do 
-    operator = Kernel.gets().chomp
+    operator = gets.chomp
 
     break if %w(1 2 3 4).include?(operator) 
     prompt("Must choose 1, 2, 3, or 4")
@@ -86,20 +84,20 @@ loop do # main loop
 
   result = case operator
                   when '1'
-                    number1.to_i() + number2.to_i()
+                    number1.to_i + number2.to_i
                   when '2'
-                    number1.to_i() - number2.to_i()
+                    number1.to_i - number2.to_i
                   when '3'
-                    number1.to_i() * number2.to_i()
+                    number1.to_i * number2.to_i
                   when '4'
-                    number1.to_f() / number2.to_f()
+                    number1.to_f / number2.to_f
   end 
 
   prompt("The result is #{result}")
 
   prompt("Do you want to perform another calculation? (Y to calculate again)")
-  answer = Kernel.gets().chomp()
-  break unless answer.downcase().start_with?('y')
+  answer = gets.chomp
+  break unless answer.downcase.start_with?('y')
 end 
 
 prompt("Thank you for using the calculator. Good bye!")
