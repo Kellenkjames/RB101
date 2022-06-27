@@ -1,4 +1,4 @@
-# Walk-through: Calculator 
+# Calculator + Refactor 
 
 =begin 
 
@@ -37,7 +37,6 @@ prompt("Welcome to Calculator! Enter your name:")
 name = nil 
 loop do 
   name = gets.chomp
-  
   name.empty? ? prompt("Make sure to use a valid name.") : break
 end 
 
@@ -48,8 +47,8 @@ loop do # main loop
   loop do 
     prompt("What's the first number?")
     number1 = gets.chomp
-
     break if valid_number?(number1)
+    
     prompt("Hmm... that doesn't look like a valid number")
   end 
 
@@ -57,8 +56,8 @@ loop do # main loop
   loop do 
     prompt("What's the second number?")
     number2 = gets.chomp
-    
     break if valid_number?(number2)
+    
     prompt("Hmm... that doesn't look like a valid number")
   end 
 
@@ -75,8 +74,8 @@ loop do # main loop
   operator = nil 
   loop do 
     operator = gets.chomp
-
     break if %w(1 2 3 4).include?(operator) 
+    
     prompt("Must choose 1, 2, 3, or 4")
   end 
 
