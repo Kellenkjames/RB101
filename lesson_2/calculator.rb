@@ -26,17 +26,19 @@ def translation(lang)
 end
 
 def operation_to_message(op, lang)
-  case op
-  when '1'
-    return MESSAGES[translation(lang)]['adding']
-  when '2'
-    return MESSAGES[translation(lang)]['subtracting']
-  when '3'
-    return MESSAGES[translation(lang)]['multiplying']
-  when '4'
-    return MESSAGES[translation(lang)]['dividing']
-  end
-  puts "Now code can be run safely after case statement"
+  word =
+    case op
+    when '1'
+      MESSAGES[translation(lang)]['adding']
+    when '2'
+      MESSAGES[translation(lang)]['subtracting']
+    when '3'
+      MESSAGES[translation(lang)]['multiplying']
+    when '4'
+      MESSAGES[translation(lang)]['dividing']
+    end
+    # If we wante to add code here, it's now possible
+  word
 end
 
 lang = nil
