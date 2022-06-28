@@ -2,11 +2,9 @@
 
 # Load messages 
 require 'yaml'
-config = YAML.load_file('config.yml')
+msgs = YAML.load_file('config.yml')
 
 =begin
-
-  * Requirements:
 
   TODO => Build a command line calculator program that does the following:
     - asks for two numbers
@@ -32,53 +30,54 @@ def number?(num_string)
 end
 
 def operation_to_message(op)
+  msgs = YAML.load_file('config.yml')
   case op
   when '1'
-    return 'Adding'
+    return msgs["adding"]
   when '2'
-    return 'Subtracting'
+    return msgs["subtracting"]
   when '3'
-    return 'Multiplying'
+    return msgs["multiplying"]
   when '4'
-    return 'Dividing'
+    return msgs["dividing"]
   end
   puts "Now code can be run safely after case statement"
 end
 
-prompt(config["en"]["welcome_msg"])
+prompt(msgs["welcome_msg"])
 
 name = nil
 loop do
   name = gets.chomp
-  name.empty? ? prompt(config["en"]["valid_name"]) : break
+  name.empty? ? prompt(msgs["valid_name"]) : break
 end
 
-prompt("Hi #{name}!")
+prompt("#{msgs["greeting"]} #{name}!")
 
 loop do # main loop
   number1 = nil
   loop do
-    prompt(config["en"]["first_number"])
+    prompt(msgs["first_number"])
     number1 = gets.chomp
     break if number?(number1)
 
-    prompt(config["en"]["invalid_number"])
+    prompt(msgs["invalid_number"])
   end
 
   number2 = nil
   loop do
-    prompt(config["en"]["second_number"])
+    prompt(msgs["second_number"])
     number2 = gets.chomp
     break if number?(number2)
 
-    prompt(config["en"]["invalid_number"])
+    prompt(msgs["invalid_number"])
   end
 
-  operator_prompt = "#{config["en"]["operation"]}
-    #{config["en"]["add"]}
-    #{config["en"]["subtract"]}
-    #{config["en"]["multiply"]}
-    #{config["en"]["divide"]}"
+  operator_prompt = "#{msgs["operation"]}
+    #{msgs["add"]}
+    #{msgs["subtract"]}
+    #{msgs["multiply"]}
+    #{msgs["divide"]}"
   
   prompt(operator_prompt)
 
@@ -87,10 +86,10 @@ loop do # main loop
     operator = gets.chomp
     break if %w(1 2 3 4).include?(operator)
 
-    prompt(config["en"]["must_choose"]])
+    prompt(msgs["must_choose"])
   end
 
-  prompt("#{operation_to_message(operator)} #{config["en"]["two_numbers"]}")
+  prompt("#{operation_to_message(operator)} #{msgs["two_numbers"]}")
 
   result =
     case operator
@@ -104,11 +103,11 @@ loop do # main loop
       number1.to_f / number2.to_f
     end
 
-  prompt("The result is #{result}")
+  prompt("#{msgs["result"]} #{result}")
 
-  prompt("Do you want to perform another calculation? (Y to calculate again)")
+  prompt("#{msgs["another_calc?"]}")
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
-prompt("Thank you for using the calculator. Good bye!")
+prompt("#{msgs["thank_you"]}")
