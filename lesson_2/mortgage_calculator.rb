@@ -49,4 +49,19 @@ annual_interest_rate = annual_interest_rate.to_f / 100
 
 prompt("The annual interest rate is #{annual_interest_rate}%")
 
+loan_duration = nil 
+loop do 
+  prompt("How long is the duration of the loan (in years)?")
+  loan_duration = gets.chomp
+  
+  break if integer?(loan_duration)
+  prompt("Please enter a valid number")
+end 
+
+prompt("The duration of the loan is #{loan_duration} years")
+
+# Monthly Interest Rate 
+montly_interest_rate = ((annual_interest_rate * 100) / 12).round(2)
+prompt("The monthly interest rate is #{montly_interest_rate}%")
+
 
