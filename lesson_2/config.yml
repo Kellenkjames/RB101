@@ -1,29 +1,58 @@
 --- 
-  # Messages 
-  adding: "Adding"
-  subtracting: "Subtracting"
-  multiplying: "Multiplying"
-  dividing: "Dividing"
+  # Messages (multi-langauge support)
   
-  welcome_msg: "Welcome to Calculator! Please enter your name:"
-  greeting: "Hi"
-  valid_name: "Make sure to use a valid name."
-  
-  first_number: "What's the first number?"
-  second_number: "What's the second number?"
-  invalid_number: "Hmm... that doesn't look like a valid number"
-  
-  operation: "What operation would you like to perform?"
-  add: "1) add"
-  subtract: "2) subtract"
-  multiply: "3) multiply"
-  divide: "4) divide"
-  
-  must_choose: "Must choose 1, 2, 3, or 4"
-  two_numbers: "the two numbers..."
+  en:
+    adding: "Adding"
+    subtracting: "Subtracting"
+    multiplying: "Multiplying"
+    dividing: "Dividing"
+    
+    welcome_msg: "Welcome to Calculator! Please enter your name:"
+    greeting: "Hi"
+    valid_name: "Make sure to use a valid name."
+    
+    first_number: "What's the first number?"
+    second_number: "What's the second number?"
+    invalid_number: "Hmm... that doesn't look like a valid number"
+    
+    operation: "What operation would you like to perform?"
+    add: "1) add"
+    subtract: "2) subtract"
+    multiply: "3) multiply"
+    divide: "4) divide"
+    
+    must_choose: "Must choose 1, 2, 3, or 4"
+    two_numbers: "the two numbers..."
 
-  result: "The result is"
-  another_calc?: "Do you want to perform another calculation? (Y to calculate again)"
-  thank_you: "Thank you for using the calculator. Good bye!"
+    result: "The result is"
+    another_calc?: "Do you want to perform another calculation? (Y to calculate again)"
+    thank_you: "Thank you for using the calculator. Good bye!"
+
+  es: 
+    adding: "Adding"
+    subtracting: "Subtracting"
+    multiplying: "Multiplying"
+    dividing: "Dividing"
+    
+    welcome_msg: "Welcome to Calculator! Please enter your name:"
+    greeting: "Hi"
+    valid_name: "Make sure to use a valid name."
+  
+    first_number: "What's the first number?"
+    second_number: "What's the second number?"
+    invalid_number: "Hmm... that doesn't look like a valid number"
+  
+    operation: "What operation would you like to perform?"
+    add: "1) add"
+    subtract: "2) subtract"
+    multiply: "3) multiply"
+    divide: "4) divide"
+  
+    must_choose: "Must choose 1, 2, 3, or 4"
+    two_numbers: "the two numbers..."
+
+    result: "The result is"
+    another_calc?: "Do you want to perform another calculation? (Y to calculate again)"
+    thank_you: "Thank you for using the calculator. Good bye!"
   
   

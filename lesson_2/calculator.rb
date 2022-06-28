@@ -1,8 +1,8 @@
-# Calculator + Refactor
+# Calculator [Command Line]
 
 # Load messages
 require 'yaml'
-msgs = YAML.load_file('config.yml')
+MESSAGES = YAML.load_file('config.yml')
 
 =begin
 
@@ -30,54 +30,53 @@ def number?(num_string)
 end
 
 def operation_to_message(op)
-  msgs = YAML.load_file('config.yml')
   case op
   when '1'
-    return msgs["adding"]
+    return MESSAGES["en"]["adding"]
   when '2'
-    return msgs["subtracting"]
+    return MESSAGES["en"]["subtracting"]
   when '3'
-    return msgs["multiplying"]
+    return MESSAGES["en"]["multiplying"]
   when '4'
-    return msgs["dividing"]
+    return MESSAGES["en"]["dividing"]
   end
   puts "Now code can be run safely after case statement"
 end
 
-prompt(msgs["welcome_msg"])
+prompt(MESSAGES["en"]["welcome_msg"])
 
 name = nil
 loop do
   name = gets.chomp
-  name.empty? ? prompt(msgs["valid_name"]) : break
+  name.empty? ? prompt(MESSAGES["en"]["valid_name"]) : break
 end
 
-prompt("#{msgs['greeting']} #{name}!")
+prompt("#{MESSAGES['en']['greeting']} #{name}!")
 
 loop do # main loop
   number1 = nil
   loop do
-    prompt(msgs["first_number"])
+    prompt(MESSAGES['en']['first_number'])
     number1 = gets.chomp
     break if number?(number1)
 
-    prompt(msgs["invalid_number"])
+    prompt(MESSAGES['en']['invalid_number'])
   end
 
   number2 = nil
   loop do
-    prompt(msgs["second_number"])
+    prompt(MESSAGES["en"]["second_number"])
     number2 = gets.chomp
     break if number?(number2)
 
-    prompt(msgs["invalid_number"])
+    prompt(MESSAGES["en"]["invalid_number"])
   end
 
-  operator_prompt = "#{msgs['operation']}
-    #{msgs['add']}
-    #{msgs['subtract']}
-    #{msgs['multiply']}
-    #{msgs['divide']}"
+  operator_prompt = "#{MESSAGES["en"]['operation']}
+    #{MESSAGES["en"]['add']}
+    #{MESSAGES["en"]['subtract']}
+    #{MESSAGES["en"]['multiply']}
+    #{MESSAGES["en"]['divide']}"
 
   prompt(operator_prompt)
 
@@ -86,10 +85,10 @@ loop do # main loop
     operator = gets.chomp
     break if %w(1 2 3 4).include?(operator)
 
-    prompt(msgs["must_choose"])
+    prompt(MESSAGES["en"]["must_choose"])
   end
 
-  prompt("#{operation_to_message(operator)} #{msgs['two_numbers']}")
+  prompt("#{operation_to_message(operator)} #{MESSAGES["en"]['two_numbers']}")
 
   result =
     case operator
@@ -103,11 +102,11 @@ loop do # main loop
       number1.to_f / number2.to_f
     end
 
-  prompt("#{msgs['result']} #{result}")
+  prompt("#{MESSAGES["en"]['result']} #{result}")
 
-  puts "=> #{msgs['another_calc?']}"
+  prompt(MESSAGES["en"]['another_calc?'])
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
-puts "=> #{msgs['thank_you']}"
+prompt(MESSAGES["en"]['thank_you'])
