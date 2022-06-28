@@ -45,7 +45,7 @@ loop do
 end 
 
 # Conversion str to float
-annual_interest_rate = annual_interest_rate.to_f
+annual_interest_rate = annual_interest_rate.to_f / 100
 
 prompt("The annual interest rate is #{annual_interest_rate}%")
 
