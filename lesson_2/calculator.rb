@@ -2,7 +2,7 @@
 
 # Load messages from YAML file
 require 'yaml'
-MESSAGES = YAML.load_file('config.yml')
+MESSAGES = YAML.load_file('calculator_messages.yml')
 
 # Handle prompts
 def prompt(message)
