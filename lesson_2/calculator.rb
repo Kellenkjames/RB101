@@ -18,16 +18,21 @@ def prompt(message)
   puts("=> #{message}")
 end
 
+# Validate Integers
 def valid_number?(num_string)
-  # validate integers
   num_string.to_i.to_s == num_string && num_string.to_i >= 0
 end
 
+# Integers or Floats
 def number?(num_string)
-  # integers or floats
   valid_number?(num_string) || num_string.to_f.to_s ==
     num_string && num_string.to_f >= 0
 end
+
+# Language translation
+def lang(langauge)
+  langauge == "en" ? "en" : "es"
+end 
 
 def operation_to_message(op)
   case op
@@ -43,7 +48,16 @@ def operation_to_message(op)
   puts "Now code can be run safely after case statement"
 end
 
-prompt(MESSAGES['en']['welcome'])
+langauge = nil 
+loop do 
+  puts "Do you want to run calculator in english or spanish? (en for english, es for spanish)"
+  langauge = gets.chomp
+  
+  break if langauge == "en" || langauge == "es"
+  puts "Please type en for english or es for spanish"
+end
+
+prompt(MESSAGES["#{lang(langauge)}"]['welcome'])
 
 name = nil
 loop do
