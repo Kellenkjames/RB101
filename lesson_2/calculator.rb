@@ -32,23 +32,23 @@ end
 def operation_to_message(op)
   case op
   when '1'
-    return MESSAGES["en"]["adding"]
+    return MESSAGES['en']['adding']
   when '2'
-    return MESSAGES["en"]["subtracting"]
+    return MESSAGES['en']['subtracting']
   when '3'
-    return MESSAGES["en"]["multiplying"]
+    return MESSAGES['en']['multiplying']
   when '4'
-    return MESSAGES["en"]["dividing"]
+    return MESSAGES['en']['dividing']
   end
   puts "Now code can be run safely after case statement"
 end
 
-prompt(MESSAGES["en"]["welcome_msg"])
+prompt(MESSAGES['en']['welcome'])
 
 name = nil
 loop do
   name = gets.chomp
-  name.empty? ? prompt(MESSAGES["en"]["valid_name"]) : break
+  name.empty? ? prompt(MESSAGES['en']['valid_name']) : break
 end
 
 prompt("#{MESSAGES['en']['greeting']} #{name}!")
@@ -65,18 +65,18 @@ loop do # main loop
 
   number2 = nil
   loop do
-    prompt(MESSAGES["en"]["second_number"])
+    prompt(MESSAGES['en']['second_number'])
     number2 = gets.chomp
     break if number?(number2)
 
-    prompt(MESSAGES["en"]["invalid_number"])
+    prompt(MESSAGES['en']['invalid_number'])
   end
 
-  operator_prompt = "#{MESSAGES["en"]['operation']}
-    #{MESSAGES["en"]['add']}
-    #{MESSAGES["en"]['subtract']}
-    #{MESSAGES["en"]['multiply']}
-    #{MESSAGES["en"]['divide']}"
+  operator_prompt = "#{MESSAGES['en']['operation']}
+    #{MESSAGES['en']['add']}
+    #{MESSAGES['en']['subtract']}
+    #{MESSAGES['en']['multiply']}
+    #{MESSAGES['en']['divide']}"
 
   prompt(operator_prompt)
 
@@ -85,10 +85,10 @@ loop do # main loop
     operator = gets.chomp
     break if %w(1 2 3 4).include?(operator)
 
-    prompt(MESSAGES["en"]["must_choose"])
+    prompt(MESSAGES['en']['must_choose'])
   end
 
-  prompt("#{operation_to_message(operator)} #{MESSAGES["en"]['two_numbers']}")
+  prompt("#{operation_to_message(operator)} #{MESSAGES['en']['two_numbers']}")
 
   result =
     case operator
@@ -102,11 +102,11 @@ loop do # main loop
       number1.to_f / number2.to_f
     end
 
-  prompt("#{MESSAGES["en"]['result']} #{result}")
+  prompt("#{MESSAGES['en']['result']} #{result}")
 
-  prompt(MESSAGES["en"]['another_calc?'])
+  prompt(MESSAGES['en']['another_calc?'])
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
-prompt(MESSAGES["en"]['thank_you'])
+prompt(MESSAGES['en']['thank_you'])
