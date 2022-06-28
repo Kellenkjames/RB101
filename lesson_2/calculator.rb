@@ -10,14 +10,13 @@ def prompt(message)
 end
 
 # Validate Integers
-def valid_number?(num_string)
-  num_string.to_i.to_s == num_string && num_string.to_i >= 0
+def integer?(input)
+  input.to_i.to_s == input && input.to_i >= 0
 end
 
 # Integers or Floats
-def number?(num_string)
-  valid_number?(num_string) || num_string.to_f.to_s ==
-    num_string && num_string.to_f >= 0
+def number?(input)
+  integer?(input) || input.to_f.to_s == input && input.to_f >= 0
 end
 
 # Language translation
