@@ -1,6 +1,6 @@
 # Calculator + Refactor
 
-# Load messages 
+# Load messages
 require 'yaml'
 msgs = YAML.load_file('config.yml')
 
@@ -52,7 +52,7 @@ loop do
   name.empty? ? prompt(msgs["valid_name"]) : break
 end
 
-prompt("#{msgs["greeting"]} #{name}!")
+prompt("#{msgs['greeting']} #{name}!")
 
 loop do # main loop
   number1 = nil
@@ -73,12 +73,12 @@ loop do # main loop
     prompt(msgs["invalid_number"])
   end
 
-  operator_prompt = "#{msgs["operation"]}
-    #{msgs["add"]}
-    #{msgs["subtract"]}
-    #{msgs["multiply"]}
-    #{msgs["divide"]}"
-  
+  operator_prompt = "#{msgs['operation']}
+    #{msgs['add']}
+    #{msgs['subtract']}
+    #{msgs['multiply']}
+    #{msgs['divide']}"
+
   prompt(operator_prompt)
 
   operator = nil
@@ -89,7 +89,7 @@ loop do # main loop
     prompt(msgs["must_choose"])
   end
 
-  prompt("#{operation_to_message(operator)} #{msgs["two_numbers"]}")
+  prompt("#{operation_to_message(operator)} #{msgs['two_numbers']}")
 
   result =
     case operator
@@ -103,11 +103,11 @@ loop do # main loop
       number1.to_f / number2.to_f
     end
 
-  prompt("#{msgs["result"]} #{result}")
+  prompt("#{msgs['result']} #{result}")
 
-  prompt("#{msgs["another_calc?"]}")
+  puts "=> #{msgs['another_calc?']}"
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
-prompt("#{msgs["thank_you"]}")
+puts "=> #{msgs['thank_you']}"
