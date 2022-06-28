@@ -25,6 +25,7 @@ def translation(lang)
   lang == 'en' ? 'en' : 'es'
 end
 
+# Handle operations msg output
 def operation_to_message(op, lang)
   word =
     case op
@@ -37,7 +38,6 @@ def operation_to_message(op, lang)
     when '4'
       MESSAGES[translation(lang)]['dividing']
     end
-    # If we wante to add code here, it's now possible
   word
 end
 
