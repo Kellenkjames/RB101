@@ -12,7 +12,7 @@ end
 
 # Handle number validation
 def number?(input)
-  integer? || input.to_f.to_s == input
+  integer?(input) || input.to_f.to_s == input && input.to_f > 0
 end
 
 name = nil 
@@ -28,9 +28,25 @@ loan_amount = nil
 loop do 
   prompt("What is the loan amount?")
   loan_amount = gets.chomp
-
+  
   break if integer?(loan_amount)
   prompt("Please enter a valid number")
 end 
 
 prompt("The loan amount is $#{loan_amount}")
+
+annual_interest_rate = nil 
+loop do 
+  prompt("What is the Annual Percentage Rate (APR)? i.e. enter 5 for 5%") 
+  annual_interest_rate = gets.chomp 
+  
+  break if number?(annual_interest_rate)
+  prompt("Please enter a valid number")
+end 
+
+# Conversion str to float
+annual_interest_rate = annual_interest_rate.to_f
+
+prompt("The annual interest rate is #{annual_interest_rate}%")
+
+
