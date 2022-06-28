@@ -1,20 +1,10 @@
 # Calculator [Command Line]
 
-# Load messages
+# Load messages from YAML file
 require 'yaml'
 MESSAGES = YAML.load_file('config.yml')
 
-=begin
-
-  TODO => Build a command line calculator program that does the following:
-    - asks for two numbers
-    - asks for the type of operation to perform
-      - add, subtract, multiply, or divide
-    - displays the result
-
-=end
-
-# Method for prompts
+# Handle prompts
 def prompt(message)
   puts("=> #{message}")
 end
@@ -33,65 +23,66 @@ end
 # Language translation
 def translation(lang)
   lang == 'en' ? 'en' : 'es'
-end 
+end
 
-def operation_to_message(op)
+def operation_to_message(op, lang)
   case op
   when '1'
-    return MESSAGES["#{translation(lang)}"]['adding']
+    return MESSAGES[translation(lang)]['adding']
   when '2'
-    return MESSAGES["#{translation(lang)}"]['subtracting']
+    return MESSAGES[translation(lang)]['subtracting']
   when '3'
-    return MESSAGES["#{translation(lang)}"]['multiplying']
+    return MESSAGES[translation(lang)]['multiplying']
   when '4'
-    return MESSAGES["#{translation(lang)}"]['dividing']
+    return MESSAGES[translation(lang)]['dividing']
   end
   puts "Now code can be run safely after case statement"
 end
 
-lang = nil 
-loop do 
-  puts "Do you want to run calculator in english or spanish? (en for english, es for spanish)"
+lang = nil
+loop do
+  puts "Do you want to run calculator in english or spanish?
+  (en for english, es for spanish)"
   lang = gets.chomp
-  
-  break if lang == "en" || lang == "es"
+
+  break if lang == 'en' || lang == 'es'
   puts "Please type en for english or es for spanish"
 end
 
-prompt(MESSAGES["#{translation(lang)}"]['welcome'])
+prompt(MESSAGES[translation(lang)]['welcome'])
 
 name = nil
 loop do
   name = gets.chomp
-  name.empty? ? prompt(MESSAGES["#{translation(lang)}"]['valid_name']) : break
+  name.empty? ? prompt(MESSAGES[translation(lang)]['valid_name']) : break
 end
 
-prompt("#{MESSAGES["#{translation(lang)}"]['greeting']} #{name}!")
+prompt("#{MESSAGES[translation(lang)]['greeting']} #{name}!")
 
 loop do # main loop
   number1 = nil
   loop do
-    prompt(MESSAGES["#{translation(lang)}"]['first_number'])
+    prompt(MESSAGES[translation(lang)]['first_number'])
     number1 = gets.chomp
     break if number?(number1)
 
-    prompt(MESSAGES["#{translation(lang)}"]['invalid_number'])
+    prompt(MESSAGES[translation(lang)]['invalid_number'])
   end
 
   number2 = nil
   loop do
-    prompt(MESSAGES["#{translation(lang)}"]['second_number'])
+    prompt(MESSAGES[translation(lang)]['second_number'])
     number2 = gets.chomp
     break if number?(number2)
 
-    prompt(MESSAGES["#{translation(lang)}"]['invalid_number'])
+    prompt(MESSAGES[translation(lang)]['invalid_number'])
   end
 
-  operator_prompt = "#{MESSAGES["#{translation(lang)}"]['operation']}
-    #{MESSAGES["#{translation(lang)}"]['add']}
-    #{MESSAGES["#{translation(lang)}"]['subtract']}
-    #{MESSAGES["#{translation(lang)}"]['multiply']}
-    #{MESSAGES["#{translation(lang)}"]['divide']}"
+  operator_prompt = "#{MESSAGES[translation(lang)]['operation']}
+    #{MESSAGES[translation(lang)]['add']}
+    #{MESSAGES[translation(lang)]['subtract']}
+    #{MESSAGES[translation(lang)]['multiply']}
+    #{MESSAGES[translation(lang)]['divide']}"
 
   prompt(operator_prompt)
 
@@ -100,10 +91,11 @@ loop do # main loop
     operator = gets.chomp
     break if %w(1 2 3 4).include?(operator)
 
-    prompt(MESSAGES["#{translation(lang)}"]['must_choose'])
+    prompt(MESSAGES[translation(lang)]['must_choose'])
   end
 
-  prompt("#{operation_to_message(operator)} #{MESSAGES["#{translation(lang)}"]['two_numbers']}")
+  prompt("#{operation_to_message(operator, lang)}
+    #{MESSAGES[translation(lang)]['two_numbers']}")
 
   result =
     case operator
@@ -117,11 +109,11 @@ loop do # main loop
       number1.to_f / number2.to_f
     end
 
-  prompt("#{MESSAGES["#{translation(lang)}"]['result']} #{result}")
+  prompt("#{MESSAGES[translation(lang)]['result']} #{result}")
 
-  prompt(MESSAGES["#{translation(lang)}"]['another_calc?'])
+  prompt(MESSAGES[translation(lang)]['another_calc?'])
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
-prompt(MESSAGES["#{translation(lang)}"]['thank_you'])
+prompt(MESSAGES[translation(lang)]['thank_you'])
