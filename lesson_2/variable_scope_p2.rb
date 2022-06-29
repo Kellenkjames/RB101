@@ -76,6 +76,8 @@ a = "hello"
 
 [1, 2, 3].map { |num| a  } # => ["hello", "hello", "hello"]
 
+#* Methods can access local variables passed in as arguments, and now we have seen that methods can access local variables through interaction with blocks. 
+
 #* Summary: 
 
 # 1. The def..end construction in Ruby is method definition 
