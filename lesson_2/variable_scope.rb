@@ -77,4 +77,25 @@ puts n       # => 10
 
 # You want to avoid shadowing, as it's almost never what you intended to do. Choosing long and descriptive variable names is one simple way to ensure that you don't run into any of these weird scoping issues. 
 
+#* Variables and Method Definitions 
+
+# While a block can access variables that were initialized outside of the block, a method cannot -- its scope is self-contained. Methods can only access variables that were initialized inside the method or that are defined as parameters. 
+
+# Example 1: a method definition can't access local variables in another scope 
+
+a = 'hi'
+
+def some_method 
+  puts a 
+end 
+
+# invoke the method
+some_method         # => NameError: undefined local variable or method 'a' for main:Object
+
+# Example 2: a method definition can access objects passed in
+def some_method(a)
+  puts a 
+end 
+
+some_method(5)      # => 5
 
