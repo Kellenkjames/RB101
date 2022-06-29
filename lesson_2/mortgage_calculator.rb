@@ -44,9 +44,9 @@ loop do
   prompt("Please enter a valid number")
 end 
 
-# Conversion str to float
+# Str conversions
 loan_amount = loan_amount.to_i
-annual_interest_rate = annual_interest_rate.to_f / 100
+annual_interest_rate = annual_interest_rate.to_f
 
 prompt("The annual interest rate is #{annual_interest_rate}%")
 
@@ -61,13 +61,16 @@ end
 
 prompt("The duration of the loan is #{loan_duration} years")
 
-# Monthly Interest Rate 
-monthly_interest_rate = ((annual_interest_rate * 100) / 12).round(1)
+# Str conversion
+loan_duration = loan_duration.to_i
+
+# Monthly interest rate (convert from APR)
+monthly_interest_rate = (annual_interest_rate / 100) / 12 
 prompt("The monthly interest rate is #{monthly_interest_rate}%")
 
-# Loan Duration (convert to months)
-loan_duration_months = loan_duration.to_i * 12
-prompt("Loan duration is #{loan_duration_months} months")
+# Loan duration (convert to months)
+loan_duration_months = loan_duration * 12
+prompt("The loan duration is #{loan_duration_months} months")
 
 # Monthly payment
 monthly_payment = loan_amount * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**(-loan_duration_months)))

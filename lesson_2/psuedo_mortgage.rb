@@ -8,7 +8,6 @@ Get the following pieces of information from the user:
   - save to loan_amount variable 
   *- what is the Annual Percentage Rate (APR) (must be a valid int or floating point number)
     - keep asking until input is a valid int or floating point number 
-    - Convert to monthly interest rate 
     - save to montly_interest_rate variable 
   *- what is the loan duration (months) (must be a valid int)
       - if the duration is less than 1 month, keep asking for a valid integer
