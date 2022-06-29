@@ -126,8 +126,28 @@ end
 
 some_method       # => NameError: undefined local variable or method 'b' for main:Object 
 
+#* Constants
+# The scoping rules for constants are not the same as local variables. In procedural style programming, constants behave like globals. 
+USERNAME = 'Batman'
 
+def authenticate
+  puts "Logging in #{USERNAME}"
+end  
 
+authenticate       # => Logging in Batman 
+
+FAVORITE_COLOR = 'taupe'
+
+1.times do 
+  puts "I love #{FAVORITE_COLOR}!"      # => I love taupe!
+end 
+
+loop do 
+  MY_TEAM = "Phoenix Suns"
+  break 
+end 
+
+puts MY_TEAM          # => Pheonix Suns 
 
 
 
