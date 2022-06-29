@@ -127,7 +127,8 @@ end
 some_method       # => NameError: undefined local variable or method 'b' for main:Object 
 
 #* Constants
-# The scoping rules for constants are not the same as local variables. In procedural style programming, constants behave like globals. 
+# The scoping rules for constants are not the same as local variables. In procedural style programming, constants behave like globals - this means they are accesible everywhere. 
+ 
 USERNAME = 'Batman'
 
 def authenticate
