@@ -78,6 +78,8 @@ a = "hello"
 
 #* Methods can access local variables passed in as arguments, and now we have seen that methods can access local variables through interaction with blocks. 
 
+# We can think of method definition as setting a certain scope for any local variables in terms of the parameters that the method definition has, what it does with those parameters, and also how it interacts (if at all) with a block. 
+
 #* Summary: 
 
 # 1. The def..end construction in Ruby is method definition 
