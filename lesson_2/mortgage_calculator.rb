@@ -76,4 +76,7 @@ prompt("The loan duration is #{loan_duration_months} months")
 monthly_payment = loan_amount * (monthly_interest_rate / (1 -
 (1 + monthly_interest_rate)**(-loan_duration_months)))
 
-prompt("Your monthly payment is: $#{monthly_payment.round(2)}")
+prompt("Your monthly payment is: $#{format('%.2f', monthly_payment)}")
+puts ""
+prompt("Thank you for using Mortgage Calculator.")
+prompt("Good bye!")
