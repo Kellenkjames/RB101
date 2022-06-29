@@ -105,12 +105,12 @@ def hello
   "Saying hello!"
 end 
 
-puts hello
+puts hello              # => "hi"
 # puts hello()        # => this indicates that we want to call the method, not the local variable. 
 
 # Ruby will first search for the local variable, and if it is not found, then Ruby tries to find a method with the given name. If neither local variable nor method is found, then a NameError message will be thrown. 
 
-# Remember: Local variables that are not initialzied inside a method definition must 
+# Remember: Local variables that are not initialzied inside a method definition must be defined as parameters
 
 #* Blocks within Method Definitions 
 def some_method
