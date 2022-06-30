@@ -66,7 +66,7 @@ loan_duration = loan_duration.to_i
 
 # Monthly interest rate (convert from APR)
 monthly_interest_rate = (annual_interest_rate / 100) / 12
-prompt("The monthly interest rate is #{monthly_interest_rate}%")
+prompt("The monthly interest rate is #{format('%.2f', monthly_interest_rate)}%")
 
 # Loan duration (convert to months)
 loan_duration_months = loan_duration * 12
@@ -77,6 +77,5 @@ monthly_payment = loan_amount * (monthly_interest_rate / (1 -
 (1 + monthly_interest_rate)**(-loan_duration_months)))
 
 prompt("Your monthly payment is: $#{format('%.2f', monthly_payment)}")
-puts ""
-prompt("Thank you for using Mortgage Calculator.")
-prompt("Good bye!")
+
+prompt("Thank you for using Mortgage Calculator. Good bye!")
