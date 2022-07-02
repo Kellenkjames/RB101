@@ -6,14 +6,12 @@ def prompt(message)
   puts ">> #{message}"
 end
 
-# Handles rock, paper, and scissors
 def win?(first, second)
   (first == 'rock' && second == 'scissors') ||
     (first == 'paper' && second == 'rock') ||
     (first == 'scissors' && second == 'paper')
 end 
 
-# Handles spock + lizard
 def more_options?(first, second)
   (first == 'rock' && second == 'lizard') || 
     (first == 'lizard' && second == 'spock') ||
