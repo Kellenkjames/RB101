@@ -23,15 +23,15 @@ def more_options?(first, second)
 end 
 
 # Method to handle user input (user types in "r" for rock) need regex pattern? 
-def str_convert(str) 
-  if str.match(/r/) 
-    str = 'rock'
-  elsif str.match(/p/)
-    str = 'paper'
-  elsif str.match(/s/)
-    str = 'scissors'
-  elsif str.match(/l/)
-    str = 'lizard'
+def word_shorten(word) 
+  if word.start_with?('r')
+    word = 'rock'
+  elsif word.start_with?('p') 
+    word = 'paper'
+  elsif word.start_with?('s')
+    word = 'scissors'
+  elsif word.start_with?('l')
+    word = 'lizard'
   end 
 end 
 
@@ -47,19 +47,22 @@ end
 
 loop do
   choice = nil
+  word = nil 
   loop do
     prompt('Welcome to RPS! Please choose rock, paper, scissors, spock, or lizard')
     prompt('You can type "r" for "rock", "p" for "paper", etc.')
-    choice = gets.chomp.downcase
     
-    break if VALID_CHOICES.include?(choice)
+    choice = gets.chomp.downcase
+    word = word_shorten(choice)
+    
+    break if VALID_CHOICES.include?(word)
     prompt("That's not a valid choice")
   end
 
   computer_choice = VALID_CHOICES.sample
 
-  prompt("You chose: #{choice} | Computer chose: #{computer_choice}")
-  display_results(choice, computer_choice)
+  prompt("You chose: #{word} | Computer chose: #{computer_choice}")
+  display_results(word, computer_choice)
 
   prompt('Do you want to play again? y for another round')
   answer = gets.chomp.downcase
