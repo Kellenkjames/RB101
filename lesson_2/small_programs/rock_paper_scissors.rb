@@ -28,8 +28,10 @@ def word_shorten(word)
     word = 'rock'
   elsif word.start_with?('p') 
     word = 'paper'
-  elsif word.start_with?('s')
+  elsif word.start_with?('sc')
     word = 'scissors'
+  elsif word.start_with?('sp')
+    word = 'spock'
   elsif word.start_with?('l')
     word = 'lizard'
   end 
@@ -50,7 +52,7 @@ loop do
   word = nil 
   loop do
     prompt('Welcome to RPS! Please choose rock, paper, scissors, spock, or lizard')
-    prompt('You can type "r" for "rock", "p" for "paper", etc.')
+    prompt('You can type "r" for "rock", "p" for "paper", "sc" for "scissors", "sp" for "spock", and "l" for "lizard"')
     
     choice = gets.chomp.downcase
     word = word_shorten(choice)
