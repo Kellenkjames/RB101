@@ -22,6 +22,19 @@ def more_options?(first, second)
     (first == 'spock' && second == 'rock') 
 end 
 
+# Method to handle user input (user types in "r" for rock) need regex pattern? 
+def str_convert(str) 
+  if str.match(/r/) 
+    str = 'rock'
+  elsif str.match(/p/)
+    str = 'paper'
+  elsif str.match(/s/)
+    str = 'scissors'
+  elsif str.match(/l/)
+    str = 'lizard'
+  end 
+end 
+
 def display_results(player, computer) 
   if win?(player, computer) || more_options?(player, computer)
     prompt('You won!')
@@ -36,9 +49,10 @@ loop do
   choice = nil
   loop do
     prompt('Welcome to RPS! Please choose rock, paper, scissors, spock, or lizard')
+    prompt('You can type "r" for "rock", "p" for "paper", etc.')
     choice = gets.chomp.downcase
-
-    break if VALID_CHOICES.join(', ').include?(choice)
+    
+    break if VALID_CHOICES.include?(choice)
     prompt("That's not a valid choice")
   end
 

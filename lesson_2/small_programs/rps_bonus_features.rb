@@ -8,6 +8,7 @@
 
 1. Scissors cuts Paper [DONE]
 2. Paper covers Rock [DONE]
+
 3. Rock crushes Lizard
 4. Lizard poisons Spock 
 5. Spock smashes Scissors
@@ -15,6 +16,7 @@
 7. Lizard eats Paper 
 8. Paper disproves Spock 
 9. Spock vaporizes Rock 
+
 10. Rock crushes Scissors [DONE]
 
 =end
