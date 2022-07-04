@@ -22,7 +22,6 @@ def more_options?(first, second)
     (first == 'spock' && second == 'rock') 
 end 
 
-# Method to handle user input (user types in "r" for rock) need regex pattern? 
 def word_shorten(word) 
   if word.start_with?('r')
     word = 'rock'
@@ -47,12 +46,25 @@ def display_results(player, computer)
   end
 end
 
+def score_counter(player, computer) 
+  player_score = 0 
+  computer_score = 0 
+
+  if win?(player, computer) || more_options?(player, computer)
+    player_score += 1
+    prompt("Your score: #{player_score} points")
+  elsif win?(computer, player) || more_options?(computer, player) 
+    computer_score += 1
+    prompt("Computer score: #{computer_score} points")
+  end
+end 
+
 loop do
   choice = nil
   word = nil 
   loop do
-    prompt('Welcome to RPS! Please choose rock, paper, scissors, spock, or lizard')
-    prompt('You can type "r" for "rock", "p" for "paper", "sc" for "scissors", "sp" for "spock", and "l" for "lizard"')
+    prompt('Welcome to Rock Paper Scissors Spock Lizard!')
+    prompt('You can type: "r" for "rock", "p" for "paper", "sc" for "scissors", "sp" for "spock", and "l" for "lizard"')
     
     choice = gets.chomp.downcase
     word = word_shorten(choice)
@@ -65,6 +77,7 @@ loop do
 
   prompt("You chose: #{word} | Computer chose: #{computer_choice}")
   display_results(word, computer_choice)
+  score_counter(word, computer_choice)
 
   prompt('Do you want to play again? y for another round')
   answer = gets.chomp.downcase
