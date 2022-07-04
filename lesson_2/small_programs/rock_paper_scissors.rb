@@ -46,18 +46,19 @@ def display_results(player, computer)
   end
 end
 
+# Each time the function is called (score is reset back to "zero") --> How do we fix this?
 def score_counter(player, computer) 
-  player_score = 0 
-  computer_score = 0 
-
+  player_score = 0
+  computer_score = 0  
+  
   if win?(player, computer) || more_options?(player, computer)
     player_score += 1
-    prompt("Your score: #{player_score} points")
   elsif win?(computer, player) || more_options?(computer, player) 
     computer_score += 1
-    prompt("Computer score: #{computer_score} points")
   end
-end 
+  prompt("Your score: #{player_score} points")
+  prompt("Computer score: #{computer_score} points")
+end
 
 loop do
   choice = nil
