@@ -63,11 +63,13 @@ end
 def game_reset(player_score, computer_score) 
   if player_score == 3 
     puts("Match is over. You win!")
+    $player_score = 0 
+    $computer_score = 0
   elsif computer_score == 3 
     puts("Match is over. Computer wins!")
+    $player_score = 0
+    $computer_score = 0
   end 
-  $player_score = 0
-  $computer_score = 0
 end
 
 loop do
