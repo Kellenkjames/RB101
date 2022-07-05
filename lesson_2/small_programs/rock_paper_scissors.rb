@@ -2,8 +2,15 @@
 
 VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
 
-$player_score = 0
-$computer_score = 0
+class Score
+  class << self
+    attr_accessor   :user
+    attr_accessor   :computer
+  end
+end
+
+Score.user = 0
+Score.computer = 0
 
 def prompt(message)
   puts ">> #{message}"
@@ -51,23 +58,23 @@ end
 
 def score_counter(player, computer)
   if win?(player, computer) || more_options?(player, computer)
-    $player_score += 1
+    Score.user += 1
   elsif win?(computer, player) || more_options?(computer, player)
-    $computer_score += 1
+    Score.computer += 1
   end
-  prompt("Your score: #{$player_score} points")
-  prompt("Computer score: #{$computer_score} points")
+  prompt("Your score: #{Score.user} points")
+  prompt("Computer score: #{Score.computer} points")
 end
 
 def game_reset(player_score, computer_score)
   if player_score == 3
     puts("Match is over. You win!")
-    $player_score = 0
-    $computer_score = 0
+    Score.user = 0
+    Score.computer = 0
   elsif computer_score == 3
     puts("Match is over. Computer wins!")
-    $player_score = 0
-    $computer_score = 0
+    Score.user = 0
+    Score.computer = 0
   end
 end
 
@@ -92,7 +99,7 @@ loop do
   display_results(word, computer_choice)
   score_counter(word, computer_choice)
 
-  game_reset($player_score, $computer_score)
+  game_reset(Score.user, Score.computer)
 
   prompt('Do you want to play again? y for another round')
   answer = gets.chomp.downcase
