@@ -12,24 +12,24 @@ end
 Score.user = 0
 Score.computer = 0
 
-def prompt(message)
-  puts ">> #{message}"
-end
+MOVES = {
+  rock: ['scissors', 'lizard'],
+  paper: ['rock', 'spock'],
+  scissors: ['paper', 'lizard'],
+  spock: ['scissors', 'rock'],
+  lizard: ['spock', 'paper']
+}
 
 def win?(first, second)
-  (first == 'rock' && second == 'scissors') ||
-    (first == 'paper' && second == 'rock') ||
-    (first == 'scissors' && second == 'paper')
+  (first == 'rock' && second == MOVES[:rock][0] || MOVES[:rock][1]) ||
+    (first == 'paper' && second == MOVES[:paper][0] || MOVES[:paper][1]) ||
+    (first == 'scissors' && second == MOVES[:scissors][0] || MOVES[:scissors][1]) ||
+    (first == 'spock' && second == MOVES[:spock][0] || MOVES[:spock][1]) ||
+    (first == 'lizard' && second == MOVES[:lizard][0] || MOVES[:lizard][1])
 end
 
-def more_options?(first, second)
-  (first == 'rock' && second == 'lizard') ||
-    (first == 'lizard' && second == 'spock') ||
-    (first == 'spock' && second == 'scissors') ||
-    (first == 'scissors' && second == 'lizard') ||
-    (first == 'lizard' && second == 'paper') ||
-    (first == 'paper' && second == 'spock') ||
-    (first == 'spock' && second == 'rock')
+def prompt(message)
+  puts ">> #{message}"
 end
 
 def word_shorten(word)
@@ -47,9 +47,9 @@ def word_shorten(word)
 end
 
 def display_results(player, computer)
-  if win?(player, computer) || more_options?(player, computer)
+  if win?(player, computer)
     prompt('You won!')
-  elsif win?(computer, player) || more_options?(computer, player)
+  elsif win?(computer, player)
     prompt('Computer won!')
   else
     prompt("It's a tie!")
@@ -57,9 +57,9 @@ def display_results(player, computer)
 end
 
 def score_counter(player, computer)
-  if win?(player, computer) || more_options?(player, computer)
+  if win?(player, computer) 
     Score.user += 1
-  elsif win?(computer, player) || more_options?(computer, player)
+  elsif win?(computer, player)
     Score.computer += 1
   end
   prompt("Your score: #{Score.user} points")
