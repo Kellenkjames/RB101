@@ -8,17 +8,17 @@ puts numbers # Prints original numbers arr => [1, 2, 2, 3]
 
 # ----------------------------------------------------------------
 
-# Question 2: Describe the difference between ! and ? in Ruby. And explain what would happe in the following scenarios 
+# Question 2: Describe the difference between ! and ? in Ruby. And explain what would happe in the following scenarios: 
 
-#* ! | called Logical NOT operator. Used to reverse the logical state of its operand. If a condition is true, then Logical NOT operator will make it false. 
-
-#* ? | defined? is a special operator that takes the form of a method call to determine whether or not the passed expression is defined. It returns a description string of the expression, nor nil if the expression isn't defined. 
+#* Just to clarify, if you see ! or ? at the end of the method, it's actually part of the method name, and not Ruby syntax. Therefore, you really don't know what the method is doing, even if it ends in those characters -- it depends on the method implementation. 
 
 =begin
 
 * 1. what is != and where should you use it? 
 
-A: This is the logical NOT operator. You should use it when you want test the "opposite" of the logical state. Most commonly used in conditional statements. 
+A: != means "not equals"
+
+This is the logical NOT operator. You should use it when you want test for equality. 
 
 # ----------------------------------------------------------------
 
@@ -26,17 +26,36 @@ A: This is the logical NOT operator. You should use it when you want test the "o
 
 A: user_name = 'Bitcoin'           !user_name => false 
 
-Returns false because it's the opposite of a "truthy" value. Any variable that has an assigned value is 'truthy' unless assigned with 'false' or 'nil' 
+This will return the opposite boolean i.e. if string object is truthy, then it returns false (the opposite)
 
 # ----------------------------------------------------------------
 
-*3. put! after something, like words.uniq! 
+*3. put ! after something, like words.uniq! 
 
 A: words = [1, 2, 3, 4, 4, 5]        words.uniq! => [1, 2 ,3]
 
-The uniq method returns a new array. Placing ! at the end is a destructive method that will remove any duplicate values in 'self'. This means the original array will be modified and returned. 
+Placing ! at the end is a destructive method that will modify the original object (pass by reference) => it will not create a copy.
 
+# ----------------------------------------------------------------
 
+*4. put ? before something 
 
+? : Ternary if-then-else
+
+If condition is true ? Then value 'X': Otherwise value 'Y' 
+
+# ----------------------------------------------------------------
+
+*5. put ?
+
+defined? variable # True if variable is initialized
+
+This will return a boolean "true" or "false" if the object or method has been defined 
+
+# ----------------------------------------------------------------
+
+*6. put !! before something, like !!user_name
+
+Is used to turn any object into their boolean equivalent 
 
 =end 
