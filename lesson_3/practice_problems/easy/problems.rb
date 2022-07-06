@@ -84,3 +84,64 @@ numbers.delete(1) # Deletes all items from 'self' that are equal to 'obj' => [2,
 # ----------------------------------------------------------------
 
 # Question 5: Programmatically determine if 42 lies between 10 and 100 
+
+puts (10..100).cover?(42)
+
+# ----------------------------------------------------------------
+
+# Question 6: Starting with the string
+
+famous_words = 'seven years ago...'
+
+# show two different ways to put the expected "Four score and " in front of it. 
+
+gettysburg_address = 'Four score and '
+
+# puts famous_words.insert(0, "#{gettysburg_address}") 
+# puts gettysburg_address.concat(famous_words) 
+# puts famous_words.prepend(gettysburg_address)
+
+# ----------------------------------------------------------------
+
+# Question 7: If we build an array like this: 
+
+flintstones = ["Fred", "Wilma"]
+flintstones << ["Barney", "Betty"]
+flintstones << ["BamBam", "Pebbles"]
+
+# We will end up with this "nested" array: 
+p flintstones.flatten! 
+
+# ----------------------------------------------------------------
+
+# Question 8: Given the hash below 
+
+# Turn this into an array containing only two elements: Barney's name and Barney's number
+
+flintstones = { "Fred" => 0, "Wilma" => 1, "Barney" => 2, "Betty" => 3, "BamBam" => 4, "Pebbles" => 5 }
+
+arr = flintstones.to_a
+arr.slice!(0, 2)
+p arr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
