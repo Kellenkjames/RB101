@@ -24,11 +24,17 @@ A: This is the logical NOT operator. You should use it when you want test the "o
 
 *2. put ! before something, like !user_name
 
-A. user_name = 'Bitcoin'           !user_name => false 
+A: user_name = 'Bitcoin'           !user_name => false 
 
 Returns false because it's the opposite of a "truthy" value. Any variable that has an assigned value is 'truthy' unless assigned with 'false' or 'nil' 
 
+# ----------------------------------------------------------------
 
+*3. put! after something, like words.uniq! 
+
+A: words = [1, 2, 3, 4, 4, 5]        words.uniq! => [1, 2 ,3]
+
+The uniq method returns a new array. Placing ! at the end is a destructive method that will remove any duplicate values in 'self'. This means the original array will be modified and returned. 
 
 
 
