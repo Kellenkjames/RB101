@@ -12,22 +12,6 @@ end
 Score.user = 0
 Score.computer = 0
 
-MOVES = {
-  rock: ['scissors', 'lizard'],
-  paper: ['rock', 'spock'],
-  scissors: ['paper', 'lizard'],
-  spock: ['scissors', 'rock'],
-  lizard: ['spock', 'paper']
-}
-
-def win?(first, second)
-  (first == 'rock' && second == MOVES[:rock][0] || MOVES[:rock][1]) ||
-    (first == 'paper' && second == MOVES[:paper][0] || MOVES[:paper][1]) ||
-    (first == 'scissors' && second == MOVES[:scissors][0] || MOVES[:scissors][1]) ||
-    (first == 'spock' && second == MOVES[:spock][0] || MOVES[:spock][1]) ||
-    (first == 'lizard' && second == MOVES[:lizard][0] || MOVES[:lizard][1])
-end
-
 def prompt(message)
   puts ">> #{message}"
 end
@@ -46,18 +30,34 @@ def word_shorten(word)
   end
 end
 
+MOVES = {
+  rock: ['scissors', 'lizard'],
+  paper: ['rock', 'spock'],
+  scissors: ['paper', 'lizard'],
+  spock: ['scissors', 'rock'],
+  lizard: ['spock', 'paper']
+}
+
+def win?(first, second)
+  first = MOVES[:"#{first}"] 
+  
+  if first && second == first[0] || first[1]
+    first # rock > 'scissors' || 'lizard'
+  end 
+end
+
 def display_results(player, computer)
   if win?(player, computer)
-    prompt('You won!')
-  elsif win?(computer, player)
-    prompt('Computer won!')
-  else
-    prompt("It's a tie!")
+    prompt('You won!') 
+  elsif win?(computer, player) # reverse "logic" if the above is not true
+    prompt('Computer won!')    
+  else 
+    prompt("It's a tie!") 
   end
 end
 
 def score_counter(player, computer)
-  if win?(player, computer) 
+  if win?(player, computer)
     Score.user += 1
   elsif win?(computer, player)
     Score.computer += 1
@@ -96,6 +96,7 @@ loop do
   computer_choice = VALID_CHOICES.sample
 
   prompt("You chose: #{word} | Computer chose: #{computer_choice}")
+  
   display_results(word, computer_choice)
   score_counter(word, computer_choice)
 
