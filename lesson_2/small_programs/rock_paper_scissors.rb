@@ -1,4 +1,4 @@
-# Rock Paper Scissors
+# RPS + Spock + Lizard
 
 VALID_CHOICES = ['rock', 'paper', 'scissors', 'spock', 'lizard']
 
@@ -39,20 +39,19 @@ MOVES = {
 }
 
 def win?(first, second)
-  first = MOVES[:"#{first}"] 
-  
-  if first && second == first[0] || first[1]
-    first # rock > 'scissors' || 'lizard'
-  end 
+  # If computer choice is a list of moves that the player's move beats
+  if second == MOVES[:"#{first}"][0] || second == MOVES[:"#{first}"][1]
+    first
+  end
 end
 
 def display_results(player, computer)
   if win?(player, computer)
-    prompt('You won!') 
-  elsif win?(computer, player) # reverse "logic" if the above is not true
-    prompt('Computer won!')    
-  else 
-    prompt("It's a tie!") 
+    prompt('You won!')
+  elsif win?(computer, player)
+    prompt('Computer won!')
+  else
+    prompt("It's a tie!")
   end
 end
 
@@ -96,7 +95,7 @@ loop do
   computer_choice = VALID_CHOICES.sample
 
   prompt("You chose: #{word} | Computer chose: #{computer_choice}")
-  
+
   display_results(word, computer_choice)
   score_counter(word, computer_choice)
 
