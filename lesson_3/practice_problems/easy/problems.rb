@@ -59,3 +59,28 @@ This will return a boolean "true" or "false" if the object or method has been de
 Is used to turn any object into their boolean equivalent 
 
 =end 
+
+# ----------------------------------------------------------------
+
+# Question 3: Replace the word "important" with "urgent" in this string: 
+
+advice = 'Few things in life are as important as house training your pet dinosaur.'
+
+# advice['important'] = 'urgent'
+advice.gsub!('important', 'urgent')
+puts advice
+
+# ----------------------------------------------------------------
+
+# Question 4: The Ruby Array class has several methods for removing items from the array. Two of them have very similar names. Let's see how they differ: 
+
+numbers = [1, 2, 3, 4, 5]
+
+numbers.delete_at(1) # Deletes the element at the specified 'index' => [1, 3, 4, 5]
+numbers.delete(1) # Deletes all items from 'self' that are equal to 'obj' => [2, 3, 4, 5]
+
+#* These methods operate on the contents of the referenced array and modify it in place (rather than just returning a modified version of the array)
+
+# ----------------------------------------------------------------
+
+# Question 5: Programmatically determine if 42 lies between 10 and 100 
