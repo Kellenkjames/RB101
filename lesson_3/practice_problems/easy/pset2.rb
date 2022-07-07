@@ -45,6 +45,46 @@ p ages.merge!(additional_ages)
 
 # ----------------------------------------------------------------
 
+# Question 4: See if the name "Dino" appears in the string below: 
+
+advice = "Few things in life are as important as house training your pet dinosaur."
+
+p advice.match?("Dino") # => false 
+
+# Note, this is not a perfect solution, it will match any substring with Dino in it. 
+
+# ----------------------------------------------------------------
+
+# Question 5: Show an easier way to write this array: 
+
+flintstones = ["Fred", "Barney", "Wilma", "Betty", "BamBam", "Pebbles"]
+
+flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+
+# ----------------------------------------------------------------
+
+# Question 6: How can we add the family pet "Dino" to our usual array:
+
+# flintstones << "Dino"
+
+
+# ----------------------------------------------------------------
+
+# Question 7: How can we add multiple items to our array? (Dino and Hoppy)
+
+flintstones.push("Dino", "Hoppy") # push returns the array so we can chain
+p flintstones
+
+# p flintstones.concat(%w(Dino Hoppy)) # concat adds an array rather than one item
+
+# ----------------------------------------------------------------
+
+# Question 8: Shorten the following sentence:
+
+advice = "Few things in life are as important as house training your pet dinosaur."
+p advice.slice!(0...39)
+
+
 
 
 
