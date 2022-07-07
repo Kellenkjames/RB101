@@ -67,7 +67,6 @@ flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
 
 # flintstones << "Dino"
 
-
 # ----------------------------------------------------------------
 
 # Question 7: How can we add multiple items to our array? (Dino and Hoppy)
@@ -82,7 +81,29 @@ p flintstones
 # Question 8: Shorten the following sentence:
 
 advice = "Few things in life are as important as house training your pet dinosaur."
-p advice.slice!(0...39)
+
+advice.slice!(0, advice.index("house")) # "Few things in life are as important as"
+p advice # "house training your pet dinosaur."
+
+# As bonus, what happens if you use the String#slice method instead? 
+
+#* Using slice, the non-destructive version of slice!, would return a new string with the same text ("Few things in life are as important as ") but the advice variable would remain the same, pointing to the original string ("Few things in life are as important as house training your pet dinosaur.")
+
+# ----------------------------------------------------------------
+
+# Question 9: Write a one-liner to count the number of lower-case 't' characters in the following string:
+
+statement = "The Flintstones Rock!"
+p statement.count('t')
+
+# ----------------------------------------------------------------
+
+# Question 10:  If we had a table of Flintstone family members that was forty characters in width, how could we easily center that title above the table with spaces?
+
+title = 'Flinstone Family Members'
+p title.center(40)
+
+
 
 
 
