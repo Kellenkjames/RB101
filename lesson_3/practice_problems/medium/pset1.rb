@@ -18,6 +18,24 @@ puts "the value of 40 + 2 is #{40 + 2}"
 #* Second possible solution: Use .to_s method 
 puts "the value of 40 + 2 is " + (40 + 2).to_s
 
+# ----------------------------------------------------------------
 
+# Question 3: Alan wrote the following method, which was intended to show all of the factors of the input number:
 
+def factors(number)
+  divisor = number
+  factors = []
+  while divisor > 0
+    factors << number / divisor if number % divisor == 0 
+    divisor -= 1
+  end
+  factors
+end
 
+puts factors(20)
+
+# Bonus 1: What is the purpose of the number % divisor == 0 
+#* Allows you to determine if the result of the division is an integer number (no remainder)
+
+# Bonus 2: What is the purpose of the second-to-last-line 
+#* This is what is the 'actual' return value from the method. Recall that without an explicit return statement in the code, the return value of the method is the last statement execuited. If we removed this line, the code would executre, but the return value of the method would be nil. 
