@@ -8,7 +8,7 @@ puts numbers # Prints original numbers arr => [1, 2, 2, 3]
 
 # ----------------------------------------------------------------
 
-# Question 2: Describe the difference between ! and ? in Ruby. And explain what would happe in the following scenarios: 
+# Question 2: Describe the difference between ! and ? in Ruby. And explain what would happen in the following scenarios: 
 
 #* Just to clarify, if you see ! or ? at the end of the method, it's actually part of the method name, and not Ruby syntax. Therefore, you really don't know what the method is doing, even if it ends in those characters -- it depends on the method implementation. 
 
@@ -56,7 +56,7 @@ This will return a boolean "true" or "false" if the object or method has been de
 
 *6. put !! before something, like !!user_name
 
-Is used to turn any object into their boolean equivalent 
+Is used to turn any object into their boolean equivalent idea = 'cool' -> !!idea => true 
 
 =end 
 
