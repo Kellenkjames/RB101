@@ -121,8 +121,9 @@ p flintstones.flatten!
 flintstones = { "Fred" => 0, "Wilma" => 1, "Barney" => 2, "Betty" => 3, "BamBam" => 4, "Pebbles" => 5 }
 
 arr = flintstones.to_a
-arr.slice!(0, 2)
-p arr
+p arr.select {|name, value| name == "Barney"}
+
+
 
 
 
