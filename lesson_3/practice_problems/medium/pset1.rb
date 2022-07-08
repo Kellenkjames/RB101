@@ -38,7 +38,7 @@ puts factors(20)
 #* Allows you to determine if the result of the division is an integer number (no remainder)
 
 # Bonus 2: What is the purpose of the second-to-last-line 
-#* This is what is the 'actual' return value from the method. Recall that without an explicit return statement in the code, the return value of the method is the last statement execuited. If we removed this line, the code would execute, but the return value of the method would be nil. 
+#* This is what is the 'actual' return value from the method. Recall that without an explicit return statement in the code, the return value of the method is the last statement executed. If we removed this line, the code would execute, but the return value of the method would be nil. 
 
 # ----------------------------------------------------------------
 
@@ -177,7 +177,7 @@ puts bar(foo) # no
 
 #* Solution: This is because the value returned from the 'foo' method will always be "yes", and "yes" == "no" will be false. 
 
-
+# ----------------------------------------------------------------
 
 
 
