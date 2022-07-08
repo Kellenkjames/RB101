@@ -38,4 +38,71 @@ puts factors(20)
 #* Allows you to determine if the result of the division is an integer number (no remainder)
 
 # Bonus 2: What is the purpose of the second-to-last-line 
-#* This is what is the 'actual' return value from the method. Recall that without an explicit return statement in the code, the return value of the method is the last statement execuited. If we removed this line, the code would executre, but the return value of the method would be nil. 
+#* This is what is the 'actual' return value from the method. Recall that without an explicit return statement in the code, the return value of the method is the last statement execuited. If we removed this line, the code would execute, but the return value of the method would be nil. 
+
+# ----------------------------------------------------------------
+
+# Question 4: Alyssa was asked to write an implementation of a rolling buffer. Elements are added to the rolling buffer and if the buffer becomes full, then new elements that are added will displace the oldest elements in the buffer.
+
+# She wrote two implementations saying, "Take your pick. Do you like << or + for modifying the buffer?". Is there a difference between the two, other than what operator she chose to use to add an element to the buffer?
+
+def rolling_buffer1(buffer, max_buffer_size, new_element)
+  buffer << new_element
+  buffer.shift if buffer.size > max_buffer_size
+  buffer
+end
+
+def rolling_buffer2(input_array, max_buffer_size, new_element)
+  buffer = input_array + [new_element]
+  buffer.shift if buffer.size > max_buffer_size
+  buffer
+end
+
+# Answer: Yes, there is a difference. While both methods have the same return value, in the first implementation, the input argument called 'buffer' will be modified and will end up being changed after rolling_buffer1 returns. 
+
+#* That is, the caller will have the input array that they pass in be different once the call returns (mutates the caller)
+
+#  In the other implementation, rolling_buffer2 will not alter the caller's input argument. 
+
+# ----------------------------------------------------------------
+
+# Question 5: Alyssa asked Ben to write up a basic implementation of a Fibonacci calculator. A user passes in two numbers, and the calculator will keep computing the sequence until some limit is reached.
+
+# Ben coded up this implementation but complained that as soon as he ran it, he got an error. Something about the limit variable. What's wrong with the code?
+
+# limit = 15 (before)
+
+def fib(first_num, second_num, limit = 15)
+  while first_num + second_num < limit
+    sum = first_num + second_num
+    first_num = second_num
+    second_num = sum
+  end
+  sum
+end
+
+result = fib(0, 1, limit = 15)
+puts "result is #{result}"
+
+#* Answer: The problem is that limit is outside of the scope of the method definition. Method definitions have their own block scopes. To fix the issue, you can:
+
+# 1. Pass limit as an additional argument to the definition of fib && pass it when you call fib
+
+#2. Move the limit variable inside the fib definition  
+
+# ----------------------------------------------------------------
+
+# Question 6: What is the output of the following code?
+
+answer = 42
+
+def mess_with_it(some_number)
+  some_number += 8
+end
+
+new_answer = mess_with_it(answer)
+
+p answer - 8 # 34 because the method never gets "called" it only gets "stored"
+
+
+
