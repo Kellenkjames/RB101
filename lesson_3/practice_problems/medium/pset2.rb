@@ -10,7 +10,7 @@ puts a.object_id # 240
 puts b.object_id # 260
 puts c.object_id # 240
 
-# ----------------------------------------------------------------
+puts # ----------------------------------------------------------------
 
 # Question 2: Let's take a look at another example with a small difference in the code:
 
@@ -32,7 +32,7 @@ puts c.object_id # 85
 
 # Note that for performance reasons, true, false, and nil are also handled specially (i.e. every instance of 'true' will all have the same object ID). This also has to do with immutability of 'true', 'false', and 'nil'. 
 
-# ----------------------------------------------------------------
+puts # ----------------------------------------------------------------
 
 # Question 3: Let's call a method, and pass both a string and an array as arguments and see how even though they are treated in the same way by Ruby, the results can be different.
 
@@ -58,3 +58,34 @@ puts "My array looks like this now: #{my_array}" # ["pumpkins", "rutabaga"]
 
 # So, because the local variable an_array_param still points to the original object, the local variables my_array and an_array_param are still pointing at the same object, and we see the results of what happened to the array "outside" of the method. 
 
+puts # ----------------------------------------------------------------
+
+# Question 4: To drive that last one home...let's turn the tables and have the string show a modified output, while the array thwarts the method's efforts to modify the caller's version of it.
+
+def tricky_method_two(a_string_param, an_array_param)
+  a_string_param << 'rutabaga'
+  an_array_param = ['pumpkins', 'rutabaga']
+end
+
+my_string = "pumpkins"
+my_array = ["pumpkins"]
+tricky_method_two(my_string, my_array)
+
+puts "My string looks like this now: #{my_string}" # pumpkinsrutabaga
+puts "My array looks like this now: #{my_array}" # ["pumpkins"]
+
+puts # ----------------------------------------------------------------
+
+# Question 5: Depending on a method to modify its arguments can be tricky:
+
+def tricky_method(a_string_param, an_array_param)
+  a_string_param += "rutabaga"
+  an_array_param << "rutabaga"
+end
+
+my_string = "pumpkins"
+my_array = ["pumpkins"]
+tricky_method(my_string, my_array)
+
+puts "My string looks like this now: #{my_string}" # pumpkins
+puts "My array looks like this now: #{my_array}" # ["pumpkins", "rutabaga"]
