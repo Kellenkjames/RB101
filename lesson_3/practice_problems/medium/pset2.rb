@@ -86,6 +86,7 @@ def no_tricky_method(a_string_param, an_array_param)
   a_string_param += "rutabaga"
   an_array_param += ["rutabaga"]
 
+  #* Since the above has reassignment (points to a new object) we can return the values 
   return a_string_param, an_array_param
 end
 
@@ -96,3 +97,23 @@ my_string, my_array = no_tricky_method(my_string, my_array)
 puts "My string looks like this now: #{my_string}"
 puts "My array looks like this now: #{my_array}"
 
+puts # ----------------------------------------------------------------
+
+#* Question 6: How could the following method be simplified without changing its return value? 
+
+def color_valid_complex(color)
+  if color == "blue" || color == "green"
+    true
+  else
+    false
+  end
+end
+
+# Both of these methods so exactly the same thing - but one is much more complex to read. 
+def color_valid_simple(color)
+  color == "blue" || color == "green"  
+end 
+
+puts color_valid_simple("blue")
+puts color_valid_simple("green")
+puts color_valid_simple("orange")
