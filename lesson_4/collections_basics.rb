@@ -28,3 +28,24 @@ str = 'The grass is green' # str[4, 5] # => "grass"
 char1 = str[2]      # => "c"
 char2 = str[2]     # => "c"
 char1.object_id == char2.object_id # => false 
+
+# --------------------------------------
+
+#* Array Element Reference 
+
+# Arrays are lists of elements that are ordered by index, where each element can be any object. Arrays use an integer-based index to maintain the order of its elements. A specific element can be referenced using its index. 
+
+arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+
+arr[2] # => "c"
+arr[2, 3] # => ["c", "d", "e"] Array#Slice method (start, length)
+arr[2, 3][0] # =>["c"]
+
+# --------------------------------------
+
+#* One situation where Array#slice does not return a new array is when we only pass the method a single index, rather than a start and length or a range; in this case the element at that index is returned rather than a new array. 
+
+arr = [1, 'two', :three, '4']
+arr.slice(3, 1) # => ["4"]
+arr.slice(3..3) # => ["4"]
+arr.slice(3)    # => "4"
