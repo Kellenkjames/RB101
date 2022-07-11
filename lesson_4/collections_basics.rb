@@ -75,10 +75,48 @@ hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot', 'fruit' => 'pear' }
 country_capitals = { uk: 'London', france: 'Paris', germany: 'Berlin' }
 country_capitals.keys                 # => [:uk, :france, :germany]
 country_capitals.values             # => ["London", "Paris", "Berlin"]
-country_capitals.values[0]        # "London"
+country_capitals.values[0]        # => "London"
 
 # The above example uses symbols as keys. Although both hash keys and values can be any object in Ruby, it is common practice to use symbols as the keys. Symbols in Ruby can be thought of as immutable strings. There's a number of advantages to using symbols for hash keys, which we won't go into here, but it is important to be aware of this convention. 
 
+# --------------------------------------
 
+#* Element Reference Gotchas 
 
+# There are a few things that can catch you off guard when referecning elements in a collection and you need to be aware of these in order to avoid unintended behavior in your code. 
 
+#* Out of Bounds Indices
+
+# Both arrays and strings can be thought of as indexed collections. That is, we can reference individual elements within the object via their index. 
+str = 'abcde'
+arr = ['a', 'b', 'c', 'd', 'e']
+
+str[2] # => "c"
+arr[2] # => "c"
+
+# What happens if we try to reference using an index greater than 4? 
+str[5] # => nil 
+arr[5] # => nil 
+
+#* Referencing an out-of-bounds index in this way returns nil. This is not necessarily a problem for a string, since we know that nil is an invalid return value; with an array, nil could be a valid return value since arrays can contain any other type of object, including nil.
+
+arr = [3, 'd', nil]
+arr[2] # => nil
+arr[3] # => nil
+
+# --------------------------------------
+
+# How can we tell the difference between the valid return and the out-of-bounds reference? 
+
+# Array has a method called #fetch
+
+#* Fetch tries to return the element at position index, but throws and IndexError exception if the referenced index lies outside of the array bounds. 
+
+arr.fetch(2)      # => nil 
+arr.fetch(2)      # => IndexError: index 3 outside of array bounds: -3...3
+
+# fetch throws an IndexError exception if the index is out of bounds. This is very helpful for catching indices that are out of bounds. It's better to use #fetch since it enforces the array boundaries. 
+
+#* Always try to think about whether nil is the real element in the array or if it's Ruby's way of telling us we've gone beyond the array boundary. 
+
+# If you really want to be safe, use #fetch in your own code. 
