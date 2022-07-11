@@ -115,8 +115,33 @@ arr[3] # => nil
 arr.fetch(2)      # => nil 
 arr.fetch(2)      # => IndexError: index 3 outside of array bounds: -3...3
 
-# fetch throws an IndexError exception if the index is out of bounds. This is very helpful for catching indices that are out of bounds. It's better to use #fetch since it enforces the array boundaries. 
+# fetch throws an IndexError exception if the index is out of bounds. This is very helpful for catching indices that are out of bounds. It's better to use #fetch since it enforces the array boundaries. If you really want to be safe, use #fetch in your own code. However, be aware that most existing Ruby code doesn't use #fetch, including much of the code you'll see here in Launch School. 
 
 #* Always try to think about whether nil is the real element in the array or if it's Ruby's way of telling us we've gone beyond the array boundary. 
 
 # If you really want to be safe, use #fetch in your own code. 
+
+# --------------------------------------
+
+#* Negative Indices 
+
+# We've seen what happens if you try to reference an element using an index greater than the last index of the string or array. What is we use an index less than 0? 
+
+str = 'abcde'
+arr = ['a', 'b', 'c', 'd', 'e']
+
+str[-2] # => "d"
+arr[-2] # => "d"
+
+# Elements in String and Array objects can be referenced using negative indices, starting from the last index in the collection -1 and working backwards. 
+
+# --------------------------------------
+
+#* What do you think would be returned by the following calls? 
+str = 'ghijk'
+arr = ['g', 'h', 'i', 'j', 'k']
+
+str.fetch[-6] # => nil 
+arr.fetch[-6] # => nil 
+
+# --------------------------------------
