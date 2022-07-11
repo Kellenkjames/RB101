@@ -141,8 +141,8 @@ arr[-2] # => "d"
 str = 'ghijk'
 arr = ['g', 'h', 'i', 'j', 'k']
 
-str.fetch[-6] # => nil 
-arr.fetch[-6] # => nil 
+# str.fetch[-6] # => nil 
+# arr.fetch[-6] # => nil 
 
 # --------------------------------------
 
@@ -158,11 +158,11 @@ hsh['c']       # => nil
 hsh[:d]        # => nil
 
 hsh.fetch(:c)  # => nil
-hsh.fetch('c') # => KeyError: key not found: "c"
+# hsh.fetch('c') # => KeyError: key not found: "c"
                #        from (irb):2:in `fetch'
                #        from (irb):2
                #        from /usr/bin/irb:11:in `<main>'
-hsh.fetch(:d)  # => KeyError: key not found: :d
+# hsh.fetch(:d)  # => KeyError: key not found: :d
                #        from (irb):3:in `fetch'
                #        from (irb):3
                #        from /usr/bin/irb:11:in `<main>'
@@ -199,6 +199,47 @@ arr[0] + ' ' + arr[1] + ' ' + arr[2] + ' ' + arr[3] + ' ' + arr[4] + ' ' + arr[5
 arr.join(', ') # => 'How do you get to Carnegie Hall?'
 
 # --------------------------------------
+
+hsh = { sky: "blue", grass: "green" }
+hsh.to_a # => [ [:sky, "blue"], [:grass, "green"] ]
+
+#* Notice the array that is returned from #to_a contains two other arrays, each sub-array containing a symbol and a string. Each sub-array is equivalent to a key-value pair from the initial hash. 
+
+# Just like Hash has a #to_a method, Array has a #to_h method. What do you think would happen if #to_h was called on the following array? 
+
+arr = [[:name, 'Joe'], [:age, 10], [:favorite_color, 'blue']]
+
+arr.to_h # => { :name => "Joe", :age => 10, :favorite_color => "blue" }
+
+# --------------------------------------
+
+# Element Assignment
+
+#* String Element Assignment 
+
+# We can use the element assignment notation of String in order to change the value of a specific character within a string by referring to its index. Say for example that we wanted to change the first letter of the first word in a sentence to its uppercase equivalent, we could do this in the following way.
+
+str = "joe's favorite color is blue"
+str[0] = 'J'
+str # => "Joe's favorite color is blue"
+
+#* You may have noticed that the string in the above example uses double quotation marks "...". You might remember from the Strings section of the Introduction to Programming with Ruby book that the reason is because the string itself includes a single quote mark (in the word "joe's") and surrounding the whole string in double quotations is one way to allow this.
+
+# Using the same element assignment method, how would you change the first letter of the remaining words in the sentence to their uppercase versions? Try it out in a code file or in irb. 
+
+puts str.index('f')
+puts str.index('c')
+puts str.index('i')
+puts str.index('b')
+
+str[6] = 'F'
+str[15] = 'C'
+str[11] = 'I'
+str[24] = 'B' 
+
+puts str # => "Joe's Favorite Color is Blue"
+
+# Note that this way of modifying a string is a destructive action; that is, the "str" string is changed permanently. 
 
 
 
