@@ -41,8 +41,8 @@ puts # ----------------------------------------------------------------
 
 # A) 
 def mess_with_vars(one, two, three)
-  one = two # => doesn't mutate the object referenced by that variable; instead, binds to a new obj
-  two = three # => doesn't mutate the object referenced by that variable; instead, binds to a new obj
+  one = two 
+  two = three 
   three = one 
 end
 
@@ -56,4 +56,40 @@ puts "one is: #{one}" # "one"
 puts "two is: #{two}" # "two"
 puts "three is: #{three}" # "three"
 
+puts # ----------------------------------------------------------------
 
+# B) 
+def mess_with_vars_v2(one, two, three)
+  one = "two"
+  two = "three"
+  three = "one"
+end
+
+one = "one"
+two = "two"
+three = "three"
+
+mess_with_vars_v2(one, two, three)
+
+puts "one is: #{one}" # one
+puts "two is: #{two}" # two 
+puts "three is: #{three}" # three 
+
+puts # ----------------------------------------------------------------
+
+# C)
+def mess_with_vars_v3(one, two, three)
+  one.gsub!("one","two")
+  two.gsub!("two","three")
+  three.gsub!("three","one")
+end
+
+one = "one"
+two = "two"
+three = "three"
+
+mess_with_vars_v3(one, two, three)
+
+puts "one is: #{one}" # two
+puts "two is: #{two}" # three
+puts "three is: #{three}" # one 
