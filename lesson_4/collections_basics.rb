@@ -145,3 +145,64 @@ str.fetch[-6] # => nil
 arr.fetch[-6] # => nil 
 
 # --------------------------------------
+
+#* Invalid Hash Keys
+
+# Hash also has a #fetch method which can be useful when trying to disambiguate valid hash keys with a nil value from invalid hash keys. 
+
+hsh = { :a => 1, 'b' => 'two', :c => nil }
+
+hsh['b']       # => "two"
+hsh[:c]        # => nil
+hsh['c']       # => nil
+hsh[:d]        # => nil
+
+hsh.fetch(:c)  # => nil
+hsh.fetch('c') # => KeyError: key not found: "c"
+               #        from (irb):2:in `fetch'
+               #        from (irb):2
+               #        from /usr/bin/irb:11:in `<main>'
+hsh.fetch(:d)  # => KeyError: key not found: :d
+               #        from (irb):3:in `fetch'
+               #        from (irb):3
+               #        from /usr/bin/irb:11:in `<main>'
+
+# In the above example both the string 'c' and the symbol :d are invalid keys; the string 'b' and the symbol :c are valid keys. Remember that both keys and values can be of any object. When referencing an item by its key you must use the correct object type. 
+
+# --------------------------------------
+
+#* Conversion 
+
+# The fact that strings and arrays share similarities, such as both being zero-indexed collections, lends itself to being able to convert from one to the other, and this is quite common practice in Ruby code. There are a number of Ruby methods that facilitate this type of conversion including String#chars and Array#join.  
+
+str = 'Practice'
+
+arr = str.chars # => ["P", "r", "a", "c", "t", "i", "c", "e"]
+
+# Array#join returns a string with the elements of the array joined together. 
+
+arr.join # => "Practice"
+
+# --------------------------------------
+
+str = 'How do you get to Carnegie Hall?'
+arr = str.split # => ["How", "do", "you", "get", "to", "Carnegie", "Hall?"]
+arr.join        # => "HowdoyougettoCarnegieHall?"
+
+# Can you think of a couple of ways in which the items in the array could be joined together so that result resembles the original string? 
+
+arr[0] + ' ' + arr[1] + ' ' + arr[2] + ' ' + arr[3] + ' ' + arr[4] + ' ' + arr[5] + ' ' + arr[6]
+# => "How do you get to Carnegie Hall?"
+
+# or 
+
+arr.join(', ') # => 'How do you get to Carnegie Hall?'
+
+# --------------------------------------
+
+
+
+
+
+
+
