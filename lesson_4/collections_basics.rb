@@ -46,6 +46,39 @@ arr[2, 3][0] # =>["c"]
 #* One situation where Array#slice does not return a new array is when we only pass the method a single index, rather than a start and length or a range; in this case the element at that index is returned rather than a new array. 
 
 arr = [1, 'two', :three, '4']
-arr.slice(3, 1) # => ["4"]
+arr.slice(3, 1) # => ["4"] 
 arr.slice(3..3) # => ["4"]
 arr.slice(3)    # => "4"
+
+# When calling methods such as this on a collection object like an array it is important to be aware of exactly what is returned, as this will affect how you can subsequently interact with that return 
+
+# --------------------------------------
+
+#* Hash Element Reference 
+
+# Hashes are another very common collection data structure that, instead of using an integer-based index, uses key-value pairs, where the key or the value can be any type of Ruby object. This allows for a more expansive and descriptive collection of elements. 
+
+hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot' }
+
+hsh['fruit']    # => "apple"
+hsh['fruit'][0] # => "a"
+
+#* When initializing a hash, the keys must be unique. Try the following code out in irb: 
+hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot', 'fruit' => 'pear' }
+
+# warning: key "fruit" is duplicated and overwritten on line 1
+
+# --------------------------------------
+
+# We can access just the keys or just the values from a hash with the #keys and #values methods of Hash. These methods return an array: 
+
+country_capitals = { uk: 'London', france: 'Paris', germany: 'Berlin' }
+country_capitals.keys                 # => [:uk, :france, :germany]
+country_capitals.values             # => ["London", "Paris", "Berlin"]
+country_capitals.values[0]        # "London"
+
+# The above example uses symbols as keys. Although both hash keys and values can be any object in Ruby, it is common practice to use symbols as the keys. Symbols in Ruby can be thought of as immutable strings. There's a number of advantages to using symbols for hash keys, which we won't go into here, but it is important to be aware of this convention. 
+
+
+
+
