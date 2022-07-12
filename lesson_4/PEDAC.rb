@@ -108,3 +108,63 @@ Understanding the problem has three steps:
 # However, designing the right algorithm is far more challenging. 
 
 #* The biggest problem that students have when writing algorithms is providing sufficient detail.
+
+# --------------------------------------
+
+#* Try to work through the "understand the problem" part of this problem on your own
+
+# PROBLEM:
+
+# Given a string, write a method `palindrome_substrings` which returns
+# all the substrings from a given string which are palindromes. Consider
+# palindrome words case sensitive.
+
+# Test cases:
+
+# palindrome_substrings("supercalifragilisticexpialidocious") == ["ili"]
+# palindrome_substrings("abcddcbA") == ["bcddcb", "cddc", "dd"]
+# palindrome_substrings("palindrome") == []
+# palindrome_substrings("") == []
+
+# --------------------------------------
+
+# After reading this problem, some items may need clarification:
+
+#* 1. What is a palindrome? 
+
+# You might ask the interviewer to tell you what a palindrome is, and the interviewer would tell you that it is a word that reads the same forwards and backward.
+
+#* 2. How should I deal with inputs that are not palindromes? 
+
+# Here, you can check the test cases. In the third example test case, the word "palindrome" returns an empty array. This is an implicit requirement that we can infer from the test cases.
+
+#* 3. How should I deal with empty strings provided as input? 
+
+# Here, you can check the test cases. In the fourth example test case, an "empty" substring returns and empty array. This is an implicit requirement that we can infer from the test cases.
+
+#* 4. Can I assume all inputs are strings? 
+
+# Test cases don't show any non-string inputs, so you should ask whether the inputs can contain non-string values, and what you should do with them.
+
+#* 5. Do I need to return the same string object or an entirely new string? 
+
+# It looks like we should be returning a new array of substrings 
+
+
+#* Write down the inputs / outputs to the problem: 
+
+=begin
+
+          * input: string 
+          * output: array of substrings (not the same object)
+          * rules: 
+                    * Explicit requirements:
+                    - Returns all substrings from a given string which are palindromes (Reminder: a palindrome is a word that reads the same forwards and backward).
+                    - Palindrome words are case sensitive ("Dad" is not a palindrome, but "dad" is.)
+
+                      * Implicit requirements: 
+                      - the returned string shouldn't be the same string object => new arr 
+                      - if the string doesn't have any palindromes, the result should be an empty arr
+                      - if the string is an empty string, the result should be an empty array  
+
+=end 
