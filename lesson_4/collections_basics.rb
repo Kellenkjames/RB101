@@ -1,6 +1,6 @@
 #* Collections Basics 
 
-# Collections are made up of individual elements. In order to work with collections we need to understand how they are structured and how to reference and assign the individual elements within them. 
+# Collections are made up of individual elements. In order to work with collections we need to understand how they are structured and how to reference and assign the individual elements within them.
 
 # --------------------------------------
 
@@ -10,8 +10,8 @@
 str = 'abcdefghi'
 str[2] # => "c"
 
-# This is  a call to the #slice method of String and is alternative syntax for str.slice(2, 3)
-str[2, 3] # => "cde"
+# This is  a call to the #slice method of String and is alternative syntax for str.slice(2, 3) 
+str[2, 3] # => "cde" 
 
 # Chaining Methods 
 str[2, 3][0] # => "c"
@@ -19,7 +19,7 @@ str[2, 3][0] # => "c"
 # Str Methods 
 str = 'The grass is green' # str[4, 5] # => "grass"
 
-#* Technically, strings are not true collections, though we will often talk of strings as though they were. Collections contain multiple objects, while strings contain only a single object. The individual characters are not objects, but are just part of the object that contains the string value. 
+#* Technically, strings are not true collections, though we will often talk of strings as though they were. Collections contain multiple objects, while strings contain only a 'single' object. The individual characters are not objects, but are just part of the object that contains the string value. 
 
 # --------------------------------------
 
@@ -28,6 +28,8 @@ str = 'The grass is green' # str[4, 5] # => "grass"
 char1 = str[2]      # => "c"
 char2 = str[2]     # => "c"
 char1.object_id == char2.object_id # => false 
+
+#* If str were a real collection, the char1 and char2 objects would have the same object_id
 
 # --------------------------------------
 
@@ -50,7 +52,7 @@ arr.slice(3, 1) # => ["4"]
 arr.slice(3..3) # => ["4"]
 arr.slice(3)    # => "4"
 
-# When calling methods such as this on a collection object like an array it is important to be aware of exactly what is returned, as this will affect how you can subsequently interact with that return 
+# When calling methods such as this on a collection object like an array it is important to be aware of exactly what is returned, as this will affect how you can subsequently interact with that return value. 
 
 # --------------------------------------
 
@@ -63,10 +65,10 @@ hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot' }
 hsh['fruit']    # => "apple"
 hsh['fruit'][0] # => "a"
 
-#* When initializing a hash, the keys must be unique. Try the following code out in irb: 
+# When initializing a hash, the keys must be unique. Try the following code out in irb: 
 hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot', 'fruit' => 'pear' }
 
-# warning: key "fruit" is duplicated and overwritten on line 1
+#* warning: key "fruit" is duplicated and overwritten on line 1
 
 # --------------------------------------
 
@@ -83,11 +85,12 @@ country_capitals.values[0]        # => "London"
 
 #* Element Reference Gotchas 
 
-# There are a few things that can catch you off guard when referecning elements in a collection and you need to be aware of these in order to avoid unintended behavior in your code. 
+# There are a few things that can catch you off guard when referencing elements in a collection and you need to be aware of these in order to avoid unintended behavior in your code.
 
 #* Out of Bounds Indices
 
-# Both arrays and strings can be thought of as indexed collections. That is, we can reference individual elements within the object via their index. 
+# Both arrays and strings can be thought of as indexed collections. That is, we can reference individual elements within the object via their index.
+
 str = 'abcde'
 arr = ['a', 'b', 'c', 'd', 'e']
 
@@ -95,6 +98,7 @@ str[2] # => "c"
 arr[2] # => "c"
 
 # What happens if we try to reference using an index greater than 4? 
+
 str[5] # => nil 
 arr[5] # => nil 
 
@@ -125,7 +129,7 @@ arr.fetch(2)      # => IndexError: index 3 outside of array bounds: -3...3
 
 #* Negative Indices 
 
-# We've seen what happens if you try to reference an element using an index greater than the last index of the string or array. What is we use an index less than 0? 
+# We've seen what happens if you try to reference an element using an index greater than the last index of the string or array. What if we use an index less than 0? 
 
 str = 'abcde'
 arr = ['a', 'b', 'c', 'd', 'e']
@@ -137,7 +141,8 @@ arr[-2] # => "d"
 
 # --------------------------------------
 
-#* What do you think would be returned by the following calls? 
+# What do you think would be returned by the following calls? 
+
 str = 'ghijk'
 arr = ['g', 'h', 'i', 'j', 'k']
 
@@ -227,10 +232,10 @@ str # => "Joe's favorite color is blue"
 
 # Using the same element assignment method, how would you change the first letter of the remaining words in the sentence to their uppercase versions? Try it out in a code file or in irb. 
 
-puts str.index('f')
-puts str.index('c')
-puts str.index('i')
-puts str.index('b')
+# puts str.index('f')
+# puts str.index('c')
+# puts str.index('i')
+# puts str.index('b')
 
 str[6] = 'F'
 str[15] = 'C'
@@ -241,9 +246,43 @@ puts str # => "Joe's Favorite Color is Blue"
 
 # Note that this way of modifying a string is a destructive action; that is, the "str" string is changed permanently. 
 
+# --------------------------------------
 
+#* Array Element Assignment 
 
+# Similar to how we can assign individual characters in a string using their index, we can assign elements of an array in the same way.
 
+arr = [1, 2, 3, 4, 5]
+arr[0] += 1 # => 2
+arr         # => [2, 2, 3, 4, 5]
 
+# Increase the value of the rest of the integers in the array by 1. 
 
+arr[1] += 1
+arr[2] += 1
+arr[3] += 1
+arr[4] += 1
 
+# or 
+
+#arr.each { |num| p num += 1 }
+
+#* Note that, once again, this is a destructive action that permanently modified arr. 
+
+# -------------------------------------- 
+
+#* Hash Element Assignment 
+
+# Hash element assignment is not too dissimilar. The hash key is used instead of assigning a value using an index.
+
+hsh = { apple: 'Produce', carrot: 'Produce', pear: 'Produce', broccoli: 'Produce' }
+hsh[:apple] = 'Fruit'
+hsh # => { :apple => "Fruit", :carrot => "Produce", :pear => "Produce", :broccoli => "Produce" }
+
+# In irb or a code file use the same method to set a value of either 'Fruit' or 'Vegetable' to each element in the hash.
+
+hsh[:carrot] = 'Vegetable'
+hsh[:pear] = 'Fruit'
+hsh[:broccoli] = 'Vegetable'
+
+p hsh # => { :apple => "Fruit", :carrot => "Vegetable", :pear => "Fruit", :broccoli => "Vegetable" }
