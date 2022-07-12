@@ -229,5 +229,4 @@ Looping comprises four basic elements: a loop, a counter, a way to retrieve the 
 
 It's often tempting to go "method hunting" to search for a method to iterate over a collection, but if you master the basics of looping, you'll find that you can perform nearly any operation you need with the simple techniques in this assignment. Methods can be useful, but they shouldn't be used as a crutch.
 
-
 =end
