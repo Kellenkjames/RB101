@@ -113,4 +113,75 @@ end
 
 # --------------------------------------
 
+#* Next
 
+# Besides break, Ruby also provides the next keyword to help us control loops. When next is executed, it tells the loop to skip the rest of the current iteration and begin the next one. We can choose to skip the current iteration when counter represents an odd number by adding an if modifier to next with the condition counter.odd?.
+
+#* odd? is a method of Integer which returns true is an integer is odd and false if it isn't.
+
+counter = 0 
+
+loop do 
+  counter += 1
+  next if counter.odd? 
+  puts counter
+  break if counter > 5
+end 
+
+# Notice that when we added next, we also had to move counter += 1 so that it's executed first. Similar to break, when next is executed, any code after it will be ignored. If the counter incrementation code was placed after next, then it wouldn't be incremented if next is executed, which will result in an infinite loop.
+
+#* The if condition also had to be changed from counter == 5 to counter > 5 since 5 is an odd number
+
+# --------------------------------------
+
+#* Iterating Over Collections 
+
+# String 
+
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+counter = 0
+
+loop do 
+  break if counter == alphabet.size
+  puts alphabet[counter]
+  counter += 1
+end 
+
+# In order to print each character in the string, we need to iterate over the entire string, and use string reference to retrieve each letter based on its index. 
+
+# We'll break out of the loop when the counter equals the length of the alphabet string. 
+
+# --------------------------------------
+
+#* Array 
+
+# To iterate over an array, we can use loop in the same way we did with a string. 
+colors = ['green', 'blue', 'purple', 'orange']
+counter = 0
+
+loop do 
+  break if counter == colors.size
+  puts "I'm the color #{colors[counter]}!"
+  counter += 1
+end 
+
+# output => "I'm the color green!"
+# output => "I'm the color blue!"
+# output => "I'm the color purple!"
+# output => "I'm the color orange!"
+
+# --------------------------------------
+
+objects = ['hello', :key, 10, []]
+counter = 0 
+
+loop do 
+  break if counter == objects.size
+  puts objects[counter].class
+  counter += 1
+end 
+
+# output => String
+# output => Symbol 
+# output => Integer
+# output => Array
