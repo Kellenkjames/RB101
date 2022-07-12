@@ -130,25 +130,13 @@ Understanding the problem has three steps:
 
 # After reading this problem, some items may need clarification:
 
-#* 1. What is a palindrome? 
+#* 1. What is a substring? 
 
-# You might ask the interviewer to tell you what a palindrome is, and the interviewer would tell you that it is a word that reads the same forwards and backward.
+#* 2. What is a palindrome? 
 
-#* 2. How should I deal with inputs that are not palindromes? 
+#* 3. Will inputs always be strings? 
 
-# Here, you can check the test cases. In the third example test case, the word "palindrome" returns an empty array. This is an implicit requirement that we can infer from the test cases.
-
-#* 3. How should I deal with empty strings provided as input? 
-
-# Here, you can check the test cases. In the fourth example test case, an "empty" substring returns and empty array. This is an implicit requirement that we can infer from the test cases.
-
-#* 4. Can I assume all inputs are strings? 
-
-# Test cases don't show any non-string inputs, so you should ask whether the inputs can contain non-string values, and what you should do with them.
-
-#* 5. Do I need to return the same string object or an entirely new string? 
-
-# It looks like we should be returning a new array of substrings 
+#*4. What does it mean to treat palindrome words case-sensitively?
 
 
 #* Write down the inputs / outputs to the problem: 
@@ -156,14 +144,15 @@ Understanding the problem has three steps:
 =begin
 
           * input: string 
-          * output: array of substrings (not the same object)
+          * output: an array of substrings 
           * rules: 
                     * Explicit requirements:
-                    - Returns all substrings from a given string which are palindromes (Reminder: a palindrome is a word that reads the same forwards and backward).
-                    - Palindrome words are case sensitive ("Dad" is not a palindrome, but "dad" is.)
+                    - return only substrings which are palindromes. 
+                    - palindrome words should be case sensitive, meaning "abBA"
+                    is not a palindrome.
 
                       * Implicit requirements: 
-                      - the returned string shouldn't be the same string object => new arr 
+                      - the returned string shouldn't be the same string object
                       - if the string doesn't have any palindromes, the result should be an empty arr
                       - if the string is an empty string, the result should be an empty array  
 
