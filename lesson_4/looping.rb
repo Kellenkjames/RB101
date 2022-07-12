@@ -185,3 +185,49 @@ end
 # output => Symbol 
 # output => Integer
 # output => Array
+
+# --------------------------------------
+
+#* Hash 
+
+# Using loop to iterate over a hash is a bit more difficult -- it requires a couple more steps. This is because hashes use key-value pairs instead of a zero-based index. This means that each value in a hash is associated with a specific key. Since hash keys can be any type of object, a simple counter variable won't allow us to fetch the values we want.
+
+number_of_pets = {
+  'dogs' => 2,
+  'cats' => 4,
+  'fish' => 1
+}
+
+pets = number_of_pets.keys # => ['dogs', 'cats', 'fish']
+counter = 0 
+
+loop do 
+  break if counter == number_of_pets.size
+  
+  current_pet = pets[counter] # => pets[0] => 'dogs' 
+  current_pet_number = number_of_pets[current_pet] # => number_of_pets['dogs']
+  
+  puts "I have #{current_pet_number} #{current_pet}!"
+  counter += 1
+end 
+
+#* Summary 
+
+=begin
+
+Looping comprises four basic elements: 
+
+1) a loop 
+
+2) a counter
+
+3) a way to retreive the current value 
+
+4) a way to exit the loop
+
+Looping comprises four basic elements: a loop, a counter, a way to retrieve the current value, and a way to exit the loop. It's important to understand how to manually loop over collections with nothing more than these 4 tools. 
+
+It's often tempting to go "method hunting" to search for a method to iterate over a collection, but if you master the basics of looping, you'll find that you can perform nearly any operation you need with the simple techniques in this assignment. Methods can be useful, but they shouldn't be used as a crutch.
+
+
+=end
