@@ -5,7 +5,7 @@
 count = 1
 
 loop do
+  puts count.even? ? "#{count}: number is even!" : "#{count}: number is odd!"
   count += 1
-  count.even? puts "#{count}: number is even" : puts "#{count}: number is odd"
   break if count > 5
 end
