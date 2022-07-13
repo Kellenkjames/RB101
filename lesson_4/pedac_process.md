@@ -38,7 +38,24 @@ Given a string, produce a new string with every other word removed.
     - Involves structuring data in a certain way 
 
 ## A: Algorithms 
+
+- A logical sequence of steps for accomplishing a task or objective 
+  - Closely linked to data structures
+  - Series of steps to structure data to produce the required output
+- Stay abstract / high 
+  - Avoid implementation detail 
+  - Don't worry about efficiency for now
+
 ## C: Implementing a solution in Code
+
+- Translating solution algorithm to code 
+- Think about algorithm in context of programming language 
+  - Language features and constraints 
+  - Characteristics of data structures
+  - Built in functions / methods 
+  - Syntax and coding patterns 
+- Create test cases 
+- Code with intent 
 
 ## Sum Even Number Rows 
 
@@ -99,3 +116,46 @@ row number: 4 ==> sum of integers in row: 68
   [14, 16, 18, 20],
   ....
 ]
+
+**Algorithm**
+
+1. Create an empty 'rows' array to contain all of the rows 
+2. Create a 'row' array and add it to the overall 'rows' array
+3. Repeat step 2 until all the necessary rows have been created 
+   - All rows have been created when the length of the 'rows' array is equal to the input integer 
+4. Sum the final row 
+5. Return the sum
+
+*Problem: Create a Row* 
+
+Rules: 
+- Row is an array 
+- Arrays contain Integers 
+- Integers are consecutive even numbers 
+- Integers in each row form part of an overall larger sequence 
+- Rows are of different lengths 
+- Input: the information needed to create the output 
+  - The starting integer 
+  - Length of the row 
+- Output: the row itself: `[8, 10, 12]`
+
+Examples: 
+start: 2, length: 1 --> [2]
+start: 4, length: 2 --> [4, 6]
+start: 8, length: 3 --> [8, 10, 12]
+
+Data structures: 
+- An array of integers 
+
+Algorithm: 
+1. Create an empty 'row' array to contain the integers 
+2. Add the starting integer 
+3. Increment the starting integer by 2 to get the next integer in the sequence 
+4. Repeat steps 2 & 3 until the array has reached the correct length 
+5. Return the 'row' array 
+
+**Final Thoughts**
+- Don't think of P.E.D.A.C as a completely linear process
+- Move back and forward between the steps 
+- Switch from implementation mode to abstract problem solving mode when necessary 
+- Don't try to problem solve at the code level 
