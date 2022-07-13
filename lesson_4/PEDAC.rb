@@ -63,8 +63,6 @@ Understanding the problem has three steps:
 
 # The test cases frequently answer this question. In this case, test case number 3 provides the answer. This is an implicit requirement that we can infer from the test cases. 
 
-# Implicit meaning (nothing extra needs to be done to handle empty strings)
-
 #* 4. Can I assume that all inputs are strings? 
 
 # Test cases don't show any non-string inputs, so you should ask whether the inputs can contain non-string values, and what you should do with them. In this problem, we won't worry about non-string values. 
@@ -103,7 +101,7 @@ Understanding the problem has three steps:
 
 #* Data Structure / Algorithm 
 
-# Data structures influence your algorithm, and for that reason, these two steps are often paired. Deciding what data structure to use is generally easy for students: use cases for arrays and objects, for instance, are generally easy to identify 
+# Data structures influence your algorithm, and for that reason, these two steps are often paired. Deciding what data structure to use is generally easy for students: use cases for arrays and objects, for instance, are generally easy to identify. 
 
 # However, designing the right algorithm is far more challenging. 
 
@@ -202,7 +200,7 @@ end
 
 #* Inner Loop - It's easiest to start with the substring of length 2, then the substring of length 3, and so on. The resulting loops look something like this:
 
-# for each starting index from 0 through the next to last index position
+# for each starting index from 0 through the next to last index position 
   # for each substring length from 2 until there are no substrings of that length
     # extract the substring of the indicated length starting at the indicate index position
   # end of inner loop
@@ -231,14 +229,18 @@ end
 # On the fifth iteration, the substring length ranges from 2 to 3. 
 # On the sixth, the substring length starts and ends at 2. 
 
-# Looking at these two examples, we can determine the following:  i.e. goalies from index 0 to 5
+# Looking at these two examples, we can determine the following:
 
-#* Outer loop iterates over indexes from 0 to the length of the next to the last index position (e.g.,string.length - 2 ). 
-#* Inner loop ranges from 2 to the original string length minus the starting index (string.length - startingIndex)
+# Outer loop iterates over indexes from 0 to the length of the next to the last index position 
+#* (string.length - 2 ). 
+
+# Inner loop ranges from 2 to the original string length minus the starting index 
+#* (string.length - startingIndex)
 
 # --------------------------------------
 
 #* Revise Algorithm 
+
 # - create an empty array called `result` that will contain all required substrings
 # - create a `starting_index` variable (value `0`) for the starting index of a substring
 # - start a loop that iterates over `starting_index` from `0` to the length of the string minus 2
@@ -302,7 +304,7 @@ end
 
 #* Check whether the string is a palindrome
 
-# - Inside the `is_palindrome?` method, check whether the string
+#   Inside the `is_palindrome?` method, check whether the string
 #   value is equal to its reversed value. You can use the
 #   String#reverse method.
 
