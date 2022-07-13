@@ -23,6 +23,12 @@ Given a string, produce a new string with every other word removed.
     - Words are delimited by spaces 
 
 ## E: Examples and Test Cases 
+
+- Can confirm / refute assumptions 
+- Help to answer questions about implicit requirements 
+- Act as assertions which help to codify the rules and boundaries 
+
+
 ## D: Data Structures 
 ## A: Algorithms 
 ## C: Implementing a solution in Code
@@ -31,10 +37,10 @@ Given a string, produce a new string with every other word removed.
 
 Imagine a sequence of consecutive even integers beginning with 2. The integers are grouped in rows, with the first row containing one integer, the second row two integers, the third row three integers, and so on. Given an integer representing the number of a particular row, return an integer representing the sum of all the integers in that row. 
 
-**Further Clarification**
-- Sequence of integers 
+**Rules/Requirements**
+- Sequence of even integers 
 - Sequence begins with two 
-- Integers are consecutive (even)
+- Integers are consecutive 
 - Sequence is grouped in to rows 
 - Each row incrementally larger: 1, 2, 3, ...
 - Row 'number' equals the number of elements in the row 
@@ -50,8 +56,18 @@ Imagine a sequence of consecutive even integers beginning with 2. The integers a
 2, 4, 6, 8, 19, 12, 14, 16, 18, ...
 
 # 2
-# 4, 6 => If the input integer is '2' we know we have to return sum of elements of this row (10)
-# 8, 10, 12 => If the input integer is '3' we know we have to return sum of elements of this row (30)
+# 4, 6 
+# 8, 10, 12
 # 14, 16, 18, 20
 
 - How do we create the structure? 
+
+**Examples**
+
+row number: 1 ==> sum of integers in row: 2
+row number: 2 ==> sum of integers in row: 10
+row number: 4 ==> sum of integers in row: 68
+
+2 --> 2 
+4, 6 -- 10
+14, 16, 18, 20 --> 68
