@@ -28,8 +28,15 @@ Given a string, produce a new string with every other word removed.
 - Help to answer questions about implicit requirements 
 - Act as assertions which help to codify the rules and boundaries 
 
-
 ## D: Data Structures 
+
+- Help reason with data logically 
+- Help interact with data at implementation level 
+- Think in terms of data structure is part of problem solving process 
+- Data structures are closely linked to algorithm 
+  - Set of steps from input to output 
+    - Involves structuring data in a certain way 
+
 ## A: Algorithms 
 ## C: Implementing a solution in Code
 
@@ -71,3 +78,24 @@ row number: 4 ==> sum of integers in row: 68
 2 --> 2 
 4, 6 -- 10
 14, 16, 18, 20 --> 68
+
+**Data Structure**
+
+# 2
+# 4, 6 
+# 8, 10, 12
+# 14, 16, 18, 20
+
+- Overall structure represents sequence as a whole
+- Individual rows within overall structure 
+- Individual rows in a set order in context of sequence 
+- Individual rows contain integers 
+- Can assume that integers are in a set order in the context of the sequence 
+
+[
+  [2],
+  [4, 6],
+  [8, 10, 12],
+  [14, 16, 18, 20],
+  ....
+]
