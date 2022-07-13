@@ -69,6 +69,7 @@ p sum_even_number_row(4) == 68
 
 # Calculating the start integer: 
 # Rule: First integer of row == last integer of preceding row + 2
+
 #*  Algorithm: 
 # - get the Last row of the rows array 
 # - get last integer of that row 
