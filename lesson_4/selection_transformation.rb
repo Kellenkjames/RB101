@@ -64,8 +64,8 @@ transformed_elements # => ['apples', 'bananas', 'pears']
 =begin
 
 * if 'aeiouAEIOU'.include?(current_char)
-    selected_chars << current_char
-  end
+  selected_chars << current_char
+end
 
 =end 
 
@@ -75,7 +75,7 @@ def select_vowels(str)
   selected_chars = ''
   counter = 0
   
-  loop do 
+  loop do
     current_char = str[counter]
     
     if 'aeiouAEIOU'.include?(current_char)
@@ -83,12 +83,39 @@ def select_vowels(str)
     end
     
     counter += 1
-    break if counter = str.size
-  end 
+    break if counter == str.size
+  end
   
   selected_chars
 end
 
+#* An important thing to note here is that when our method is done iterating over the collection it returns a new collection containing the selected values. In this case, our select_vowels method returns a new string.
 
+p select_vowels('the quick brown fox') # => "euioo"
+
+sentence = 'I wandered lonely as a cloud'
+p select_vowels(sentence)   # => "Iaeeoeaaou"
+
+# We can therefore call other methods on that return value. 
+
+number_of_vowels = select_vowels('hello world').size
+p number_of_vowels # => 3
+
+#----------------------------------------------
+
+#* Hashes 
+
+produce = {
+  'apple' => 'Fruit',
+  'carrot' => 'Vegetable',
+  'pear' => 'Fruit',
+  'broccoli' => 'Vegetable'
+}
+
+def select_fruit(produce)
+  produce.select { |k, v | v == 'Fruit'}
+end 
+
+puts select_fruit(produce) 
 
 
