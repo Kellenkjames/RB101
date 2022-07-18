@@ -74,3 +74,98 @@ end
 
 # An important thing to note here is that when our method is done iterating over the collection - it returns a new collection containing the selected values. In this case, our 'select_vowels' method returns a new string. 
 
+select_vowels('the quick brown fox')      # => "euioo"
+
+sentence = 'I wandered lonely as a cloud'
+select_vowels(sentence)                   # => "Iaeeoeaaou"
+
+# We can therefore call other methods on that return value 
+number_of_vowels = select_vowels('hello world').size 
+number_of_vowels # => 3
+
+#----------------------------------------------
+
+#* Hashes
+
+produce = {
+  'apple' => 'Fruit',
+  'carrot' => 'Vegetable',
+  'pear' => 'Fruit',
+  'broccoli' => 'Vegetable'
+}
+
+def select_fruit(produce_list)
+  produce_keys = produce_list.keys 
+  counter = 0
+  selected_fruits = {}
+  
+  loop do 
+    # This has to be at the top in case produce_list is empty hash 
+    break if counter == produce_list.size
+    
+    current_key = produce_keys[counter]
+    current_value = produce_list[current_key]
+    
+    if current_value == 'Fruit'
+      selected_fruits[current_key] = current_value
+    end
+    
+    counter += 1
+  end
+  
+  selected_fruits
+end 
+
+puts select_fruit(produce) # => {"apple"=>"Fruit", "pear"=>"Fruit"}
+
+# Notice that
+
+# the original argument, produce_list, it not mutated 
+# a new hash is returned by the method (as opposed to an array or string)
+
+#----------------------------------------------
+
+#* Transformation Examples: 
+
+def double_numbers(numbers)
+  double_numbers = []
+  counter = 0
+  
+  loop do 
+    break if counter == numbers.size 
+    
+    current_number = numbers[counter]
+    double_numbers << current_number * 2
+    
+    counter += 1
+  end 
+  
+  double_numbers
+end 
+
+# We can invoke the method like this: 
+my_numbers = [1, 4, 3, 7, 2, 6]
+p double_numbers(my_numbers) # => [2, 8, 6, 14, 4, 12]
+
+#----------------------------------------------
+
+#* Implement a double_numbers! method that mutates its argument
+
+def double_numbers!(numbers)
+  counter = 0
+  
+  loop do 
+    break if counter == numbers.size
+    
+    numbers[counter] *= 2
+    
+    counter += 1
+  end
+  
+  numbers
+end 
+
+my_numbers = [1, 4, 3, 7, 2, 6]
+p double_numbers!(my_numbers) # => [2, 8, 6, 14, 4, 12]
+
+p my_numbers # arg has now been permanently modified => [2, 8, 6, 14, 4, 12]
