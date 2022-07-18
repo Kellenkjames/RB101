@@ -169,3 +169,58 @@ my_numbers = [1, 4, 3, 7, 2, 6]
 p double_numbers!(my_numbers) # => [2, 8, 6, 14, 4, 12]
 
 p my_numbers # arg has now been permanently modified => [2, 8, 6, 14, 4, 12]
+
+# rather than returning a new array, this method returns a reference to the (mutated) original array
+
+#----------------------------------------------
+
+#* Method that only transforms a subset of elements in the collection. 
+
+def double_odd_numbers(numbers)
+  double_numbers = []
+  counter = 0
+  
+  loop do 
+    break if counter == numbers.size
+    
+    current_number = numbers[counter]
+    current_number *= 2 if current_number.odd?
+    double_numbers << current_number
+    
+    counter += 1
+  end 
+  
+  double_numbers
+end 
+
+# Note: This method does not mutate its argument and instead returns a new array. We can call it like so:
+
+my_numbers = [1, 4, 3, 7, 2, 6]
+double_odd_numbers(my_numbers) # => [2, 4, 6, 14, 2, 6]
+
+#----------------------------------------------
+
+#* Create method that transforms the numbers based on their position in the array rather than their value
+
+def double_odd_numbers(numbers)
+  double_numbers = []
+  counter = 0
+  
+  loop do 
+    break if counter == numbers.size 
+    
+    current_number = numbers[counter]
+    current_number *= 2 if counter.odd? 
+    double_numbers << current_number
+    
+    counter += 1
+  end 
+  
+  double_numbers
+end 
+
+my_numbers = [1, 4, 3, 7, 2, 6]
+p double_odd_numbers(my_numbers) # => [1, 8, 3, 14, 2, 12]
+
+#----------------------------------------------
+
