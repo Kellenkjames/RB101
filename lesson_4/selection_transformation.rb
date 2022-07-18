@@ -51,7 +51,7 @@ transformed_elements # => ['apples', 'bananas', 'pears']
 
 # Note that, in this example, we perform the transformation on a new array and leave the original array unchanged. 
 
-#* When performing transformation, it's always important to pay attention to whether the original collection was mutated or if a new collection was returned.
+#* When performing transformations, it's always important to pay attention to whether the original collection was mutated or if a new collection was returned.
 
 #----------------------------------------------
 
@@ -105,6 +105,8 @@ p number_of_vowels # => 3
 
 #* Hashes 
 
+# In this example we want to select the key-value pairs where the value is 'Fruit'. 
+
 produce = {
   'apple' => 'Fruit',
   'carrot' => 'Vegetable',
@@ -112,10 +114,31 @@ produce = {
   'broccoli' => 'Vegetable'
 }
 
-def select_fruit(produce)
-  produce.select { |k, v | v == 'Fruit'}
+# Implement a method (from scratch)
+def select_fruit(product_list)
+  produce_keys = product_list.keys 
+  counter = 0
+  selected_fruits = {}
+  
+  loop do 
+    # This needs to be at the top in case the hash is "empty" 
+    break if counter == produce_keys.size
+    
+    current_key = produce_keys[counter]
+    current_value = product_list[current_key]
+    
+    if current_value == 'Fruit'
+      selected_fruits[current_key] = current_value
+    end 
+    
+    counter += 1
+  end 
+  
+  selected_fruits
 end 
 
-puts select_fruit(produce) 
+puts select_fruit(produce) # => {"apple"=>"Fruit", "pear"=>"Fruit"}
+
+#----------------------------------------------
 
 
