@@ -293,8 +293,9 @@ def select_letter(sentence, character)
   selected_chars = ''
   counter = 0
   
+  # same as for loop 
   loop do 
-    break if counter == sentence.size
+    break if counter == sentence.size 
     current_char = sentence[counter]
     
     if current_char == character
@@ -312,3 +313,30 @@ p select_letter(question, 'a') # => "aaaaaaaa"
 p select_letter(question, 't') # => "ttttt"
 p select_letter(question, 'z') # => ""
 
+#----------------------------------------------
+
+#* The for loop 
+
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+for char in alphabet.chars
+  puts char 
+end 
+
+#----------------------------------------------
+
+=begin
+
+* Summary 
+
+We often want to perform iteration, selection or transformation operations on a collection. Using these 3 actions, we can manipulate a collection nearly any way we need to.
+
+Typically, these are generic actions that we can move into a method, so that we can perform these generic operations repeatedly on different collections.
+
+* Pay attention to when the original collection is mutated vs when the method returns a new collection. This might seem trivial right now, but it's a source of a lot of misunderstanding. Make certain to study this.
+
+Understand how these methods can be made more generic by allowing for additional parameters to specify some criteria for selection or transformation.
+
+Finally, it's common to chain actions on collections; but pay special mind to the return value, especially if the return value is an empty collection or nil. Trying to chain methods on empty collections or nil is dangerous and results in a lot of broken programs.
+
+=end 
