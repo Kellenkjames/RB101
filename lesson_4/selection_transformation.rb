@@ -248,4 +248,36 @@ def general_select(produce_list, selection_criteria)
   selected_produce
 end 
 
+# To use the above general_select method, we have to pass in a collection and some selection criteria. In this specific case, the criteria is hardcoded to match with a value: if there's a match between the criteria and value, then the current key-value pair is selected into the selected_produce hash. Here's how we can use this method:
 
+produce = {
+  'apple' => 'Fruit',
+  'carrot' => 'Vegetable',
+  'pear' => 'Fruit',
+  'broccoli' => 'Vegetable'
+}
+
+general_select(produce, 'Fruit')     # => {"apple"=>"Fruit", "pear"=>"Fruit"}
+general_select(produce, 'Vegetable') # => {"carrot"=>"Vegetable", "broccoli"=>"Vegetable"}
+general_select(produce, 'Meat')      # => {}
+
+#----------------------------------------------
+
+#* Update our double_numbers method
+
+def multiply(numbers, multiplier)
+  multiplied_numbers = []
+  counter = 0
+
+  loop do 
+    break if counter == numbers.size
+    
+    multiplied_numbers << numbers[counter] * multiplier
+    counter += 1
+  end 
+
+  multiplied_numbers
+end 
+
+my_numbers = [1, 4, 3, 7, 2, 6]
+p multiply(my_numbers, 3) # => [3, 12, 9, 21, 6, 18]
