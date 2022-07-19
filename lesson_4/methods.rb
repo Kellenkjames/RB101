@@ -51,7 +51,7 @@ def a_method
   end
 end
 
-p a_method # => [1, 2, 3]
+a_method # => [1, 2, 3]
 
 # The return value is [1, 2, 3]. This is because the last expression in the method is [1, 2, 3].each 
 
@@ -102,7 +102,7 @@ end
   puts num
 end
 
-# select will now return an empty array. Since puts num is now the last evaluated expression in the block, it is the return value of this expression which determines the return value of the block. 
+# select will now return an empty array []. Since puts num is now the last evaluated expression in the block, it is the return value of this expression which determines the return value of the block. 
 
 #* We know that puts always returns nil, therefore the return value of the block will now be nil, which is considered a "falsey" value. 
 
@@ -148,11 +148,6 @@ end
 end 
 
 # Since 'hi' is the only statement within the block, the return value of the block is 'hi', which map will use as the transformation criteria. Therefore, the above code will return an array where each element is 'hi'. 
-
-
-
-
-
 
 
 
