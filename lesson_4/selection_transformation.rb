@@ -41,12 +41,12 @@ loop do
   transformed_elements << current_element + 's' # appends trasformed string into array 
   
   counter += 1
-  break if counter = fruits.size
+  break if counter == fruits.size
 end 
 
 # Since we're applying the transformation to every element in the array, we don't need an if condition, but the entire line is the transformation criteria. Note that, in this example, we perform the transformation on a new array and leave the original array unchanged. 
 
-#* When performing transformation, it's always important to pay attention to whether the original collection was mutated or if a new collection was returned. 
+#* When performing transformations, it's always important to pay attention to whether the original collection was mutated or if a new collection was returned. 
 
 #----------------------------------------------
 
@@ -106,6 +106,7 @@ def select_fruit(produce_list)
     current_key = produce_keys[counter]
     current_value = produce_list[current_key]
     
+    #* Selection Criteria 
     if current_value == 'Fruit'
       selected_fruits[current_key] = current_value
     end
@@ -230,21 +231,21 @@ def general_select(produce_list, selection_criteria)
   produce_keys = produce_list.keys
   counter = 0
   selected_produce = {}
-
+  
   loop do 
     break if counter == produce_keys.size
-
+    
     current_key = produce_keys[counter]
     current_value = produce_list[current_key]
-
+    
     # used to be current_value == 'Fruit'
     if current_value == selection_criteria
       selected_produce[current_key] = current_value
     end 
-
+    
     counter += 1
   end 
-
+  
   selected_produce
 end 
 
@@ -268,16 +269,46 @@ general_select(produce, 'Meat')      # => {}
 def multiply(numbers, multiplier)
   multiplied_numbers = []
   counter = 0
-
+  
   loop do 
     break if counter == numbers.size
     
     multiplied_numbers << numbers[counter] * multiplier
     counter += 1
   end 
-
+  
   multiplied_numbers
 end 
 
 my_numbers = [1, 4, 3, 7, 2, 6]
 p multiply(my_numbers, 3) # => [3, 12, 9, 21, 6, 18]
+
+#* Note that the original argument is not mutated and that we're returning a new array here. 
+
+#----------------------------------------------
+
+# Write a method called select_letter, that takes a string and returns a new string containing only the letter that we specified:
+
+def select_letter(sentence, character)
+  selected_chars = ''
+  counter = 0
+  
+  loop do 
+    break if counter == sentence.size
+    current_char = sentence[counter]
+    
+    if current_char == character
+        selected_chars << current_char
+    end 
+    
+    counter += 1
+  end 
+  
+  selected_chars 
+end 
+
+question = 'How many times does a particular character appear in this sentence?'
+p select_letter(question, 'a') # => "aaaaaaaa"
+p select_letter(question, 't') # => "ttttt"
+p select_letter(question, 'z') # => ""
+
