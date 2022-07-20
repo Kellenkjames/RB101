@@ -2,6 +2,8 @@
 
 # There are many useful methods that come out of the box with Ruby, but they're only useful if we thoroughly understand how they work. 
 
+# Ruby Array and Hash includes the Enumerable module.
+
 # --------------------------------------
 
 #* Enumerable#any?  https://docs.ruby-lang.org/en/2.7.0/Enumerable.html#method-i-any-3F 
