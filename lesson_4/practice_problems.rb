@@ -35,7 +35,9 @@ end
 
 # => [1, 2, 3]
 
-# Solution: reject returns a new array containing items where the block's return value is "falsey". In other words, if the return value was false or nil the element would be selected. puts always returns nil. 
+# Solution: reject returns a new array containing items where the block's return value is "falsey". In other words, if the return value was false or nil the element would be selected. 
+
+#* puts always returns nil (if it is the last evaluated expression)
 
 # --------------------------------------
 
@@ -45,7 +47,7 @@ end
   hash[value[0]] = value
 end
 
-#* => { "a" => "ant", "b" => "bear", "c" => "cat" }
+# => { "a" => "ant", "b" => "bear", "c" => "cat" }
 
 # Solution: When we invoke each_wth_object, we pass in an object ({} here) as an argument. That object is then passed into the block and its updated value is returned at the end of each iteration. 
 
@@ -99,9 +101,7 @@ Therefore, the block's return value will be a boolean, since Integer#odd can onl
 
 Since the Array#any? method returns true if the block ever returns a value other than false or nil, and the block returns true on the first iteration, we know that any? will return true. 
 
-*What is also interesting here is any? stops iterating after this point since there is no need to evaluate the remaining items in the array; therefore, puts num is only ever invoked for the first item in the array: 1
-
-puts always returns nil, therefore the elements from the original collection will be returned and it will stop at 1 since it's odd. 
+* What is also interesting here is any? stops iterating after this point since there is no need to evaluate the remaining items in the array; therefore, puts num is only ever invoked for the first item in the array: 1
 
 =end
 
@@ -134,7 +134,9 @@ Solution: There are some interesting things to point out here.
 
 * First, the return value of map is an array, which is the collection type that map always returns. 
 
-Second, where did that nil come from? If we look at the if condition (value.size > 3), we'll notice that it evaluates as true when the length of value is greater than 3. In this case, the only value with a length greater than 3 is 'bear'. This means that for the first element, 'ant', the condition evaluates as false and value isn't returned.
+Second, where did that nil come from? If we look at the if condition (value.size > 3), we'll notice that it evaluates as true when the length of value is greater than 3. In this case, the only value with a length greater than 3 is 'bear'. 
+
+This means that for the first element, 'ant', the condition evaluates as false and value isn't returned.
 
 * When none of the conditions in an if statement evaluates as true, the if statement itself returns nil. That's why we see nil as the first element in the returned array.
 
