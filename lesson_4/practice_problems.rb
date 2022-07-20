@@ -82,4 +82,60 @@ hash.shift
 
 # --------------------------------------
 
-# 7: 
+# 7: What is the block's return value in the following code? How is it determined? Also, what is the return value of any? in this code and what does it output?
+
+[1, 2, 3].any? do |num|
+  puts num
+  num.odd?
+end
+
+# => true 
+
+=begin 
+
+The return value of the block is determined by the return value of the last expression within the block. In this case the last statement evaluated is num.odd?, which returns a boolean. 
+
+Therefore, the block's return value will be a boolean, since Integer#odd can only return true or false. 
+
+Since the Array#any? method returns true if the block ever returns a value other than false or nil, and the block returns true on the first iteration, we know that any? will return true. 
+
+*What is also interesting here is any? stops iterating after this point since there is no need to evaluate the remaining items in the array; therefore, puts num is only ever invoked for the first item in the array: 1
+
+puts always returns nil, therefore the elements from the original collection will be returned and it will stop at 1 since it's odd. 
+
+=end
+
+# --------------------------------------
+
+# 8: How does take work? Is it destructive? How can we find out? 
+
+arr = [1, 2, 3, 4, 5]
+arr.take(2)
+
+# => [1, 2]
+
+# Solution: By reading the docs and testing the method in irb, we're able to determine that Array#take selects a specified number of elements from an array. We're also able to verify that it isn't a destructive method. 
+
+# --------------------------------------
+
+# 9: What is the return value of 'map' in the following code? Why? 
+
+{ a: 'ant', b: 'bear' }.map do |key, value| 
+  if value.size > 3
+    value
+  end 
+end
+
+# => [nil, "bear"]
+
+=begin
+
+Solution: There are some interesting things to point out here. 
+
+* First, the return value of map is an array, which is the collection type that map always returns. 
+
+Second, where did that nil come from? If we look at the if condition (value.size > 3), we'll notice that it evaluates as true when the length of value is greater than 3. In this case, the only value with a length greater than 3 is 'bear'. This means that for the first element, 'ant', the condition evaluates as false and value isn't returned.
+
+* When none of the conditions in an if statement evaluates as true, the if statement itself returns nil. That's why we see nil as the first element in the returned array.
+
+=end 
