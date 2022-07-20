@@ -64,10 +64,22 @@ hash.shift
 
 # removes a key-value pair from hash => [a, 'ant']
 
-# Solution: 
+# Solution: We can find this information by checking Hash#shift in the Ruby docs
 
+#* shift removes a key-value pair from hash (destructively) and returns it as the two-item array [key, value], or the hash's default value if the hash is empty. 
 
+# --------------------------------------
 
+# 6: What is the return value of the following statement? Why? 
 
+['ant', 'bear', 'caterpillar'].pop.size 
 
+# => 11
 
+# Solution: There are a couple things going on here. First, pop is being called on the array. pop destructively removes the last element from the calling array and returns it. 
+
+# Second, size is being called on the return value by pop. Once we realize that size is evaluating the return value of pop (which is "caterpillar") then the final return value of 11 should make sense. 
+
+# --------------------------------------
+
+# 7: 
