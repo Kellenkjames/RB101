@@ -100,7 +100,7 @@ end
 
 # As an additional quirk, it's possible to use parentheses to capture the key and value in the first block argument. 
 
-{ a: "ant", b: "bear", c: "cat"}.each_with_object({}) do |(key, value), hash| 
+{ a: "ant", b: "bear", c: "cat" }.each_with_object({}) do |(key, value), hash| 
   hash[value] = key
 end
 # => { "ant" => :a, "bear" => :b, "cat" => :c }
@@ -118,16 +118,16 @@ end
 
 # Let's now try to call first on a hash. 
 
-{ a: "ant", b: "bear", c: "cat"}.first(2) # return 2 elements 
+{ a: "ant", b: "bear", c: "cat" }.first(2) # return 2 elements 
 # => [[:a, "ant"], [:b, "bear"]]
 
 =begin
 
 There are a couple of interesting things of note here.
 
-1. First, hashes are typically thought of as unordered and values are retrieved by keys. In some programming languages, the order is not preserved at all. This used to be true for Ruby too, but since Ruby 1.9, order is preserved according to the order of insertion. Calling first on a hash doesn't quite make sense, but Ruby lets you do it.
+*1. First, hashes are typically thought of as unordered and values are retrieved by keys. In some programming languages, the order is not preserved at all. This used to be true for Ruby too, but since Ruby 1.9, order is preserved according to the order of insertion. Calling first on a hash doesn't quite make sense, but Ruby lets you do it.
 
-2. Second, notice that the return value of calling first on a hash with a numeric argument is a nested array. This is unexpected. Fortunately, turning this nested array back to a hash is easy enough: [[:a, "ant"], [:b, "bear"]].to_h.
+* 2. Second, notice that the return value of calling first on a hash with a numeric argument is a nested array. This is unexpected. Fortunately, turning this nested array back to a hash is easy enough: [[:a, "ant"], [:b, "bear"]].to_h.
 
 In practice, first is rarely called on a hash, and most often used with arrays.
 
@@ -137,6 +137,53 @@ In practice, first is rarely called on a hash, and most often used with arrays.
 
 #* Enumerable#include? 
 
+# include? doesn't take a block, but it does require one argument. It returns true if the argument exists in the collection and false if it doesn't.
+
+[1, 2, 3].include?(1)
+# => true 
+
+# --------------------------------------
+
+#* When called on a hash, include? only checks the keys, not the values. 
+
+{ a: "ant", b: "bear", c: "cat" }.include?("ant")
+# => false 
+
+{ a: "ant", b: "bear", c: "cat" }.include?(:a)
+# => true 
+
+# Hash#include? is essentially an alias for Hash#key? or Hash#has_key? In practice, Rubyists would usually prefer to use the key? method over include?
+
+# --------------------------------------
+
+#* Enumerable#partition
+
+# partition divides up elements in the current collection into two collections, depending on the block's return value. For example:
+
+[1, 2, 3].partition do |num| 
+  num.odd?
+end
+# => [ [1, 3], [2] ]
+
+# The return value is a nested array, with the inner arrays separated based on the return value of the block. The most idiomatic way to use partition is to parallel assign variables to capture the divided inner arrays. 
+
+odd, even = [1, 2, 3].partition do |num|
+  num.odd? 
+end
+
+odd # => [1, 3]
+even # => [2]
+
+# --------------------------------------
+
+#* Even if the collection is a hash, the return value of partition will always be an array. 
+
+long, short = { a: "ant", b: "bear", c: "cat" }.partition do |key, value| 
+  value.size > 3
+end
+# => [[[:b, "bear"]], [[:a, "ant"], [:c, "cat"]]]
+
+# To transform these arrays back into a hash, we can invoke Array
 
 
 
