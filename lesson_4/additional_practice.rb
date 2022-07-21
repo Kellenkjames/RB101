@@ -84,12 +84,32 @@ statement.gsub!(/\s+/, '')
 statement_arr = statement.split('').tally
 p statement_arr
 
+# --------------------------------------
+
+# 8: What happens when we modify an array while we are iterating over it? What would be output by this code?
+
+numbers = [1, 2, 3, 4]
+numbers.each do |number| 
+  p number
+  numbers.shift(1)
+end
+
+# => [3, 4]
+
+=begin
+
+[1, 2, 3, 4]
+Iteration 1: Starts from index 0 | removes first single element [1]
+
+[2, 3, 4]
+Iteration 2: Starts from index 1 | removes first single element [3]
+
+[3, 4]
+Iteration 3: Starts from index 2 
+* stops here and returns because it has no element at index 2
 
 
-
-
-
-
+=end 
 
 
 
