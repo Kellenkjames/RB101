@@ -106,14 +106,30 @@ Iteration 2: Starts from index 1 | removes first single element [3]
 
 [3, 4]
 Iteration 3: Starts from index 2 
-* stops here and returns because it has no element at index 2
-
+* loop ends here and returns because it has no element at index 2
 
 =end 
 
+numbers = [1, 2, 3, 4]
+numbers.each do |number| 
+  p number
+  numbers.pop(1)
+end 
 
+# => [1, 2]
 
+=begin
 
+[1, 2, 3, 4]
+Iteration 1: Starts from index 0 | removes last element of self [1]
 
+[1, 2, 3]
+Iteration 2: Starts from index 1 | removes last element of self [2]
+
+# => [1, 2]
+Iteration 3: Starts from index 2
+* loop ends here and returns because it has no element at index 2
+
+=end 
 
 
