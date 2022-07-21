@@ -73,7 +73,21 @@ flintstones.map! { |name| name.slice(0, 3) }
 
 # --------------------------------------
 
-# 7: Create a hash that expresses the frequency with which each letter occurs in this string: 
+#* 7: Create a hash that expresses the frequency with which each letter occurs in this string: 
+
+statement = "The Flintstones Rock"
+
+# Remove all whitespace 
+statement.gsub!(/\s+/, '')
+
+# Split chars and count occurences 
+statement_arr = statement.split('').tally
+p statement_arr
+
+
+
+
+
 
 
 
