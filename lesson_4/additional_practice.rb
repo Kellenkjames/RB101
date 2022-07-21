@@ -63,6 +63,21 @@ puts be_index
 
 p flintstones.index { |name| name[0, 2] == "Be" }
 
+# --------------------------------------
+
+# 6: Amend this array so that the names are all shortened to just the first three characters:
+
+flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+
+flintstones.map! { |name| name.slice(0, 3) }
+
+# --------------------------------------
+
+# 7: Create a hash that expresses the frequency with which each letter occurs in this string: 
+
+
+
+
 
 
 
