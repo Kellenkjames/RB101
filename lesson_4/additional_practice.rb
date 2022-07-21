@@ -132,4 +132,15 @@ Iteration 3: Starts from index 2
 
 =end 
 
+# --------------------------------------
 
+#* Write your own version of the rails titleize implementation. 
+
+def titleize(words)
+  arr = words.split(' ')
+  arr.each { |word| word.capitalize! }
+  puts arr.join(" ")
+end 
+
+words = "the flintstones rock"
+titleize(words)
