@@ -139,8 +139,8 @@ Iteration 3: Starts from index 2
 def titleize(words)
   arr = words.split(' ')
   arr.each { |word| word.capitalize! }
-  puts arr.join(" ")
+  arr.join(" ")
 end 
 
 words = "the flintstones rock"
-titleize(words)
+titleize(words) # => "The Flintstones Rock"
