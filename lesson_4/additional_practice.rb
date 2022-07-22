@@ -23,7 +23,7 @@ puts flintstones_hash
 
 # --------------------------------------
 
-# 2: Add up all of the ages from the Munster family hash
+# 2: Add up all of the ages from the Munster family hash:
 
 # Solution
 ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10, "Marilyn" => 22, "Spot" => 237 }
@@ -57,11 +57,11 @@ p ages.values.min
 flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
 
 be_index = flintstones.index { |name| name.start_with?("Be") }
-puts be_index
+be_index # => 3
 
 # or 
 
-p flintstones.index { |name| name[0, 2] == "Be" }
+flintstones.index { |name| name[0, 2] == "Be" }
 
 # --------------------------------------
 
@@ -144,3 +144,50 @@ end
 
 words = "the flintstones rock"
 titleize(words) # => "The Flintstones Rock"
+
+# --------------------------------------
+
+# 10: Modify the hash such that each member of the Munster family has an additional "age_group" key that has one of three values describing the age group the family member is in (kid, adult, or senior). Your solution should produce the hash below:
+
+munsters = {
+  "Herman" => { "age" => 32, "gender" => "male" },
+  "Lily" => { "age" => 30, "gender" => "female" },
+  "Grandpa" => { "age" => 402, "gender" => "male" },
+  "Eddie" => { "age" => 10, "gender" => "male" },
+  "Marilyn" => { "age" => 23, "gender" => "female"}
+}
+
+#* Expected Output:
+# { "Herman" => { "age" => 32, "gender" => "male", "age_group" => "adult" },
+#   "Lily" => {"age" => 30, "gender" => "female", "age_group" => "adult" },
+#   "Grandpa" => { "age" => 402, "gender" => "male", "age_group" => "senior" },
+#   "Eddie" => { "age" => 10, "gender" => "male", "age_group" => "kid" },
+#   "Marilyn" => { "age" => 23, "gender" => "female", "age_group" => "adult" } }
+
+def age_group(age)
+  if age >= 0 && age <= 17
+    age_group = 'kid'
+  elsif age >= 18 && age <= 64
+    age_group = 'adult'  
+  else
+    age_group = 'senior'  
+  end
+end  
+
+munsters.each_value do |value| 
+  age_group = { "age_group" => age_group(value["age"]) }
+  value.merge!(age_group)
+end
+puts munsters
+
+
+
+
+
+
+
+
+
+
+
+
