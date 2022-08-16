@@ -6,7 +6,9 @@
 
 #* Comparison 
 
-# Sorting is essentially carried out by comparing the items in a collection with each other, and ordering them based on the result of that comparison. Comparison is at the heart of how sorting works. 
+# Sorting is essentially carried out by comparing the items in a collection with each other, and ordering them based on the result of that comparison. 
+
+#* Comparison is at the heart of how sorting works. 
 
 # Let's look at another example: 
 
@@ -136,7 +138,7 @@ end
 ['cot', 'bed', 'mat'].sort_by do |word|
   word[1]
 end 
-# => ["mat", "bed", "c0t"]
+# => ["mat", "bed", "cot"]
 
 # Here we are sorting using the character at index 1 of each string, so only the characters 'a', 'e' and 'o' are compared and the strings ordered according to the comparison of those characters. The other characters in the strings are ignored entirely.
 
@@ -155,7 +157,7 @@ end
 
 # What if we want to order the hash by name rather than age?  
 
-# By using Symbol#<=> we are effectively comparing strings. We therefore know that we can sort our hash by name. 
+# By using Symbol# <=> we are effectively comparing strings. We therefore know that we can sort our hash by name. 
 
 # There is a problem though - you may have noticed one of the names. :john is not capitalized. 
 
@@ -184,7 +186,7 @@ end
 
 # -------------------------------------------------------------------------------------------------
 
-# Summary 
+# Summary: 
 
 # Sorting is complex to carry out algorithmically on your own, but we can use the built-in sort and sort_by methods to do the complex work for us.
 
