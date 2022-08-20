@@ -188,11 +188,19 @@ end
 
 4. key, value represent local variables for each key-value pair of the hash collection 
 
-5. value[0] == key.to_s will check for "truthiness". 
+5. using value[0] == key.to_s to test whether all keys match the first letter of all their associated values. 
 
 6. hash.all? returns false on the first collection since it never evaluates to true. 
 
 7. Therefore, the final output will be #=> [{:c=> "cat"}] since this is the only collection that evaluates to true. 
+
+* What would happen if, instead of using all?, we used any?. Why would this affect the return value of select? 
+
+If we used all?, instead of any? we would return the original calling object and output the following:
+
+# => [{ a: 'ant', b: 'elephant' }, { c: 'cat' }]
+
+* The original object would be returned because the method returns true if the block ever returns a value other than false or nil. 
 
 =end 
 
