@@ -204,3 +204,40 @@ If we used all?, instead of any? we would return the original calling object and
 
 =end 
 
+# ------------------------------------------------------------------
+
+# Example 7: 
+
+arr = [['1', '8', '11'], ['2', '6', '13'], ['2', '12', '15'], ['1', '8', '9']]
+
+arr.sort_by do |sub_arr|
+  sub_arr.map do |num|
+    num.to_i
+  end
+end
+# => [["1", "8", "9"], ["1", "8", "11"], ["2", "6", "13"], ["2", "12", "15"]]
+
+=begin
+
+* What is happening here? 
+
+1. sort_by method is being called on the arr and passed to the block (will sort each inner array)
+
+2. sub_arr will be set as the local variable within the block 
+
+3. map is called on the sub_arr variable which represents each inner arr and passed to the block 
+
+4. num is set as the local variable within the method 
+
+5. to_i method is called on num which represents each number in each inner array 
+
+6. sort_by method (outer) returns the same array. The to_i method will not show up in the final output. 
+
+7. Therefore, the final output will be: 
+# => [["1", "8", "9"], ["1", "8", "11"], ["2", "6", "13"], ["2", "12", "15"]]
+
+=end 
+
+
+
+
