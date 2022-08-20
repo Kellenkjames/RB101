@@ -100,7 +100,7 @@ end
 
 # ------------------------------------------------------------------
 
-#) Here's another example: 
+#) Example 4:  
 
 my_arr = [[18, 7], [3, 12]].each do |arr|
   arr.each do |num|
@@ -128,10 +128,71 @@ end
 
 5. If sub-array contains number > 5, print string integer output 
 
-6. puts will print the string representation of the integer which is 18, 7, 12
+6. puts will print the string representation of an nteger which is 18, 7, 12
 
 7. since puts is the last evaluated statement, the method will return nil 
 
 8. The final output of the method will be the calling object => [[18, 7], [3, 12]]
 
 =end 
+
+# ------------------------------------------------------------------
+
+# Example 5: 
+
+[[1, 2], [3, 4]].map do |arr|
+  arr.map do |num|
+    num * 2
+  end
+end
+# => [[2, 4], [6, 8]]
+
+=begin 
+
+* Explain what's happening here (in detail):
+
+1. Map method is being called on a multi-dimensional array and passed to the block 
+
+2. arr is set to the local variable and represents the calling object 
+
+3. Map method is called on the arr variable and passed to the block 
+
+4. num is set to the local variable of the block and represents each integer of each sub-array 
+
+5. num * 2 will return 2, 4, 6, and 8 respectively 
+
+6. The final output will be a new_ary that returns => [[2, 4], [6, 8]]
+
+=end 
+
+# ------------------------------------------------------------------
+
+# Example 6:
+
+[{ a: 'ant', b: 'elephant' }, { c: 'cat' }].select do |hash|
+  hash.all? do |key, value|
+    value[0] == key.to_s
+  end
+end
+# => [{ :c => "cat" }]
+
+=begin 
+
+* Explain what's happening here (in detail):
+
+1. Select method is being called on array of hashes and passed to the block 
+
+2. hash is the local variable assigned to the block and will represent each collection in the arr
+
+3. all? method is called on the hash variable and passes each element of the collection to the given block
+
+4. key, value represent local variables for each key-value pair of the hash collection 
+
+5. value[0] == key.to_s will check for "truthiness". 
+
+6. hash.all? returns false on the first collection since it never evaluates to true. 
+
+7. Therefore, the final output will be #=> [{:c=> "cat"}] since this is the only collection that evaluates to true. 
+
+=end 
+
