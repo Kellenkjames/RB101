@@ -90,10 +90,48 @@ end
 
 4. arr#first will return the first object at index 0 for each sub-array 
 
-5. puts will print the string representation of the integer which is 1 and 3 respectively. 
+5. puts will print the string representation of the integer which is 1 and 3 respectively
 
 6. arr.first will return the integer objects of puts => 1, 3
 
 7. Since map returns a new array, the final output will be [1, 3]
+
+=end 
+
+# ------------------------------------------------------------------
+
+#) Here's another example: 
+
+my_arr = [[18, 7], [3, 12]].each do |arr|
+  arr.each do |num|
+    if num > 5
+      puts num
+    end
+  end 
+end 
+# 18
+# 7
+# 12
+# => [[18, 7], [3, 12]]
+
+=begin 
+
+* Explain what's happening here (in detail):
+
+1. Multi-dimensional array is being stored in the my_arr variable 
+
+2. Each method is called on object and passed to block were arr is set as the local variable 
+
+3. Each method is called on arr (local variable) and passed to block were num is set as the local variable. 
+
+4. Num variable will represent each sub-array 
+
+5. If sub-array contains number > 5, print string integer output 
+
+6. puts will print the string representation of the integer which is 18, 7, 12
+
+7. since puts is the last evaluated statement, the method will return nil 
+
+8. The final output of the method will be the calling object => [[18, 7], [3, 12]]
 
 =end 
