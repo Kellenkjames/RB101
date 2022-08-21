@@ -294,6 +294,28 @@ If we used each instead we wouldn't have the desired return value, and would nee
 end
 # => [[[1], [2], [3], [4]], [["a"], ["b"], ["c"]]]
 
+=begin 
+
+* What is happening here? 
+
+1. Map is being called to return a new array on the calling object and passsed to the block 
+
+2. element1 is being set as the local variable and will represent the entire collection 
+
+3. each method is called on element1 to iterate over each collection, and passed to the block 
+
+4. partition method is called on element2 (which represents both inner arrays) and passes to the block 
+
+5. element3 is set as the local variable to the block 
+
+6. Conditonal check for "truthiness" to test if each sub-array has a size > 0
+
+7. The final output will result in: 
+
+* => [[[1], [2], [3], [4]], [["a"], ["b"], ["c"]]]
+
+=end 
+
 
 
 
