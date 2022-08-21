@@ -238,6 +238,62 @@ end
 
 =end 
 
+# ------------------------------------------------------------------
+
+# Example 8) 
+
+[[8, 13, 27], ['apple', 'banana', 'cantaloupe']].map do |arr|
+  arr.select do |item|
+    if item.to_s.to_i == item    # if it's an integer
+      item > 13
+    else
+      item.size < 6
+    end
+  end
+end
+# => [[27], ["apple"]]
+
+=begin
+
+* What is happening here? 
+
+1. Map method is being called on a nested array with different objects and passed to the block 
+
+2. arr is set as the local variable to the block and represents both objects inside the nested array 
+
+3. select method is called on arr variable and passed to the block
+
+4. item is set at the local variable to the block and represents each item of each arr. 
+
+5. Within select block, check to see which items are integers 
+
+6. IF true, then item > 13 
+
+7. ELSE, item.size < 6
+
+* At first you might think to reach for the select method to perform selection, but since we're working with a nested array, that won't work. 
+
+We first need to access the nested arrays before we can select the value we want. 
+
+One of the main reasons map is used in this example is not only to iterate over the array and access the nested arrays, but to return a new array containing the selected values. 
+
+If we used each instead we wouldn't have the desired return value, and would need an extra variable to collect the desired results. 
+
+=end 
+
+# ------------------------------------------------------------------
+
+#) Example 9 
+
+[[[1], [2], [3], [4]], [['a'], ['b'], ['c']]].map do |element1|
+  element1.each do |element2|
+    element2.partition do |element3|
+      element3.size > 0
+    end
+  end
+end
+# => [[[1], [2], [3], [4]], [["a"], ["b"], ["c"]]]
+
 
 
 
