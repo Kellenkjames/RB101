@@ -23,3 +23,9 @@ books = [
 books.sort_by do |book|
   book[:published]
 end 
+# => [
+# {:title=>"War and Peace", :author=>"Leo Tolstoy", :published=>"1869"},
+# {:title=>"Ulysses", :author=>"James Joyce", :published=>"1922"},
+# {:title=>"The Great Gatsby", :author=>"F. Scott Fitzgerald", :published=>"1925"},
+# {:title=>"One Hundred Years of Solitude", :author=>"Gabriel Garcia Marquez", :published=>"1967"}
+# ]
