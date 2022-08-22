@@ -29,3 +29,19 @@ end
 # {:title=>"The Great Gatsby", :author=>"F. Scott Fitzgerald", :published=>"1925"},
 # {:title=>"One Hundred Years of Solitude", :author=>"Gabriel Garcia Marquez", :published=>"1967"}
 # ]
+
+# ------------------------------------------------
+
+# Problem 3: For each of these collection objects demonstrate how you would reference the letter 'g'.
+
+arr1 = 
+['a', 'b', 
+  ['c', 
+    ['d', 'e', 'f', 'g']
+  ]
+]
+arr1[2][1][3] # => 'g'
+
+
+
+
