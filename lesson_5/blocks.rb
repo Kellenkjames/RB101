@@ -86,7 +86,7 @@ end
 
 2. Map will iterate over each sub-array and in turn will be passed to the block 
 
-3. arr will be the local variable for the block 
+3. arr will be assigned as the local variable within the block. 
 
 4. arr#first will return the first object at index 0 for each sub-array 
 
@@ -188,7 +188,7 @@ end
 
 4. key, value represent local variables for each key-value pair of the hash collection 
 
-5. using value[0] == key.to_s to test whether all keys match the first letter of all their associated values. 
+5. using value[0] == key.to_s to test whether keys match the first letter of all their associated values. 
 
 6. hash.all? returns false on the first collection since it never evaluates to true. 
 
@@ -219,9 +219,9 @@ end
 
 =begin
 
-* What is happening here? 
+* Explain what's happening here (in detail): 
 
-1. sort_by method is being called on the arr and passed to the block (will sort each inner array)
+1. sort_by method returns the same array and is passed to the block 
 
 2. sub_arr will be set as the local variable within the block 
 
@@ -255,7 +255,7 @@ end
 
 =begin
 
-* What is happening here? 
+* Explain what's happening here (in detail): 
 
 1. Map method is being called on a nested array with different objects and passed to the block 
 
@@ -286,7 +286,7 @@ If we used each instead we wouldn't have the desired return value, and would nee
 #) Example 9 
 
 [[[1], [2], [3], [4]], [['a'], ['b'], ['c']]].map do |element1|
-  element1.each do |element2|
+  element1.each do |element2| # each doesn't care about a block's return value
     element2.partition do |element3|
       element3.size > 0
     end
@@ -296,11 +296,11 @@ end
 
 =begin 
 
-* What is happening here? 
+* Explain what's happening here (in detail):
 
 1. Map is being called to return a new array on the calling object and passsed to the block 
 
-2. element1 is being set as the local variable and will represent the entire collection 
+2. element1 is being set as the local variable within the block 
 
 3. each method is called on element1 to iterate over each collection, and passed to the block 
 
@@ -315,6 +315,48 @@ end
 * => [[[1], [2], [3], [4]], [["a"], ["b"], ["c"]]]
 
 =end 
+
+# ------------------------------------------------------------------
+
+# Example 10
+
+# Let's say we have the following data structure of nested arrays and we want to increment every number by 1 without changing the data structure.
+
+[[[1, 2], [3, 4]], [5, 6]].map do |arr|
+  arr.map do |el|
+    if el.to_s.size == 1    # it's an integer
+      el + 1
+    else                    # it's an array
+      el.map do |n|
+        n + 1
+      end
+    end
+  end
+end
+
+=begin 
+
+* Explain what's happening here (in detail):
+
+1. Map returns a new array on the calling object (nested array) and is passed to the block 
+
+2. arr will be assigned as a local variable within the block 
+
+3. map will be called on arr (returning a new array) and passed to the block 
+
+4. el will be assigned as a local variable within the block 
+
+5. #* conditional check: if el.to_s.size == 1, then el + 1 | this will return false 
+
+6. otherwise, n + 1 | [[[2, 3], [4, 5]], [6, 7]]
+
+7. The final out put will be a new array: 
+
+# => [[[2, 3], [4, 5]], [6, 7]]
+
+=end 
+
+
 
 
 
