@@ -56,3 +56,45 @@ hsh2 = {
 hsh2[:third].key(0)
 
 # ------------------------------------------------
+
+# Problem 4: For each of these collection objects where the value 3 occurs, demonstrate how you would change this to 4
+
+arr1 = arr1 = [1, [2, 3], 4]
+arr1[1][1] = 4
+# => [1, [2, 4], 4]
+
+arr2 = [{a: 1}, {b: 2, c: [7, 6, 5], d: 4}, 3]
+arr2[2] = 4
+# =>[{a: 1}, {b: 2, c: [7, 6, 5], d: 4}, 4]
+
+hsh1 = {first: [1, 2, [3]]}
+hsh1[:first][2] = 4
+# => {first: [1, 2, [4]]}
+
+hsh2 = 
+{ ['a'] => {a: ['1', :two, 3], b: 4}, 'b' => 5 }
+hsh2[['a']]
+# => { ['a'] => {a: ['1', :two, 4], b: 4}, 'b' => 5 }
+
+# ------------------------------------------------
+
+# Problem 5: Given this nested Hash: figure out the total age of just the male members of the family. 
+
+munsters = {
+  "Herman" => { "age" => 32, "gender" => "male" },
+  "Lily" => { "age" => 30, "gender" => "female" },
+  "Grandpa" => { "age" => 402, "gender" => "male" },
+  "Eddie" => { "age" => 10, "gender" => "male" },
+  "Marilyn" => { "age" => 23, "gender" => "female"}
+}
+
+total_male_age = 0
+munsters.each_value do |details|
+  total_male_age += details["age"] if details["gender"] == "male"
+end 
+total_male_age # => 444
+
+
+
+
+
