@@ -167,8 +167,27 @@ end
   incremented_hsh
 end 
 
+# ------------------------------------------------
 
+# Problem 11: Given the following data structure use a combination of methods, including either the select or reject method, to return a new array identical in structure to the original but containing only the integers that are multiples of 3.
 
+arr = [[2], [3, 5, 7], [9], [11, 13, 15]]
 
+arr.map do |sub_array|
+  sub_array.select do |number| 
+    number % 3 == 0 
+  end 
+end
 
+# ------------------------------------------------
+
+# Problem 12: Given the following data structure, and without using the Array#to_h method, write some code that will return a hash where the key is the first item in each sub array and the value is the second item.
+
+arr = [[:a, 1], ['b', 'two'], ['sea', {c: 3}], [{a: 1, b: 2, c: 3, d: 4}, 'D']]
+
+hsh = {}
+arr.each do |sub_arr| 
+  hsh[sub_arr[0]] = sub_arr[1]
+end 
+hsh # => {:a=>1, "b"=>"two", "sea"=>{:c=>3}, {:a=>1, :b=>2, :c=>3, :d=>4}=>"D"}
 
