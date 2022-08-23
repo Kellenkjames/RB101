@@ -128,6 +128,33 @@ arr   # => [4, [3, 8]]
 
 # ------------------------------------------------
 
+# Problem 8: Using the each method, write some code to output all of the vowels from the strings. 
+
+hsh = {first: ['the', 'quick'], second: ['brown', 'fox'], third: ['jumped'], fourth: ['over', 'the', 'lazy', 'dog']}
+
+vowels = %w(a e i o u)
+
+hsh.each do |_, value|
+  value.each do |string|
+    string.chars do |char|
+      puts char if vowels.include?(char)
+    end
+  end
+end
+
+# ------------------------------------------------
+
+# Problem 9: Given this data structure, return a new array of the same structure but with the sub arrays being ordered (alphabetically or numerically as appropriate) in descending order.
+
+arr = [['b', 'c', 'a'], [2, 1, 3], ['blue', 'black', 'green']]
+
+arr.map do |sub_array|
+  sub_array.sort do |a, b|
+    b <=> a
+  end 
+end 
+# => [["c", "b", "a"], [3, 2, 1], ["green", "blue", "black"]]
+
 
 
 
