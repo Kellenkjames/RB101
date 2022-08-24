@@ -203,8 +203,33 @@ arr.sort_by do |sub_arr|
   end
 end 
 
-
 #       [[1, 8, 3], [1, 5, 9], [6, 1, 7], [1, 6, 9]]
 
 # By performing selection on the sub-arrays that we are comparing, we can compare them based on the value of the odd integers alone. 
 
+# ------------------------------------------------
+
+# Problem 14: Given this data structure write some code to return an array containing the colors of the fruits and the sizes of the vegetables. The sizes should be uppercase and the colors should be capitalized.
+
+hsh = {
+  'grape' => {type: 'fruit', colors: ['red', 'green'], size: 'small'},
+  'carrot' => {type: 'vegetable', colors: ['orange'], size: 'medium'},
+  'apple' => {type: 'fruit', colors: ['red', 'green'], size: 'medium'},
+  'apricot' => {type: 'fruit', colors: ['orange'], size: 'medium'},
+  'marrow' => {type: 'vegetable', colors: ['green'], size: 'large'},
+}
+
+hsh.map do |_, details| 
+  colors_of_fruits = nil 
+  sizes_of_vegetables = nil 
+
+  if details[:type] == 'fruit'
+    details[:colors].each do |color|
+      colors_of_fruits = color.capitalize!
+    end 
+  elsif details[:type] == 'vegetable'
+    sizes_of_vegetables = details[:size].upcase! 
+  end 
+end 
+
+# => [["Red", "Green"], "MEDIUM", ["Red", "Green"], ["Orange"], "LARGE"]
