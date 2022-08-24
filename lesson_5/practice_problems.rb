@@ -247,3 +247,68 @@ arr.select do |hsh|
     end 
   end 
 end 
+
+# ------------------------------------------------
+
+# Problem 16: Write a method that returns one UUID when called with no parameters
+
+# "f65c57f6-a6aa-17a8-faa1-a67f2dc9fa91"
+
+def uuid_generator
+  arr = []
+  uuid_str_one = ''
+  uuid_str_two = ''
+  uuid_str_three = ''
+  uuid_str_four = ''
+  uuid_str_five = ''
+  
+  counter = 0
+  loop do 
+    uuid_str_one += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
+    counter += 1
+    break if uuid_str_one.size == 8
+  end 
+  
+  arr << uuid_str_one
+  
+  counter = 0
+  loop do 
+    uuid_str_two += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
+    counter += 1
+    break if uuid_str_two.size == 4
+  end 
+  
+  arr << uuid_str_two
+  
+  counter = 0
+  loop do 
+    uuid_str_three += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
+    counter += 1
+    break if uuid_str_three.size == 4
+  end
+  
+  arr << uuid_str_three
+  
+  counter = 0
+  loop do 
+    uuid_str_four += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
+    counter += 1
+    break if uuid_str_four.size == 4
+  end
+  
+  arr << uuid_str_four
+  
+  counter = 0
+  loop do 
+    uuid_str_five += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
+    counter += 1
+    break if uuid_str_five.size == 12
+  end
+  
+  arr << uuid_str_five
+  
+  arr.join("-")
+end 
+
+uuid_generator
+# => "c1b6p3s6-g5o2-f1u4-p2d2-g3n6j5b5y1w1"
