@@ -252,8 +252,6 @@ end
 
 # Problem 16: Write a method that returns one UUID when called with no parameters
 
-# "f65c57f6-a6aa-17a8-faa1-a67f2dc9fa91"
-
 def uuid_generator
   arr = []
   uuid_str_one = ''
