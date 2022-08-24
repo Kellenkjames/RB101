@@ -220,15 +220,12 @@ hsh = {
 }
 
 hsh.map do |_, details| 
-  colors_of_fruits = nil 
-  sizes_of_vegetables = nil 
-
   if details[:type] == 'fruit'
-    details[:colors].each do |color|
-      colors_of_fruits = color.capitalize!
+    details[:colors].map do |color|
+      color.capitalize
     end 
   elsif details[:type] == 'vegetable'
-    sizes_of_vegetables = details[:size].upcase! 
+    details[:size].upcase
   end 
 end 
 
