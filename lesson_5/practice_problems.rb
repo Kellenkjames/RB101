@@ -252,61 +252,52 @@ end
 
 # Problem 16: Write a method that returns one UUID when called with no parameters
 
-def uuid_generator
+def generate_uuid  
   arr = []
-  uuid_str_one = ''
-  uuid_str_two = ''
-  uuid_str_three = ''
-  uuid_str_four = ''
-  uuid_str_five = ''
   
-  counter = 0
-  loop do 
-    uuid_str_one += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
-    counter += 1
-    break if uuid_str_one.size == 8
+  # Section 1: i.e., 'f65c57f6' (8 chars)
+  str_one = ''
+  counter_one = 0
+
+  while str_one.length < 8
+    str_one += ('a'..'z').to_a.sample 
+    str_one += rand(1..9).to_s
+    counter_one += 1
   end 
   
-  arr << uuid_str_one
-  
-  counter = 0
-  loop do 
-    uuid_str_two += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
-    counter += 1
-    break if uuid_str_two.size == 4
+  arr << str_one
+
+  # Section 2-4: i.e., 'a6aa' (4 chars)
+  def four_chars 
+    str_two = ''
+    counter_two = 0
+    
+    while str_two.length < 4
+      str_two += ('a'..'z').to_a.sample 
+      str_two += rand(1..9).to_s
+      counter_two += 1
+    end
+    str_two
   end 
   
-  arr << uuid_str_two
+  arr << four_chars 
+  arr << four_chars  
+  arr << four_chars
   
-  counter = 0
-  loop do 
-    uuid_str_three += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
-    counter += 1
-    break if uuid_str_three.size == 4
-  end
+  # Section 5: i.e., 'a67f2dc9fa91' (12 chars)
+  str_three = ''
+  counter_three = 0
+
+  while str_three.length < 12
+    str_three += ('a'..'z').to_a.sample
+    str_three += rand(1..9).to_s
+    counter_three += 1
+  end 
   
-  arr << uuid_str_three
-  
-  counter = 0
-  loop do 
-    uuid_str_four += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
-    counter += 1
-    break if uuid_str_four.size == 4
-  end
-  
-  arr << uuid_str_four
-  
-  counter = 0
-  loop do 
-    uuid_str_five += "#{('a'..'z').to_a.sample}#{rand(1..9)}"
-    counter += 1
-    break if uuid_str_five.size == 12
-  end
-  
-  arr << uuid_str_five
+  arr << str_three
   
   arr.join("-")
 end 
 
-uuid_generator
-# => "c1b6p3s6-g5o2-f1u4-p2d2-g3n6j5b5y1w1"
+p generate_uuid
+# => "n1s1g7f1-h8g6-s9r9-j7v9-s6c2s1c3x3f9"
