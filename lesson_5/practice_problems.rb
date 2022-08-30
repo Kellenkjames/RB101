@@ -299,5 +299,5 @@ def generate_uuid
   arr.join("-")
 end 
 
-p generate_uuid
+generate_uuid
 # => "n1s1g7f1-h8g6-s9r9-j7v9-s6c2s1c3x3f9"
