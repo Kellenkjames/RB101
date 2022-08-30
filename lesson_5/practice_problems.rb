@@ -50,10 +50,9 @@ hsh1 = {'a' => ['d', 'e'], 'b' => ['f', 'g'], 'c' => ['h', 'i']}
 hsh1['b'][1]
 # => 'g' 
 
-hsh2 = { 
-  first: {'d' => 3}, second: {'e' => 2, 'f' => 1}, third: {'g' => 0} 
-}
+hsh2 = { first: {'d' => 3}, second: {'e' => 2, 'f' => 1}, third: {'g' => 0} }
 hsh2[:third].key(0)
+# => 'g'
 
 # ------------------------------------------------
 
@@ -71,8 +70,7 @@ hsh1 = {first: [1, 2, [3]]}
 hsh1[:first][2] = 4
 # => {first: [1, 2, [4]]}
 
-hsh2 = 
-{ ['a'] => {a: ['1', :two, 3], b: 4}, 'b' => 5 }
+hsh2 = { ['a'] => {a: ['1', :two, 3], b: 4}, 'b' => 5 }
 hsh2[['a']]
 # => { ['a'] => {a: ['1', :two, 4], b: 4}, 'b' => 5 }
 
@@ -121,10 +119,10 @@ arr = [a, b]
 
 arr[0] += 2 
 arr[1][0] -= a
+arr   # => [4, [3, 8]]
 
 a     # => 2
 b     # => [3, 8]
-arr   # => [4, [3, 8]]
 
 # ------------------------------------------------
 
@@ -132,7 +130,7 @@ arr   # => [4, [3, 8]]
 
 hsh = {first: ['the', 'quick'], second: ['brown', 'fox'], third: ['jumped'], fourth: ['over', 'the', 'lazy', 'dog']}
 
-vowels = %w(a e i o u)
+vowels = 'aeiou'
 
 hsh.each do |_, value|
   value.each do |string|
@@ -203,7 +201,7 @@ arr.sort_by do |sub_arr|
   end
 end 
 
-#       [[1, 8, 3], [1, 5, 9], [6, 1, 7], [1, 6, 9]]
+# => [[1, 8, 3], [1, 5, 9], [6, 1, 7], [1, 6, 9]]
 
 # By performing selection on the sub-arrays that we are comparing, we can compare them based on the value of the odd integers alone. 
 
