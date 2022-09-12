@@ -19,8 +19,8 @@
 
 # ----------------------------------------
 
-# Board that is passed into display_board is a "hash" and the keys correlate with the space number. 
-# Keys:     Represent the squares in the board, i.e., 1, 2, 3
+# Data Structure for the board is a "hash":  
+# Keys:     Represent the sequence of squares in the board, i.e., 1, 2, 3, 4, 5, 6 , 7, 8, 9
 # Values: Represent "what" we display => "X", "O", or " "
 
 def display_board(brd)
@@ -36,14 +36,13 @@ def display_board(brd)
   puts "     |     |"
   puts "  #{brd[7]}  |  #{brd[8]}  |  #{brd[9]}"
   puts "     |     |"
-  puts ""
 end 
 
 def initialize_board
   new_board = {}
   (1..9).each { |num| new_board[num] = 'X' } 
   new_board
-end
+end 
 
 board = initialize_board
-display_board(initialize_board)
+display_board(board)
