@@ -1,3 +1,4 @@
+require 'pry'
 
 # *Tic Tac Toe
 
@@ -60,7 +61,7 @@ def player_places_piece!(brd)
     break if empty_squares(brd).include?(square)    
     prompt "Sorry, that's not a valid choice."
   end 
-
+  
   brd[square] = PLAYER_MARKER
 end
 
