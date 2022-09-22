@@ -7,7 +7,6 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
-# Step 1: Set up and display the board
 def display_board(brd)
   system 'clear'
   puts "You're a #{PLAYER_MARKER} Computer is #{COMPUTER_MARKER}"
@@ -36,7 +35,6 @@ def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
-# Step 2: Player Turn
 def player_turn!(brd)
   square = ''
   loop do
@@ -50,18 +48,15 @@ def player_turn!(brd)
   brd[square] = PLAYER_MARKER
 end
 
-# Step 3: Computer Turn
 def computer_turn!(brd)
   square = empty_squares(brd).sample
   brd[square] = COMPUTER_MARKER
 end
 
-# Step 5: Determine if the board is full
 def board_full?(brd)
   empty_squares(brd).empty?
 end
 
-# Step 6: Determine if someone won
 def someone_won?(brd)
   !!detect_winner(brd)
 end
@@ -86,7 +81,6 @@ def detect_winner(brd)
   nil
 end
 
-# Step 4: Main Game Loop
 loop do
   board = initialize_board
 
@@ -99,10 +93,9 @@ loop do
     computer_turn!(board)
     break if someone_won?(board) || board_full?(board)
   end
-
-  # Final Result
-  someone_won?(board) ? prompt("#{detect_winner(board)} won!") : prompt("It's a tie!")
   
+  someone_won?(board) ? prompt("#{detect_winner(board)} won!") : prompt("It's a tie!")
+
   prompt "Play again? (y or n)"
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
