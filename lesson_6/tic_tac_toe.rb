@@ -40,8 +40,9 @@ def player_turn!(brd)
   loop do
     prompt "Choose a square (#{empty_squares(brd).join(', ')}):"
     square = gets.chomp.to_i
-    
+
     break if empty_squares(brd).include?(square)
+  
     prompt "Sorry, that's not a valid choice."
   end
 
@@ -86,19 +87,19 @@ loop do
 
   loop do
     display_board(board)
-  
+
     player_turn!(board)
-    break if someone_won?(board) || board_full?(board) 
-  
+    break if someone_won?(board) || board_full?(board)
+
     computer_turn!(board)
     break if someone_won?(board) || board_full?(board)
   end
-  
+
   someone_won?(board) ? prompt("#{detect_winner(board)} won!") : prompt("It's a tie!")
 
-  prompt "Play again? (y or n)"
+  prompt 'Play again? (y or n)'
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
-prompt "Thanks for playing Tic Tac Toe! Good bye!"
+prompt 'Thanks for playing Tic Tac Toe! Good bye!'
