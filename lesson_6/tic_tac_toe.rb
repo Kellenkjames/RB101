@@ -1,12 +1,19 @@
+# frozen_string_literal: true
 
-INITIAL_MARKER = ' '.freeze
-PLAYER_MARKER = 'X'.freeze
-COMPUTER_MARKER = 'O'.freeze
+WINNING_LINES =
+  [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
+  [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # cols
+  [[1, 5, 9], [3, 5, 7]] # diagonals
+
+INITIAL_MARKER = ' '
+PLAYER_MARKER = 'X'
+COMPUTER_MARKER = 'O'
 
 def prompt(msg)
   puts "=> #{msg}"
 end
 
+# rubocop:disable Metrics/MethodLength, Metrics/AbcSize
 def display_board(brd)
   system 'clear'
   puts "You're a #{PLAYER_MARKER} Computer is #{COMPUTER_MARKER}"
@@ -24,6 +31,7 @@ def display_board(brd)
   puts '     |     |'
   puts ''
 end
+# rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
 def initialize_board
   new_board = {}
@@ -42,7 +50,7 @@ def player_turn!(brd)
     square = gets.chomp.to_i
 
     break if empty_squares(brd).include?(square)
-  
+
     prompt "Sorry, that's not a valid choice."
   end
 
@@ -63,21 +71,9 @@ def someone_won?(brd)
 end
 
 def detect_winner(brd)
-  winning_lines =
-    [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
-    [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # cols
-    [[1, 5, 9], [3, 5, 7]] # diagonals
-
-  winning_lines.each do |line|
-    if  brd[line[0]] == PLAYER_MARKER &&
-        brd[line[1]] == PLAYER_MARKER &&
-        brd[line[2]] == PLAYER_MARKER
-      return 'Player'
-    elsif brd[line[0]] == COMPUTER_MARKER &&
-            brd[line[1]] == COMPUTER_MARKER &&
-            brd[line[2]] == COMPUTER_MARKER
-      return 'Computer'
-    end
+  WINNING_LINES.each do |line|
+    return 'Player' if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 3
+    return 'Computer' if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 3
   end
   nil
 end
