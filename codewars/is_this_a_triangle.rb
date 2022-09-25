@@ -53,8 +53,6 @@ end
 
 #* C - Code 
 
-# 7, 14, 16 
-
 def is_triangle(a, b, c)
   b + c > a ? true : false 
 end 
