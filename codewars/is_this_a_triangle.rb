@@ -34,6 +34,9 @@ Clarifying Questions:
 
 is_triangle(1, 2, 2) == true 
 is_triangle(7, 2, 2) == false 
+is_triangle(9, 3, 8) == true 
+is_triangle(3, 1, 10) == false 
+is_triangle(2, 7, 4) == false 
 
 # ------------------------------------------------
 
@@ -46,12 +49,17 @@ is_triangle(7, 2, 2) == false
 * A - Algorithm:
 
 Algorithm: 
-- the two inputs that have equal values (are the sides)
-- check for inputs that have the same values
-- arr = [a, b , c]
-- arr.select do |num|
-  p num
+- store inputs into empty arr[]:
+  arr = [a, b, c]
+- check to make sure each input is greater than 0 (no negative numbers allowed)
+    return false if arr[0] < 0 || arr[1] < 0 || arr[2] < 0 
+- conditional logic (sum of two inputs must be greater than a single input)
+    arr[0] + arr[1] > arr[2] && 
+    arr[1] + arr[2] > arr[0] && 
+    arr[0] + arr [2] > arr[1] ? true : false
   end 
+end 
+
 end
 
 =end 
@@ -62,19 +70,17 @@ end
 
 def is_triangle(a, b, c)
   arr = [a, b, c]
-
+  
   return false if arr[0] < 0 || arr[1] < 0 || arr[2] < 0 
   
-  if arr[0] + arr[1] > arr[2] && arr[1] + arr[2] > arr[0] && arr[0] + arr [2] > arr[1]
-    true 
-  else 
-    false
-  end 
+  arr[0] + arr[1] > arr[2] && 
+  arr[1] + arr[2] > arr[0] && 
+  arr[0] + arr [2] > arr[1] ? true : false 
 
 end 
 
-p is_triangle(1, 2, 2) # true 
-p is_triangle(7, 2, 2) # false 
-p is_triangle(9, 3, 8) # true
-p is_triangle(3, 1, 10) # false
-p is_triangle(2, 7, 4) # false 
+is_triangle(1, 2, 2) 
+is_triangle(7, 2, 2) 
+is_triangle(9, 3, 8) 
+is_triangle(3, 1, 10) 
+is_triangle(2, 7, 4) 
