@@ -42,21 +42,19 @@ is_triangle(2, 7, 4) == false
 
 * D - Data Structure 
 
-# => []
+# => N/A
 
 # ------------------------------------------------
 
 * A - Algorithm:
 
 Algorithm: 
-- store inputs into empty arr[]:
-  arr = [a, b, c]
-- check to make sure each input is greater than 0 (no negative numbers allowed)
-    return false if arr[0] < 0 || arr[1] < 0 || arr[2] < 0 
-- conditional logic (sum of two inputs must be greater than a single input)
-    arr[0] + arr[1] > arr[2] && 
-    arr[1] + arr[2] > arr[0] && 
-    arr[0] + arr [2] > arr[1] ? true : false
+- check to make sure each input is greater than 0 (no negative numbers allowed):
+    return false if a < 0 || b < 0 || c < 0 
+- conditional logic (sum of two inputs must be greater than a single input):
+    a + b > c && 
+    b + c > a && 
+    a + c > b ? true : false
   end 
 end 
 
@@ -69,13 +67,12 @@ end
 #* C - Code 
 
 def is_triangle(a, b, c)
-  arr = [a, b, c]
+
+  return false if a < 0 || b < 0 || c < 0 
   
-  return false if arr[0] < 0 || arr[1] < 0 || arr[2] < 0 
-  
-  arr[0] + arr[1] > arr[2] && 
-  arr[1] + arr[2] > arr[0] && 
-  arr[0] + arr [2] > arr[1] ? true : false 
+  a + b > c && 
+  b + c > a && 
+  a + c > b ? true : false 
 
 end 
 
