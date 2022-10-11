@@ -53,9 +53,6 @@ joinor([1, 2, 3], ', ', 'and')   # => "1, 2, and 3"
 
 # Algorithm:
   - arr_join = arr
-  - store the value of the last index in a variable:
-    - last_index = arr.last 
-  - method needs to accept two args (arr, "delimeter=optional"):
   - if delimeter args are not provided || delimeter == ' ' 
     - arr.insert(last_index, "or")
   - elsif delimeter == 'and'
@@ -67,8 +64,15 @@ joinor([1, 2, 3], ', ', 'and')   # => "1, 2, and 3"
 
 # ---------------------------------------------
 
-def joinor(arr, delimeter)
+#* C - Code 
 
+def joinor(arr, delimeter="")
 
-
+  if arr.size == 2 && !!delimeter 
+    arr.insert(arr[-2], 'or').join(" ")
+  end 
 end 
+
+p joinor([1, 2])
+
+
