@@ -70,9 +70,12 @@ def joinor(arr, delimeter="")
 
   if arr.size == 2 && !!delimeter 
     arr.insert(arr[-2], 'or').join(" ")
+  elsif arr.size > 2 && !!delimeter
+    arr.insert(arr[-2], 'or').join(", ")
   end 
 end 
 
 p joinor([1, 2])
+p joinor([1, 2, 3])
 
 
