@@ -1,3 +1,5 @@
+require "pry"
+
 #* Assignment: TTT Bonus Features 
 
 # Improved "join"
@@ -67,15 +69,28 @@ joinor([1, 2, 3], ', ', 'and')   # => "1, 2, and 3"
 #* C - Code 
 
 def joinor(arr, delimeter="")
-
   if arr.size == 2 && !!delimeter 
     arr.insert(arr[-2], 'or').join(" ")
   elsif arr.size > 2 && !!delimeter
-    arr.insert(arr[-2], 'or').join(", ")
-  end 
-end 
+    string = arr.insert(arr[-2], 'or').join(" ")
 
-p joinor([1, 2])
-p joinor([1, 2, 3])
+    new_arr = []
+    counter = 1 
+    loop do 
+      new_arr << counter
+      string.insert(counter, ',')
+      counter += 3
+      break if new_arr.size == arr.size - 2
+    end
+  string
+  end
 
+end
+
+# new_arr                   = 1, 4, 7, 10, 13, 16, 19                               size : 5
+# arr                           = 1, 2, 3, 4, 5, "or", 6                                 size: 7 - 2
+
+# break if counter > last counter value? 
+
+p joinor([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) # arr.size == 6
 
