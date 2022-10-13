@@ -68,36 +68,31 @@ joinor([1, 2, 3], ', ', 'and')   # => "1, 2, and 3"
 
 #* C - Code 
 
-def joinor(arr, delimeter="")
-  if arr.size == 2 && delimeter == ""
-    arr.insert(arr[-2], 'or').join(" ")
-  elsif arr.size > 2 && delimeter == ""
-    string = arr.insert(arr[-2], 'or').join(" ")
+def str_join(arr, delimeter="")
+  string = arr.insert(arr[-2], 'or').join(" ")
     new_arr = []
     counter = 1 
     loop do 
       new_arr << counter
-      string.insert(counter, ',')
+      string.insert(counter, delimeter)
       counter += 3
       break if new_arr.size == arr.size - 2
     end
-    string
-  elsif arr.size > 2 && delimeter
-    string = arr.insert(arr[-2], 'or').join(" ")
-    new_arr = []
-    counter = 1 
-    loop do 
-      new_arr << counter
-      string.insert(counter, ';')
-      counter += 3
-      break if new_arr.size == arr.size - 2
-    end
-    string
+  string
+end 
+
+def joinor(arr, delimeter="", word="")
+  if arr.size == 2 && delimeter == "" && word == ""
+    arr.insert(arr[-2], 'or').join(" ") 
+  elsif arr.size > 2 && delimeter == "" && word == ""
+    str_join(arr, delimeter=",")
+  elsif arr.size > 2 && delimeter && word == ""
+    str_join(arr, delimeter=";")
   end 
 
 end
 
-p joinor([1, 2])                                    # => "1 or 2"
-p joinor([1, 2, 3])                                # => "1, 2, or 3"
-p joinor([1, 2, 3], '; ')                          # => "1; 2; or 3"
-
+p joinor([1, 2])                                              # => "1 or 2"
+p joinor([1, 2, 3])                                          # => "1, 2, or 3"
+p joinor([1, 2, 3], '; ')                                    # => "1; 2; or 3"
+#p joinor([1, 2, 3], ', ', 'and')                          # => "1; 2; or 3"
