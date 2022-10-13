@@ -52,14 +52,31 @@ joinor([1, 2, 3], ', ', 'and')   # => "1, 2, and 3"
 * A - Algorithm 
 
 # Algorithm:
-  - arr_join = arr
-  - if delimeter args are not provided || delimeter == ' ' 
-    - arr.insert(last_index, "or")
-  - elsif delimeter == 'and'
-    - arr.insert(last_index, "and")
+  - #* Helper method str_join: accepts 3 parameters (arr, delimeter, word)
+    string = arr.insert(arr[-2], word).join(" ")
+    new_arr = []
+    counter = 1
+    loop do 
+      new_arr << counter
+      string.insert(counter,delimeter)
+      counter += 3
+      break if new_arr.size == arr.size - 2
+    end 
+    string
+    end 
   end 
-  arr_join(delimeter)
-  
+  -#* Main method join_or: accepts 3 parameters (arr, delimeter, word)
+    if arr.size == 2 && delimeter == "" && word == ""
+      arr.insert(arr[-2], 'or').join(" ")
+    elsif arr.size > 2 && delimeter == "" && word == ""
+      str_join(arr, delimeter=",", word="or")
+    elsif arr.size > 2 && delimeter && word == ""
+      str_join(arr, delimeter=";", word="or")
+    elsif arr.size > 2 && delimeter && word
+      str_join(arr, delimeter=",", word="and")
+    end 
+  end 
+
 =end 
 
 # ---------------------------------------------
