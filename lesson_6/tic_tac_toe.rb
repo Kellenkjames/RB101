@@ -15,27 +15,12 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
-def str_join(arr, delimeter="", word="")
-  string = arr.insert(arr[-2], word).join(" ")
-    new_arr = []
-    counter = 1 
-    loop do 
-      new_arr << counter
-      string.insert(counter, delimeter)
-      counter += 3
-      break if new_arr.size == arr.size - 2
-    end
-  string
-end 
-
 def joinor(arr, delimeter="", word="")
   if arr.size == 1 && delimeter == "" && word == ""
     arr.join("")
-  elsif arr.size == 2 && delimeter == "" && word == ""
-    arr.insert(arr[-2], 'or').join(" ") 
   elsif arr.size > 2 && delimeter == "" && word == ""
-    str_join(arr, delimeter=",", word="or")
-  end
+    arr.insert(arr[-2], 'or')
+  end 
 end
 
 # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -71,14 +56,15 @@ end
 def player_turn!(brd)
   square = ''
   smart_prompt = joinor(empty_squares(brd), delimeter="", word="")
-  
+
+  if smart_prompt.size > 2
+    smart_prompt.delete_if { |value| value == nil }
+  end 
+
   loop do
     prompt "Choose a position to place a piece: #{smart_prompt}"
 
     square = gets.chomp.to_i
-
-    # On each iteration, remove extra spaces + commas 
-    
 
     break if empty_squares(brd).include?(square)
     prompt "Sorry, that's not a valid choice."
