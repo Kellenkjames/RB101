@@ -60,7 +60,12 @@ def player_turn!(brd)
   if smart_prompt.size > 2
     smart_prompt.delete_if { |value| value == nil }
   end 
-
+  
+  if smart_prompt[-1] == "or"
+    smart_prompt.delete_at(-1)
+    smart_prompt.insert(-2, 'or')
+  end 
+  
   loop do
     prompt "Choose a position to place a piece: #{smart_prompt}"
 
