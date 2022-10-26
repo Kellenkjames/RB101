@@ -1,3 +1,5 @@
+require "pry"
+
 # frozen_string_literal: true
 
 WINNING_LINES =
@@ -11,6 +13,29 @@ COMPUTER_MARKER = 'O'
 
 def prompt(msg)
   puts "=> #{msg}"
+end
+
+def str_join(arr, delimeter="", word="")
+  string = arr.insert(arr[-2], word).join(" ")
+    new_arr = []
+    counter = 1 
+    loop do 
+      new_arr << counter
+      string.insert(counter, delimeter)
+      counter += 3
+      break if new_arr.size == arr.size - 2
+    end
+  string
+end 
+
+def joinor(arr, delimeter="", word="")
+  if arr.size == 1 && delimeter == "" && word == ""
+    arr.join("")
+  elsif arr.size == 2 && delimeter == "" && word == ""
+    arr.insert(arr[-2], 'or').join(" ") 
+  elsif arr.size > 2 && delimeter == "" && word == ""
+    str_join(arr, delimeter=",", word="or")
+  end
 end
 
 # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -45,12 +70,17 @@ end
 
 def player_turn!(brd)
   square = ''
+  smart_prompt = joinor(empty_squares(brd), delimeter="", word="")
+  
   loop do
-    prompt "Choose a square (#{empty_squares(brd).join(', ')}):"
+    prompt "Choose a position to place a piece: #{smart_prompt}"
+
     square = gets.chomp.to_i
 
-    break if empty_squares(brd).include?(square)
+    # On each iteration, remove extra spaces + commas 
+    
 
+    break if empty_squares(brd).include?(square)
     prompt "Sorry, that's not a valid choice."
   end
 

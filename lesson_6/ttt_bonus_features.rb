@@ -97,7 +97,9 @@ def str_join(arr, delimeter="", word="")
 end 
 
 def joinor(arr, delimeter="", word="")
-  if arr.size == 2 && delimeter == "" && word == ""
+  if arr.size == 1 && delimeter == "" && word == ""
+    arr.join("")
+  elsif arr.size == 2 && delimeter == "" && word == ""
     arr.insert(arr[-2], 'or').join(" ") 
   elsif arr.size > 2 && delimeter == "" && word == ""
     str_join(arr, delimeter=",", word="or")
@@ -106,11 +108,10 @@ def joinor(arr, delimeter="", word="")
   elsif arr.size > 2 && delimeter && word
     str_join(arr, delimeter=",", word="and")
   end
-
 end 
 
-
+p joinor([2])                                                     # => "2"
 p joinor([1, 2])                                                 # => "1 or 2"
 p joinor([1, 2, 3])                                             # => "1, 2, or 3"
 p joinor([1, 2, 3], '; ')                                       # => "1; 2; or 3"
-p joinor([1, 2, 3], ', ', 'and')                             # => "1; 2; and 3"
+p joinor([1, 2, 3], ', ', 'and')                             # => "1, 2, and 3"
