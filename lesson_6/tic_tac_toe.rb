@@ -55,7 +55,7 @@ end
 
 def player_turn!(brd)
   square = ''
-  smart_prompt = joinor(empty_squares(brd), delimeter="", word="")
+  smart_prompt = joinor(empty_squares(brd))
 
   if smart_prompt.size > 2
     smart_prompt.delete_if { |value| value == nil }
@@ -68,7 +68,7 @@ def player_turn!(brd)
 
   loop do
     prompt "Choose a position to place a piece: #{[smart_prompt].join(", ")}"
-    
+
     square = gets.chomp.to_i
 
     break if empty_squares(brd).include?(square)
