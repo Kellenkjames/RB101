@@ -65,10 +65,10 @@ def player_turn!(brd)
     smart_prompt.delete_at(-1)
     smart_prompt.insert(-2, 'or')
   end 
-  
-  loop do
-    prompt "Choose a position to place a piece: #{smart_prompt}"
 
+  loop do
+    prompt "Choose a position to place a piece: #{[smart_prompt].join(", ")}"
+    
     square = gets.chomp.to_i
 
     break if empty_squares(brd).include?(square)
