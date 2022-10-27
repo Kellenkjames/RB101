@@ -15,12 +15,12 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
-def joinor(arr, delimeter="", word="")
-  if arr.size == 1 && delimeter == "" && word == ""
+def joinor(arr, delimeter=",", word="or")
+  if arr.size == 1
     arr.join("")
-  elsif arr.size > 2 && delimeter == "" && word == ""
-    arr.insert(arr[-2], 'or')
-  end 
+  elsif arr.size > 2
+    arr.insert(arr[-2], word)
+  end
 end
 
 # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -63,8 +63,8 @@ def player_turn!(brd)
   
   if smart_prompt[-1] == "or"
     smart_prompt.delete_at(-1)
-    smart_prompt.insert(-2, 'or')
-  end 
+    smart_prompt.insert(-2, "or")
+  end
 
   loop do
     prompt "Choose a position to place a piece: #{[smart_prompt].join(", ")}"
