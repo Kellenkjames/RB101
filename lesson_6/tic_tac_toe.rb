@@ -99,6 +99,25 @@ def detect_winner(brd)
   nil
 end
 
+def keep_score(brd)
+  player_score = 0
+  computer_score = 0
+
+  loop do
+    if detect_winner(brd) == 'Player'
+      player_score += 1
+    elsif detect_winner(brd) == 'Computer'
+      computer_score += 1
+    end
+    
+    prompt "Player Score: #{player_score}"
+    prompt "Computer Score: #{computer_score}"
+    break if player_score || computer_score == 5
+  end
+
+end
+
+
 loop do
   board = initialize_board
 
@@ -113,7 +132,8 @@ loop do
   end
 
   someone_won?(board) ? prompt("#{detect_winner(board)} won!") : prompt("It's a tie!")
-
+  keep_score(board)
+    
   prompt 'Play again? (y or n)'
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
