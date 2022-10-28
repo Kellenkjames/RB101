@@ -68,7 +68,6 @@ def player_turn!(brd)
 
   loop do
     prompt "Choose a position to place a piece: #{[smart_prompt].join(", ")}"
-
     square = gets.chomp.to_i
 
     break if empty_squares(brd).include?(square)
@@ -99,24 +98,11 @@ def detect_winner(brd)
   nil
 end
 
-def keep_score(brd)
-  player_score = 0
-  computer_score = 0
+# Each time the method is called, the score resets to "0" - we don't want that. 
+# We need to initialize the variable to "0" - but it needs to update each time the round "resets"
 
-  loop do
-    if detect_winner(brd) == 'Player'
-      player_score += 1
-    elsif detect_winner(brd) == 'Computer'
-      computer_score += 1
-    end
-    
-    prompt "Player Score: #{player_score}"
-    prompt "Computer Score: #{computer_score}"
-    break if player_score || computer_score == 5
-  end
-
-end
-
+player_score = 0
+computer_score = 0
 
 loop do
   board = initialize_board
@@ -132,8 +118,26 @@ loop do
   end
 
   someone_won?(board) ? prompt("#{detect_winner(board)} won!") : prompt("It's a tie!")
-  keep_score(board)
-    
+  
+  if detect_winner(board) == 'Player'
+    player_score += 1
+  elsif detect_winner(board) == 'Computer'
+    computer_score += 1
+  end 
+
+  prompt "Player Score: #{player_score}"
+  prompt "Computer Score: #{computer_score}"
+
+  if player_score == 5
+    prompt "Player Wins Game"
+    player_score = 0
+    computer_score = 0
+  elsif computer_score == 5
+    prompt "Player Wins Game"
+    player_score = 0
+    computer_score = 0
+  end 
+
   prompt 'Play again? (y or n)'
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
