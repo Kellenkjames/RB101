@@ -98,15 +98,18 @@ def detect_winner(brd)
   nil
 end
 
+def reset_scores(player_score, computer_score)
+  player_score = 0
+  computer_score = 0
+end
+
 def game_reset(player_score, computer_score)
   if player_score == 5
-    prompt "Player Wins Game."
-    player_score = 0
-    computer_score = 0
+    prompt "Player Wins Game. 🎉🎉🎉"
+    reset_scores(player_score, computer_score)
   elsif computer_score == 5
     prompt "Computer Wins Game."
-    player_score = 0
-    computer_score = 0
+    reset_scores(player_score, computer_score)
   end
 end
 
@@ -132,7 +135,7 @@ loop do
     player_score += 1
   elsif detect_winner(board) == 'Computer'
     computer_score += 1
-  end 
+  end
   
   prompt "Player Score: #{player_score}"
   prompt "Computer Score: #{computer_score}"
