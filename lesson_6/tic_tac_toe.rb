@@ -26,7 +26,7 @@ end
 # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
 def display_board(brd)
   system 'clear'
-  puts "You're a #{PLAYER_MARKER} Computer is #{COMPUTER_MARKER}"
+  puts "You're a #{PLAYER_MARKER} | Computer is #{COMPUTER_MARKER}"
   puts ''
   puts '     |     |'
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}"
@@ -80,6 +80,15 @@ end
 def computer_turn!(brd)
   square = empty_squares(brd).sample
   brd[square] = COMPUTER_MARKER
+  # If there's an immediate threat, it will defend the 3rd square -- "immediate threat" is 2 squares marked by the Player. 
+  if immediate_threat(brd) == 'Player'
+    WINNING_LINES.each do |line|
+      # Find the empty square of the winning line that has 2 squares marked by the Player. 
+      binding.pry
+      square = empty_squares(brd)
+    end
+  end
+  # Otherwise, it will just pick a random square. 
 end
 
 def board_full?(brd)
@@ -97,6 +106,13 @@ def detect_winner(brd)
   end
   nil
 end
+
+def immediate_threat(brd)
+  WINNING_LINES.each do |line|
+    return 'Player' if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
+  end
+  nil
+end 
 
 def reset_scores(player_score, computer_score)
   player_score = 0
