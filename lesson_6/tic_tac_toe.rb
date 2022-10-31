@@ -78,17 +78,15 @@ def player_turn!(brd)
 end
 
 def computer_turn!(brd)
-  square = empty_squares(brd).sample
-  brd[square] = COMPUTER_MARKER
-  # If there's an immediate threat, it will defend the 3rd square -- "immediate threat" is 2 squares marked by the Player. 
-  if immediate_threat(brd) == 'Player'
-    WINNING_LINES.each do |line|
-      # Find the empty square of the winning line that has 2 squares marked by the Player. 
+  if immediate_threat(brd)
+    empty_squares(brd).each do |square|
       binding.pry
-      square = empty_squares(brd)
-    end
+      square
+      brd[square] = COMPUTER_MARKER
+    end 
   end
-  # Otherwise, it will just pick a random square. 
+  square = empty_squares(brd).sample
+  brd[square] = COMPUTER_MARKER 
 end
 
 def board_full?(brd)
@@ -109,7 +107,7 @@ end
 
 def immediate_threat(brd)
   WINNING_LINES.each do |line|
-    return 'Player' if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
+    return line if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
   end
   nil
 end 
