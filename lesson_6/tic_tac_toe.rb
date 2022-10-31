@@ -105,10 +105,10 @@ end
 
 def game_reset(player_score, computer_score)
   if player_score == 5
-    prompt "Player Wins Game. 🎉🎉🎉"
+    prompt "Player Wins Game 🎉 🎉 🎉"
     reset_scores(player_score, computer_score)
   elsif computer_score == 5
-    prompt "Computer Wins Game."
+    prompt "Computer Wins Game 💻 💻 💻"
     reset_scores(player_score, computer_score)
   end
 end
