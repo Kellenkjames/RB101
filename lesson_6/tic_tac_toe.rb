@@ -77,16 +77,22 @@ def player_turn!(brd)
   brd[square] = PLAYER_MARKER
 end
 
-def computer_turn!(brd)
-  if immediate_threat(brd)
+def immediate_threat(brd)
+  WINNING_LINES.each do |line|
     empty_squares(brd).each do |square|
       binding.pry
-      square
-      brd[square] = COMPUTER_MARKER
-    end 
+      if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
+        #* Need to find the "empty" square on the corresponding winning line
+        square = COMPUTER_MARKER
+      end
+    end
   end
+end
+
+def computer_turn!(brd)
+  immediate_threat(brd)
   square = empty_squares(brd).sample
-  brd[square] = COMPUTER_MARKER 
+  brd[square] = COMPUTER_MARKER
 end
 
 def board_full?(brd)
@@ -104,13 +110,6 @@ def detect_winner(brd)
   end
   nil
 end
-
-def immediate_threat(brd)
-  WINNING_LINES.each do |line|
-    return line if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
-  end
-  nil
-end 
 
 def reset_scores(player_score, computer_score)
   player_score = 0
@@ -162,3 +161,4 @@ loop do
 end
 
 prompt 'Thanks for playing Tic Tac Toe! Good bye!'
+
