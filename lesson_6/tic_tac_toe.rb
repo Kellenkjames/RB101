@@ -56,10 +56,8 @@ end
 def player_turn!(brd)
   square = ''
   smart_prompt = joinor(empty_squares(brd))
-
-  if smart_prompt.size > 2
-    smart_prompt.delete_if { |value| value == nil }
-  end 
+  
+  smart_prompt.compact! unless smart_prompt.size == 1
   
   if smart_prompt[-1] == "or"
     smart_prompt.delete_at(-1)
