@@ -59,7 +59,7 @@ def player_turn!(brd)
   
   smart_prompt.compact! unless smart_prompt.size == 1
   
-  if smart_prompt.last == "or"
+  if smart_prompt[-1] == "or"
     smart_prompt.delete_at(-1)
     smart_prompt.insert(-2, "or")
   end
@@ -88,7 +88,7 @@ end
 def computer_ai_offense(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2
-      # binding.pry 
+      binding.pry 
       line.each do |square|
         brd[square] = PLAYER_MARKER if brd[square] == INITIAL_MARKER
       end
