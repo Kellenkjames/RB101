@@ -77,13 +77,12 @@ def player_turn!(brd)
   brd[square] = PLAYER_MARKER
 end
 
+# We'll consider an "immediate threat" to be 2 squares marked by the opponent in a row. If there's no immediate threat, then it will just pick a random square.
 def immediate_threat(brd)
   WINNING_LINES.each do |line|
     empty_squares(brd).each do |square|
-      binding.pry
       if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
-        #* Need to find the "empty" square on the corresponding winning line
-        square = COMPUTER_MARKER
+        brd[square] = COMPUTER_MARKER
       end
     end
   end
