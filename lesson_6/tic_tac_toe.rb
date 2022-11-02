@@ -59,7 +59,7 @@ def player_turn!(brd)
   
   smart_prompt.compact! unless smart_prompt.size == 1
   
-  if smart_prompt[-1] == "or"
+  if smart_prompt.last == "or"
     smart_prompt.delete_at(-1)
     smart_prompt.insert(-2, "or")
   end
