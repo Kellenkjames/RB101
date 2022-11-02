@@ -79,14 +79,14 @@ end
 
 def immediate_threat(brd)
   WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2 
+    if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
       line.each do |square|
         brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
       end
-    end 
+    end
   end
-  square = empty_squares(brd).sample 
-  brd[square] = COMPUTER_MARKER 
+  square = empty_squares(brd).sample
+  brd[square] = COMPUTER_MARKER
 end
 
 def computer_turn!(brd)
