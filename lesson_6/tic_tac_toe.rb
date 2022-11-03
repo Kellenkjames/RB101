@@ -79,9 +79,9 @@ end
 
 def computer_ai_offense(brd)
   WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2 
+    if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2
       line.each do |square|
-        brd[square] = PLAYER_MARKER if brd[square] == INITIAL_MARKER
+        brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
       end
     end
   end
@@ -99,7 +99,7 @@ end
 
 # Computer Turn Refinements:
 
-# a) We actually have the offense and defense steps backwards. In other words, if the computer has a chance to win, it should take that move rather than defend. As we have coded it now, it will defend first. Update the code so that it plays the offensive move first.
+# We actually have the offense and defense steps backwards. In other words, if the computer has a chance to win, it should take that move rather than defend. As we have coded it now, it will defend first. Update the code so that it plays the offensive move first.
 
 def computer_turn!(brd)
   computer_ai_offense(brd)
