@@ -56,8 +56,12 @@ end
 def player_turn!(brd)
   square = ''
   smart_prompt = joinor(empty_squares(brd))
-
-  smart_prompt.delete_if { |value| value == nil } unless smart_prompt.size == 1
+  
+  #! When there are two squares remaining: the undefined method for `nil` is thrown # => [7, 8, nil]
+  if smart_prompt.size > 2 
+    smart_prompt.delete_if { |value| value == nil }
+  end
+  # binding.pry
 
   if smart_prompt[-1] == "or"
     smart_prompt.delete_at(-1)
@@ -75,16 +79,6 @@ def player_turn!(brd)
   brd[square] = PLAYER_MARKER
 end
 
-def computer_ai_defense(brd)
-  WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
-      line.each do |square|
-        brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
-      end
-    end
-  end
-end
-
 def computer_ai_offense(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2 
@@ -95,9 +89,23 @@ def computer_ai_offense(brd)
   end
 end
 
+def computer_ai_defense(brd)
+  WINNING_LINES.each do |line|
+    if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
+      line.each do |square|
+        brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
+      end
+    end
+  end
+end
+
+# Computer Turn Refinements:
+
+# a) We actually have the offense and defense steps backwards. In other words, if the computer has a chance to win, it should take that move rather than defend. As we have coded it now, it will defend first. Update the code so that it plays the offensive move first.
+
 def computer_turn!(brd)
-  computer_ai_defense(brd)
   computer_ai_offense(brd)
+  computer_ai_defense(brd)
 
   square = empty_squares(brd).sample
   brd[square] = COMPUTER_MARKER
