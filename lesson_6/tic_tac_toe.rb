@@ -56,9 +56,9 @@ end
 def player_turn!(brd)
   square = ''
   smart_prompt = joinor(empty_squares(brd))
-  
-  smart_prompt.compact! unless smart_prompt.size == 1
-  
+
+  smart_prompt.delete_if { |value| value == nil } unless smart_prompt.size == 1
+
   if smart_prompt[-1] == "or"
     smart_prompt.delete_at(-1)
     smart_prompt.insert(-2, "or")
@@ -87,8 +87,7 @@ end
 
 def computer_ai_offense(brd)
   WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2
-      binding.pry 
+    if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2 
       line.each do |square|
         brd[square] = PLAYER_MARKER if brd[square] == INITIAL_MARKER
       end
@@ -99,7 +98,7 @@ end
 def computer_turn!(brd)
   computer_ai_defense(brd)
   computer_ai_offense(brd)
-  
+
   square = empty_squares(brd).sample
   brd[square] = COMPUTER_MARKER
 end
@@ -169,5 +168,5 @@ loop do
   break unless answer.downcase.start_with?('y')
 end
 
-prompt 'Thanks for playing Tic Tac Toe! Good bye!'
+prompt 'Thanks for playing Tic Tac Toe! Good Bye!'
 
