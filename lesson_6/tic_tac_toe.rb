@@ -57,12 +57,10 @@ def player_turn!(brd)
   square = ''
   smart_prompt = joinor(empty_squares(brd))
   
-  #! When there are two squares remaining: the undefined method for `nil` is thrown # => [7, 8, nil]
   if smart_prompt.size > 2 
     smart_prompt.delete_if { |value| value == nil }
   end
-  # binding.pry
-
+  
   if smart_prompt[-1] == "or"
     smart_prompt.delete_at(-1)
     smart_prompt.insert(-2, "or")
