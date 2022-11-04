@@ -130,14 +130,27 @@ computer_score = 0
 loop do
   board = initialize_board
 
+  first_move = nil 
+  loop do
+    prompt "Who should make the first move 🤔 P = Player | C = Computer"
+    first_move = gets.chomp.downcase
+    
+    if first_move == "P"
+      first_move = player_turn!(board)
+    elsif first_move == "C"
+      first_move = computer_turn!(board)
+    end
+
+    break if first_move == "P" || first_move == "C"
+    prompt "Please enter P for Player or C for Computer."
+  end
+
   loop do
     display_board(board)
 
-    player_turn!(board)
+    first_move
     break if someone_won?(board) || board_full?(board)
-
-    computer_turn!(board)
-    break if someone_won?(board) || board_full?(board)
+      
   end
 
   someone_won?(board) ? prompt("#{detect_winner(board)} Won!") : prompt("It's a Tie!")
