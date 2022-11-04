@@ -18,7 +18,7 @@ end
 def joinor(arr, delimeter=",", word="or")
   if arr.size == 1
     arr.join("")
-  elsif arr.size > 2
+  elsif arr.size >= 2
     arr.insert(arr[-2], word)
   end
 end
@@ -57,9 +57,7 @@ def player_turn!(brd)
   square = ''
   smart_prompt = joinor(empty_squares(brd))
   
-  if smart_prompt.size > 2 
-    smart_prompt.delete_if { |value| value == nil }
-  end
+  smart_prompt.delete_if { |value| value == nil } if smart_prompt.size > 1 
   
   if smart_prompt[-1] == "or"
     smart_prompt.delete_at(-1)
@@ -77,36 +75,30 @@ def player_turn!(brd)
   brd[square] = PLAYER_MARKER
 end
 
-def computer_ai_offense(brd)
+def computer_ai_strategy(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2
       line.each do |square|
         brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
       end
-    end
-  end
-end
-
-def computer_ai_defense(brd)
-  WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
+    elsif brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
       line.each do |square|
         brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
-      end
-    end
+      end 
+    elsif brd[5] == INITIAL_MARKER
+      brd[5] = COMPUTER_MARKER
+    end 
   end
+  square = empty_squares(brd).sample
+  brd[square] = COMPUTER_MARKER
 end
 
 # Computer Turn Refinements:
 
-# We actually have the offense and defense steps backwards. In other words, if the computer has a chance to win, it should take that move rather than defend. As we have coded it now, it will defend first. Update the code so that it plays the offensive move first.
+# b) We can make one more improvement: pick square #5 if it's available. The AI for the computer should go like this: first, pick the winning move; then, defend; then pick square #5; then pick a random square.
 
 def computer_turn!(brd)
-  computer_ai_offense(brd)
-  computer_ai_defense(brd)
-
-  square = empty_squares(brd).sample
-  brd[square] = COMPUTER_MARKER
+  computer_ai_strategy(brd)
 end
 
 def board_full?(brd)
