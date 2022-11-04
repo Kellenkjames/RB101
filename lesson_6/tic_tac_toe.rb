@@ -16,11 +16,7 @@ def prompt(msg)
 end
 
 def joinor(arr, delimeter=",", word="or")
-  if arr.size == 1
-    arr.join("")
-  elsif arr.size >= 2
-    arr.insert(arr[-2], word)
-  end
+  arr.size == 1 ? arr.join("") : arr.insert(arr[-2], word)
 end
 
 # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -57,13 +53,13 @@ def player_turn!(brd)
   square = ''
   smart_prompt = joinor(empty_squares(brd))
   
-  smart_prompt.delete_if { |value| value == nil } if smart_prompt.size > 1 
-  
+  smart_prompt.delete_if { |value| value == nil } if smart_prompt.size > 1
+
   if smart_prompt[-1] == "or"
     smart_prompt.delete_at(-1)
     smart_prompt.insert(-2, "or")
   end
-
+  
   loop do
     prompt "Choose a position to place a piece: #{[smart_prompt].join(", ")}"
     square = gets.chomp.to_i
@@ -92,10 +88,6 @@ def computer_ai_strategy(brd)
   square = empty_squares(brd).sample
   brd[square] = COMPUTER_MARKER
 end
-
-# Computer Turn Refinements:
-
-# b) We can make one more improvement: pick square #5 if it's available. The AI for the computer should go like this: first, pick the winning move; then, defend; then pick square #5; then pick a random square.
 
 def computer_turn!(brd)
   computer_ai_strategy(brd)
