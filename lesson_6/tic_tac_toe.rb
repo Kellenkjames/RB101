@@ -124,33 +124,38 @@ def game_reset(player_score, computer_score)
   end
 end
 
+def first_move(brd)
+  loop do 
+    prompt "Who should go first 🤔 P = Player | C = Computer"
+    answer = gets.chomp.upcase 
+    
+    if answer == "P"
+      player_turn!(brd)
+    elsif answer == "C"
+      computer_turn!(brd)
+    end
+    
+    break if answer == "P" || answer == "C"
+    prompt "Please select either P for Player or C for Computer."
+  end
+end
+
 player_score = 0
 computer_score = 0
 
 loop do
   board = initialize_board
 
-  first_move = nil 
-  loop do
-    prompt "Who should make the first move 🤔 P = Player | C = Computer"
-    first_move = gets.chomp.downcase
-    
-    if first_move == "P"
-      first_move = player_turn!(board)
-    elsif first_move == "C"
-      first_move = computer_turn!(board)
-    end
-
-    break if first_move == "P" || first_move == "C"
-    prompt "Please enter P for Player or C for Computer."
-  end
+  first_move(board)
 
   loop do
     display_board(board)
 
-    first_move
+    player_turn!(board)
     break if someone_won?(board) || board_full?(board)
-      
+
+    computer_turn!(board)
+    break if someone_won?(board) || board_full?(board)
   end
 
   someone_won?(board) ? prompt("#{detect_winner(board)} Won!") : prompt("It's a Tie!")
@@ -172,4 +177,3 @@ loop do
 end
 
 prompt 'Thanks for playing Tic Tac Toe! Good Bye!'
-
