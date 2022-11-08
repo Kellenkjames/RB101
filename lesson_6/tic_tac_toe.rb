@@ -51,7 +51,7 @@ def player_turn!(brd)
   square = ''
   smart_prompt = joinor(empty_squares(brd))
 
-  smart_prompt.delete_if { |value| value.nil? } if smart_prompt.size > 1
+  smart_prompt.delete_if(&:nil?) if smart_prompt.size > 1
 
   if smart_prompt[-1] == 'or'
     smart_prompt.delete_at(-1)
@@ -111,7 +111,7 @@ end
 def first_move(_brd)
   current_player = nil
   loop do
-    prompt 'Who should go first 🤔 P => Player | C => Computer'
+    prompt 'Who should go first 🤔 P = Player | C = Computer'
     answer = gets.chomp.upcase
     options = %w[P C]
 
