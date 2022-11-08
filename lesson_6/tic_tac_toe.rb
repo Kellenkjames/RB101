@@ -1,5 +1,3 @@
-require "pry"
-
 # frozen_string_literal: true
 
 WINNING_LINES =
@@ -119,10 +117,10 @@ end
 
 def game_reset(player_score, computer_score)
   if player_score == 5
-    prompt "Player Wins Game 🎉 🎉 🎉"
+    prompt 'Player Wins Game 🎉 🎉 🎉'
     reset_scores(player_score, computer_score)
   elsif computer_score == 5
-    prompt "Computer Wins Game 💻 💻 💻"
+    prompt 'Computer Wins Game 💻 💻 💻'
     reset_scores(player_score, computer_score)
   end
 end
@@ -130,40 +128,40 @@ end
 def first_move(brd)
   current_player = nil
   loop do
-    prompt "Who should go first 🤔 P => Player | C => Computer"
+    prompt 'Who should go first 🤔 P => Player | C => Computer'
     answer = gets.chomp.upcase
     
-    if answer == "P"
-      current_player = "Player"
-    elsif answer == "C"
-      current_player = "Computer"
-      prompt "Computer will choose who goes first:"
+    if answer == 'P'
+      current_player = 'Player'
+    elsif answer == 'C'
+      current_player = 'Computer'
+      prompt 'Computer will choose who goes first:'
       
-      options = ["P", "C"]
+      options = ['P', 'C']
       random_selection = options.sample
       
-      if random_selection == "P"
-        prompt "Player is up."
-        current_player = "Player"
+      if random_selection == 'P'
+        prompt 'Player is up.'
+        current_player = 'Player'
       else 
-        prompt "Computer is up."
-        current_player = "Computer"
+        prompt 'Computer is up.'
+        current_player = 'Computer'
       end
     end
     
-    break if answer == "P" || answer == "C"
-    prompt "Please select either (P for Player) or (C for Computer)."
+    break if answer == 'P' || answer == 'C'
+    prompt 'Please select either (P for Player) or (C for Computer).'
   end
   
   current_player
 end
 
 def place_piece!(brd, current_player)
-  current_player == "Player" ? player_turn!(brd) : computer_turn!(brd)
+  current_player == 'Player' ? player_turn!(brd) : computer_turn!(brd)
 end
 
 def alternate_player(current_player)
-  current_player == "Player" ? current_player = "Computer" : current_player = "Player"
+  current_player == 'Player' ? current_player = 'Computer' : current_player = 'Player'
 end
 
 loop do
