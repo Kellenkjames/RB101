@@ -126,29 +126,29 @@ end
 
 def first_move(brd)
   loop do
-    prompt "Who should go first 🤔 P = Player | C = Computer"
+    prompt "Who should go first 🤔 P => Player | C => Computer"
     answer = gets.chomp.upcase
     
     if answer == "P"
       player_turn!(brd)
       computer_turn!(brd)
     elsif answer == "C"
-      prompt "Computer will choose who goes first"
+      prompt "Computer will choose who goes first:"
       options = ["P", "C"]
       random_selection = options.sample
       
       if random_selection == "P"
+        prompt "Player is up."
         player_turn!(brd)
         computer_turn!(brd)
       elsif random_selection == "C"
+        prompt "Computer is up."
         computer_turn!(brd)
-        player_turn!(brd)
       end
-      break if options == ["P", "C"]
     end
     
     break if answer == "P" || answer == "C"
-    prompt "Please select either P for Player or C for Computer."
+    prompt "Please select either (P for Player) or (C for Computer)."
   end
 end
 
