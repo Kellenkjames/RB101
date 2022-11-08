@@ -137,9 +137,9 @@ def first_move(brd)
     elsif answer == 'C'
       current_player = 'Computer'
       prompt 'Computer will choose who goes first:'
-  
+
       random_selection = options.sample
-  
+
       if random_selection == 'P'
         prompt 'Player is up.'
         current_player = 'Player'
