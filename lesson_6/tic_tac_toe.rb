@@ -1,5 +1,3 @@
-require 'pry'
-
 # frozen_string_literal: true
 
 WINNING_LINES =
@@ -177,11 +175,11 @@ loop do
 
   if player_score == 5
     prompt 'Player Wins Game 🎉 🎉 🎉 🎉 🎉'
-    player_score = 0 
+    player_score = 0
     computer_score = 0
   elsif computer_score == 5
     prompt 'Computer Wins Game 🤖 🤖 🤖 🤖 🤖'
-    player_score = 0 
+    player_score = 0
     computer_score = 0
   end
 
