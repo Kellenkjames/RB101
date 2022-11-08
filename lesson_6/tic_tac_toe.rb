@@ -154,6 +154,7 @@ def first_move(brd)
     break if answer == "P" || answer == "C"
     prompt "Please select either (P for Player) or (C for Computer)."
   end
+  
   current_player
 end
 
