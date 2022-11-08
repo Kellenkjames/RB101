@@ -135,18 +135,19 @@ def first_move(brd)
     elsif answer == "C"
       prompt "Computer will choose who goes first"
       options = ["P", "C"]
-      options.sample
+      random_selection = options.sample
       
-      if options == "P"
+      if random_selection == "P"
         player_turn!(brd)
         computer_turn!(brd)
-      elsif options == "C"
+      elsif random_selection == "C"
         computer_turn!(brd)
         player_turn!(brd)
-      end 
+      end
+      break if options == ["P", "C"]
     end
     
-    break if answer == "P" || answer == "C" || options == "P" || options == "C"
+    break if answer == "P" || answer == "C"
     prompt "Please select either P for Player or C for Computer."
   end
 end
