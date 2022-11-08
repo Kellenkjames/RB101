@@ -1,3 +1,5 @@
+require 'pry'
+
 # frozen_string_literal: true
 
 WINNING_LINES =
@@ -9,15 +11,12 @@ INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
 
-player_score = 0
-computer_score = 0
-
 def prompt(msg)
   puts "=> #{msg}"
 end
 
-def joinor(arr, _delimeter = ",", word = 'or')
-  arr.size == 1 ? arr.join("") : arr.insert(arr[-2], word)
+def joinor(arr, _delimeter = ',', word = 'or')
+  arr.size == 1 ? arr.join('') : arr.insert(arr[-2], word)
 end
 
 # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -53,7 +52,7 @@ end
 def player_turn!(brd)
   square = ''
   smart_prompt = joinor(empty_squares(brd))
-  
+
   smart_prompt.delete_if { |value| value == nil } if smart_prompt.size > 1
 
   if smart_prompt[-1] == 'or'
@@ -66,7 +65,7 @@ def player_turn!(brd)
     square = gets.chomp.to_i
 
     break if empty_squares(brd).include?(square)
-    
+
     prompt "Sorry, that's not a valid choice."
   end
 
@@ -111,21 +110,6 @@ def detect_winner(brd)
   nil
 end
 
-def reset_scores(player_score, computer_score)
-  player_score = 0
-  computer_score = 0
-end
-
-def game_reset(player_score, computer_score)
-  if player_score == 5
-    prompt 'Player Wins Game 🎉 🎉 🎉'
-    reset_scores(player_score, computer_score)
-  elsif computer_score == 5
-    prompt 'Computer Wins Game 💻 💻 💻'
-    reset_scores(player_score, computer_score)
-  end
-end
-
 def first_move(_brd)
   current_player = nil
   loop do
@@ -166,6 +150,9 @@ def alternate_player(current_player)
   current_player == 'Player' ? 'Computer' : 'Player'
 end
 
+player_score = 0
+computer_score = 0
+
 loop do
   board = initialize_board
   current_player = first_move(board)
@@ -188,7 +175,15 @@ loop do
   prompt "Player Score: #{player_score}"
   prompt "Computer Score: #{computer_score}"
 
-  game_reset(player_score, computer_score)
+  if player_score == 5
+    prompt 'Player Wins Game 🎉 🎉 🎉 🎉 🎉'
+    player_score = 0 
+    computer_score = 0
+  elsif computer_score == 5
+    prompt 'Computer Wins Game 🤖 🤖 🤖 🤖 🤖'
+    player_score = 0 
+    computer_score = 0
+  end
 
   prompt 'Play again? (y or n)'
   answer = gets.chomp
