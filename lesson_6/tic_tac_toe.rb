@@ -167,7 +167,7 @@ end
 loop do
   board = initialize_board
   current_player = first_move(board)
-  
+
   loop do
     display_board(board)
     place_piece!(board, current_player)
@@ -176,13 +176,13 @@ loop do
   end
 
   someone_won?(board) ? prompt("#{detect_winner(board)} Won!") : prompt("It's a Tie!")
-  
+
   if detect_winner(board) == 'Player'
     player_score += 1
   elsif detect_winner(board) == 'Computer'
     computer_score += 1
   end
-  
+
   prompt "Player Score: #{player_score}"
   prompt "Computer Score: #{computer_score}"
 
