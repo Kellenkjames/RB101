@@ -11,6 +11,9 @@ INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
 
+player_score = 0
+computer_score = 0
+
 def prompt(msg)
   puts "=> #{msg}"
 end
@@ -142,7 +145,6 @@ def first_move(brd)
         player_turn!(brd)
         computer_turn!(brd)
       elsif random_selection == "C"
-        prompt "Computer is up."
         computer_turn!(brd)
       end
     end
@@ -151,9 +153,6 @@ def first_move(brd)
     prompt "Please select either (P for Player) or (C for Computer)."
   end
 end
-
-player_score = 0
-computer_score = 0
 
 loop do
   board = initialize_board
