@@ -162,19 +162,19 @@ def place_piece!(brd, current_player)
   current_player == "Player" ? player_turn!(brd) : computer_turn!(brd)
 end
 
+def alternate_player(current_player)
+  current_player == "Player" ? current_player = "Computer" : current_player = "Player"
+end
+
 loop do
   board = initialize_board
-  first_move(board)
-  current_player = place_piece!(board, current_player)
-
+  current_player = first_move(board)
+  
   loop do
     display_board(board)
     place_piece!(board, current_player)
-    
-    
-    break if someone_won?(board) || board_full?(board)
-
-    computer_turn!(board)
+    current_player = alternate_player(current_player)
+    # binding.pry 
     break if someone_won?(board) || board_full?(board)
   end
 
@@ -197,22 +197,3 @@ loop do
 end
 
 prompt 'Thanks for playing Tic Tac Toe! Good Bye!'
-
-=begin
-
-Improve the Game Loop: 
-
-#* Notice how we have to break after each player makes a move. What if we could have a generic method that marks a square based on the player? We could do something like this:
-
-There are two new methods there: place_piece! and alternate_player. The place_piece! is a generic method that will know how to place the piece on the board depending on the current_player. That is, it will call player_places_piece! or computer_places_piece! depending on the value of current_player. The trick, then, is to keep track of a current_player, and to switch that variable's value after every turn.
-
-See if you can build those two methods and make this work.
-
-loop do
-  display_board(board)
-  place_piece!(board, current_player)
-  current_player = alternate_player(current_player)
-  break if someone_won?(board) || board_full?(board)
-end
-
-=end
