@@ -128,14 +128,17 @@ def game_reset(player_score, computer_score)
 end
 
 def first_move(brd)
+  current_player = nil
   loop do
     prompt "Who should go first 🤔 P => Player | C => Computer"
     answer = gets.chomp.upcase
     
     if answer == "P"
+      current_player = "Player"
       player_turn!(brd)
       computer_turn!(brd)
     elsif answer == "C"
+      current_player = "Computer"
       prompt "Computer will choose who goes first:"
       options = ["P", "C"]
       random_selection = options.sample
@@ -152,17 +155,23 @@ def first_move(brd)
     break if answer == "P" || answer == "C"
     prompt "Please select either (P for Player) or (C for Computer)."
   end
+  current_player
+end
+
+def place_piece!(brd, current_player)
+  current_player == "Player" ? player_turn!(brd) : computer_turn!(brd)
 end
 
 loop do
   board = initialize_board
-
   first_move(board)
+  current_player = place_piece!(board, current_player)
 
   loop do
     display_board(board)
-
-    player_turn!(board)
+    place_piece!(board, current_player)
+    
+    
     break if someone_won?(board) || board_full?(board)
 
     computer_turn!(board)
@@ -188,3 +197,22 @@ loop do
 end
 
 prompt 'Thanks for playing Tic Tac Toe! Good Bye!'
+
+=begin
+
+Improve the Game Loop: 
+
+#* Notice how we have to break after each player makes a move. What if we could have a generic method that marks a square based on the player? We could do something like this:
+
+There are two new methods there: place_piece! and alternate_player. The place_piece! is a generic method that will know how to place the piece on the board depending on the current_player. That is, it will call player_places_piece! or computer_places_piece! depending on the value of current_player. The trick, then, is to keep track of a current_player, and to switch that variable's value after every turn.
+
+See if you can build those two methods and make this work.
+
+loop do
+  display_board(board)
+  place_piece!(board, current_player)
+  current_player = alternate_player(current_player)
+  break if someone_won?(board) || board_full?(board)
+end
+
+=end
