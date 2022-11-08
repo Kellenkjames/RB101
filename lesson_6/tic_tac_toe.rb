@@ -16,7 +16,7 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
-def joinor(arr, delimeter=",", word="or")
+def joinor(arr, _delimeter = ",", word = 'or')
   arr.size == 1 ? arr.join("") : arr.insert(arr[-2], word)
 end
 
@@ -56,16 +56,17 @@ def player_turn!(brd)
   
   smart_prompt.delete_if { |value| value == nil } if smart_prompt.size > 1
 
-  if smart_prompt[-1] == "or"
+  if smart_prompt[-1] == 'or'
     smart_prompt.delete_at(-1)
-    smart_prompt.insert(-2, "or")
+    smart_prompt.insert(-2, 'or')
   end
-  
+
   loop do
-    prompt "Choose a position to place a piece: #{[smart_prompt].join(", ")}"
+    prompt "Choose a position to place a piece: #{[smart_prompt].join(', ')}"
     square = gets.chomp.to_i
 
     break if empty_squares(brd).include?(square)
+    
     prompt "Sorry, that's not a valid choice."
   end
 
@@ -81,10 +82,10 @@ def computer_ai_strategy(brd)
     elsif brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
       line.each do |square|
         brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
-      end 
+      end
     elsif brd[5] == INITIAL_MARKER
       brd[5] = COMPUTER_MARKER
-    end 
+    end
   end
   square = empty_squares(brd).sample
   brd[square] = COMPUTER_MARKER
@@ -125,12 +126,12 @@ def game_reset(player_score, computer_score)
   end
 end
 
-def first_move(brd)
+def first_move(_brd)
   current_player = nil
   loop do
     prompt 'Who should go first 🤔 P => Player | C => Computer'
     answer = gets.chomp.upcase
-    options = ['P', 'C']
+    options = %w[P C]
 
     if answer == 'P'
       current_player = 'Player'
