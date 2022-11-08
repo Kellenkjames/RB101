@@ -161,7 +161,7 @@ def place_piece!(brd, current_player)
 end
 
 def alternate_player(current_player)
-  current_player == 'Player' ? current_player = 'Computer' : current_player = 'Player'
+  current_player == 'Player' ? 'Computer' : 'Player'
 end
 
 loop do
