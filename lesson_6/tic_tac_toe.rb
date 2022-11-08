@@ -125,17 +125,28 @@ def game_reset(player_score, computer_score)
 end
 
 def first_move(brd)
-  loop do 
+  loop do
     prompt "Who should go first 🤔 P = Player | C = Computer"
-    answer = gets.chomp.upcase 
+    answer = gets.chomp.upcase
     
     if answer == "P"
       player_turn!(brd)
-    elsif answer == "C"
       computer_turn!(brd)
+    elsif answer == "C"
+      prompt "Computer will choose who goes first"
+      options = ["P", "C"]
+      options.sample
+      
+      if options == "P"
+        player_turn!(brd)
+        computer_turn!(brd)
+      elsif options == "C"
+        computer_turn!(brd)
+        player_turn!(brd)
+      end 
     end
     
-    break if answer == "P" || answer == "C"
+    break if answer == "P" || answer == "C" || options == "P" || options == "C"
     prompt "Please select either P for Player or C for Computer."
   end
 end
