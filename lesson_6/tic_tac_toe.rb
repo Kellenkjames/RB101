@@ -135,20 +135,19 @@ def first_move(brd)
     
     if answer == "P"
       current_player = "Player"
-      player_turn!(brd)
-      computer_turn!(brd)
     elsif answer == "C"
       current_player = "Computer"
       prompt "Computer will choose who goes first:"
+      
       options = ["P", "C"]
       random_selection = options.sample
       
       if random_selection == "P"
         prompt "Player is up."
-        player_turn!(brd)
-        computer_turn!(brd)
-      elsif random_selection == "C"
-        computer_turn!(brd)
+        current_player = "Player"
+      else 
+        prompt "Computer is up."
+        current_player = "Computer"
       end
     end
     
@@ -174,7 +173,6 @@ loop do
     display_board(board)
     place_piece!(board, current_player)
     current_player = alternate_player(current_player)
-    # binding.pry 
     break if someone_won?(board) || board_full?(board)
   end
 
