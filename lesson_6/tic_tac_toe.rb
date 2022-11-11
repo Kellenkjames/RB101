@@ -47,19 +47,23 @@ def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
-def player_turn!(brd)
-  square = ''
+def display_prompt(brd)
   smart_prompt = joinor(empty_squares(brd))
-
   smart_prompt.delete_if(&:nil?) if smart_prompt.size > 1
 
   if smart_prompt[-1] == 'or'
     smart_prompt.delete_at(-1)
     smart_prompt.insert(-2, 'or')
   end
+  smart_prompt
+end
+
+def player_turn!(brd)
+  square = ''
+  display_prompt(brd)
 
   loop do
-    prompt "Choose a position to place a piece: #{[smart_prompt].join(', ')}"
+    prompt "Choose a position to place a piece: #{[display_prompt(brd)].join(', ')}"
     square = gets.chomp.to_i
 
     break if empty_squares(brd).include?(square)
