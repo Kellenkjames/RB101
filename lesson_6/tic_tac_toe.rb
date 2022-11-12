@@ -74,20 +74,25 @@ def player_turn!(brd)
   brd[square] = PLAYER_MARKER
 end
 
-def computer_ai_strategy(brd)
+def fill_blank_square(brd, square)
+  brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
+end
+
+def find_empty_squares(brd)
   WINNING_LINES.each do |line|
-    if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2
-      line.each do |square|
-        brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
+    line.each do |square|
+      if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2
+        fill_blank_square(brd, square)
+      elsif brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
+        fill_blank_square(brd, square)
       end
-    elsif brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
-      line.each do |square|
-        brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
-      end
-    elsif brd[5] == INITIAL_MARKER
-      brd[5] = COMPUTER_MARKER
     end
   end
+end
+
+def computer_ai_strategy(brd)
+  find_empty_squares(brd)
+  brd[5] = COMPUTER_MARKER if brd[5] == INITIAL_MARKER
   square = empty_squares(brd).sample
   brd[square] = COMPUTER_MARKER
 end
