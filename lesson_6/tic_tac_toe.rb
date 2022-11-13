@@ -119,10 +119,11 @@ end
 
 def first_move(_brd)
   current_player = nil
+  options = %w[P C]
+  
   loop do
     prompt 'Who should go first 🤔 P (Player) or C (Computer)'
     answer = gets.chomp.upcase
-    options = %w[P C]
 
     current_player = 'Player' if answer == 'P'
     random_selection = options.sample if answer == 'C'
