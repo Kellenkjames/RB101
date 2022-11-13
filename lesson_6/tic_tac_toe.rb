@@ -74,24 +74,24 @@ def player_turn!(brd)
   brd[square] = PLAYER_MARKER
 end
 
-def fill_blank_square(brd, square)
+def fill_at_risk_square(brd, square)
   brd[square] = COMPUTER_MARKER if brd[square] == INITIAL_MARKER
 end
 
-def find_empty_squares(brd)
+def find_at_risk_square(brd)
   WINNING_LINES.each do |line|
     line.each do |square|
       if brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 2
-        fill_blank_square(brd, square)
+        fill_at_risk_square(brd, square)
       elsif brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 2
-        fill_blank_square(brd, square)
+        fill_at_risk_square(brd, square)
       end
     end
   end
 end
 
 def computer_ai_strategy(brd)
-  find_empty_squares(brd)
+  find_at_risk_square(brd)
   brd[5] = COMPUTER_MARKER if brd[5] == INITIAL_MARKER
   square = empty_squares(brd).sample
   brd[square] = COMPUTER_MARKER
@@ -124,22 +124,15 @@ def first_move(_brd)
     answer = gets.chomp.upcase
     options = %w[P C]
 
-    if answer == 'P'
-      current_player = 'Player'
-    elsif answer == 'C'
-      current_player = 'Computer'
+    current_player = 'Player' if answer == 'P'
+
+    if answer == 'C'
       prompt 'Computer will choose who goes first:'
-
       random_selection = options.sample
-
-      if random_selection == 'P'
-        prompt 'Player is up.'
-        current_player = 'Player'
-      else
-        prompt 'Computer is up.'
-        current_player = 'Computer'
-      end
     end
+
+    current_player = 'Player' if random_selection == 'P'
+    current_player = 'Computer' if random_selection == 'C'
 
     break if options.include?(answer)
 
