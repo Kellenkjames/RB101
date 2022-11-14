@@ -125,11 +125,10 @@ def first_move(_brd)
     prompt 'Who should go first 🤔 P (Player) or C (Computer)'
     answer = gets.chomp.upcase
 
-    current_player = 'Player' if answer == 'P'
-    random_selection = options.sample if answer == 'C'
+    computer_random = options.sample
 
-    current_player = 'Player' if random_selection == 'P'
-    current_player = 'Computer' if random_selection == 'C'
+    current_player = 'Player' if answer || computer_random == 'P'
+    current_player = 'Computer' if computer_random == 'C'
 
     break if options.include?(answer)
 
