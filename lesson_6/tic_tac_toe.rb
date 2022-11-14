@@ -145,9 +145,6 @@ def alternate_player(current_player)
   current_player == 'Player' ? 'Computer' : 'Player'
 end
 
-player_score = 0
-computer_score = 0
-
 def player_reset
   prompt 'Player Wins Game 🎉 🎉 🎉 🎉 🎉'
 end
@@ -161,6 +158,9 @@ def display_game_scores
   prompt "Computer Score: #{computer_score}"
   prompt 'Play again? (y or n)'
 end
+
+player_score = 0
+computer_score = 0
 
 loop do
   board = initialize_board
@@ -180,8 +180,15 @@ loop do
 
   display_game_scores(player_score, computer_score)
 
-  player_reset if player_score == 5
-  computer_reset if player_score == 5
+  if player_score == 5
+    player_reset
+    player_score = 0
+    computer_score = 0
+  elsif computer_score == 5
+    computer_reset
+    player_score = 0
+    computer_score = 0
+  end
 
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
