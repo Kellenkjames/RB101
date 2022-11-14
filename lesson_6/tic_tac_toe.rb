@@ -153,7 +153,7 @@ def computer_reset
   prompt 'Computer Wins Game 🤖 🤖 🤖 🤖 🤖'
 end
 
-def display_game_scores
+def display_game_scores(player_score, computer_score)
   prompt "Player Score: #{player_score}"
   prompt "Computer Score: #{computer_score}"
   prompt 'Play again? (y or n)'
