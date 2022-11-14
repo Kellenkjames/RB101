@@ -123,12 +123,11 @@ def first_move(_brd)
 
   loop do
     prompt 'Who should go first 🤔 P (Player) or C (Computer)'
-    answer = gets.chomp.upcase
+    player_answer = gets.chomp.upcase
+    computer_answer = options.sample
 
-    computer_random = options.sample
-
-    current_player = 'Player' if answer || computer_random == 'P'
-    current_player = 'Computer' if computer_random == 'C'
+    current_player = 'Player' if answer || computer_answer == 'P'
+    current_player = 'Computer' if computer_answer == 'C'
 
     break if options.include?(answer)
 
