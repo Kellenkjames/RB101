@@ -126,10 +126,10 @@ def first_move(_brd)
     player_answer = gets.chomp.upcase
     computer_answer = options.sample
 
-    current_player = 'Player' if answer || computer_answer == 'P'
+    current_player = 'Player' if player_answer || computer_answer == 'P'
     current_player = 'Computer' if computer_answer == 'C'
 
-    break if options.include?(answer)
+    break if options.include?(player_answer)
 
     prompt 'Please select either P (Player) or C (Computer).'
   end
