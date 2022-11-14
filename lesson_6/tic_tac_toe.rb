@@ -117,23 +117,23 @@ def detect_winner(brd)
   nil
 end
 
-def first_move(_brd)
-  current_player = nil
+def current_player
   options = %w[P C]
-
   loop do
     prompt 'Who should go first 🤔 P (Player) or C (Computer)'
     player_answer = gets.chomp.upcase
     computer_answer = options.sample
 
-    current_player = 'Player' if player_answer || computer_answer == 'P'
-    current_player = 'Computer' if computer_answer == 'C'
+    return 'Player' if player_answer || computer_answer == 'P'
+    return 'Computer' if computer_answer == 'C'
 
     break if options.include?(player_answer)
 
-    prompt 'Please select either P (Player) or C (Computer).'
+    prompt 'Please select P (Player) or C (Computer).'
   end
+end
 
+def first_move(_brd)
   current_player
 end
 
