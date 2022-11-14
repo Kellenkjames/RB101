@@ -148,6 +148,20 @@ end
 player_score = 0
 computer_score = 0
 
+def player_reset
+  prompt 'Player Wins Game 🎉 🎉 🎉 🎉 🎉'
+end
+
+def computer_reset
+  prompt 'Computer Wins Game 🤖 🤖 🤖 🤖 🤖'
+end
+
+def display_game_scores
+  prompt "Player Score: #{player_score}"
+  prompt "Computer Score: #{computer_score}"
+  prompt 'Play again? (y or n)'
+end
+
 loop do
   board = initialize_board
   current_player = first_move(board)
@@ -161,26 +175,14 @@ loop do
 
   someone_won?(board) ? prompt("#{detect_winner(board)} Won!") : prompt("It's a Tie!")
 
-  if detect_winner(board) == 'Player'
-    player_score += 1
-  elsif detect_winner(board) == 'Computer'
-    computer_score += 1
-  end
+  player_score += 1 if detect_winner(board) == 'Player'
+  computer_score += 1 if detect_winner(board) == 'Computer'
 
-  prompt "Player Score: #{player_score}"
-  prompt "Computer Score: #{computer_score}"
+  display_game_scores(player_score, computer_score)
 
-  if player_score == 5
-    prompt 'Player Wins Game 🎉 🎉 🎉 🎉 🎉'
-    player_score = 0
-    computer_score = 0
-  elsif computer_score == 5
-    prompt 'Computer Wins Game 🤖 🤖 🤖 🤖 🤖'
-    player_score = 0
-    computer_score = 0
-  end
+  player_reset if player_score == 5
+  computer_reset if player_score == 5
 
-  prompt 'Play again? (y or n)'
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
