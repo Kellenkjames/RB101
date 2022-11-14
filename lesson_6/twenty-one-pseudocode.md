@@ -106,13 +106,143 @@ We'll be using a nested array, where each array element is itself a 2-element ar
 
 `For example, a hand that contains 2 of Hearts, Jack of Spades, and Ace of Diamonds could be represented as a nested array like this:`
 
+`Each sub array is a separate hand`
+
 [['H', '2'], ['S', 'J'], ['D', 'A']]
 
 Suites: Clubs, Diamonds, Hearts, and Spades
 
-**Ace**
+```ruby
+
+# Ace
 [ ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'] ]
 
-**2**
+# 2
 [ ['C', '2'], ['D', '2'], ['H', '2'], ['S', '2'] ]
+
+# 3
+[ ['C', '3'], ['D', '3'], ['H', '3'], ['S', '3'] ]
+
+# 4
+[ ['C', '4'], ['D', '4'], ['H', '4'], ['S', '4'] ]
+
+# 5
+[ ['C', '5'], ['D', '5'], ['H', '5'], ['S', '5'] ]
+
+# 6
+[ ['C', '6'], ['D', '6'], ['H', '6'], ['S', '6'] ]
+
+# 7
+[ ['C', '7'], ['D', '7'], ['H', '7'], ['S', '7'] ]
+
+# 8
+[ ['C', '8'], ['D', '8'], ['H', '8'], ['S', '8'] ]
+
+# 9
+[ ['C', '9'], ['D', '9'], ['H', '9'], ['S', '9'] ]
+
+# 10
+[ ['C', '10'], ['D', '10'], ['H', '10'], ['S', '10'] ]
+
+# Jack 
+[ ['C', 'J'], ['D', 'J'], ['H', 'J'], ['S', 'J'] ]
+
+# Queen 
+[ ['C', 'Q'], ['D', 'Q'], ['H', 'Q'], ['S', 'Q'] ]
+
+# King 
+[ ['C', 'K'], ['D', 'K'], ['H', 'K'], ['S', 'K'] ]
+
+```
+
+#-----------------------------------------------------------------------------------------------
+
+Tip Two:
+
+`Calculating Aces:` Remember that aces can be worth either 1 or 11, depending on the context. You should not ask the user what the value of the ace is; your program should be able to figure this out automatically.
+
+```ruby: 
+def total(cards)
+  # cards = [['H', '3'], ['S', 'Q'], ... ]
+  values = cards.map { |card| card[1] }
+
+  sum = 0
+  values.each do |value|
+    if value == "A"
+      sum += 11
+    elsif value.to_i == 0 # J, Q, K
+      sum += 10
+    else
+      sum += value.to_i
+    end
+  end
+
+  # correct for Aces
+  values.select { |value| value == "A" }.count.times do
+    sum -= 10 if sum > 21
+  end
+
+  sum
+end
+```
+
+#-----------------------------------------------------------------------------------------------
+
+Tip Three:
+
+`Player Turn`: When thinking about how to code up the player's turn, think about a loop that keeps asking the player to either "hit" or "stay". Now, think about the breaking condition for that loop. When do we stop asking that question to the user? Some pseudo-code may help.
+
+1. ask "hit" or "stay"
+2. if "stay", stop asking 
+3. otherwise, go to #1
+
+That seems pretty straight forward. Let's code it up:
+
+```ruby: 
+loop do
+  puts "hit or stay?"
+  answer = gets.chomp
+  break if answer == 'stay'
+end
+```
+
+Notice that because we want to ask the user the question at least once, the break happens at the bottom of the loop. If the user chose anything other than "stay", then the loop continues. Can you think of another condition that can cause the loop to break?
+
+`What about if the user keeps hitting, and the player busts? We'd have to adjust our break condition:`
+
+```ruby 
+
+loop do
+  puts "hit or stay?"
+  answer = gets.chomp
+  break if answer = 'stay' || busted? # the busted? method is not shown
+end
+
+```
+
+`This means that the user can only exit the loop if one of those two things happen: either the player stays or the player busts. This means that after the loop, we can then handle those two conditions:`
+
+```ruby 
+
+answer = nil
+loop do
+  puts "hit or stay?"
+  answer = gets.chomp
+  break if answer == 'stay' || busted? # the busted? method is not shown
+end
+
+if busted?
+  # probably end the game? or ask the user to play again?
+else
+  puts "You chose to stay!" # if player didn't bust, must have stayed to get here
+end
+
+# ... continue on to Dealer turn 
+
+```
+
+
+
+
+
 
