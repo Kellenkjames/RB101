@@ -42,7 +42,7 @@ def prompt(msg)
 end
 
 def initialize_deck
-  new_arr.shuffle.map do |value|
+  CARDS.shuffle.map do |value|
     value[1]
   end
 end
