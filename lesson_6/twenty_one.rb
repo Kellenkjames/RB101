@@ -17,7 +17,7 @@ High Level Pseudocode:
 
 =end
 
-BUST = 21
+TARGET = 21
 
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
@@ -45,6 +45,19 @@ def initialize_deck
   end
 end
 
-def deal_player(deck)
+# Player turn: the player goes first, and can decide to either "hit" or "stay". A hit means the player will ask for another card. Remember that if the total exceeds 21, then the player "busts" and loses.
+def player_turn
+  arr = []
+  counter = 0 
+  loop do 
+    arr << initialize_deck[1]
+    counter += 1
+    break if counter == 2
+  end 
+  arr
+  prompt "You have: #{arr[0]} and #{arr[1]}"
+end 
 
+def hit_me
+  
 end 
