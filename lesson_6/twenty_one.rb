@@ -55,8 +55,10 @@ def player_turn(cards)
   loop do
     prompt "hit or stay?"
     answer = gets.chomp.upcase
+    
     player_cards << initialize_deck[1]
     prompt "Dealer wins" if total(player_cards) > BUST
+    
     break if answer == 'S'
   end
   
