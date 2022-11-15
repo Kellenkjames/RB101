@@ -13,11 +13,13 @@ If you've never played blackjack before, don't worry, our Twenty-One game is ver
 
 * The `goal` of Twenty-One is to try to get as close to 21 as possible, without going over. If you go over 21, it's a "bust" and you lose.
 
-* `Setup`: the game consists of a "dealer" and a "player". Both participants are initially dealt 2 cards. The player can see their 2 cards, but can only see one of the dealer's cards.
+* `Setup`: the game consists of a "dealer" and a "player". `Both participants are initially dealt 2 cards.` The player can see their 2 cards, but can only see one of the dealer's cards.
 
-* `Card Values`: all of the card values are pretty straightforward, except for the ace. The numbers 2 through 10 are worth their face value. The jack, queen, and king are each worth 10, and the ace can be worth 1 or 11. 
-  
-* The ace's value is determined *each time* a new card is drawn from the deck. For example, if the hand contains a 2, an ace, and a 5, then the total value of the hand is 18. In this case, the ace is worth 11 because the sum of the hand (2 + 11 + 5) doesn't exceed 21. 
+* `Card Values`: all of the card values are pretty straightforward, except for the ace. The numbers 2 through 10 are worth their face value. The jack, queen, and king are each worth 10, and `the ace can be worth 1 or 11`. 
+
+* An Ace will have a value of `11` **unless** that would give a player or the dealer a score in excess of `21`; in which case, it has a value of `1`.
+
+* The ace's value is determined *each time* a new card is drawn from the deck. For example, if the hand contains a 2, an ace, and a 5, then the total value of the hand is 18. In this case, the ace is worth 11 because the sum of the hand (2 + 11 + 5) doesn't exceed 21.
 
 * Now, say another card is drawn and it happens to be an ace. Your program will have to determine the value of both aces. `If the sum of the hand (2 + 11 + 5 + 11) exceeds 21 then one of the aces must be worth 1, resulting in the hand's total value being 19`. What happens if another card is drawn and it also happens to be an ace? It can get tricky if there are multiple aces in a hand, so your program must account for that.
 
@@ -27,8 +29,8 @@ If you've never played blackjack before, don't worry, our Twenty-One game is ver
 
 * `Player Turn:` 
   * The player goes first, and can decide to either "hit" or "stay". 
-  * A hit means the player will ask for another card--remember that if the total exceeds 21, then the player "busts" and loses.
-  * The decision to hit or stay will depend on what the player's cards are and what the player thinks the dealer has.
+  * A hit means the player will ask for another card--remember that if the total exceeds `21`, then the player "busts" and loses.
+  * The decision to hit or stay will depend on what the player's cards are and what the player `thinks` the dealer has.
   * For example, if the dealer is showing a "10" (the other card is hidden), and the player has a "2" and a "4", then the obvious choice is for the player to "hit".
   * The player can continue to hit as many times as they want. The turn is over when the player either busts or stays. If the player busts, the game is over and the dealer won.
 
@@ -50,6 +52,10 @@ You have: 2 and 8
 
 `You should "hit" in this scenario. You see the dealer has an "Ace", which means the dealer has a high probability of having a 21, the optimal number. On top of that, your total of 10 can only benefit from an extra card, as there's no way you can bust.`
 
+On the first hand, we can assume the Ace is worth `11` and the unknown card could be anything from 2-10. 
+
+You have: 2 and 8 (therefore, it would be wise to "hit").
+
 #-----------------------------------------------------------------------------------------------
 
 Example 2):
@@ -58,6 +64,8 @@ Dealer has: 7 and unknown card
 You have: 10 and 7
 
 `You should "stay" here, because chances are good that the unknown card is not an Ace, which is the only situation where you can lose. Most likely, you're going to win with 17, or tie. There's a very small chance you will lose.`
+
+You typically want to stop hitting around `16` or `17`
 
 #-----------------------------------------------------------------------------------------------
 
@@ -76,7 +84,7 @@ Hopefully that gives you an idea of how fun and tricky this game can be, despite
 
 **Implementation Steps:**
 
-The very high level steps of implementing Twenty-One appear to be pretty straightforward. Here's a stab at some high level pseudo code:
+**The very high level steps of implementing Twenty-One appear to be pretty straightforward. Here's a stab at some high level pseudo code:
 
 1. Initialize Deck
 2. Deal cards to `player` and `dealer`
@@ -86,7 +94,7 @@ The very high level steps of implementing Twenty-One appear to be pretty straigh
 5. Dealer turn: hit or stay
    1. repeat until total >= 17
 6. If dealer bust, player wins. 
-7. Compare cards and declare winner. 
+7. Compare cards and declare winner. **
 
 There are some tricky parts in coming up with the looping constructs, but that seems to be a decent high level flow.
 
@@ -94,7 +102,7 @@ There are some tricky parts in coming up with the looping constructs, but that s
 
 **Tips on Getting Started**
 
-Tip One
+Tip One:
 
 Figure out a data structure to contain the `deck` and the `player's cards` and `dealer's cards`. Maybe a hash? An array? A nested array?
 
@@ -199,11 +207,13 @@ Tip Three:
 That seems pretty straight forward. Let's code it up:
 
 ```ruby: 
+
 loop do
   puts "hit or stay?"
   answer = gets.chomp
   break if answer == 'stay'
 end
+
 ```
 
 Notice that because we want to ask the user the question at least once, the break happens at the bottom of the loop. If the user chose anything other than "stay", then the loop continues. Can you think of another condition that can cause the loop to break?
@@ -241,6 +251,19 @@ end
 
 ```
 
+#-----------------------------------------------------------------------------------------------
+
+Tip Four: 
+
+`Dealer Turn`: The dealer turn will follow a very similar pattern as the player turn. Except: the dealer's break condition will occur at the top of the "hit or stay" loop. See if you can figure out why that is.
+
+#-----------------------------------------------------------------------------------------------
+
+Tip Five: 
+
+When you display the results, you also need to perform the calculation of who won. Having one method that does both the calculation and the display to the output makes it hard to reason about. 
+
+The trick is to create a method that only returns the result of the game, and another that only handles displaying the result. `You want to write methods that only do one thing.`
 
 
 
