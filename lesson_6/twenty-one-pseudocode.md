@@ -94,7 +94,7 @@ Hopefully that gives you an idea of how fun and tricky this game can be, despite
 5. Dealer turn: hit or stay
    1. repeat until total >= 17
 6. If dealer bust, player wins. 
-7. Compare cards and declare winner. **
+7. Compare cards and declare winner. 
 
 There are some tricky parts in coming up with the looping constructs, but that seems to be a decent high level flow.
 
@@ -104,7 +104,7 @@ There are some tricky parts in coming up with the looping constructs, but that s
 
 Tip One:
 
-Figure out a data structure to contain the `deck` and the `player's cards` and `dealer's cards`. Maybe a hash? An array? A nested array?
+Figure out a data structure to contain the `deck` and the `player's cards` and `dealer's **cards**`. Maybe a hash? An array? A nested array?
 
 Your decision will have consequences throughout your code, but don't be afraid of choosing the wrong one. Play around with an idea, and see how far you can push it. If it doesn't work, back out of it. 
  
