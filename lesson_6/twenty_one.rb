@@ -17,6 +17,8 @@ High Level Pseudocode:
 
 =end
 
+BUST = 21
+
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
   ['C', '2'], ['D', '2'], ['H', '2'], ['S', '2'],
@@ -33,10 +35,16 @@ CARDS = [
   ['C', 'K'], ['D', 'K'], ['H', 'K'], ['S', 'K']
 ]
 
+def prompt(msg)
+  puts "=> #{msg}"
+end
+
 def initialize_deck
   CARDS.shuffle.map do |value|
     value[1]
   end
 end
 
-p initialize_deck
+def deal_player(deck)
+
+end 
