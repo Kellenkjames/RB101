@@ -49,9 +49,20 @@ end
 
 def player_turn
   player_cards = []
+  
   2.times { |arr| player_cards << initialize_deck[1]}
   player_cards
   prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
+  
+  loop do
+    prompt "hit or stay?"
+    answer = gets.chomp.upcase
+    # call hit method
+    
+    break if answer == 'S'
+  end 
+  
 end
 
 player_turn
+
