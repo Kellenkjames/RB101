@@ -21,7 +21,7 @@ CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
   ['C', '2'], ['D', '2'], ['H', '2'], ['S', '2'],
   ['C', '3'], ['D', '3'], ['H', '3'], ['S', '3'], 
-  ['C', '4'], ['D', '4'], ['H', '4'], ['S', '4'], 
+  ['C', '4'], ['D', '4'], ['H', '4'], ['S', '4'],
   ['C', '5'], ['D', '5'], ['H', '5'], ['S', '5'],
   ['C', '6'], ['D', '6'], ['H', '6'], ['S', '6'],
   ['C', '7'], ['D', '7'], ['H', '7'], ['S', '7'],
@@ -34,10 +34,8 @@ CARDS = [
 ]
 
 def initialize_deck
-  CARDS.shuffle.map do |suite|
-    suite.shuffle.map do |value|
-      value
-    end
+  CARDS.shuffle.map do |value|
+    value[1]
   end
 end
 
