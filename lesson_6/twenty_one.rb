@@ -80,10 +80,33 @@ def total(cards)
   end
 
   # correct for Aces 
-  values.select { |value| value == "A" }.count.times do 
-    sum -= 10 if sum > 21 
+  values.select { |value| value == "A" }.count.times do
+    sum -= 10 if sum > 21
   end
 
-  sum 
+  sum
 end
+
+=begin
+
+How the total method works:
+
+1. We are going to map over the values and return a new arr (values only), i.e., 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' .
+
+2. Create a local sum variable and set equal to zero.
+
+3. If value is an "Ace", add 11 to the sum.
+
+4. Elsif value is the other letters, i.e., 'J', 'Q', or 'K', we add 10 to the sum.
+
+5. Else, just convert the string values to integer and add the sum.
+
+#* If the sum is > 21 while we have "aces" in our deck -- we want to subtract "10" for each ace (this will make the value of the ace "1" instead of "11")
+
+#* If we don't have aces in our deck, then the player or dealer can bust if they exceed the value of 21. 
+
+Example) [10, 8, A].sum 
+(10 + 8 + 11) - 10 = 19
+
+=end
 
