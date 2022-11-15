@@ -45,41 +45,45 @@ def initialize_deck
   CARDS.shuffle
 end
 
-p initialize_deck
-
-# def player_turn(cards)
-#   player_cards = []
+def player_turn(cards)
+  player_cards = []
   
-#   2.times { |arr| player_cards << initialize_deck[1]}
-#   player_cards
-#   prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
+  2.times { |arr| player_cards << initialize_deck[1] }
+  player_cards
+  prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
   
-#   loop do
-#     prompt "hit or stay?"
-#     answer = gets.chomp.upcase
-#     # call hit method
+  loop do
+    prompt "hit or stay?"
+    answer = gets.chomp.upcase
+    # call hit method
     
-#     break if answer == 'S'
-#   end 
+    break if answer == 'S'
+  end 
   
-# end
+end
 
-# player_turn(CARDS)
+player_turn(CARDS)
 
-# def total(cards)
-#   # cards = [['H', '3'],  ['S', 'Q'], ... ]
-#   values = cards.map { |card| card[1 ] }
+def total(cards)
+  # cards = [['H', '3'], ['S', 'Q'], ... ]
+  values = cards.map { |card| card[1] }
 
-#   sum = 0
-#   values.each do |value|
-#     if value == "A"
-#       sum += 11
-#     elsif value.to_i == 0 # J, Q, K
-#       sum += 10
-#     else
-#       sum += value.to_i
-#     end
-#   end
+  sum = 0
+  values.each do |value|
+    if value == "A"
+      sum += 11
+    elsif value.to_i == 0 # J, Q, K
+      sum += 10
+    else
+      sum += value.to_i
+    end
+  end
 
-# end
+  # correct for Aces 
+  values.select { |value| value == "A" }.count.times do 
+    sum -= 10 if sum > 21 
+  end
+
+  sum 
+end
 
