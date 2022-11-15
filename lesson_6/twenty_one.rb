@@ -19,7 +19,7 @@ High Level Pseudocode:
 
 =end
 
-TARGET = 21
+BUST = 21
 
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
@@ -55,14 +55,12 @@ def player_turn(cards)
   loop do
     prompt "hit or stay?"
     answer = gets.chomp.upcase
-    # call hit method
-    
+    player_cards << initialize_deck[1]
+    prompt "Dealer wins" if total(player_cards) > BUST
     break if answer == 'S'
-  end 
+  end
   
 end
-
-player_turn(CARDS)
 
 def total(cards)
   # cards = [['H', '3'], ['S', 'Q'], ... ]
