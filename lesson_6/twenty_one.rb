@@ -45,6 +45,7 @@ def word_modifier(cards)
     values << 'King' if card == 'K'
     values << 'Jack' if card == 'J'
   end
+  values
 end
 
 def prompt(msg)
