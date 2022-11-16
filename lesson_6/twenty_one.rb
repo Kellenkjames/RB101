@@ -47,22 +47,25 @@ end
 
 def player_turn(cards)
   player_cards = []
+  values = cards.map { |card| card[1] } # => returns a new array with just the values. 
   
-  2.times { |arr| player_cards << initialize_deck[1] }
-  player_cards
+  # Draw two cards from the array
+  player_cards = values.sample(2)
   prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
   
-  loop do
-    prompt "hit or stay?"
-    answer = gets.chomp.upcase
+  # loop do
+  #   prompt "hit or stay?"
+  #   answer = gets.chomp.upcase
     
-    player_cards << initialize_deck[1]
-    prompt "Dealer wins" if total(player_cards) > BUST
+  #   player_cards << initialize_deck[1]
+  #   prompt "Dealer wins" if total(player_cards) > BUST
     
-    break if answer == 'S'
-  end
+  #   break if answer == 'S'
+  # end
   
 end
+
+player_turn(initialize_deck)
 
 def total(cards)
   # cards = [['H', '3'], ['S', 'Q'], ... ]
