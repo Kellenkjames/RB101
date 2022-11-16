@@ -40,11 +40,18 @@ CARDS = [
 def word_modifier(cards)
   values = []
   cards.map do |card|
-    values << 'Ace' if card == 'A'
-    values << 'Queen' if card == 'Q'
-    values << 'King' if card == 'K'
-    values << 'Jack' if card == 'J'
-  end
+    if card == 'A'
+      values << 'Ace'
+    elsif card == 'Q'
+      values << 'Queen'
+    elsif card == 'K'
+      values << 'King'
+    elsif card == 'J'
+      values << 'Jack'
+    else
+    values << card
+    end 
+  end 
   values
 end
 
@@ -58,12 +65,11 @@ end
 
 def player_turn(cards)
   player_cards = []
-  values = cards.map { |card| card[1] } 
+  values = cards.map { |card| card[1] }
   
   player_cards = values.sample(2)
-  # p player_cards
-  # p word_modifier(player_cards)
-  # prompt "You have: #{word_modifier(player_cards)[0]} and #{word_modifier(player_cards)[1]}"
+  p player_cards
+  p word_modifier(player_cards)
   
   # loop do
   #   prompt "hit or stay?"
