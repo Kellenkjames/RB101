@@ -19,8 +19,6 @@ High Level Pseudocode:
 
 =end
 
-BUST = 21
-
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
   ['C', '2'], ['D', '2'], ['H', '2'], ['S', '2'],
@@ -37,7 +35,7 @@ CARDS = [
   ['C', 'K'], ['D', 'K'], ['H', 'K'], ['S', 'K']
 ]
 
-def word_modifier(cards)
+def deck_modifier(cards)
   values = []
   cards.map do |card|
     case card
@@ -64,35 +62,13 @@ def initialize_deck
   CARDS.shuffle
 end
 
-def player_turn(cards)
-  player_cards = []
-  values = cards.map { |card| card[1] }
-  
-  player_cards = values.sample(2)
-  p player_cards
-  p word_modifier(player_cards)
-  
-  # loop do
-  #   prompt "hit or stay?"
-  #   answer = gets.chomp.upcase
-    
-  #   player_cards << initialize_deck[1]
-  #   prompt "Dealer wins" if total(player_cards) > BUST
-    
-  #   break if answer == 'S'
-  # end
-  
-end
-
-player_turn(initialize_deck)
-
 def total(cards)
   # cards = [['H', '3'], ['S', 'Q'], ... ]
-  values = cards.map { |card| card[1] }
+  values = cards.map { |card| card }
 
   sum = 0
   values.each do |value|
-    if value == "A"
+    if value == "Ace"
       sum += 11
     elsif value.to_i == 0 # J, Q, K
       sum += 10
@@ -101,13 +77,51 @@ def total(cards)
     end
   end
 
-  # correct for Aces 
-  values.select { |value| value == "A" }.count.times do
+  # correct for Aces
+  values.select { |value| value == "Ace" }.count.times do
     sum -= 10 if sum > 21
   end
 
   sum
 end
+
+def handle_join(cards, word="and")
+  if cards.size == 2
+    cards.insert(-2, word).join(' ')
+  elsif cards.size > 2
+    cards.insert(-2, word).join(', ')
+  end
+end
+
+def player_turn(cards)
+  player_cards = []
+  values = cards.map { |card| card[1] }
+  
+  player_cards = values.sample(2)
+  p handle_join(deck_modifier(player_cards))
+  prompt "You have: #{handle_join(deck_modifier(player_cards))}"
+  
+  loop do
+    prompt "hit or stay? Enter h (hit) or s (stay)."
+    answer = gets.chomp.upcase
+    
+    # If player "hits" -- draw another card from the deck and adds to player_cards array.
+    player_cards << values.sample(1).join(',')
+    # p player_cards
+
+    # Calculate Total
+    # prompt "You have: #{deck_modifier(player_cards[0])}, #{deck_modifier(player_cards[1])}, and #{deck_modifier(player_cards[2])}"
+    if total(player_cards) > 21
+      prompt "You busted!"
+      break
+    end
+    
+    break if answer == 'S'
+  end
+  
+end
+
+player_turn(initialize_deck)
 
 =begin
 
