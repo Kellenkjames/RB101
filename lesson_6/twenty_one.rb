@@ -40,16 +40,17 @@ CARDS = [
 def word_modifier(cards)
   values = []
   cards.map do |card|
-    if card == 'A'
+    case card
+    when 'A'
       values << 'Ace'
-    elsif card == 'Q'
+    when 'Q'
       values << 'Queen'
-    elsif card == 'K'
+    when 'K'
       values << 'King'
-    elsif card == 'J'
+    when 'J'
       values << 'Jack'
     else
-    values << card
+      values << card 
     end 
   end 
   values
