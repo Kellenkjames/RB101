@@ -85,43 +85,48 @@ def total(cards)
   sum
 end
 
-def handle_join(cards, word="and")
+def handle_join(cards, delimeter=',', word="and")
   if cards.size == 2
     cards.insert(-2, word).join(' ')
   elsif cards.size > 2
-    cards.insert(-2, word).join(', ')
-  end
-end
-
-def player_turn(cards)
-  player_cards = []
-  values = cards.map { |card| card[1] }
-  
-  player_cards = values.sample(2)
-  p handle_join(deck_modifier(player_cards))
-  prompt "You have: #{handle_join(deck_modifier(player_cards))}"
-  
-  loop do
-    prompt "hit or stay? Enter h (hit) or s (stay)."
-    answer = gets.chomp.upcase
-    
-    # If player "hits" -- draw another card from the deck and adds to player_cards array.
-    player_cards << values.sample(1).join(',')
-    # p player_cards
-
-    # Calculate Total
-    # prompt "You have: #{deck_modifier(player_cards[0])}, #{deck_modifier(player_cards[1])}, and #{deck_modifier(player_cards[2])}"
-    if total(player_cards) > 21
-      prompt "You busted!"
-      break
+    cards.insert(-2, word).map do |value|
+      value << delimeter unless value == word || value == cards.last
     end
-    
-    break if answer == 'S'
+    cards.join(' ')
   end
-  
 end
 
-player_turn(initialize_deck)
+p handle_join(['6', '2'])
+p handle_join(['6', '2', '4'])
+p handle_join(['6', '2', 'Ace', '3', '4'])
+
+# def player_turn(cards)
+#   player_cards = []
+#   values = cards.map { |card| card[1] }
+  
+#   player_cards = values.sample(2)
+#   prompt "You have: #{handle_join(deck_modifier(player_cards))}"
+  
+#   loop do
+#     prompt "hit or stay? Enter h (hit) or s (stay)."
+#     answer = gets.chomp.upcase
+    
+#     # If player "hits" -- draw another card from the deck and adds to player_cards array.
+#     player_cards << values.sample(1).join(',')
+#     prompt "You have: #{handle_join(deck_modifier(player_cards))}"
+
+#     # Calculate Total
+#     if total(player_cards) > 21
+#       prompt "You busted!"
+#       break
+#     end
+    
+#     break if answer == 'S'
+#   end
+  
+# end
+
+# player_turn(initialize_deck)
 
 =begin
 
