@@ -7,8 +7,8 @@ require "pry"
 
 High Level Pseudocode: 
 
-1. Initialize Deck
-2. Deal cards to `player` and `dealer`
+1. Initialize Deck [DONE]
+2. Deal cards to `player` and `dealer` 
 3. Player turn: hit or stay
   1. repeat until bust or "stay"
 4. If player bust, dealer wins. 
@@ -64,6 +64,7 @@ def initialize_deck
   CARDS.shuffle
 end
 
+# Calculating Aces
 def total(cards)
   # cards = [['H', '3'], ['S', 'Q'], ... ]
   values = cards.map { |card| card }
@@ -112,7 +113,7 @@ def player_turn(cards)
       player_cards << values.sample(1).join(' ')
       prompt "You have: #{handle_join(deck_modifier(player_cards))}"
       if total(player_cards) > TWENTY_ONE
-        prompt 'You busted!'
+        prompt 'Player Bust!'
         break
       end
     elsif answer == 'S'
