@@ -19,6 +19,8 @@ High Level Pseudocode:
 
 =end
 
+TWENTY_ONE = 21
+
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
   ['C', '2'], ['D', '2'], ['H', '2'], ['S', '2'],
@@ -95,32 +97,32 @@ def handle_join(cards, delimeter=',', word="and")
   end
 end
 
-# def player_turn(cards)
-#   player_cards = []
-#   values = cards.map { |card| card[1] }
+def player_turn(cards)
+  player_cards = []
+  values = cards.map { |card| card[1] }
   
-#   player_cards = values.sample(2)
-#   prompt "You have: #{handle_join(deck_modifier(player_cards))}"
+  player_cards = values.sample(2)
+  prompt "You have: #{handle_join(deck_modifier(player_cards))}"
   
-#   loop do
-#     prompt "hit or stay? Enter h (hit) or s (stay)."
-#     answer = gets.chomp.upcase
+  loop do
+    prompt "hit or stay? Enter h (hit) or s (stay)."
+    answer = gets.chomp.upcase
     
-#     # If player "hits" -- draw another card from the deck and adds to player_cards array.
-#     player_cards << values.sample(1).join(' ')
-#     prompt "You have: #{handle_join(deck_modifier(player_cards))}"
+    # If player "hits" -- draw another card from the deck and adds to player_cards array.
+    player_cards << values.sample(1).join(' ')
+    prompt "You have: #{handle_join(deck_modifier(player_cards))}"
 
-#     # Calculate Total
-#     if total(player_cards) > 21
-#       prompt "You busted!"
-#       break
-#     end
+    # Calculate Total
+    if total(player_cards) > TWENTY_ONE
+      prompt "You busted!"
+      break
+    end
     
-#     break if answer == 'S'
-#   end
-# end
+    break if answer == 'S'
+  end
+end
 
-# player_turn(initialize_deck)
+player_turn(initialize_deck)
 
 =begin
 
