@@ -89,16 +89,11 @@ def handle_join(cards, delimeter=',', word="and")
   if cards.size == 2
     cards.insert(-2, word).join(' ')
   elsif cards.size > 2
-    cards.insert(-2, word).map do |value|
-      value << delimeter unless value == word || value == cards.last
-    end
-    cards.join(' ')
+    values = cards.insert(-2, word).join(', ')
+    values.slice!((values.index(word) + 3)) # removes trailing delimeter after word, i.e., "2, 10, and Ace"
+    values
   end
 end
-
-p handle_join(['6', '2'])
-p handle_join(['6', '2', '4'])
-p handle_join(['6', '2', 'Ace', '3', '4'])
 
 # def player_turn(cards)
 #   player_cards = []
@@ -112,7 +107,7 @@ p handle_join(['6', '2', 'Ace', '3', '4'])
 #     answer = gets.chomp.upcase
     
 #     # If player "hits" -- draw another card from the deck and adds to player_cards array.
-#     player_cards << values.sample(1).join(',')
+#     player_cards << values.sample(1).join(' ')
 #     prompt "You have: #{handle_join(deck_modifier(player_cards))}"
 
 #     # Calculate Total
@@ -123,7 +118,6 @@ p handle_join(['6', '2', 'Ace', '3', '4'])
     
 #     break if answer == 'S'
 #   end
-  
 # end
 
 # player_turn(initialize_deck)
