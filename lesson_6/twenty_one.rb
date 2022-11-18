@@ -111,7 +111,10 @@ def player_turn(cards)
     if answer == 'H'
       player_cards << values.sample(1).join(' ')
       prompt "You have: #{handle_join(deck_modifier(player_cards))}"
-      prompt 'You busted!' if total(player_cards) > TWENTY_ONE
+      if total(player_cards) > TWENTY_ONE
+        prompt 'You busted!'
+        break
+      end
     elsif answer == 'S'
       break
     else
