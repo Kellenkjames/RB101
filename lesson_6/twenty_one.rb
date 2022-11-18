@@ -103,23 +103,22 @@ def player_turn(cards)
   
   player_cards = values.sample(2)
   prompt "You have: #{handle_join(deck_modifier(player_cards))}"
-  
+
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)."
     answer = gets.chomp.upcase
-    
-    # If player "hits" -- draw another card from the deck and adds to player_cards array.
-    player_cards << values.sample(1).join(' ')
-    prompt "You have: #{handle_join(deck_modifier(player_cards))}"
 
-    # Calculate Total
-    if total(player_cards) > TWENTY_ONE
-      prompt "You busted!"
+    if answer == 'H'
+      player_cards << values.sample(1).join(' ')
+      prompt "You have: #{handle_join(deck_modifier(player_cards))}"
+      prompt 'You busted!' if total(player_cards) > TWENTY_ONE
+    elsif answer == 'S'
       break
+    else
+      prompt "Please select valid choice:"
     end
-    
-    break if answer == 'S'
   end
+
 end
 
 player_turn(initialize_deck)
