@@ -119,7 +119,7 @@ def player_turn(cards)
     break if answer == 'S' || busted?(player_cards)
   end
 
-  prompt "Player Bust!" if busted?(player_cards)
+  prompt "Player Bust! Dealer Wins." if busted?(player_cards)
 end
 
 player_turn(initialize_deck)
