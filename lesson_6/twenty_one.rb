@@ -18,7 +18,8 @@ High Level Pseudocode:
 
 =end
 
-TWENTY_ONE = 21
+PLAYER_MAX = 21
+DEALER_MAX = 17
 
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
@@ -98,7 +99,7 @@ def handle_join(cards, delimeter=',', word="and")
 end
 
 def busted?(cards)
-  total(cards) > TWENTY_ONE
+  total(cards) > PLAYER_MAX
 end
 
 def play_again?(cards)
