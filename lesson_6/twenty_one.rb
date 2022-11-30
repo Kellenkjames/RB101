@@ -126,7 +126,7 @@ def player_turn(cards)
   prompt "You have: #{handle_join(deck_modifier(player_cards))}"
 
   loop do
-    prompt "hit or stay? Enter h (hit) or s (stay)."
+    prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.upcase
 
     if answer == 'H'
@@ -152,10 +152,20 @@ def dealer_turn(cards)
   dealer_cards = values.sample(2)
   prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))[0]} and unknown card"
 
-end 
+  loop do
+    # Break condition will occur at the top of the loop because it's more likely we will hit "17" on the first try - therefore, we should be checking for this first.
+    break if total(dealer_cards) >= DEALER_MAX
+    
+    if total(dealer_cards) < DEALER_MAX
+      dealer_cards << values.sample(1).join(' ')
+      prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))}"
+    end
+
+  end
+end
 
 dealer_turn(initialize_deck)
-player_turn(initialize_deck)
+# player_turn(initialize_deck)
 
 =begin
 
