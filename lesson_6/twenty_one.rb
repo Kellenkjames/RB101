@@ -122,7 +122,7 @@ def player_turn(cards)
   player_cards = []
   values = cards.map { |card| card[1] }
   
-  player_cards = values.sample(2) # Player gets drawn 2 cards.
+  player_cards = values.sample(2) 
   prompt "You have: #{handle_join(deck_modifier(player_cards))}"
 
   loop do
@@ -145,6 +145,16 @@ def player_turn(cards)
 
 end
 
+def dealer_turn(cards)
+  dealer_cards = []
+  values = cards.map { |card| card[1] }
+
+  dealer_cards = values.sample(2)
+  prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))[0]} and unknown card"
+
+end 
+
+dealer_turn(initialize_deck)
 player_turn(initialize_deck)
 
 =begin
