@@ -111,11 +111,11 @@ end
 
 def game_reset(cards)
   loop do
-    if busted?(cards)
-      prompt "Do you want to play again? y (yes) or n (no)."
-      answer = gets.chomp.upcase
-      answer == 'Y' ? player_turn(initialize_deck) : break
-    end
+    prompt "Do you want to play again? y (yes) or n (no)."
+    answer = gets.chomp.upcase
+    
+    player_turn(initialize_deck) if answer == 'Y'
+    break if answer == 'N'
   end
   prompt "Thanks for Playing Twenty-One. Goodbye."
 end
