@@ -1,4 +1,3 @@
-
 require "pry"
 
 #* Assignment: Twenty-One
@@ -98,11 +97,15 @@ def handle_join(cards, delimeter=',', word="and")
   end
 end
 
+def busted?(cards)
+  total(cards) > TWENTY_ONE
+end
+
 def player_turn(cards)
   player_cards = []
   values = cards.map { |card| card[1] }
   
-  player_cards = values.sample(2)
+  player_cards = values.sample(2) # Player gets drawn two cards. 
   prompt "You have: #{handle_join(deck_modifier(player_cards))}"
 
   loop do
@@ -112,10 +115,7 @@ def player_turn(cards)
     if answer == 'H'
       player_cards << values.sample(1).join(' ')
       prompt "You have: #{handle_join(deck_modifier(player_cards))}"
-      if total(player_cards) > TWENTY_ONE
-        prompt 'Player Bust!'
-        break
-      end
+      break if busted?(player_cards)
     elsif answer == 'S'
       break
     else
@@ -123,6 +123,7 @@ def player_turn(cards)
     end
   end
 
+  prompt "Player Bust!"
 end
 
 player_turn(initialize_deck)
