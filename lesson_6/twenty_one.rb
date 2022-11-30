@@ -105,7 +105,7 @@ def player_turn(cards)
   player_cards = []
   values = cards.map { |card| card[1] }
   
-  player_cards = values.sample(2) # Player gets drawn two cards. 
+  player_cards = values.sample(2) # Player gets drawn 2 cards.
   prompt "You have: #{handle_join(deck_modifier(player_cards))}"
 
   loop do
@@ -115,15 +115,11 @@ def player_turn(cards)
     if answer == 'H'
       player_cards << values.sample(1).join(' ')
       prompt "You have: #{handle_join(deck_modifier(player_cards))}"
-      break if busted?(player_cards)
-    elsif answer == 'S'
-      break
-    else
-      prompt "Please select valid choice:"
     end
+    break if answer == 'S' || busted?(player_cards)
   end
 
-  prompt "Player Bust!"
+  prompt "Player Bust!" if busted?(player_cards)
 end
 
 player_turn(initialize_deck)
