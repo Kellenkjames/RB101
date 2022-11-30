@@ -101,23 +101,20 @@ def busted?(cards)
   total(cards) > TWENTY_ONE
 end
 
-def game_results(cards)
-  if busted?(cards)
-    prompt "Player Busts! Dealer Wins."
-  else
-    prompt "You Chose To Stay."
-  end
-end
-
-def game_reset(cards)
+def play_again?(cards)
+  answer = nil
   loop do
     prompt "Do you want to play again? y (yes) or n (no)."
     answer = gets.chomp.upcase
     
-    player_turn(initialize_deck) if answer == 'Y'
-    break if answer == 'N'
+    if answer == 'Y'
+      player_turn(initialize_deck)
+      break
+    else
+      prompt "Thanks for Playing Twenty-One. Goodbye!"
+      break
+    end
   end
-  prompt "Thanks for Playing Twenty-One. Goodbye."
 end
 
 def player_turn(cards)
@@ -137,9 +134,14 @@ def player_turn(cards)
     end
     break if answer == 'S' || busted?(player_cards)
   end
+  
+  if busted?(player_cards)
+    prompt "Player Bust! Dealer Wins."
+    play_again?(player_cards)
+  else
+    prompt "You Chose to Stay!"
+  end
 
-  game_results(player_cards)
-  game_reset(player_cards)
 end
 
 player_turn(initialize_deck)
