@@ -109,6 +109,7 @@ def game_reset?(cards)
       answer == 'Y' ? player_turn(initialize_deck) : break
     end
   end
+  prompt "Thanks for Playing Twenty-One. Goodbye."
 end
 
 def player_turn(cards)
