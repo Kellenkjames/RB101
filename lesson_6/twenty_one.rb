@@ -101,6 +101,14 @@ def busted?(cards)
   total(cards) > TWENTY_ONE
 end
 
+def game_results(cards)
+  if busted?(cards)
+    prompt "Player Busts! Dealer Wins."
+  else
+    prompt "You Chose To Stay."
+  end
+end
+
 def game_reset(cards)
   loop do
     if busted?(cards)
@@ -110,14 +118,6 @@ def game_reset(cards)
     end
   end
   prompt "Thanks for Playing Twenty-One. Goodbye."
-end
-
-def game_results(cards)
-  if busted?(cards)
-    prompt "Player Busts! Dealer Wins."
-  else
-    prompt "You Chose To Stay."
-  end
 end
 
 def player_turn(cards)
