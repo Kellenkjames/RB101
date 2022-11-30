@@ -101,6 +101,16 @@ def busted?(cards)
   total(cards) > TWENTY_ONE
 end
 
+def game_reset?(cards)
+  loop do
+    if busted?(cards)
+      prompt "Do you want to play again? y (yes) or n (no)."
+      answer = gets.chomp.upcase
+      answer == 'Y' ? player_turn(initialize_deck) : break
+    end
+  end
+end
+
 def player_turn(cards)
   player_cards = []
   values = cards.map { |card| card[1] }
@@ -119,7 +129,13 @@ def player_turn(cards)
     break if answer == 'S' || busted?(player_cards)
   end
 
-  prompt "Player Bust! Dealer Wins." if busted?(player_cards)
+  if busted?(player_cards)
+    prompt "Player Busts! Dealer Wins."
+  else
+    prompt "You Chose To Stay."
+  end
+  
+  game_reset?(player_cards)
 end
 
 player_turn(initialize_deck)
