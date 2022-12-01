@@ -119,19 +119,17 @@ def dealer_turn(cards)
   dealer_cards = values.sample(2)
   prompt "Dealer has: #{dealer_cards[0]} and unknown card"
   
-  # We are going to add the next card until the total is at greater or equal to "17"
   loop do
     break if total(dealer_cards) >= DEALER_MAX
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete("and")
   end
 
-  prompt "Dealer has: #{handle_join(dealer_cards)}"
-  
-  if total(dealer_cards) >= DEALER_MAX
-    prompt "Dealer Bust! Player Wins."
+  if total(dealer_cards) > PLAYER_MAX
+    prompt "Dealer has: #{handle_join(dealer_cards)}"
+    prompt "Dealer Busts! Player Wins."
   else
-    prompt "Dealer Chose To Stay."
+    prompt "Dealer Chose To Stay"
   end
 
 end
