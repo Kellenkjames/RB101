@@ -25,10 +25,6 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
-# def initialize_deck
-#   CARDS.shuffle
-# end
-
 # Calculating Aces
 def total(cards)
   # cards = [['H', '3'], ['S', 'Q'], ... ]
@@ -71,7 +67,7 @@ def play_again?(cards)
     answer = gets.chomp.downcase
 
     if answer == 'y'
-      player_turn(initialize_deck)
+      player_turn(CARDS)
       break
     elsif answer == 'n'
       prompt "Thanks for Playing Twenty-One. Goodbye!"
@@ -101,13 +97,13 @@ def show_player_cards(cards)
 end
 
 def player_turn(cards)
-  player_cards = show_player_cards(CARDS) # => ['10', '4']
+  player_cards = show_player_cards(CARDS)
   
   answer = nil
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.downcase
-    break if answer == 's' || busted?(player_cards) # => We want to append to the same array so we can keep track of our values. 
+    break if answer == 's' || busted?(player_cards)
   end
 
   if answer == 's'
