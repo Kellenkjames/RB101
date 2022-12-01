@@ -60,7 +60,7 @@ def handle_join(cards, word="and")
     cards.insert(-2, word).join(' ')
   elsif cards.size > 2
     values = cards.insert(-2, word).join(', ')
-    values.slice!((values.index(word) + 3)) # removes trailing delimeter after "third" string, i.e., "2, 10, and Ace"
+    values.slice!((values.index(word) + 3)) # removes trailing delimeter after "and", i.e., "2, 10, and Ace"
     values
   end
 end
@@ -69,16 +69,12 @@ def play_again?(cards)
   answer = nil
   loop do
     prompt "Do you want to play again? y (yes) or n (no)."
-    answer = gets.chomp.upcase
-    
-    if answer == 'Y'
-      player_turn(initialize_deck)
-      break
-    else
-      prompt "Thanks for Playing Twenty-One. Goodbye!"
-      break
-    end
+    answer = gets.chomp.downcase
+    break if answer == 'n'
+
+    player_turn(initialize_deck)
   end
+  prompt "Thanks for Playing Twenty-One. Goodbye!"
 end
 
 def busted?(cards, values)
@@ -104,7 +100,12 @@ def player_turn(cards)
     break if answer == 's' || busted?(player_cards, values)
   end
 
-  prompt "You Chose To Stay" if answer == 's'
+  if answer == 's'
+    prompt "You Chose To Stay"
+  else
+    play_again?(player_cards)
+  end
+
 end
 
 def dealer_turn(cards)
@@ -125,4 +126,4 @@ def dealer_turn(cards)
 end
 
 player_turn(initialize_deck)
-# dealer_turn(initialize_deck)
+#dealer_turn(initialize_deck)
