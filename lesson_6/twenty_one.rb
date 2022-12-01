@@ -123,11 +123,6 @@ def show_dealer_cards(cards)
 end
 
 def dealer_turn(cards)
-  # dealer_cards = []
-  # values = cards.map { |card| card[1] }
-
-  # dealer_cards = values.sample(2)
-  # prompt "Dealer has: #{dealer_cards[0]} and unknown card"
   
   loop do
     break if total(dealer_cards) >= DEALER_MAX
@@ -144,8 +139,8 @@ def dealer_turn(cards)
 
 end
 
-player_turn(CARDS)
-# dealer_turn(initialize_deck)
+# player_turn(CARDS)
+dealer_turn(initialize_deck)
 
 #* Main Game Loop
 
