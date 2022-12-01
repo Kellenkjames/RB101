@@ -87,6 +87,7 @@ def busted?(cards, values)
   
   prompt "You have: #{handle_join(cards)}"
   prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
+  true if total(cards) > PLAYER_MAX
 end
 
 def player_turn(cards)
@@ -103,6 +104,7 @@ def player_turn(cards)
     break if answer == 's' || busted?(player_cards, values)
   end
 
+  prompt "You Chose To Stay" if answer == 's'
 end
 
 def dealer_turn(cards)
