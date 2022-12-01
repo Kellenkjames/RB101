@@ -37,25 +37,6 @@ CARDS = [
   ['C', 'K'], ['D', 'K'], ['H', 'K'], ['S', 'K']
 ]
 
-def deck_modifier(cards)
-  values = []
-  cards.map do |card|
-    case card
-    when 'A'
-      values << 'Ace'
-    when 'Q'
-      values << 'Queen'
-    when 'K'
-      values << 'King'
-    when 'J'
-      values << 'Jack'
-    else
-      values << card 
-    end 
-  end 
-  values
-end
-
 def prompt(msg)
   puts "=> #{msg}"
 end
@@ -71,7 +52,7 @@ def total(cards)
 
   sum = 0
   values.each do |value|
-    if value == "Ace"
+    if value == "A"
       sum += 11
     elsif value.to_i == 0 # J, Q, K
       sum += 10
@@ -81,7 +62,7 @@ def total(cards)
   end
 
   # correct for Aces
-  values.select { |value| value == "Ace" }.count.times do
+  values.select { |value| value == "A" }.count.times do
     sum -= 10 if sum > 21
   end
 
@@ -97,6 +78,9 @@ def handle_join(cards, delimeter=',', word="and")
     values
   end
 end
+
+# p handle_join(['10', 'K'])
+# p handle_join(['10', 'K', 'A'])
 
 def busted?(cards)
   total(cards) > PLAYER_MAX
@@ -122,8 +106,8 @@ def player_turn(cards)
   player_cards = []
   values = cards.map { |card| card[1] }
   
-  player_cards = values.sample(2) 
-  prompt "You have: #{handle_join(deck_modifier(player_cards))}"
+  player_cards = values.sample(2)
+  prompt "You have: #{handle_join(player_cards)}"
 
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
@@ -131,7 +115,7 @@ def player_turn(cards)
 
     if answer == 'H'
       player_cards << values.sample(1).join(' ')
-      prompt "You have: #{handle_join(deck_modifier(player_cards))}"
+      prompt "You have: #{handle_join(player_cards)}"
     end
     break if answer == 'S' || busted?(player_cards)
   end
@@ -150,43 +134,17 @@ def dealer_turn(cards)
   values = cards.map { |card| card[1] }
 
   dealer_cards = values.sample(2)
-  prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))[0]} and unknown card"
+  prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))}"
+  # prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))[0]} and unknown card"
 
   loop do
-    # Break condition will occur at the top of the loop because it's more likely we will hit "17" on the first try - therefore, we should be checking for this first.
+    # We should not "hit" again if the dealer already has "17".
     break if total(dealer_cards) >= DEALER_MAX
-    
-    if total(dealer_cards) < DEALER_MAX
-      dealer_cards << values.sample(1).join(' ')
-      prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))}"
-    end
-
+    dealer_cards << values.sample(1).join(' ')
   end
+
+  # prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))}"
 end
 
-dealer_turn(initialize_deck)
+# dealer_turn(initialize_deck)
 # player_turn(initialize_deck)
-
-=begin
-
-How the total method works:
-
-1. We are going to map over the values and return a new arr (values only), i.e., 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' .
-
-2. Create a local sum variable and set equal to zero.
-
-3. If value is an "Ace", add 11 to the sum.
-
-4. Elsif value is the other letters, i.e., 'J', 'Q', or 'K', we add 10 to the sum.
-
-5. Else, just convert the string values to integer and add the sum.
-
-#* If the sum is > 21 while we have "aces" in our deck -- we want to subtract "10" for each ace (this will make the value of the ace "1" instead of "11")
-
-#* If we don't have aces in our deck, then the player or dealer can bust if they exceed the value of 21. 
-
-Example) [10, 8, A].sum 
-(10 + 8 + 11) - 10 = 19
-
-=end
-
