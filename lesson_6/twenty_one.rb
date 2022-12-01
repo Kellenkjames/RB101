@@ -120,6 +120,7 @@ def show_dealer_cards(cards)
 
   dealer_cards = values.sample(2)
   prompt "Dealer has: #{dealer_cards[0]} and unknown card"
+  dealer_cards
 end
 
 def dealer_turn(cards)
