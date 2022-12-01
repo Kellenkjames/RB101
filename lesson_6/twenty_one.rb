@@ -90,12 +90,20 @@ def busted?(cards, values)
   true if total(cards) > PLAYER_MAX
 end
 
-def player_turn(cards)
+def show_player_cards(cards)
   player_cards = []
   values = cards.map { |card| card[1] }
   
   player_cards = values.sample(2)
   prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
+end 
+
+def player_turn(cards)
+  # player_cards = []
+  # values = cards.map { |card| card[1] }
+  
+  # player_cards = values.sample(2)
+  # prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
 
   answer = nil
   loop do
@@ -112,12 +120,20 @@ def player_turn(cards)
 
 end
 
-def dealer_turn(cards)
+def show_dealer_cards(cards)
   dealer_cards = []
   values = cards.map { |card| card[1] }
 
   dealer_cards = values.sample(2)
   prompt "Dealer has: #{dealer_cards[0]} and unknown card"
+end
+
+def dealer_turn(cards)
+  # dealer_cards = []
+  # values = cards.map { |card| card[1] }
+
+  # dealer_cards = values.sample(2)
+  # prompt "Dealer has: #{dealer_cards[0]} and unknown card"
   
   loop do
     break if total(dealer_cards) >= DEALER_MAX
@@ -135,4 +151,20 @@ def dealer_turn(cards)
 end
 
 # player_turn(initialize_deck)
-dealer_turn(initialize_deck)
+# dealer_turn(initialize_deck)
+
+# Main Game Loop
+
+# Show dealer cards 
+show_dealer_cards(initialize_deck)
+
+# Show player cards
+show_player_cards(initialize_deck)
+
+# Player Turn: the player goes first, and can decide to either "hit" or "stay". A hit means the player will ask for another card. Remember that if the total exceeds 21, then the player "busts" and loses. The player can continue to hit as many times as they want. The turn is over when the player either busts or stays. If the player busts, the game is over and the dealer won.
+
+
+# Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
+
+# Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
+
