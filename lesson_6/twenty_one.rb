@@ -2,22 +2,6 @@ require "pry"
 
 #* Assignment: Twenty-One
 
-=begin
-
-High Level Pseudocode: 
-
-1. Initialize Deck [DONE]
-2. Deal cards to `player` and `dealer` 
-3. Player turn: hit or stay
-  1. repeat until bust or "stay"
-4. If player bust, dealer wins. 
-5. Dealer turn: hit or stay
-  1. repeat until total >= 17
-6. If dealer bust, player wins. 
-7. Compare cards and declare winner. 
-
-=end
-
 PLAYER_MAX = 21
 DEALER_MAX = 17
 
@@ -71,12 +55,12 @@ def total(cards)
   sum
 end
 
-def handle_join(cards, delimeter=',', word="and")
+def handle_join(cards, word="and")
   if cards.size == 2
     cards.insert(-2, word).join(' ')
   elsif cards.size > 2
     values = cards.insert(-2, word).join(', ')
-    values.slice((values.index(word) + 3)) # removes trailing delimeter after "third" string, i.e., "2, 10, and Ace"
+    values.slice!((values.index(word) + 3)) # removes trailing delimeter after "third" string, i.e., "2, 10, and Ace"
     values
   end
 end
@@ -99,9 +83,10 @@ end
 
 def busted?(cards, values)
   cards << values.sample(1).join(' ')
-  p cards
+  cards.delete("and")
+  
   prompt "You have: #{handle_join(cards)}"
-  prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX 
+  prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
 end
 
 def player_turn(cards)
@@ -109,7 +94,7 @@ def player_turn(cards)
   values = cards.map { |card| card[1] }
   
   player_cards = values.sample(2)
-  prompt "You have: #{handle_join(player_cards)}"
+  prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
 
   answer = nil
   loop do
