@@ -91,7 +91,7 @@ def show_player_cards(cards)
   player_cards = []
   values = cards.map { |card| card[1] }
   
-  player_cards = values.sample(2) # randomization
+  player_cards = values.sample(2)
   prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
   player_cards
 end
