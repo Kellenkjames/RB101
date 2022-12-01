@@ -66,15 +66,19 @@ def handle_join(cards, word="and")
 end
 
 def play_again?(cards)
-  answer = nil
   loop do
     prompt "Do you want to play again? y (yes) or n (no)."
     answer = gets.chomp.downcase
-    break if answer == 'n'
 
-    player_turn(initialize_deck)
+    if answer == 'y'
+      player_turn(initialize_deck)
+      break
+    elsif answer == 'n'
+      prompt "Thanks for Playing Twenty-One. Goodbye!"
+      break
+    end
   end
-  prompt "Thanks for Playing Twenty-One. Goodbye!"
+
 end
 
 def busted?(cards, values)
