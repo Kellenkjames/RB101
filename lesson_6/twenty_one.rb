@@ -117,17 +117,24 @@ def dealer_turn(cards)
   values = cards.map { |card| card[1] }
 
   dealer_cards = values.sample(2)
-  prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))}"
-  # prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))[0]} and unknown card"
-
+  prompt "Dealer has: #{dealer_cards[0]} and unknown card"
+  
+  # We are going to add the next card until the total is at greater or equal to "17"
   loop do
-    # We don't want to ask the question at least "once", therefore we put the break condition at the top. 
     break if total(dealer_cards) >= DEALER_MAX
     dealer_cards << values.sample(1).join(' ')
+    dealer_cards.delete("and")
   end
 
-  # prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))}"
+  prompt "Dealer has: #{handle_join(dealer_cards)}"
+  
+  if total(dealer_cards) >= DEALER_MAX
+    prompt "Dealer Bust! Player Wins."
+  else
+    prompt "Dealer Chose To Stay."
+  end
+
 end
 
-player_turn(initialize_deck)
-#dealer_turn(initialize_deck)
+# player_turn(initialize_deck)
+dealer_turn(initialize_deck)
