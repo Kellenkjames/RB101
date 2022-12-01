@@ -96,15 +96,10 @@ def show_player_cards(cards)
   
   player_cards = values.sample(2)
   prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
+  player_cards
 end 
 
 def player_turn(cards)
-  # player_cards = []
-  # values = cards.map { |card| card[1] }
-  
-  # player_cards = values.sample(2)
-  # prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
-
   answer = nil
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
@@ -162,7 +157,7 @@ show_dealer_cards(initialize_deck)
 show_player_cards(initialize_deck)
 
 # Player Turn: the player goes first, and can decide to either "hit" or "stay". A hit means the player will ask for another card. Remember that if the total exceeds 21, then the player "busts" and loses. The player can continue to hit as many times as they want. The turn is over when the player either busts or stays. If the player busts, the game is over and the dealer won.
-
+player_turn()
 
 # Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
 
