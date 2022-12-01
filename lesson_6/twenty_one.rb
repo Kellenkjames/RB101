@@ -153,7 +153,7 @@ end
 # player_turn(initialize_deck)
 # dealer_turn(initialize_deck)
 
-# Main Game Loop
+#* Main Game Loop
 
 # Show dealer cards 
 show_dealer_cards(initialize_deck)
