@@ -52,8 +52,10 @@ def total(cards)
 
   sum = 0
   values.each do |value|
-    if value == "A"
+    if value == 'A'
       sum += 11
+    elsif value == 'and'
+      sum += 0
     elsif value.to_i == 0 # J, Q, K
       sum += 10
     else
@@ -62,7 +64,7 @@ def total(cards)
   end
 
   # correct for Aces
-  values.select { |value| value == "A" }.count.times do
+  values.select { |value| value == 'A' }.count.times do
     sum -= 10 if sum > 21
   end
 
@@ -74,16 +76,9 @@ def handle_join(cards, delimeter=',', word="and")
     cards.insert(-2, word).join(' ')
   elsif cards.size > 2
     values = cards.insert(-2, word).join(', ')
-    values.slice!((values.index(word) + 3)) # removes trailing delimeter after word, i.e., "2, 10, and Ace"
+    values.slice((values.index(word) + 3)) # removes trailing delimeter after "third" string, i.e., "2, 10, and Ace"
     values
   end
-end
-
-# p handle_join(['10', 'K'])
-# p handle_join(['10', 'K', 'A'])
-
-def busted?(cards)
-  total(cards) > PLAYER_MAX
 end
 
 def play_again?(cards)
@@ -102,6 +97,13 @@ def play_again?(cards)
   end
 end
 
+def busted?(cards, values)
+  cards << values.sample(1).join(' ')
+  p cards
+  prompt "You have: #{handle_join(cards)}"
+  prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX 
+end
+
 def player_turn(cards)
   player_cards = []
   values = cards.map { |card| card[1] }
@@ -109,22 +111,11 @@ def player_turn(cards)
   player_cards = values.sample(2)
   prompt "You have: #{handle_join(player_cards)}"
 
+  answer = nil
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
-    answer = gets.chomp.upcase
-
-    if answer == 'H'
-      player_cards << values.sample(1).join(' ')
-      prompt "You have: #{handle_join(player_cards)}"
-    end
-    break if answer == 'S' || busted?(player_cards)
-  end
-  
-  if busted?(player_cards)
-    prompt "Player Bust! Dealer Wins."
-    play_again?(player_cards)
-  else
-    prompt "You Chose to Stay!"
+    answer = gets.chomp.downcase
+    break if answer == 's' || busted?(player_cards, values)
   end
 
 end
@@ -138,7 +129,7 @@ def dealer_turn(cards)
   # prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))[0]} and unknown card"
 
   loop do
-    # We should not "hit" again if the dealer already has "17".
+    # We don't want to ask the question at least "once", therefore we put the break condition at the top. 
     break if total(dealer_cards) >= DEALER_MAX
     dealer_cards << values.sample(1).join(' ')
   end
@@ -146,5 +137,5 @@ def dealer_turn(cards)
   # prompt "Dealer has: #{handle_join(deck_modifier(dealer_cards))}"
 end
 
+player_turn(initialize_deck)
 # dealer_turn(initialize_deck)
-# player_turn(initialize_deck)
