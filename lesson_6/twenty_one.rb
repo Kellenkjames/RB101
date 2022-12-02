@@ -121,17 +121,16 @@ def show_dealer(cards)
 end
 
 def dealer_turn(cards)
-  dealer_cards = show_dealer_cards(CARDS) 
   values = CARDS.map { |card| card[1] }
   
   loop do
-    break if total(dealer_cards) >= DEALER_MAX
-    dealer_cards << values.sample(1).join(' ')
-    dealer_cards.delete("and")
+    break if total(cards) >= DEALER_MAX
+    cards << values.sample(1).join(' ')
+    cards.delete("and")
   end
 
-  if total(dealer_cards) > PLAYER_MAX
-    prompt "Dealer has: #{handle_join(dealer_cards)}"
+  if total(cards) > PLAYER_MAX
+    prompt "Dealer has: #{handle_join(cards)}"
     prompt "Dealer Busts! Player Wins."
   else
     prompt "Dealer Chose To Stay"
@@ -141,15 +140,16 @@ end
 
 #* Main Game Loop
 
-# Show dealer cards 
-# show_dealer_cards(CARDS)
+# Show dealer cards
+show_dealer(dealer_cards)
 
 # Show player cards
 show_player(player_cards)
 
-# Player Turn: the player goes first, and can decide to either "hit" or "stay". 
+# Player Turn: the player goes first, and can decide to either "hit" or "stay".
 player_turn(player_cards)
 
 # Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
+dealer_turn(dealer_cards)
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
