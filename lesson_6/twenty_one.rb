@@ -74,7 +74,6 @@ def play_again?(cards)
       break
     end
   end
-
 end
 
 def busted?(cards)
@@ -84,8 +83,6 @@ def busted?(cards)
   
   prompt "You have: #{handle_join(cards)}"
   prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
-
-  true if total(cards) > PLAYER_MAX
 end
 
 def shuffle(cards)
@@ -101,15 +98,14 @@ def show_player(cards)
 end
 
 def player_turn(cards)
-  answer = nil
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.downcase
-    break if answer == 's' || busted?(cards)
+    break if answer == 's' || busted?(cards) # this method is being invoked on each loop. 
   end
 
   if busted?(cards)
-    play_again?(cards)
+    play_again?(player_cards)
   else
     prompt "You Chose To Stay"
   end
@@ -140,7 +136,7 @@ def dealer_turn(cards)
 end
 
 # Show dealer cards
-show_dealer(dealer_cards)
+# show_dealer(dealer_cards)
 
 # Show player cards
 show_player(player_cards)
@@ -149,6 +145,6 @@ show_player(player_cards)
 player_turn(player_cards)
 
 # Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
-dealer_turn(dealer_cards)
+# dealer_turn(dealer_cards)
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
