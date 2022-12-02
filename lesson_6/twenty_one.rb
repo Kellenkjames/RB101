@@ -78,12 +78,15 @@ def play_again?(cards)
 end
 
 def busted?(cards)
+  # Keep track of player values by storing in an array. 
+  player_cards_arr = player_hand(CARDS)
   values = cards.map { |card| card[1] }
-  cards << values.sample(1).join(' ')
+  
+  player_cards_arr << values.sample(1).join(' ')
   cards.delete("and")
   
-  prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
-  true if total(cards) > PLAYER_MAX
+  prompt "Player Busts! Dealer Wins." if total(player_cards_arr) > PLAYER_MAX
+  true if total(player_cards_arr) > PLAYER_MAX
 end
 
 def shuffle(cards)
@@ -93,25 +96,23 @@ def shuffle(cards)
 end
 
 def player_hand(cards)
-  player_cards = shuffle(cards) # This method should not be shuffling the cards again.
+  player_cards = shuffle(cards)
   prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
   player_cards
 end
-
-p player_hand(CARDS)
 
 def player_turn(cards)
   answer = nil
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.downcase
-    break if answer == 's' || busted?(cards) # We don't want this method to accept any arguments.
+    break if answer == 's' || busted?(cards)
   end
 
   if answer == 's'
     prompt "You Chose To Stay"
   else
-    play_again?(show_player_cards(CARDS))
+    play_again?(player_hand(CARDS))
   end
 
 end
