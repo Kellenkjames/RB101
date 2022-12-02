@@ -78,15 +78,12 @@ def play_again?(cards)
 end
 
 def busted?(cards)
-  # Keep track of player values by storing in an array. 
-  player_cards_arr = player_hand(CARDS)
-  values = cards.map { |card| card[1] }
+  # values = cards.map { |card| card[1] }
+  # player_cards_arr << values.sample(1).join(' ')
+  # cards.delete("and")
   
-  player_cards_arr << values.sample(1).join(' ')
-  cards.delete("and")
-  
-  prompt "Player Busts! Dealer Wins." if total(player_cards_arr) > PLAYER_MAX
-  true if total(player_cards_arr) > PLAYER_MAX
+  # prompt "Player Busts! Dealer Wins." if total(player_cards_arr) > PLAYER_MAX # 21
+  # true if total(player_cards_arr) > PLAYER_MAX
 end
 
 def shuffle(cards)
@@ -95,10 +92,10 @@ def shuffle(cards)
   cards_arr = values.sample(2)
 end
 
-def player_hand(cards)
-  player_cards = shuffle(cards)
-  prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
-  player_cards
+player_cards = shuffle(CARDS)
+
+def show_player(cards)
+  prompt "You have: #{cards[0]} and #{cards[1]}"
 end
 
 def player_turn(cards)
@@ -106,13 +103,11 @@ def player_turn(cards)
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.downcase
-    break if answer == 's' || busted?(cards)
+    break if answer == 's' || busted?(cards) # break if busted? method returns "true".
   end
 
   if answer == 's'
     prompt "You Chose To Stay"
-  else
-    play_again?(player_hand(CARDS))
   end
 
 end
@@ -151,9 +146,10 @@ end
 # show_dealer_cards(CARDS)
 
 # Show player cards
-# player_hand(CARDS)
+player_hand(player_draw)
 
-# Player Turn: the player goes first, and can decide to either "hit" or "stay". A hit means the player will ask for another card. Remember that if the total exceeds 21, then the player "busts" and loses. The player can continue to hit as many times as they want. The turn is over when the player either busts or stays. If the player busts, the game is over and the dealer won.
+# Player Turn: the player goes first, and can decide to either "hit" or "stay". 
+player_turn(CARDS)
 
 # Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
 
