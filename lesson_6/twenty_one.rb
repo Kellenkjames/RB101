@@ -78,13 +78,13 @@ def play_again?(cards)
 end
 
 def busted?(cards)
-  p cards
-  # values = cards.map { |card| card[1] }
-  # cards << values.sample(1).join(' ')
-  # cards.delete("and")
+  values = CARDS.map { |card| card[1] }
+  cards << values.sample(1).join(' ')
+  cards.delete("and")
   
-  # prompt "Player Busts! Dealer Wins." if total(player_cards_arr) > PLAYER_MAX # 21
-  # true if total(player_cards_arr) > PLAYER_MAX
+  prompt "You have: #{handle_join(cards)}"
+  prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX 
+  true if total(cards) > PLAYER_MAX
 end
 
 def shuffle(cards)
