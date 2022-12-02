@@ -103,8 +103,10 @@ def player_turn(cards)
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.downcase
+    
     hit_me(cards) if answer == 'h'
     break if answer == 's' || player_bust?(cards)
+    
   end
 
   if player_bust?(cards)
