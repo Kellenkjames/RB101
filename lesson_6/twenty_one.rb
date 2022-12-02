@@ -83,7 +83,8 @@ def busted?(cards)
   cards.delete("and")
   
   prompt "You have: #{handle_join(cards)}"
-  prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX 
+  prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
+
   true if total(cards) > PLAYER_MAX
 end
 
