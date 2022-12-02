@@ -61,7 +61,14 @@ def handle_join(cards, word="and")
   end
 end
 
+def shuffle(cards)
+  cards_arr = []
+  values = cards.map { |card| card[1] }
+  cards_arr = values.sample(2)
+end
+
 player_cards = shuffle(CARDS)
+dealer_cards = shuffle(CARDS)
 
 def play_again?(cards)
   loop do
@@ -89,12 +96,6 @@ def player_bust?(cards)
   true if total(cards) > PLAYER_MAX
 end
 
-def shuffle(cards)
-  cards_arr = []
-  values = cards.map { |card| card[1] }
-  cards_arr = values.sample(2)
-end
-
 def show_player(cards)
   prompt "You have: #{cards[0]} and #{cards[1]}"
 end
@@ -115,8 +116,6 @@ def player_turn(cards)
     prompt "You Chose To Stay"
   end
 end
-
-dealer_cards = shuffle(CARDS)
 
 def show_dealer(cards)
   prompt "Dealer has: #{cards[0]} and unknown card"
