@@ -67,7 +67,7 @@ def play_again?(cards)
     answer = gets.chomp.downcase
 
     if answer == 'y'
-      player_turn(CARDS)
+      player_turn(cards)
       break
     elsif answer == 'n'
       prompt "Thanks for Playing Twenty-One. Goodbye!"
