@@ -108,10 +108,11 @@ def player_turn(cards)
     break if answer == 's' || busted?(cards)
   end
 
-  if answer == 's'
+  if busted?(cards)
+    play_again?(cards)
+  else
     prompt "You Chose To Stay"
   end
-
 end
 
 dealer_cards = shuffle(CARDS)
@@ -137,8 +138,6 @@ def dealer_turn(cards)
   end
 
 end
-
-#* Main Game Loop
 
 # Show dealer cards
 show_dealer(dealer_cards)
