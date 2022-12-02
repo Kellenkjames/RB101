@@ -70,13 +70,20 @@ end
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
+def game_loop 
+  show_dealer(dealer_cards)
+  show_player(player_cards)
+  player_turn(player_cards)
+  dealer_turn(dealer_cards)
+end 
+
 def play_again?(cards)
   loop do
     prompt "Do you want to play again? Y (Yes) or n (No)."
     answer = gets.chomp.upcase
 
     if answer == 'Y'
-      player_turn(cards)
+      player_turn(cards) # !This is where we repeat the same loop at the bottom of the page
       break
     elsif answer == 'N'
       prompt "Thanks for Playing Twenty-One. Goodbye!"
@@ -140,7 +147,7 @@ def dealer_turn(cards)
 end
 
 # Show dealer cards
-# show_dealer(dealer_cards)
+show_dealer(dealer_cards)
 
 # Show player cards
 show_player(player_cards)
