@@ -87,29 +87,31 @@ def busted?(cards)
   true if total(cards) > PLAYER_MAX
 end
 
-def show_player_cards(cards)
+def shuffle_cards(cards)
   player_cards = []
   values = cards.map { |card| card[1] }
-  
+
   player_cards = values.sample(2)
-  prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
   player_cards
 end
 
-def player_turn
-  player_cards = show_player_cards(CARDS) #! This is calling the method when we call the function
-  
+def show_player_cards(cards)
+  player_cards = shuffle_cards(cards)
+  prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
+end
+
+def player_turn(cards)
   answer = nil
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.downcase
-    break if answer == 's' || busted?(player_cards)
+    break if answer == 's' || busted?(show_player_cards(CARDS)) # This method will shuffle the cards again when invoked.
   end
 
   if answer == 's'
     prompt "You Chose To Stay"
   else
-    play_again?(player_cards)
+    play_again?(show_player_cards(CARDS))
   end
 
 end
@@ -142,21 +144,16 @@ def dealer_turn(cards)
 
 end
 
-# player_turn(CARDS)
-# dealer_turn(CARDS)
-
 #* Main Game Loop
 
 # Show dealer cards 
-show_dealer_cards(CARDS)
+# show_dealer_cards(CARDS)
 
 # Show player cards
 show_player_cards(CARDS)
 
 # Player Turn: the player goes first, and can decide to either "hit" or "stay". A hit means the player will ask for another card. Remember that if the total exceeds 21, then the player "busts" and loses. The player can continue to hit as many times as they want. The turn is over when the player either busts or stays. If the player busts, the game is over and the dealer won.
-player_turn
 
 # Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
-
