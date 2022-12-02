@@ -107,7 +107,7 @@ def player_turn(cards)
     break if answer == 's' || player_bust?(cards)
   end
 
-  if busted?(cards)
+  if player_bust?(cards)
     play_again?(player_cards)
   else
     prompt "You Chose To Stay"
