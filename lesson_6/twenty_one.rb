@@ -76,12 +76,14 @@ def play_again?(cards)
   end
 end
 
-def busted?(cards)
+def hit_me(cards)
   values = CARDS.map { |card| card[1] }
   cards << values.sample(1).join(' ')
   cards.delete("and")
-  
   prompt "You have: #{handle_join(cards)}"
+end
+
+def player_bust?(cards)
   prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
 end
 
@@ -101,7 +103,8 @@ def player_turn(cards)
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.downcase
-    break if answer == 's' || busted?(cards) # this method is being invoked on each loop. 
+    hit_me(cards) if answer == 'h'
+    break if answer == 's' || player_bust?(cards)
   end
 
   if busted?(cards)
