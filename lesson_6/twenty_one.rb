@@ -124,7 +124,7 @@ def show_dealer_cards(cards)
 end
 
 def dealer_turn(cards)
-  dealer_cards = show_dealer_cards(CARDS) # => ['7', '3']
+  dealer_cards = show_dealer_cards(CARDS) 
   values = CARDS.map { |card| card[1] }
   
   loop do
@@ -143,15 +143,15 @@ def dealer_turn(cards)
 end
 
 # player_turn(CARDS)
-# dealer_turn(initialize_deck)
+# dealer_turn(CARDS)
 
 #* Main Game Loop
 
 # Show dealer cards 
-# show_dealer_cards(initialize_deck)
+show_dealer_cards(CARDS)
 
 # Show player cards
-# show_player_cards(initialize_deck)
+show_player_cards(CARDS)
 
 # Player Turn: the player goes first, and can decide to either "hit" or "stay". A hit means the player will ask for another card. Remember that if the total exceeds 21, then the player "busts" and loses. The player can continue to hit as many times as they want. The turn is over when the player either busts or stays. If the player busts, the game is over and the dealer won.
 
