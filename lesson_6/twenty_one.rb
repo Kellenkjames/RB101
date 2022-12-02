@@ -63,13 +63,13 @@ end
 
 def play_again?(cards)
   loop do
-    prompt "Do you want to play again? y (yes) or n (no)."
-    answer = gets.chomp.downcase
+    prompt "Do you want to play again? Y (Yes) or n (No)."
+    answer = gets.chomp.upcase
 
-    if answer == 'y'
+    if answer == 'Y'
       player_turn(cards)
       break
-    elsif answer == 'n'
+    elsif answer == 'N'
       prompt "Thanks for Playing Twenty-One. Goodbye!"
       break
     end
@@ -85,6 +85,7 @@ end
 
 def player_bust?(cards)
   prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
+  true if total(cards) > PLAYER_MAX
 end
 
 def shuffle(cards)
@@ -106,11 +107,10 @@ def player_turn(cards)
     
     hit_me(cards) if answer == 'H'
     break if answer == 'S' || player_bust?(cards)
-
   end
 
   if player_bust?(cards)
-    play_again?(player_cards)
+    play_again?(cards)
   else
     prompt "You Chose To Stay"
   end
