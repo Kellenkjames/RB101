@@ -114,13 +114,10 @@ def player_turn(cards)
 
 end
 
-def show_dealer_cards(cards)
-  dealer_cards = []
-  values = CARDS.map { |card| card[1] }
+dealer_cards = shuffle(CARDS)
 
-  dealer_cards = values.sample(2)
-  prompt "Dealer has: #{dealer_cards[0]} and unknown card"
-  dealer_cards
+def show_dealer(cards)
+  prompt "Dealer has: #{cards[0]} and unknown card"
 end
 
 def dealer_turn(cards)
