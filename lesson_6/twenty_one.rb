@@ -135,16 +135,16 @@ def dealer_bust?(cards)
   if total(cards) > PLAYER_MAX
     prompt "Dealer has: #{handle_join(cards)}"
     prompt "Dealer Busts! Player Wins."
-  else 
+  else
     prompt "Dealer Chose To Stay."
   end
-end 
+end
 
 def dealer_turn(cards)
   values = CARDS.map { |card| card[1] }
   
   loop do
-    break if total(cards) >= DEALER_MAX 
+    break if total(cards) >= DEALER_MAX
     cards << values.sample(1).join(' ')
     cards.delete("and")
   end
