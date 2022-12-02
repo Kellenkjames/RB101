@@ -70,7 +70,7 @@ end
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
-def reset_game
+def reset_game(player_cards, dealer_cards)
   show_dealer(dealer_cards)
   show_player(player_cards)
   player_turn(player_cards)
@@ -86,7 +86,7 @@ def play_again?(cards)
     answer = gets.chomp.upcase
 
     if answer == 'Y'
-        reset_game
+        reset_game(player_cards, dealer_cards)
       break
     elsif answer == 'N'
       prompt "Thanks for Playing Twenty-One. Goodbye!"
@@ -128,37 +128,40 @@ def player_turn(cards)
 end
 
 def show_dealer(cards)
-  prompt "Dealer has: #{cards[0]} and unknown card"
+  prompt "Dealer has: #{cards[0]} and unknown card."
 end
+
+def dealer_bust?(cards)
+  if total(cards) > PLAYER_MAX
+    prompt "Dealer has: #{handle_join(cards)}"
+    prompt "Dealer Busts! Player Wins."
+  else 
+    prompt "Dealer Chose To Stay."
+  end
+end 
 
 def dealer_turn(cards)
   values = CARDS.map { |card| card[1] }
   
   loop do
-    break if total(cards) >= DEALER_MAX
+    break if total(cards) >= DEALER_MAX 
     cards << values.sample(1).join(' ')
     cards.delete("and")
   end
 
-  if total(cards) > PLAYER_MAX
-    prompt "Dealer has: #{handle_join(cards)}"
-    prompt "Dealer Busts! Player Wins."
-  else
-    prompt "Dealer Chose To Stay"
-  end
-
+  dealer_bust?(cards)
 end
 
 # Show dealer cards
 show_dealer(dealer_cards)
 
 # Show player cards
-show_player(player_cards)
+# show_player(player_cards)
 
 # Player Turn: the player goes first, and can decide to either "hit" or "stay".
-player_turn(player_cards)
+# player_turn(player_cards)
 
 # Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
-# dealer_turn(dealer_cards)
+dealer_turn(dealer_cards)
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
