@@ -105,7 +105,7 @@ def player_turn(cards)
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.downcase
-    break if answer == 's' || busted?(cards) # break if busted? method returns "true".
+    break if answer == 's' || busted?(cards)
   end
 
   if answer == 's'
