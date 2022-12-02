@@ -78,11 +78,11 @@ def play_again?(cards)
 end
 
 def busted?(cards)
-  values = CARDS.map { |card| card[1] }
+  values = cards.map { |card| card[1] }
   cards << values.sample(1).join(' ')
   cards.delete("and")
   
-  prompt "You have: #{handle_join(cards)}"
+  # prompt "You have: #{handle_join(cards)}" 
   prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
   true if total(cards) > PLAYER_MAX
 end
@@ -96,8 +96,8 @@ def show_player_cards(cards)
   player_cards
 end
 
-def player_turn(cards)
-  player_cards = show_player_cards(CARDS)
+def player_turn
+  player_cards = show_player_cards(CARDS) #! This is calling the method when we call the function
   
   answer = nil
   loop do
@@ -154,6 +154,7 @@ show_dealer_cards(CARDS)
 show_player_cards(CARDS)
 
 # Player Turn: the player goes first, and can decide to either "hit" or "stay". A hit means the player will ask for another card. Remember that if the total exceeds 21, then the player "busts" and loses. The player can continue to hit as many times as they want. The turn is over when the player either busts or stays. If the player busts, the game is over and the dealer won.
+player_turn
 
 # Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
 
