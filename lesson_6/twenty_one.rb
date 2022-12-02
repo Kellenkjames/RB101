@@ -82,20 +82,18 @@ def busted?(cards)
   cards << values.sample(1).join(' ')
   cards.delete("and")
   
-  # prompt "You have: #{handle_join(cards)}" 
   prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
   true if total(cards) > PLAYER_MAX
 end
 
-def shuffle_deck(cards)
+def shuffle(cards)
   cards_arr = []
   values = cards.map { |card| card[1] }
-
   cards_arr = values.sample(2)
 end
 
 def player_hand(cards)
-  player_cards = shuffle_deck(cards)
+  player_cards = shuffle(cards) # This method should not be shuffling the cards again.
   prompt "You have: #{player_cards[0]} and #{player_cards[1]}"
   player_cards
 end
@@ -107,7 +105,7 @@ def player_turn(cards)
   loop do
     prompt "hit or stay? Enter h (hit) or s (stay)"
     answer = gets.chomp.downcase
-    break if answer == 's' || busted?(player_hand(CARDS)) # We are here.
+    break if answer == 's' || busted?(cards) # We don't want this method to accept any arguments.
   end
 
   if answer == 's'
