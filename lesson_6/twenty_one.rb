@@ -84,8 +84,8 @@ def hit_me(cards)
 end
 
 def player_bust?(cards)
-  prompt "Player Busts! Dealer Wins." if total(cards) > PLAYER_MAX
   true if total(cards) > PLAYER_MAX
+  prompt "Player Busts! Dealer Wins."
 end
 
 def shuffle(cards)
