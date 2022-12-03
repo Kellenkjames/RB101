@@ -5,8 +5,8 @@ require "pry"
 BUST = 21
 DEALER_MAX = 17
 
-player_stays = 0
-dealer_stays = 0
+player_hold = 0
+dealer_hold = 0
 
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
@@ -120,7 +120,7 @@ def dealer_bust?(dealer_cards, player_cards)
     prompt "Dealer Busts! Player Wins."
   else
     prompt "Dealer Chose To Stay."
-    dealer_decides_to_stay += 1
+    dealer_hold += 1
     player_turn(player_cards, dealer_cards) #! We need additional logic if dealer and player decide to stay.
   end
 end
@@ -137,7 +137,7 @@ def dealer_turn(dealer_cards, player_cards)
   dealer_bust?(dealer_cards, player_cards)
 end
 
-def player_turn(player_cards, dealer_cards)
+def player_turn(player_cards, dealer_cards, player_hold)
   loop do
     prompt "Hit or Stay? Enter H (Hit) or S (Stay)"
     answer = gets.chomp.upcase
@@ -151,14 +151,14 @@ def player_turn(player_cards, dealer_cards)
     # play_again?(cards) #! Last part of the application to fix. 
   else
     prompt "You Chose To Stay"
-    player_decides_to_stay += 1
+    player_hold += 1
     dealer_turn(dealer_cards, player_cards)
   end
 end
 
 show_dealer(dealer_cards)
 show_player(player_cards)
-player_turn(player_cards, dealer_cards)
+player_turn(player_cards, dealer_cards, player_hold)
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
 
