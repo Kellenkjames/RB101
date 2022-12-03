@@ -78,8 +78,8 @@ def reset_game(player_cards, dealer_cards)
 end
 
 def play_again?(cards)
-  player_cards = shuffle(CARDS)
-  dealer_cards = shuffle(CARDS)
+  # player_cards = shuffle(CARDS)
+  # dealer_cards = shuffle(CARDS)
   
   loop do
     prompt "Do you want to play again? Y (Yes) or n (No)."
@@ -126,7 +126,7 @@ def player_turn(cards)
   else
     prompt "You Chose To Stay"
     # Dealer's Turn
-    dealer_turn(cards) # We need to pass in the dealer_cards
+    dealer_turn(cards) #! We need to pass in the dealer_cards
   end
 end
 
@@ -135,14 +135,13 @@ def show_dealer(cards)
 end
 
 def dealer_bust?(cards) #=> cards parameter represents "dealer_cards", we also need "player_cards"
-  player_cards = shuffle(CARDS)
   if total(cards) > BUST
     prompt "Dealer has: #{handle_join(cards)}"
     prompt "Dealer Busts! Player Wins."
   else
     prompt "Dealer Chose To Stay."
     # If dealer chose to stay, it's the player's turn.
-    player_turn(player_cards)
+    player_turn(player_cards) #! We can't do this becuase it's reshuffling the cards again.
   end
 end
 
@@ -168,6 +167,5 @@ show_player(player_cards)
 player_turn(player_cards)
 
 # Dealer Turn: When the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
-dealer_turn(dealer_cards)
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
