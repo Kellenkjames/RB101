@@ -70,6 +70,9 @@ end
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
+player_decides_to_stay = 0
+dealer_decides_to_stay = 0
+
 def show_dealer(cards)
   prompt "Dealer has: #{cards[0]} and unknown card"
 end
@@ -117,7 +120,7 @@ def dealer_bust?(dealer_cards, player_cards)
     prompt "Dealer Busts! Player Wins."
   else
     prompt "Dealer Chose To Stay."
-    player_turn(player_cards, dealer_cards)
+    player_turn(player_cards, dealer_cards) #! We need additional logic if dealer and player decide to stay.
   end
 end
 
