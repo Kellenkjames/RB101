@@ -70,6 +70,14 @@ end
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
+def show_dealer(cards)
+  prompt "Dealer has: #{cards[0]} and unknown card"
+end
+
+def show_player(cards)
+  prompt "You have: #{cards[0]} and #{cards[1]}"
+end
+
 def reset_game(player_cards, dealer_cards)
   show_dealer(dealer_cards)
   show_player(player_cards)
@@ -101,10 +109,6 @@ end
 
 def player_bust?(cards)
   true if total(cards) > BUST
-end
-
-def show_player(cards)
-  prompt "You have: #{cards[0]} and #{cards[1]}"
 end
 
 def dealer_bust?(dealer_cards, player_cards)
@@ -147,12 +151,10 @@ def player_turn(player_cards, dealer_cards)
   end
 end
 
-def show_dealer(cards)
-  prompt "Dealer has: #{cards[0]} and unknown card"
-end
-
 show_dealer(dealer_cards)
 show_player(player_cards)
 player_turn(player_cards, dealer_cards)
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
+
+# When you display the results, you also need to perform the calculation of who won. Having one method that does both the calculation and the display to the output makes it hard to reason about. The trick is to create a method that only returns the result of the game, and another that only handles displaying the result. You want to write methods that only do one thing.
