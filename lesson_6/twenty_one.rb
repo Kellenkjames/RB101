@@ -117,13 +117,13 @@ def dealer_bust?(dealer_cards, player_cards)
   end
 end
 
-def dealer_turn(cards)
+def dealer_turn(dealer_cards, player_cards)
   values = CARDS.map { |card| card[1] }
   
   loop do
-    break if total(cards) >= DEALER_MAX
-    cards << values.sample(1).join(' ')
-    cards.delete("and")
+    break if total(dealer_cards) >= DEALER_MAX
+    dealer_cards << values.sample(1).join(' ')
+    dealer_cards.delete("and")
   end
 
   dealer_bust?(dealer_cards, player_cards)
