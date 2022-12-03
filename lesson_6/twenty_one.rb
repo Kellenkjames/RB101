@@ -113,7 +113,7 @@ def dealer_bust?(dealer_cards, player_cards)
     prompt "Dealer Busts! Player Wins."
   else
     prompt "Dealer Chose To Stay."
-    player_turn(player_cards)
+    player_turn(player_cards, dealer_cards)
   end
 end
 
