@@ -107,7 +107,17 @@ def show_player(cards)
   prompt "You have: #{cards[0]} and #{cards[1]}"
 end
 
-def dealer_turn(cards) #=> cards parameter represents "dealer_cards"
+def dealer_bust?(dealer_cards, player_cards)
+  if total(dealer_cards) > BUST
+    prompt "Dealer has: #{handle_join(dealer_cards)}"
+    prompt "Dealer Busts! Player Wins."
+  else
+    prompt "Dealer Chose To Stay."
+    player_turn(player_cards)
+  end
+end
+
+def dealer_turn(cards)
   values = CARDS.map { |card| card[1] }
   
   loop do
@@ -116,7 +126,7 @@ def dealer_turn(cards) #=> cards parameter represents "dealer_cards"
     cards.delete("and")
   end
 
-  dealer_bust?(cards)
+  dealer_bust?(dealer_cards, player_cards)
 end
 
 def player_turn(player_cards, dealer_cards)
@@ -124,7 +134,7 @@ def player_turn(player_cards, dealer_cards)
     prompt "Hit or Stay? Enter H (Hit) or S (Stay)"
     answer = gets.chomp.upcase
     
-    hit_me(player_cards) if answer == 'H' # We are good here. Still keeping track of our initial "hand".
+    hit_me(player_cards) if answer == 'H'
     break if answer == 'S' || player_bust?(cards)
   end
 
@@ -139,17 +149,6 @@ end
 
 def show_dealer(cards)
   prompt "Dealer has: #{cards[0]} and unknown card"
-end
-
-def dealer_bust?(cards) #=> cards parameter represents "dealer_cards", we also need "player_cards" to be passed into player_turn
-  if total(cards) > BUST
-    prompt "Dealer has: #{handle_join(cards)}"
-    prompt "Dealer Busts! Player Wins."
-  else
-    prompt "Dealer Chose To Stay."
-    # If dealer chose to stay, it's the player's turn.
-    player_turn(player_cards) #! We can't do this becuase it's reshuffling the cards again.
-  end
 end
 
 # Show dealer cards
