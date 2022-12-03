@@ -78,9 +78,6 @@ def reset_game(player_cards, dealer_cards)
 end
 
 def play_again?(cards)
-  # player_cards = shuffle(CARDS)
-  # dealer_cards = shuffle(CARDS)
-  
   loop do
     prompt "Do you want to play again? Y (Yes) or n (No)."
     answer = gets.chomp.upcase
@@ -110,42 +107,7 @@ def show_player(cards)
   prompt "You have: #{cards[0]} and #{cards[1]}"
 end
 
-def player_turn(cards)
-  
-  loop do
-    prompt "Hit or Stay? Enter H (Hit) or S (Stay)"
-    answer = gets.chomp.upcase
-    
-    hit_me(cards) if answer == 'H'
-    break if answer == 'S' || player_bust?(cards)
-  end
-
-  if player_bust?(cards)
-    prompt "Player Bust! Dealer Wins."
-    # play_again?(cards)
-  else
-    prompt "You Chose To Stay"
-    # Dealer's Turn
-    dealer_turn(cards) #! We need to pass in the dealer_cards
-  end
-end
-
-def show_dealer(cards)
-  prompt "Dealer has: #{cards[0]} and unknown card"
-end
-
-def dealer_bust?(cards) #=> cards parameter represents "dealer_cards", we also need "player_cards"
-  if total(cards) > BUST
-    prompt "Dealer has: #{handle_join(cards)}"
-    prompt "Dealer Busts! Player Wins."
-  else
-    prompt "Dealer Chose To Stay."
-    # If dealer chose to stay, it's the player's turn.
-    player_turn(player_cards) #! We can't do this becuase it's reshuffling the cards again.
-  end
-end
-
-def dealer_turn(cards)
+def dealer_turn(cards) #=> cards parameter represents "dealer_cards"
   values = CARDS.map { |card| card[1] }
   
   loop do
@@ -155,6 +117,41 @@ def dealer_turn(cards)
   end
 
   dealer_bust?(cards)
+end
+
+def player_turn(cards)
+  loop do
+    prompt "Hit or Stay? Enter H (Hit) or S (Stay)"
+    answer = gets.chomp.upcase
+    
+    hit_me(cards) if answer == 'H' # We are good here. Still keeping track of our initial "hand".
+    break if answer == 'S' || player_bust?(cards)
+  end
+
+  if player_bust?(cards)
+    prompt "Player Bust! Dealer Wins."
+    # play_again?(cards)
+  else
+    prompt "You Chose To Stay"
+    # Dealer's Turn
+    binding.pry
+    dealer_turn(cards)
+  end
+end
+
+def show_dealer(cards)
+  prompt "Dealer has: #{cards[0]} and unknown card"
+end
+
+def dealer_bust?(cards) #=> cards parameter represents "dealer_cards", we also need "player_cards" to be passed into player_turn
+  if total(cards) > BUST
+    prompt "Dealer has: #{handle_join(cards)}"
+    prompt "Dealer Busts! Player Wins."
+  else
+    prompt "Dealer Chose To Stay."
+    # If dealer chose to stay, it's the player's turn.
+    player_turn(player_cards) #! We can't do this becuase it's reshuffling the cards again.
+  end
 end
 
 # Show dealer cards
