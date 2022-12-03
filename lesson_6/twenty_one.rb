@@ -120,6 +120,7 @@ def dealer_bust?(dealer_cards, player_cards)
     prompt "Dealer Busts! Player Wins."
   else
     prompt "Dealer Chose To Stay."
+    dealer_decides_to_stay += 1
     player_turn(player_cards, dealer_cards) #! We need additional logic if dealer and player decide to stay.
   end
 end
@@ -150,6 +151,7 @@ def player_turn(player_cards, dealer_cards)
     # play_again?(cards) #! Last part of the application to fix. 
   else
     prompt "You Chose To Stay"
+    player_decides_to_stay += 1
     dealer_turn(dealer_cards, player_cards)
   end
 end
