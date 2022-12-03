@@ -119,23 +119,21 @@ def dealer_turn(cards) #=> cards parameter represents "dealer_cards"
   dealer_bust?(cards)
 end
 
-def player_turn(cards)
+def player_turn(player_cards, dealer_cards)
   loop do
     prompt "Hit or Stay? Enter H (Hit) or S (Stay)"
     answer = gets.chomp.upcase
     
-    hit_me(cards) if answer == 'H' # We are good here. Still keeping track of our initial "hand".
+    hit_me(player_cards) if answer == 'H' # We are good here. Still keeping track of our initial "hand".
     break if answer == 'S' || player_bust?(cards)
   end
 
-  if player_bust?(cards)
+  if player_bust?(player_cards)
     prompt "Player Bust! Dealer Wins."
     # play_again?(cards)
   else
     prompt "You Chose To Stay"
-    # Dealer's Turn
-    binding.pry
-    dealer_turn(cards)
+    dealer_turn(dealer_cards)
   end
 end
 
@@ -161,7 +159,7 @@ show_dealer(dealer_cards)
 show_player(player_cards)
 
 # Player Turn: The player goes first, and can decide to either "hit" or "stay". Repeat until bust or "stay". If player bust, dealer wins. 
-player_turn(player_cards)
+player_turn(player_cards, dealer_cards)
 
 # Dealer Turn: When the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
 
