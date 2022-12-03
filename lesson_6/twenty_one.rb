@@ -135,7 +135,7 @@ def player_turn(player_cards, dealer_cards)
     answer = gets.chomp.upcase
     
     hit_me(player_cards) if answer == 'H'
-    break if answer == 'S' || player_bust?(cards)
+    break if answer == 'S' || player_bust?(player_cards)
   end
 
   if player_bust?(player_cards)
