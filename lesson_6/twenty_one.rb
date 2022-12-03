@@ -2,7 +2,7 @@ require "pry"
 
 #* Assignment: Twenty-One
 
-PLAYER_MAX = 21
+BUST = 21
 DEALER_MAX = 17
 
 CARDS = [
@@ -103,7 +103,7 @@ def hit_me(cards)
 end
 
 def player_bust?(cards)
-  true if total(cards) > PLAYER_MAX
+  true if total(cards) > BUST
 end
 
 def show_player(cards)
@@ -132,7 +132,7 @@ def show_dealer(cards)
 end
 
 def dealer_bust?(cards)
-  if total(cards) > PLAYER_MAX
+  if total(cards) > BUST
     prompt "Dealer has: #{handle_join(cards)}"
     prompt "Dealer Busts! Player Wins."
   else
@@ -144,6 +144,7 @@ def dealer_turn(cards)
   values = CARDS.map { |card| card[1] }
   
   loop do
+    # Strict Rule: Dealer must hit until the total is at least "17"
     break if total(cards) >= DEALER_MAX
     cards << values.sample(1).join(' ')
     cards.delete("and")
@@ -156,12 +157,25 @@ end
 show_dealer(dealer_cards)
 
 # Show player cards
-# show_player(player_cards)
+show_player(player_cards)
 
 # Player Turn: the player goes first, and can decide to either "hit" or "stay".
-# player_turn(player_cards)
+player_turn(player_cards)
 
 # Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
 dealer_turn(dealer_cards)
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
+
+# Tests: 
+
+=begin
+
+* Game Issues:
+
+1. After one round, when player says "n" to exit game, the following message appears: "Dealer Chose To Stay."
+
+* Dealer Chose To Stay Runs every time. 
+
+
+=end
