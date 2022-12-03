@@ -143,7 +143,7 @@ def player_turn(player_cards, dealer_cards)
     # play_again?(cards)
   else
     prompt "You Chose To Stay"
-    dealer_turn(dealer_cards)
+    dealer_turn(dealer_cards, player_cards)
   end
 end
 
