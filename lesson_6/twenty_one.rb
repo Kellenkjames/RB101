@@ -111,6 +111,7 @@ def show_player(cards)
 end
 
 def player_turn(cards)
+  
   loop do
     prompt "Hit or Stay? Enter H (Hit) or S (Stay)"
     answer = gets.chomp.upcase
@@ -121,14 +122,16 @@ def player_turn(cards)
 
   if player_bust?(cards)
     prompt "Player Bust! Dealer Wins."
-    play_again?(cards)
+    # play_again?(cards)
   else
     prompt "You Chose To Stay"
+    # Dealer's Turn
+    dealer_turn(cards) #! We need to pass the dealer cards as an argument.
   end
 end
 
 def show_dealer(cards)
-  prompt "Dealer has: #{cards[0]} and unknown card."
+  prompt "Dealer has: #{cards[0]} and unknown card"
 end
 
 def dealer_bust?(cards)
@@ -159,23 +162,10 @@ show_dealer(dealer_cards)
 # Show player cards
 show_player(player_cards)
 
-# Player Turn: the player goes first, and can decide to either "hit" or "stay".
+# Player Turn: The player goes first, and can decide to either "hit" or "stay". Repeat until bust or "stay". If player bust, dealer wins. 
 player_turn(player_cards)
 
-# Dealer Turn: when the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
-dealer_turn(dealer_cards)
+# Dealer Turn: When the player stays, it's the dealer's turn. The dealer must follow a strict rule for determining whether to hit or stay: hit until the total is at least 17. If the dealer busts, then the player wins.
+
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
-
-# Tests: 
-
-=begin
-
-* Game Issues:
-
-1. After one round, when player says "n" to exit game, the following message appears: "Dealer Chose To Stay."
-
-* Dealer Chose To Stay Runs every time. 
-
-
-=end
