@@ -114,7 +114,7 @@ def player_bust?(cards)
   true if total(cards) > BUST
 end
 
-def dealer_bust?(dealer_cards, player_cards)
+def dealer_bust?(dealer_cards, player_cards, dealer_hold)
   if total(dealer_cards) > BUST
     prompt "Dealer has: #{handle_join(dealer_cards)}"
     prompt "Dealer Busts! Player Wins."
@@ -125,7 +125,7 @@ def dealer_bust?(dealer_cards, player_cards)
   end
 end
 
-def dealer_turn(dealer_cards, player_cards)
+def dealer_turn(dealer_cards, player_cards, dealer_hold)
   values = CARDS.map { |card| card[1] }
   
   loop do
@@ -134,7 +134,7 @@ def dealer_turn(dealer_cards, player_cards)
     dealer_cards.delete("and")
   end
 
-  dealer_bust?(dealer_cards, player_cards)
+  dealer_bust?(dealer_cards, player_cards, dealer_hold)
 end
 
 def player_turn(player_cards, dealer_cards, player_hold)
