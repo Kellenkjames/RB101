@@ -5,6 +5,9 @@ require "pry"
 BUST = 21
 DEALER_MAX = 17
 
+player_stays = 0
+dealer_stays = 0
+
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
   ['C', '2'], ['D', '2'], ['H', '2'], ['S', '2'],
@@ -69,9 +72,6 @@ end
 
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
-
-player_decides_to_stay = 0
-dealer_decides_to_stay = 0
 
 def show_dealer(cards)
   prompt "Dealer has: #{cards[0]} and unknown card"
