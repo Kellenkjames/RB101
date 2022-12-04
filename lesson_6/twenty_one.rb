@@ -114,6 +114,11 @@ def player_bust?(cards)
   true if total(cards) > BUST
 end
 
+# Compare the total of player and dealer
+def winner?()
+
+end 
+
 def dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
   
@@ -153,7 +158,11 @@ def dealer_bust?(dealer_cards, player_cards, player_hold, dealer_hold)
     prompt "Dealer Chose To Stay."
     dealer_hold += 1
     # If player chose to stay and dealer chose to stay...
-    player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+    if player_hold == 1 && dealer_hold == 1
+      #* Call method that performs the calculation of who "won"
+    else
+      player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+    end
   end
 end
 
