@@ -115,9 +115,13 @@ def player_bust?(cards)
 end
 
 # Compare the total of player and dealer
-def winner?()
-
-end 
+def winner?(player_cards, dealer_cards)
+  if total(player_cards) > total(dealer_cards)
+    prompt "Player Wins! Dealer Loses."
+  else
+    prompt "Dealer Loses! Player Wins."
+  end
+end
 
 def dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
