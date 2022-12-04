@@ -8,6 +8,9 @@ DEALER_MAX = 17
 player_hold = 0
 dealer_hold = 0
 
+player_score = 0
+dealer_score = 0
+
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
   ['C', '2'], ['D', '2'], ['H', '2'], ['S', '2'],
@@ -114,12 +117,12 @@ def player_bust?(cards)
   true if total(cards) > BUST
 end
 
-def player_score(player_cards)
-  return total(player_cards)
-end
+def final_scores(player_cards, dealer_cards)
+  player_score = total(player_cards)
+  dealer_score = total(dealer_cards)
 
-def dealer_score(dealer_cards)
-  return total(dealer_cards)
+  player_score
+  dealer_score
 end
 
 def dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
