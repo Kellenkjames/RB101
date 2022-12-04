@@ -114,12 +114,12 @@ def player_bust?(cards)
   true if total(cards) > BUST
 end
 
-def final_player_score(player_cards)
+def player_score(player_cards)
   return total(player_cards)
 end
 
-def final_dealer_score(dealer_score)
-  return total(dealer_score)
+def dealer_score(dealer_cards)
+  return total(dealer_cards)
 end
 
 def dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
