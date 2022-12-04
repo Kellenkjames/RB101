@@ -168,9 +168,7 @@ def dealer_bust?(dealer_cards, player_cards, player_hold, dealer_hold)
   else
     prompt "Dealer Chose To Stay."
     dealer_hold += 1
-    # If player chose to stay and dealer chose to stay...
     if player_hold == 1 && dealer_hold == 1
-      # Call method that performs the calculation of who "won"
       player_calc_score(player_cards)
       dealer_calc_score(dealer_cards)
       display_results(player_cards, dealer_cards)
