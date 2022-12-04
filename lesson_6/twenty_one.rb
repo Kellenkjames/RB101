@@ -114,7 +114,7 @@ def player_bust?(cards)
   true if total(cards) > BUST
 end
 
-def dealer_turn(dealer_cards, player_cards, dealer_hold)
+def dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
   
   loop do
@@ -123,7 +123,7 @@ def dealer_turn(dealer_cards, player_cards, dealer_hold)
     dealer_cards.delete("and")
   end
 
-  dealer_bust?(dealer_cards, player_cards, dealer_hold)
+  dealer_bust?(dealer_cards, player_cards, player_hold, dealer_hold)
 end
 
 def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -141,18 +141,19 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "You Chose To Stay"
     player_hold += 1
-    dealer_turn(dealer_cards, player_cards, dealer_hold)
+    dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
   end
 end
 
-def dealer_bust?(dealer_cards, player_cards, dealer_hold)
+def dealer_bust?(dealer_cards, player_cards, player_hold, dealer_hold)
   if total(dealer_cards) > BUST
     prompt "Dealer has: #{handle_join(dealer_cards)}"
     prompt "Dealer Busts! Player Wins."
   else
     prompt "Dealer Chose To Stay."
     dealer_hold += 1
-    player_turn(player_cards, dealer_cards, player_hold, dealer_hold) #! We need additional logic if dealer and player decide to stay.
+    # If player chose to stay and dealer chose to stay...
+    player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
