@@ -114,16 +114,21 @@ def player_bust?(cards)
   true if total(cards) > BUST
 end
 
-def player_score(player_cards)
+def player_calc_score(player_cards)
   total(player_cards)
 end
 
-def dealer_score(dealer_cards)
+def dealer_calc_score(dealer_cards)
   total(dealer_cards)
 end
 
-p player_score(player_cards)
-p dealer_score(dealer_cards)
+def display_results(player_cards, dealer_cards)
+  if player_calc_score(player_cards) > dealer_calc_score(dealer_cards)
+    prompt "Player Wins! Dealer Loses."
+  else
+    prompt "Player Loses! Dealer Wins."
+  end
+end
 
 def dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
@@ -165,8 +170,10 @@ def dealer_bust?(dealer_cards, player_cards, player_hold, dealer_hold)
     dealer_hold += 1
     # If player chose to stay and dealer chose to stay...
     if player_hold == 1 && dealer_hold == 1
-      #* Call method that performs the calculation of who "won"
-      winner?(player_cards, dealer_cards)
+      # Call method that performs the calculation of who "won"
+      player_calc_score(player_cards)
+      dealer_calc_score(dealer_cards)
+      display_results(player_cards, dealer_cards)
     else
       player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     end
