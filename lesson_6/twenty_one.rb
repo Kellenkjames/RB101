@@ -181,7 +181,3 @@ end
 show_dealer(dealer_cards)
 show_player(player_cards)
 player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
-
-# Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
-
-# When you display the results, you also need to perform the calculation of who won. Having one method that does both the calculation and the display to the output makes it hard to reason about. The trick is to create a method that only returns the result of the game, and another that only handles displaying the result. You want to write methods that only do one thing.
