@@ -137,7 +137,7 @@ def dealer_turn(dealer_cards, player_cards, dealer_hold)
   dealer_bust?(dealer_cards, player_cards, dealer_hold)
 end
 
-def player_turn(player_cards, dealer_cards, player_hold)
+def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
     prompt "Hit or Stay? Enter H (Hit) or S (Stay)"
     answer = gets.chomp.upcase
@@ -152,13 +152,13 @@ def player_turn(player_cards, dealer_cards, player_hold)
   else
     prompt "You Chose To Stay"
     player_hold += 1
-    dealer_turn(dealer_cards, player_cards)
+    dealer_turn(dealer_cards, player_cards, dealer_hold)
   end
 end
 
 show_dealer(dealer_cards)
 show_player(player_cards)
-player_turn(player_cards, dealer_cards, player_hold)
+player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 
 # Comparing cards: when both the player and the dealer stay, it's time to compare the total value of the cards and see who has the highest value.
 
