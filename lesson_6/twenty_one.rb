@@ -117,9 +117,9 @@ end
 # Compare the total of player and dealer
 def winner?(player_cards, dealer_cards)
   if total(player_cards) > total(dealer_cards)
-    prompt "Player Wins! Dealer Loses."
+    prompt "Player Wins!"
   else
-    prompt "Dealer Loses! Player Wins."
+    prompt "Player Loses!"
   end
 end
 
@@ -164,6 +164,7 @@ def dealer_bust?(dealer_cards, player_cards, player_hold, dealer_hold)
     # If player chose to stay and dealer chose to stay...
     if player_hold == 1 && dealer_hold == 1
       #* Call method that performs the calculation of who "won"
+      winner?(player_cards, dealer_cards)
     else
       player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     end
