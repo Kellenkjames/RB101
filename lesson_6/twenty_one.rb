@@ -5,9 +5,6 @@ require "pry"
 BUST = 21
 DEALER_MAX = 17
 
-player_hold = 0
-dealer_hold = 0
-
 CARDS = [
   ['C', 'A'], ['D', 'A'], ['H', 'A'], ['S', 'A'],
   ['C', '2'], ['D', '2'], ['H', '2'], ['S', '2'],
@@ -70,8 +67,13 @@ def shuffle(cards)
   cards_arr = values.sample(2)
 end
 
+# Keep track of the cards for each player 
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
+
+# Keep track if player decides to stay
+player_hold = 0
+dealer_hold = 0
 
 def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt "Welcome to Twenty-One!"
@@ -121,7 +123,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 
   if player_bust?(player_cards)
-    prompt 'Player Bust! Dealer Wins.'
+    prompt 'Player Bust ❌ Dealer Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "You Chose To Stay With: #{total(player_cards)}"
@@ -133,7 +135,7 @@ end
 def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > BUST
     prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
-    prompt 'Dealer Busts! Player Wins.'
+    prompt 'Dealer Busts! Player Wins 🏆'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "Dealer Chose To Stay With: #{total(dealer_cards)}"
@@ -172,7 +174,7 @@ end
 
 def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
-    prompt 'Player Wins! Dealer Loses.'
+    prompt 'Player Wins 🏆 Dealer Loses.'
     prompt "=========================="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   elsif total(player_cards) == total(dealer_cards)
@@ -180,7 +182,7 @@ def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
     prompt "=========================="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
-    prompt 'Player Loses! Dealer Wins.'
+    prompt 'Player Loses ❌ Dealer Wins.'
     prompt "=========================="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
