@@ -172,6 +172,13 @@ def compare_cards(player_cards, dealer_cards)
   scores = { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
 end
 
+def tie_game?(player_cards, dealer_cards, player_hold, dealer_hold)
+  if total(player_cards) == total(dealer_cards)
+    prompt "It's a tie!"
+    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+  end
+end
+
 def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
     prompt 'Player Wins! Dealer Loses.'
