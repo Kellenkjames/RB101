@@ -114,21 +114,14 @@ def player_bust?(cards)
   true if total(cards) > BUST
 end
 
-def player_calc_score(player_cards)
-  total(player_cards)
+def game_results(player_cards, dealer_cards)
+  scores = []
+  scores << total(player_cards)
+  scores << total(dealer_cards)
+  scores
 end
 
-def dealer_calc_score(dealer_cards)
-  total(dealer_cards)
-end
-
-def display_results(player_cards, dealer_cards)
-  if player_calc_score(player_cards) > dealer_calc_score(dealer_cards)
-    prompt "Player Wins! Dealer Loses."
-  else
-    prompt "Player Loses! Dealer Wins."
-  end
-end
+p game_results(player_cards, dealer_cards)
 
 def dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
@@ -153,7 +146,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 
   if player_bust?(player_cards)
     prompt "Player Bust! Dealer Wins."
-    # play_again?(cards) #! Last part of the application to fix. 
+    # play_again?(cards) #! Last part of the application to fix.
   else
     prompt "You Chose To Stay"
     player_hold += 1
