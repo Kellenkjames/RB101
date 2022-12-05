@@ -124,7 +124,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     prompt 'Player Bust! Dealer Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
-    prompt 'You Chose To Stay'
+    prompt "You Chose To Stay With: #{total(player_cards)}"
     player_hold += 1
     dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
@@ -136,7 +136,7 @@ def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
     prompt 'Dealer Busts! Player Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
-    prompt 'Dealer Chose To Stay.'
+    prompt "Dealer Chose To Stay With: #{total(dealer_cards)}"
     dealer_hold += 1
     if player_hold == 1 && dealer_hold == 1 # When both player and dealer choose to stay - compare totals.
       compare_cards(player_cards, dealer_cards)
@@ -172,19 +172,17 @@ end
 
 def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
-    prompt "Player: #{total(player_cards)} Dealer: #{total(dealer_cards)}"
     prompt 'Player Wins! Dealer Loses.'
-    prompt "=============="
+    prompt "=========================="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   elsif total(player_cards) == total(dealer_cards)
-    prompt "Player: #{total(player_cards)} Dealer: #{total(dealer_cards)}"
     prompt "It's a tie!"
-    prompt "=============="
+    prompt "=========================="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "Player: #{total(player_cards)} Dealer: #{total(dealer_cards)}"
     prompt 'Player Loses! Dealer Wins.'
-    prompt "=============="
+    prompt "=========================="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
