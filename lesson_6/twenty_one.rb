@@ -105,9 +105,9 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     break if total(dealer_cards) >= DEALER_MAX
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
+    prompt "Dealer now has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
   end
   
-  prompt "Dealer now has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
@@ -159,7 +159,7 @@ end
 def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   answer = nil
   loop do
-    prompt 'Do you want to play again? Y (Yes) or n (No).'
+    prompt 'Do you want to play again? Y (Yes) or N (No).'
     answer = gets.chomp.upcase
     break if answer == 'Y' || answer == 'N'
   end
