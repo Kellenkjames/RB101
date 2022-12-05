@@ -139,7 +139,7 @@ def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
     dealer_hold += 1
     if player_hold == 1 && dealer_hold == 1
       compare_cards(player_cards, dealer_cards)
-      display_results(player_cards, dealer_cards)
+      display_results(player_cards, dealer_cards, player_hold, dealer_hold)
     else
       player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     end
