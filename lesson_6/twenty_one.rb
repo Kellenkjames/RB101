@@ -81,21 +81,21 @@ def show_player(cards)
   prompt "You have: #{cards[0]} and #{cards[1]}"
 end
 
-def reset_game(player_cards, dealer_cards)
+def reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
   show_dealer(dealer_cards)
   show_player(player_cards)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def play_again?(player_cards, dealer_cards)
-  answer = nil 
+  answer = nil
   loop do
     prompt "Do you want to play again? Y (Yes) or n (No)."
     answer = gets.chomp.upcase
     break if answer == 'Y' || answer == 'N'
   end
   if answer == 'Y'
-    reset_game(player_cards, dealer_cards)
+    reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
   elsif answer == 'N'
     prompt "Thanks for Playing Twenty-One. Goodbye!"
   end
