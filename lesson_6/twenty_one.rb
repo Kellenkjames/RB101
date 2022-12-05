@@ -107,7 +107,7 @@ end
 def hit_me(cards)
   values = CARDS.map { |card| card[1] }
   cards << values.sample(1).join(' ')
-  cards.delete("and")
+  cards.delete('and')
   prompt "You have: #{handle_join(cards)}"
 end
 
@@ -133,7 +133,7 @@ def dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
   loop do
     break if total(dealer_cards) >= DEALER_MAX
     dealer_cards << values.sample(1).join(' ')
-    dealer_cards.delete("and")
+    dealer_cards.delete('and')
   end
 
   dealer_bust?(dealer_cards, player_cards, player_hold, dealer_hold)
