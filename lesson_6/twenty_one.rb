@@ -88,7 +88,7 @@ def reset_game(player_cards, dealer_cards)
   dealer_turn(dealer_cards)
 end
 
-def play_again?(cards)
+def play_again?(player_cards, dealer_cards)
   loop do
     prompt "Do you want to play again? Y (Yes) or n (No)."
     answer = gets.chomp.upcase
@@ -149,7 +149,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 
   if player_bust?(player_cards)
     prompt "Player Bust! Dealer Wins."
-    # play_again?(cards) #! Last part of the application to fix.
+    play_again?(player_cards, dealer_cards)
   else
     prompt "You Chose To Stay"
     player_hold += 1
