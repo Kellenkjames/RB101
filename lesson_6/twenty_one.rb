@@ -172,9 +172,14 @@ def compare_cards(player_cards, dealer_cards)
   scores = { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
 end
 
-def display_results(player_cards, dealer_cards)
-  prompt compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer] ? 
-  "Player Wins! Dealer Loses." : "Player Loses! Dealer Wins."
+def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
+  if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
+    prompt "Player Wins! Dealer Loses."
+    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+  else
+    promt "Player Loses! Dealer Wins."
+    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+  end
 end
 
 initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
