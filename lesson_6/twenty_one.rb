@@ -153,9 +153,7 @@ def reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
   dealer_cards = shuffle(CARDS)
   player_hold = 0
   dealer_hold = 0
-  show_dealer(dealer_cards)
-  show_player(player_cards)
-  player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
