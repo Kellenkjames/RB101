@@ -91,7 +91,7 @@ def hit_me(cards)
   values = CARDS.map { |card| card[1] }
   cards << values.sample(1).join(' ')
   cards.delete('and')
-  prompt "You have: #{handle_join(cards)}"
+  prompt "You now have: #{handle_join(cards)}"
 end
 
 def player_bust?(cards)
@@ -149,6 +149,8 @@ end
 def reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
   player_cards = shuffle(CARDS)
   dealer_cards = shuffle(CARDS)
+  player_hold = 0
+  dealer_hold = 0
   show_dealer(dealer_cards)
   show_player(player_cards)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -179,4 +181,16 @@ def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+
+=begin
+
+Add code for the following conditions:
+
+1. Tiebreaker 
+
+2. Player hits => show updated score 
+
+3. Dealer hits => show updated score 
+
+=end 
 
