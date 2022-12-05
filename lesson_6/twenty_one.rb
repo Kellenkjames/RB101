@@ -161,11 +161,7 @@ def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
     answer = gets.chomp.upcase
     break if answer == 'Y' || answer == 'N'
   end
-  if answer == 'Y'
-    reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
-  elsif answer == 'N'
-    prompt "Thanks for Playing Twenty-One. Goodbye!"
-  end
+  prompt answer == 'Y' ? reset_game(player_cards, dealer_cards, player_hold, dealer_hold) : 'Thanks for Playing Twenty-One. Goodbye!'
 end
 
 def compare_cards(player_cards, dealer_cards)
