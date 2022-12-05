@@ -82,7 +82,10 @@ def show_player(cards)
 end
 
 def reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
+  #! Need to reshuffle the cards for game reset.
+  dealer_cards
   show_dealer(dealer_cards)
+  player_cards
   show_player(player_cards)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
