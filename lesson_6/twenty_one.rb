@@ -147,6 +147,7 @@ def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
+  system 'clear'
   player_cards = shuffle(CARDS)
   dealer_cards = shuffle(CARDS)
   player_hold = 0
