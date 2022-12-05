@@ -54,7 +54,7 @@ def total(cards)
   sum
 end
 
-def handle_join(cards, word="and")
+def handle_join(cards, word='and')
   if cards.size == 2
     cards.insert(-2, word).join(' ')
   elsif cards.size > 2
@@ -112,7 +112,7 @@ end
 
 def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
-    prompt "Hit or Stay? Enter H (Hit) or S (Stay)"
+    prompt 'Hit or Stay? Enter H (Hit) or S (Stay)'
     answer = gets.chomp.upcase
     
     hit_me(player_cards) if answer == 'H'
@@ -120,10 +120,10 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 
   if player_bust?(player_cards)
-    prompt "Player Bust! Dealer Wins."
+    prompt 'Player Bust! Dealer Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
-    prompt "You Chose To Stay"
+    prompt 'You Chose To Stay'
     player_hold += 1
     dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
@@ -132,10 +132,10 @@ end
 def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > BUST
     prompt "Dealer has: #{handle_join(dealer_cards)}"
-    prompt "Dealer Busts! Player Wins."
+    prompt 'Dealer Busts! Player Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
-    prompt "Dealer Chose To Stay."
+    prompt 'Dealer Chose To Stay.'
     dealer_hold += 1
     if player_hold == 1 && dealer_hold == 1 # When both player and dealer choose to stay - compare totals.
       compare_cards(player_cards, dealer_cards)
@@ -157,7 +157,7 @@ end
 def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   answer = nil
   loop do
-    prompt "Do you want to play again? Y (Yes) or n (No)."
+    prompt 'Do you want to play again? Y (Yes) or n (No).'
     answer = gets.chomp.upcase
     break if answer == 'Y' || answer == 'N'
   end
@@ -170,10 +170,10 @@ end
 
 def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
-    prompt "Player Wins! Dealer Loses."
+    prompt 'Player Wins! Dealer Loses.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
-    prompt "Player Loses! Dealer Wins."
+    prompt 'Player Loses! Dealer Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
