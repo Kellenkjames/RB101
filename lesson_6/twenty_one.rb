@@ -87,7 +87,7 @@ def reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def play_again?(player_cards, dealer_cards)
+def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   answer = nil
   loop do
     prompt "Do you want to play again? Y (Yes) or n (No)."
