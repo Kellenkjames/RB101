@@ -84,22 +84,20 @@ end
 def reset_game(player_cards, dealer_cards)
   show_dealer(dealer_cards)
   show_player(player_cards)
-  player_turn(player_cards)
-  dealer_turn(dealer_cards)
+  player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def play_again?(player_cards, dealer_cards)
+  answer = nil 
   loop do
     prompt "Do you want to play again? Y (Yes) or n (No)."
     answer = gets.chomp.upcase
-
-    if answer == 'Y'
-        reset_game(player_cards, dealer_cards)
-      break
-    elsif answer == 'N'
-      prompt "Thanks for Playing Twenty-One. Goodbye!"
-      break
-    end
+    break if answer == 'Y' || answer == 'N'
+  end
+  if answer == 'Y'
+    reset_game(player_cards, dealer_cards)
+  elsif answer == 'N'
+    prompt "Thanks for Playing Twenty-One. Goodbye!"
   end
 end
 
