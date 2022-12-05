@@ -73,12 +73,29 @@ end
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
+def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+  show_dealer(dealer_cards)
+  show_player(player_cards)
+  player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+end
+
 def show_dealer(cards)
   prompt "Dealer has: #{cards[0]} and unknown card"
 end
 
 def show_player(cards)
   prompt "You have: #{cards[0]} and #{cards[1]}"
+end
+
+def hit_me(cards)
+  values = CARDS.map { |card| card[1] }
+  cards << values.sample(1).join(' ')
+  cards.delete('and')
+  prompt "You have: #{handle_join(cards)}"
+end
+
+def player_bust?(cards)
+  true if total(cards) > BUST
 end
 
 def reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -102,17 +119,6 @@ def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   elsif answer == 'N'
     prompt "Thanks for Playing Twenty-One. Goodbye!"
   end
-end
-
-def hit_me(cards)
-  values = CARDS.map { |card| card[1] }
-  cards << values.sample(1).join(' ')
-  cards.delete('and')
-  prompt "You have: #{handle_join(cards)}"
-end
-
-def player_bust?(cards)
-  true if total(cards) > BUST
 end
 
 def game_results(player_cards, dealer_cards)
@@ -174,6 +180,5 @@ def dealer_bust?(dealer_cards, player_cards, player_hold, dealer_hold)
   end
 end
 
-show_dealer(dealer_cards)
-show_player(player_cards)
-player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+
