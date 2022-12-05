@@ -115,13 +115,16 @@ def player_bust?(cards)
 end
 
 def game_results(player_cards, dealer_cards)
-  scores = []
-  scores << total(player_cards)
-  scores << total(dealer_cards)
-  scores
+  scores = { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
 end
 
-p game_results(player_cards, dealer_cards)
+def display_results(player_cards, dealer_cards)
+  if game_results(player_cards, dealer_cards)[:Player] > game_results(player_cards, dealer_cards)[:Dealer]
+    prompt "Player Wins! Dealer Loses."
+  else
+    prompt "Player Loses! Dealer Wins."
+  end
+end
 
 def dealer_turn(dealer_cards, player_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
