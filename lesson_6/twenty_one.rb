@@ -147,7 +147,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 
   if player_bust?(player_cards)
     prompt "Player Bust! Dealer Wins."
-    play_again?(player_cards, dealer_cards)
+    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "You Chose To Stay"
     player_hold += 1
