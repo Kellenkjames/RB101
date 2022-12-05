@@ -74,6 +74,7 @@ player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
 def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+  prompt "Welcome to Twenty-One!"
   show_dealer(dealer_cards)
   show_player(player_cards)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -112,11 +113,11 @@ end
 
 def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
-    prompt 'Hit or Stay? Enter H (Hit) or S (Stay)'
-    answer = gets.chomp.upcase
+    prompt 'hit or stay? Enter h (hit) or s (stay)'
+    answer = gets.chomp.downcase
     
-    hit_me(player_cards) if answer == 'H'
-    break if answer == 'S' || player_bust?(player_cards)
+    hit_me(player_cards) if answer == 'h'
+    break if answer == 's' || player_bust?(player_cards)
   end
 
   if player_bust?(player_cards)
@@ -131,7 +132,7 @@ end
 
 def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > BUST
-    prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(cards)}"
+    prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
     prompt 'Dealer Busts! Player Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
@@ -158,11 +159,11 @@ end
 def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   answer = nil
   loop do
-    prompt 'Do you want to play again? Y (Yes) or N (No).'
-    answer = gets.chomp.upcase
-    break if answer == 'Y' || answer == 'N'
+    prompt 'Do you want to play again? y (yes) or n (no).'
+    answer = gets.chomp.downcase
+    break if answer == 'y' || answer == 'n'
   end
-  prompt answer == 'Y' ? reset_game(player_cards, dealer_cards, player_hold, dealer_hold) : 'Thanks for Playing Twenty-One. Goodbye!'
+  prompt answer == 'y' ? reset_game(player_cards, dealer_cards, player_hold, dealer_hold) : 'Thanks for Playing Twenty-One. Goodbye!'
 end
 
 def compare_cards(player_cards, dealer_cards)
@@ -173,14 +174,17 @@ def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
     prompt "Player: #{total(player_cards)} Dealer: #{total(dealer_cards)}"
     prompt 'Player Wins! Dealer Loses.'
+    prompt "=============="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   elsif total(player_cards) == total(dealer_cards)
     prompt "Player: #{total(player_cards)} Dealer: #{total(dealer_cards)}"
     prompt "It's a tie!"
+    prompt "=============="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "Player: #{total(player_cards)} Dealer: #{total(dealer_cards)}"
     prompt 'Player Loses! Dealer Wins.'
+    prompt "=============="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
