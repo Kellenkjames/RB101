@@ -165,8 +165,7 @@ def dealer_bust?(dealer_cards, player_cards, player_hold, dealer_hold)
     prompt "Dealer Chose To Stay."
     dealer_hold += 1
     if player_hold == 1 && dealer_hold == 1
-      player_calc_score(player_cards)
-      dealer_calc_score(dealer_cards)
+      game_results(player_cards, dealer_cards)
       display_results(player_cards, dealer_cards)
     else
       player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
