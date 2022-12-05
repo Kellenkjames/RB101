@@ -166,6 +166,7 @@ def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
     break if answer == 'y' || answer == 'n'
   end
   prompt answer == 'y' ? reset_game(player_cards, dealer_cards, player_hold, dealer_hold) : 'Thanks for Playing Twenty-One. Goodbye!'
+  system 'clear'
 end
 
 def compare_cards(player_cards, dealer_cards)
