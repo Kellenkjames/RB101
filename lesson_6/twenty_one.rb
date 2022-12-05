@@ -172,19 +172,31 @@ def compare_cards(player_cards, dealer_cards)
   scores = { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
 end
 
+def player_won(player_cards, dealer_cards, player_hold, dealer_hold)
+  prompt 'Player Wins 🏆 Dealer Loses.'
+  prompt "=========================="
+  play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+end
+
+def tie_game(player_cards, dealer_cards, player_hold, dealer_hold)
+  prompt "It's a tie!"
+  prompt "=========================="
+  play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+end
+
+def player_lost(player_cards, dealer_cards, player_hold, dealer_hold)
+  prompt 'Player Loses ❌ Dealer Wins.'
+  prompt "=========================="
+  play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+end
+
 def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
-    prompt 'Player Wins 🏆 Dealer Loses.'
-    prompt "=========================="
-    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+    player_won(player_cards, dealer_cards, player_hold, dealer_hold)
   elsif total(player_cards) == total(dealer_cards)
-    prompt "It's a tie!"
-    prompt "=========================="
-    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+    tie_game(player_cards, dealer_cards, player_hold, dealer_hold)
   else
-    prompt 'Player Loses ❌ Dealer Wins.'
-    prompt "=========================="
-    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+    player_lost(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
