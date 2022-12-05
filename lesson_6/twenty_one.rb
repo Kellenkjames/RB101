@@ -180,7 +180,6 @@ def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
     prompt "=========================="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
-    prompt "Player: #{total(player_cards)} Dealer: #{total(dealer_cards)}"
     prompt 'Player Loses! Dealer Wins.'
     prompt "=========================="
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
