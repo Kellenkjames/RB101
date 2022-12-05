@@ -137,7 +137,7 @@ def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
     prompt "Dealer Chose To Stay."
     dealer_hold += 1
     if player_hold == 1 && dealer_hold == 1
-      game_results(player_cards, dealer_cards)
+      compare_cards(player_cards, dealer_cards)
       display_results(player_cards, dealer_cards)
     else
       player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -168,12 +168,12 @@ def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
-def game_results(player_cards, dealer_cards)
+def compare_cards(player_cards, dealer_cards)
   scores = { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
 end
 
 def display_results(player_cards, dealer_cards)
-  if game_results(player_cards, dealer_cards)[:Player] > game_results(player_cards, dealer_cards)[:Dealer]
+  if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
     prompt "Player Wins! Dealer Loses."
   else
     prompt "Player Loses! Dealer Wins."
