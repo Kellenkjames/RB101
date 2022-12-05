@@ -84,7 +84,7 @@ def show_dealer(cards)
 end
 
 def show_player(cards)
-  prompt "You have: #{cards[0]} and #{cards[1]}"
+  prompt "You have: #{cards[0]} and #{cards[1]} | Total: #{total(cards)}"
 end
 
 def hit_me(cards)
@@ -105,7 +105,6 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     break if total(dealer_cards) >= DEALER_MAX
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
-    prompt "Dealer now has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
   end
   
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -132,7 +131,7 @@ end
 
 def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > BUST
-    prompt "Dealer has: #{handle_join(dealer_cards)}"
+    prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(cards)}"
     prompt 'Dealer Busts! Player Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
@@ -187,5 +186,4 @@ def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
-
 
