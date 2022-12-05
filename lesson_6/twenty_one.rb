@@ -133,6 +133,7 @@ def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > BUST
     prompt "Dealer has: #{handle_join(dealer_cards)}"
     prompt "Dealer Busts! Player Wins."
+    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "Dealer Chose To Stay."
     dealer_hold += 1
@@ -148,7 +149,6 @@ end
 def reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
   player_cards = shuffle(CARDS)
   dealer_cards = shuffle(CARDS)
-
   show_dealer(dealer_cards)
   show_player(player_cards)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -173,11 +173,8 @@ def compare_cards(player_cards, dealer_cards)
 end
 
 def display_results(player_cards, dealer_cards)
-  if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
-    prompt "Player Wins! Dealer Loses."
-  else
-    prompt "Player Loses! Dealer Wins."
-  end
+  prompt compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer] ? 
+  "Player Wins! Dealer Loses." : "Player Loses! Dealer Wins."
 end
 
 initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
