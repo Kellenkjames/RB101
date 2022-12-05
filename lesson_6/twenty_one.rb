@@ -106,7 +106,8 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
   end
-
+  
+  prompt "Dealer now has: #{handle_join(dealer_cards)}"
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
