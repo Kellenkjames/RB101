@@ -76,7 +76,7 @@ player_hold = 0
 dealer_hold = 0
 
 def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
-  prompt "Welcome to Twenty-One!"
+  prompt "Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️"
   show_dealer(dealer_cards)
   show_player(player_cards)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
