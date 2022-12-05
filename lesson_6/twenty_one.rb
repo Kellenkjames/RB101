@@ -91,7 +91,7 @@ def hit_me(cards)
   values = CARDS.map { |card| card[1] }
   cards << values.sample(1).join(' ')
   cards.delete('and')
-  prompt "You now have: #{handle_join(cards)}"
+  prompt "You now have: #{handle_join(cards)} | Total: #{total(cards)}"
 end
 
 def player_bust?(cards)
@@ -107,7 +107,7 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     dealer_cards.delete('and')
   end
   
-  prompt "Dealer now has: #{handle_join(dealer_cards)}"
+  prompt "Dealer now has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
