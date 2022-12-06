@@ -168,13 +168,7 @@ def reset_game
   initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
-  answer = nil
-  loop do
-    prompt 'Do you want to play again? y (yes) or n (no)'
-    answer = gets.chomp.downcase
-    break if answer == 'y' || answer == 'n'
-  end
+def game_reset?(answer)
   if answer == 'y'
     reset_game
   elsif answer == 'n'
@@ -182,6 +176,16 @@ def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt 'Please choose y (yes) or n (no)'
   end
+end
+
+def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+  answer = nil
+  loop do
+    prompt 'Do you want to play again? y (yes) or n (no)'
+    answer = gets.chomp.downcase
+    break if answer == 'y' || answer == 'n'
+  end
+  game_reset?(answer)
 end
 
 # both player and dealer stays - compare cards
