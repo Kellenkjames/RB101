@@ -36,12 +36,12 @@ end
 def total(cards)
   # cards = [['H', '3'], ['S', 'Q'], ... ]
   values = cards.map { |card| card }
-  
+
   sum = 0
   values.each do |value|
     sum += calc_sum(value)
   end
-  
+
   # correct for Aces
   values.select { |value| value == 'A' }.count.times do
     sum -= 10 if sum > 21
@@ -50,7 +50,7 @@ def total(cards)
   sum
 end
 
-def handle_join(cards, word='and')
+def handle_join(cards, word = 'and')
   if cards.size == 2
     cards.insert(-2, word).join(' ')
   elsif cards.size > 2
