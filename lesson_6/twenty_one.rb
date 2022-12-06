@@ -64,7 +64,7 @@ def shuffle(cards)
   cards.map { |card| card[1] }.sample(2)
 end
 
-# Keep track of the cards for each player 
+# Keep track of the cards for each player
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
@@ -73,7 +73,7 @@ player_hold = 0
 dealer_hold = 0
 
 def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
-  prompt "Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️"
+  prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
   show_player(player_cards)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -100,13 +100,14 @@ end
 
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
-  
+
   loop do
     break if total(dealer_cards) >= 17
+
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
   end
-  
+
   dealer_21?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
