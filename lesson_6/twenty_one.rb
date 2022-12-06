@@ -15,7 +15,7 @@ CARDS = [
   %w[C 9], %w[D 9], %w[H 9], %w[S 9],
   %w[C 10], %w[D 10], %w[H 10], %w[S 10],
   %w[C J], %w[D J], %w[H J], %w[S J],
-  %w[C Q], %w[D Q], %w[H, Q], %w[S Q],
+  %w[C Q], %w[D Q], %w[H Q], %w[S Q],
   %w[C K], %w[D K], %w[H K], %w[S K]
 ].freeze
 
