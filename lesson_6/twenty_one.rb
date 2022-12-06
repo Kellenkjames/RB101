@@ -5,7 +5,7 @@ DEALER_MAX = 17
 
 CARDS = [
   %w[C A], %w[D A], %w[H A], %w[S A],
-  %w[C 2], %w[D 2] %w[H 2] %w[S 2],
+  %w[C 2], %w[D 2], %w[H 2], %w[S 2],
   %w[C 3], %w[D 3], %w[H 3], %w[S 3],
   %w[C 4], %w[D 4], %w[H 4], %w[S 4],
   %w[C 5], %w[D 5], %w[H 5], %w[S 5],
