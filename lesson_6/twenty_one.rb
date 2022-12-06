@@ -1,7 +1,6 @@
-# frozen_string_literal: true
+require 'pry'
 
-BUST = 21
-DEALER_MAX = 17
+# frozen_string_literal: true
 
 CARDS = [
   %w[C A], %w[D A], %w[H A], %w[S A],
@@ -23,24 +22,30 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
+# What value do I need to return from this method => sum
+def calc_sum(value)
+  sum = 0 
+  if value == 'A'
+    sum += 11
+  elsif value == 'and'
+    sum += 0
+  elsif value.to_i == 0 # J, Q, K
+    sum += 10
+  else
+    sum += value.to_i
+  end
+end
+
 # Calculating Aces
 def total(cards)
   # cards = [['H', '3'], ['S', 'Q'], ... ]
   values = cards.map { |card| card }
-
+  
   sum = 0
   values.each do |value|
-    if value == 'A'
-      sum += 11
-    elsif value == 'and'
-      sum += 0
-    elsif value.to_i == 0 # J, Q, K
-      sum += 10
-    else
-      sum += value.to_i
-    end
+    sum += calc_sum(value)
   end
-
+  
   # correct for Aces
   values.select { |value| value == 'A' }.count.times do
     sum -= 10 if sum > 21
@@ -95,20 +100,20 @@ def hit_me(cards)
   prompt "You now have: #{handle_join(cards)} | Total: #{total(cards)}"
 end
 
-def player_bust?(cards)
-  true if total(cards) > BUST
+def player_21?(cards)
+  true if total(cards) > 21
 end
 
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
   
   loop do
-    break if total(dealer_cards) >= DEALER_MAX
+    break if total(dealer_cards) >= 17
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
   end
   
-  dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
+  dealer_21?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -117,11 +122,11 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     answer = gets.chomp.downcase
     
     hit_me(player_cards) if answer == 'h'
-    break if answer == 's' || player_bust?(player_cards)
+    break if answer == 's' || player_21?(player_cards)
   end
 
-  if player_bust?(player_cards)
-    prompt 'Player Bust ❌ Dealer Wins.'
+  if player_21?(player_cards)
+    prompt 'Player 21 ❌ Dealer Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "You Chose To Stay With: #{total(player_cards)}"
@@ -130,10 +135,10 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
-def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
-  if total(dealer_cards) > BUST
+def dealer_21?(player_cards, dealer_cards, player_hold, dealer_hold)
+  if total(dealer_cards) > 21
     prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
-    prompt 'Dealer Busts! Player Wins 🏆'
+    prompt 'Dealer 21s! Player Wins 🏆'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "Dealer Chose To Stay With: #{total(dealer_cards)}"
