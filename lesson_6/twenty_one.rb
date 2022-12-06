@@ -94,7 +94,7 @@ def hit_me(cards)
   prompt "You now have: #{handle_join(cards)} | Total: #{total(cards)}"
 end
 
-def player_21?(cards)
+def player_bust?(cards)
   true if total(cards) > 21
 end
 
@@ -108,7 +108,7 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     dealer_cards.delete('and')
   end
 
-  dealer_21?(player_cards, dealer_cards, player_hold, dealer_hold)
+  dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -117,10 +117,10 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     answer = gets.chomp.downcase
     
     hit_me(player_cards) if answer == 'h'
-    break if answer == 's' || player_21?(player_cards)
+    break if answer == 's' || player_bust?(player_cards)
   end
 
-  if player_21?(player_cards)
+  if player_bust?(player_cards)
     prompt 'Player 21 ❌ Dealer Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
@@ -130,7 +130,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
-def dealer_21?(player_cards, dealer_cards, player_hold, dealer_hold)
+def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > 21
     prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
     prompt 'Dealer 21s! Player Wins 🏆'
