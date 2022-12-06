@@ -111,6 +111,17 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
+def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
+  if player_bust?(player_cards)
+    prompt 'Player Bust ❌ Dealer Wins.'
+    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+  else
+    prompt "You Chose To Stay With: #{total(player_cards)}"
+    player_hold += 1
+    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+  end
+end
+
 def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
     prompt 'hit or stay? Enter h (hit) or s (stay)'
@@ -120,14 +131,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     break if answer == 's' || player_bust?(player_cards)
   end
 
-  if player_bust?(player_cards)
-    prompt 'Player Bust ❌ Dealer Wins.'
-    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
-  else
-    prompt "You Chose To Stay With: #{total(player_cards)}"
-    player_hold += 1
-    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
-  end
+  player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
