@@ -126,7 +126,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
     prompt 'hit or stay? Enter h (hit) or s (stay)'
     answer = gets.chomp.downcase
-    
+
     hit_me(player_cards) if answer == 'h'
     break if answer == 's' || player_bust?(player_cards)
   end
@@ -134,20 +134,28 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
+def dealer_did_bust(player_cards, dealer_cards, player_hold, dealer_hold)
+  prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
+  prompt 'Dealer Busts! Player Wins 🏆'
+  play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+end
+
+def player_dealer_both_stay?(player_cards, dealer_cards, player_hold, dealer_hold)
+  if player_hold == 1 && dealer_hold == 1
+    compare_cards(player_cards, dealer_cards)
+    display_results(player_cards, dealer_cards, player_hold, dealer_hold)
+  else
+    player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+  end
+end
+
 def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > 21
-    prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
-    prompt 'Dealer Busts! Player Wins 🏆'
-    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+    dealer_did_bust(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "Dealer Chose To Stay With: #{total(dealer_cards)}"
     dealer_hold += 1
-    if player_hold == 1 && dealer_hold == 1 # When both player and dealer choose to stay
-      compare_cards(player_cards, dealer_cards)
-      display_results(player_cards, dealer_cards, player_hold, dealer_hold)
-    else
-      player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
-    end
+    player_dealer_both_stay?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
