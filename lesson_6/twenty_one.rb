@@ -161,7 +161,7 @@ end
 def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   answer = nil
   loop do
-    prompt 'Do you want to play again? y (yes) or n (no).'
+    prompt 'Do you want to play again? y (yes) or n (no)'
     answer = gets.chomp.downcase
     break if answer == 'y' || answer == 'n'
   end
@@ -174,19 +174,19 @@ end
 
 def player_won(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Player Wins 🏆 Dealer Loses.'
-  prompt "=========================="
+  prompt "==========================="
   play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def tie_game(player_cards, dealer_cards, player_hold, dealer_hold)
-  prompt "It's a tie!"
-  prompt "=========================="
+  prompt "It's a tie 👯"
+  prompt "==========================="
   play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def player_lost(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Player Loses ❌ Dealer Wins.'
-  prompt "=========================="
+  prompt "==========================="
   play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
