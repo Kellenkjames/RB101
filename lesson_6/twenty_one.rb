@@ -114,7 +114,7 @@ end
 def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
   if player_bust?(player_cards)
     prompt 'Player Bust ❌ Dealer Wins.'
-    play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+    play_again?
   else
     prompt "You Chose To Stay With: #{total(player_cards)}"
     player_hold += 1
@@ -137,7 +137,7 @@ end
 def dealer_busted(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
   prompt 'Dealer Busts! Player Wins 🏆'
-  play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+  play_again?
 end
 
 def player_dealer_both_stay?(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -179,7 +179,7 @@ def game_reset?(answer)
   end
 end
 
-def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+def play_again?
   answer = nil
   loop do
     prompt 'Do you want to play again? y (yes) or n (no)'
@@ -197,19 +197,19 @@ end
 def player_won(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Player Wins 🏆 Dealer Loses.'
   prompt "==========================="
-  play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+  play_again?
 end
 
 def tie_game(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt "It's a tie 👯"
   prompt "==========================="
-  play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+  play_again?
 end
 
 def player_lost(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Player Loses ❌ Dealer Wins.'
   prompt "==========================="
-  play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
+  play_again?
 end
 
 def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
