@@ -169,9 +169,10 @@ def reset_game
 end
 
 def game_reset?(answer)
-  if answer == 'y'
+  case answer
+  when 'y'
     reset_game
-  elsif answer == 'n'
+  when 'n'
     prompt 'Thanks for Playing Twenty-One. Goodbye!'
   else
     prompt 'Please choose y (yes) or n (no)'
