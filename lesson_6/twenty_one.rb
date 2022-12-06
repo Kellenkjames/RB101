@@ -171,6 +171,7 @@ def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
     prompt 'Thanks for Playing Twenty-One. Goodbye!'
   else
     prompt 'Please choose y (yes) or n (no)'
+  end
 end
 
 # both player and dealer stays - compare cards
