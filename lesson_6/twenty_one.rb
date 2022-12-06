@@ -61,7 +61,7 @@ def handle_join(cards, word = 'and')
 end
 
 def shuffle(cards)
-  values = cards.map { |card| card[1] }.sample(2)
+  cards.map { |card| card[1] }.sample(2)
 end
 
 # Keep track of the cards for each player 
