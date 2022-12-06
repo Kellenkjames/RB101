@@ -159,13 +159,13 @@ def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
-def reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
+def reset_game
   system 'clear'
-  player_deck = shuffle(CARDS)
-  dealer_deck = shuffle(CARDS)
-  player_stay = 0
-  dealer_stay = 0
-  initialize_game(player_deck, dealer_deck, player_stay, dealer_stay)
+  player_cards = shuffle(CARDS)
+  dealer_cards = shuffle(CARDS)
+  player_hold = 0
+  dealer_hold = 0
+  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -176,7 +176,7 @@ def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
     break if answer == 'y' || answer == 'n'
   end
   if answer == 'y'
-    reset_game(player_cards, dealer_cards, player_hold, dealer_hold)
+    reset_game
   elsif answer == 'n'
     prompt 'Thanks for Playing Twenty-One. Goodbye!'
   else
