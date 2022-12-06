@@ -140,7 +140,7 @@ def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "Dealer Chose To Stay With: #{total(dealer_cards)}"
     dealer_hold += 1
-    if player_hold == 1 && dealer_hold == 1 # When both player and dealer choose to stay - compare totals.
+    if player_hold == 1 && dealer_hold == 1 # When both player and dealer choose to stay
       compare_cards(player_cards, dealer_cards)
       display_results(player_cards, dealer_cards, player_hold, dealer_hold)
     else
@@ -168,6 +168,7 @@ def play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt answer == 'y' ? reset_game(player_cards, dealer_cards, player_hold, dealer_hold) : 'Thanks for Playing Twenty-One. Goodbye!'
 end
 
+# both player and dealer stays - compare cards
 def compare_cards(player_cards, dealer_cards)
   scores = { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
 end
