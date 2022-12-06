@@ -71,7 +71,7 @@ end
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
-# Keep track if player decides to stay
+# Keep track when player decides to hold position
 player_hold = 0
 dealer_hold = 0
 
