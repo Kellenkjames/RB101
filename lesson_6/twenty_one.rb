@@ -121,7 +121,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 
   if player_bust?(player_cards)
-    prompt 'Player 21 ❌ Dealer Wins.'
+    prompt 'Player Bust ❌ Dealer Wins.'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "You Chose To Stay With: #{total(player_cards)}"
@@ -133,7 +133,7 @@ end
 def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > 21
     prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
-    prompt 'Dealer 21s! Player Wins 🏆'
+    prompt 'Dealer Busts! Player Wins 🏆'
     play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "Dealer Chose To Stay With: #{total(dealer_cards)}"
