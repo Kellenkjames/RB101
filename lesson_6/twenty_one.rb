@@ -134,7 +134,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def dealer_did_bust(player_cards, dealer_cards, player_hold, dealer_hold)
+def dealer_busted(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
   prompt 'Dealer Busts! Player Wins 🏆'
   play_again?(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -151,7 +151,7 @@ end
 
 def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > 21
-    dealer_did_bust(player_cards, dealer_cards, player_hold, dealer_hold)
+    dealer_busted(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "Dealer Chose To Stay With: #{total(dealer_cards)}"
     dealer_hold += 1
