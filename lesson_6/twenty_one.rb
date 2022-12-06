@@ -1,5 +1,3 @@
-require 'pry'
-
 # frozen_string_literal: true
 
 CARDS = [
@@ -22,14 +20,13 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
-# What value do I need to return from this method => sum
 def calc_sum(value)
-  sum = 0 
+  sum = 0
   if value == 'A'
     sum += 11
   elsif value == 'and'
     sum += 0
-  elsif value.to_i == 0 # J, Q, K
+  elsif value.to_i.zero? # J, Q, K
     sum += 10
   else
     sum += value.to_i
