@@ -22,13 +22,13 @@ end
 
 def calc_sum(value)
   if value == 'A'
-    return 11
+    11
   elsif value == 'and'
-    return 0
+    0
   elsif value.to_i.zero? # J, Q, K
-    return 10
+    10
   else
-    return value.to_i
+    value.to_i
   end
 end
 
