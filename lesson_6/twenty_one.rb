@@ -21,15 +21,14 @@ def prompt(msg)
 end
 
 def calc_sum(value)
-  sum = 0
   if value == 'A'
-    sum += 11
+    return 11
   elsif value == 'and'
-    sum += 0
+    return 0
   elsif value.to_i.zero? # J, Q, K
-    sum += 10
+    return 10
   else
-    sum += value.to_i
+    return value.to_i
   end
 end
 
