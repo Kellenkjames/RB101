@@ -84,7 +84,7 @@ def show_dealer(dealer_cards)
 end
 
 def show_player(player_cards)
-  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{total(cards)}"
+  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{total(player_cards)}"
 end
 
 def hit_me(player_cards)
