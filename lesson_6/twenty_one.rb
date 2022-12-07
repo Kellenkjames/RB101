@@ -64,34 +64,39 @@ def shuffle(cards)
   cards.map { |card| card[1] }.sample(2)
 end
 
-# Keep track of the cards for each player
+# Keep track of each player's cards
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
-# Keep track when player decides to hold position
+# Keep track of each player's decision to hold
 player_hold = 0
 dealer_hold = 0
 
-def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+# Keep track of each player's total in a local variable (cache)
+player_total = total(player_cards)
+dealer_total = total(dealer_cards)
+
+def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
-  show_player(player_cards)
+  show_player(player_cards, player_total)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def show_dealer(cards)
-  prompt "Dealer has: #{cards[0]} and unknown card"
+def show_dealer(dealer_cards)
+  prompt "Dealer has: #{dealer_cards[0]} and unknown card"
 end
 
-def show_player(cards)
-  prompt "You have: #{cards[0]} and #{cards[1]} | Total: #{total(cards)}"
+def show_player(player_cards, player_total)
+  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total}"
 end
 
-def hit_me(cards)
+def hit_me(player_cards) # This is where we have an issue because we are referencing player_cards outside of the method (before it's has been mutated) 
   values = CARDS.map { |card| card[1] }
-  cards << values.sample(1).join(' ')
-  cards.delete('and')
-  prompt "You now have: #{handle_join(cards)} | Total: #{total(cards)}"
+  player_cards << values.sample(1).join(' ')
+  player_cards.delete('and')
+  player_total = total(player_cards)
+  prompt "You now have: #{handle_join(player_cards)} | Total: #{player_total}"
 end
 
 def player_bust?(cards)
@@ -165,7 +170,7 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_hold = 0
   dealer_hold = 0
-  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
 end
 
 def game_reset?(answer)
@@ -222,4 +227,4 @@ def display_results(player_cards, dealer_cards)
   end
 end
 
-initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
