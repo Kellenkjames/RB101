@@ -79,23 +79,23 @@ def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def show_dealer(cards)
-  prompt "Dealer has: #{cards[0]} and unknown card"
+def show_dealer(dealer_cards)
+  prompt "Dealer has: #{dealer_cards[0]} and unknown card"
 end
 
-def show_player(cards)
-  prompt "You have: #{cards[0]} and #{cards[1]} | Total: #{total(cards)}"
+def show_player(player_cards)
+  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{total(cards)}"
 end
 
-def hit_me(cards)
+def hit_me(player_cards)
   values = CARDS.map { |card| card[1] }
-  cards << values.sample(1).join(' ')
-  cards.delete('and')
-  prompt "You now have: #{handle_join(cards)} | Total: #{total(cards)}"
+  player_cards << values.sample(1).join(' ')
+  player_cards.delete('and')
+  prompt "You now have: #{handle_join(player_cards)} | Total: #{total(player_cards)}"
 end
 
-def player_bust?(cards)
-  true if total(cards) > 21
+def player_bust?(player_cards)
+  true if total(player_cards) > 21
 end
 
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
