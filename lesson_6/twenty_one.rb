@@ -1,5 +1,3 @@
-require 'pry'
-
 # frozen_string_literal: true
 
 CARDS = [
@@ -66,71 +64,65 @@ def shuffle(cards)
   cards.map { |card| card[1] }.sample(2)
 end
 
-# Keep track of each player's cards
+# Keep track of the cards for each player
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
-# Keep track of each player's decision to hold
+# Keep track when player decides to hold position
 player_hold = 0
 dealer_hold = 0
 
-# Keep track of each player's total in a local variable (cache)
-player_total = total(player_cards)
-dealer_total = total(dealer_cards)
-
-def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
-  show_player(player_cards, player_total)
-  player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+  show_player(player_cards)
+  player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def show_dealer(dealer_cards)
-  prompt "Dealer has: #{dealer_cards[0]} and unknown card"
+def show_dealer(cards)
+  prompt "Dealer has: #{cards[0]} and unknown card"
 end
 
-def show_player(player_cards, player_total)
-  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total}"
+def show_player(cards)
+  prompt "You have: #{cards[0]} and #{cards[1]} | Total: #{total(cards)}"
 end
 
-def hit_me(player_cards)
+def hit_me(cards)
   values = CARDS.map { |card| card[1] }
-  player_cards << values.sample(1).join(' ')
-  player_cards.delete('and')
-  player_total = total(player_cards)
-  prompt "You now have: #{handle_join(player_cards)} | Total: #{player_total}"
+  cards << values.sample(1).join(' ')
+  cards.delete('and')
+  prompt "You now have: #{handle_join(cards)} | Total: #{total(cards)}"
 end
 
-def player_bust?(player_cards)
-  player_total = total(player_cards)
-  true if player_total > 21
+def player_bust?(cards)
+  true if total(cards) > 21
 end
 
-def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
 
   loop do
-    break if dealer_total >= 17
+    break if total(dealer_cards) >= 17
 
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
   end
 
-  dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+  dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
   if player_bust?(player_cards)
     prompt 'Player Bust ❌ Dealer Wins.'
     play_again?
   else
-    prompt "You Chose To Hold With: #{player_total}"
+    prompt "You Chose To Hold With: #{total(player_cards)}"
     player_hold += 1
-    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
-def player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
     prompt 'hit or stay? Enter h (hit) or s (stay)'
     answer = gets.chomp.downcase
@@ -139,31 +131,31 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_tot
     break if answer == 's' || player_bust?(player_cards)
   end
 
-  player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+  player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def dealer_busted(dealer_cards, dealer_total)
-  prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
+def dealer_busted(dealer_cards)
+  prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
   prompt 'Dealer Busts! Player Wins 🏆'
   play_again?
 end
 
-def both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold)
   if player_hold == 1 && dealer_hold == 1
     compare_cards(player_cards, dealer_cards)
     display_results(player_cards, dealer_cards)
   else
-    player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+    player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
-def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
-  if dealer_total > 21
+def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
+  if total(dealer_cards) > 21
     dealer_busted(dealer_cards)
   else
-    prompt "Dealer Chose To Hold With: #{dealer_total}"
+    prompt "Dealer Chose To Hold With: #{total(dealer_cards)}"
     dealer_hold += 1
-    both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+    both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
@@ -173,7 +165,7 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_hold = 0
   dealer_hold = 0
-  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def game_reset?(answer)
@@ -198,8 +190,8 @@ def play_again?
 end
 
 # both player and dealer stays - compare cards
-def compare_cards(player_total, dealer_total) #! Do we need to redefine the local variables in here? 
-  { 'Player': player_total, 'Dealer': dealer_total }
+def compare_cards(player_cards, dealer_cards)
+  { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
 end
 
 def player_won
@@ -220,14 +212,14 @@ def player_lost
   play_again?
 end
 
-def display_results(player_total, dealer_total)
-  if compare_cards(player_total, dealer_total)[:Player] > compare_cards(player_total, dealer_total)[:Dealer]
+def display_results(player_cards, dealer_cards)
+  if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
     player_won
-  elsif player_total == dealer_total
+  elsif total(player_cards) == total(dealer_cards)
     tie_game
   else
     player_lost
   end
 end
 
-initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
