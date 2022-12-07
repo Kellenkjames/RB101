@@ -200,7 +200,7 @@ def player_won
   play_again?
 end
 
-def tie_game(player_cards, dealer_cards, player_hold, dealer_hold)
+def tie_game
   prompt "It's a tie 👯"
   prompt '==========================='
   play_again?
@@ -216,7 +216,7 @@ def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
     player_won
   elsif total(player_cards) == total(dealer_cards)
-    tie_game(player_cards, dealer_cards, player_hold, dealer_hold)
+    tie_game
   else
     player_lost(player_cards, dealer_cards, player_hold, dealer_hold)
   end
