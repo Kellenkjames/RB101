@@ -103,11 +103,11 @@ def player_bust?(player_total)
   true if player_total > 21
 end
 
-def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, dealer_total)
   values = CARDS.map { |card| card[1] }
 
   loop do
-    break if total(dealer_cards) >= 17
+    break if dealer_total >= 17
 
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
@@ -116,14 +116,14 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
+def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, dealer_total)
   if player_bust?(player_cards)
     prompt 'Player Bust ❌ Dealer Wins.'
     play_again?
   else
     prompt "You Chose To Hold With: #{total(player_cards)}"
     player_hold += 1
-    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, dealer_total)
   end
 end
 
