@@ -206,7 +206,7 @@ def tie_game
   play_again?
 end
 
-def player_lost(player_cards, dealer_cards, player_hold, dealer_hold)
+def player_lost
   prompt 'Player Loses ❌ Dealer Wins.'
   prompt '==========================='
   play_again?
@@ -218,7 +218,7 @@ def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
   elsif total(player_cards) == total(dealer_cards)
     tie_game
   else
-    player_lost(player_cards, dealer_cards, player_hold, dealer_hold)
+    player_lost
   end
 end
 
