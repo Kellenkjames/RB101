@@ -184,7 +184,7 @@ def play_again?
   loop do
     prompt 'Do you want to play again? y (yes) or n (no)'
     answer = gets.chomp.downcase
-    break if answer == 'y' || answer == 'n'
+    break if %w[y n].include?(answer)
   end
   game_reset?(answer)
 end
