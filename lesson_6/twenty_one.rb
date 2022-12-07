@@ -143,7 +143,7 @@ end
 def both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold)
   if player_hold == 1 && dealer_hold == 1
     compare_cards(player_cards, dealer_cards)
-    display_results(player_cards, dealer_cards, player_hold, dealer_hold)
+    display_results(player_cards, dealer_cards)
   else
     player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
@@ -212,7 +212,7 @@ def player_lost
   play_again?
 end
 
-def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
+def display_results(player_cards, dealer_cards)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
     player_won
   elsif total(player_cards) == total(dealer_cards)
@@ -223,4 +223,3 @@ def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
-
