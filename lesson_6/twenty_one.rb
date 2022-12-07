@@ -99,8 +99,8 @@ def hit_me(player_cards) # This is where we have an issue because we are referen
   prompt "You now have: #{handle_join(player_cards)} | Total: #{player_total}"
 end
 
-def player_bust?(cards)
-  true if total(cards) > 21
+def player_bust?(player_total)
+  true if player_total > 21
 end
 
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
