@@ -100,7 +100,8 @@ def hit_me(player_cards)
 end
 
 def player_bust?(player_cards)
-  true if total(player_cards) > 21
+  player_total = total(player_cards)
+  true if player_total > 21
 end
 
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
