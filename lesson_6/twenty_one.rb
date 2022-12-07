@@ -76,11 +76,11 @@ dealer_hold = 0
 player_total = total(player_cards)
 dealer_total = total(dealer_cards)
 
-def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
+def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
   show_player(player_cards, player_total)
-  player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+  player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
 end
 
 def show_dealer(dealer_cards)
@@ -117,7 +117,7 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, dealer_tot
 end
 
 def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
-  if player_bust?(player_cards)
+  if player_bust?(player_total)
     prompt 'Player Bust ❌ Dealer Wins.'
     play_again?
   else
@@ -127,16 +127,16 @@ def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_to
   end
 end
 
-def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+def player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
   loop do
     prompt 'hit or stay? Enter h (hit) or s (stay)'
     answer = gets.chomp.downcase
 
     hit_me(player_cards) if answer == 'h'
-    break if answer == 's' || player_bust?(player_cards)
+    break if answer == 's' || player_bust?(player_total)
   end
 
-  player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
+  player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
 end
 
 def dealer_busted(dealer_cards, dealer_total)
@@ -145,12 +145,12 @@ def dealer_busted(dealer_cards, dealer_total)
   play_again?
 end
 
-def both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold)
+def both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
   if player_hold == 1 && dealer_hold == 1
     compare_cards(player_cards, dealer_cards)
     display_results(player_cards, dealer_cards)
   else
-    player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
+    player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
   end
 end
 
@@ -160,7 +160,7 @@ def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold, dealer_to
   else
     prompt "Dealer Chose To Hold With: #{dealer_total}"
     dealer_hold += 1
-    both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold)
+    both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
   end
 end
 
@@ -170,7 +170,7 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_hold = 0
   dealer_hold = 0
-  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
+  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
 end
 
 def game_reset?(answer)
@@ -227,4 +227,4 @@ def display_results(player_total, dealer_total)
   end
 end
 
-initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
+initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
