@@ -116,12 +116,12 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, dealer_tot
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, dealer_total)
+def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
   if player_bust?(player_cards)
     prompt 'Player Bust ❌ Dealer Wins.'
     play_again?
   else
-    prompt "You Chose To Hold With: #{total(player_cards)}"
+    prompt "You Chose To Hold With: #{player_total}"
     player_hold += 1
     dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, dealer_total)
   end
@@ -136,7 +136,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     break if answer == 's' || player_bust?(player_cards)
   end
 
-  player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
+  player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
 end
 
 def dealer_busted(dealer_cards)
