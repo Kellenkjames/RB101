@@ -103,7 +103,7 @@ def player_bust?(player_total)
   true if player_total > 21
 end
 
-def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, dealer_total)
+def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
   values = CARDS.map { |card| card[1] }
 
   loop do
@@ -113,17 +113,17 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, dealer_tot
     dealer_cards.delete('and')
   end
 
-  dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
+  dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
 end
 
 def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
-  if player_bust?(player_total)
+  if player_bust?(player_cards)
     prompt 'Player Bust ❌ Dealer Wins.'
     play_again?
   else
     prompt "You Chose To Hold With: #{player_total}"
     player_hold += 1
-    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, dealer_total)
+    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
   end
 end
 
@@ -133,7 +133,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_tot
     answer = gets.chomp.downcase
 
     hit_me(player_cards) if answer == 'h'
-    break if answer == 's' || player_bust?(player_total)
+    break if answer == 's' || player_bust?(player_cards)
   end
 
   player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
@@ -154,7 +154,7 @@ def both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold, pla
   end
 end
 
-def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold, dealer_total)
+def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
   if dealer_total > 21
     dealer_busted(dealer_cards)
   else
@@ -195,7 +195,7 @@ def play_again?
 end
 
 # both player and dealer stays - compare cards
-def compare_cards(player_total, dealer_total)
+def compare_cards(player_total, dealer_total) #! Do we need to redefine the local variables in here? 
   { 'Player': player_total, 'Dealer': dealer_total }
 end
 
