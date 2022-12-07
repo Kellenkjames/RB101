@@ -196,19 +196,19 @@ end
 
 def player_won
   prompt 'Player Wins 🏆 Dealer Loses.'
-  prompt "==========================="
+  prompt '==========================='
   play_again?
 end
 
 def tie_game(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt "It's a tie 👯"
-  prompt "==========================="
+  prompt '==========================='
   play_again?
 end
 
 def player_lost(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Player Loses ❌ Dealer Wins.'
-  prompt "==========================="
+  prompt '==========================='
   play_again?
 end
 
