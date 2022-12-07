@@ -220,7 +220,7 @@ end
 def display_results(player_total, dealer_total)
   if compare_cards(player_total, dealer_total)[:Player] > compare_cards(player_total, dealer_total)[:Dealer]
     player_won
-  elsif total(player_total) == total(dealer_total)
+  elsif player_total == dealer_total
     tie_game
   else
     player_lost
