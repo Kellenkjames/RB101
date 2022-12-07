@@ -191,10 +191,10 @@ end
 
 # both player and dealer stays - compare cards
 def compare_cards(player_cards, dealer_cards)
-  scores = { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
+  { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
 end
 
-def player_won(player_cards, dealer_cards, player_hold, dealer_hold)
+def player_won
   prompt 'Player Wins 🏆 Dealer Loses.'
   prompt "==========================="
   play_again?
@@ -214,7 +214,7 @@ end
 
 def display_results(player_cards, dealer_cards, player_hold, dealer_hold)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
-    player_won(player_cards, dealer_cards, player_hold, dealer_hold)
+    player_won
   elsif total(player_cards) == total(dealer_cards)
     tie_game(player_cards, dealer_cards, player_hold, dealer_hold)
   else
