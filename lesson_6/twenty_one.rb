@@ -1,3 +1,5 @@
+require 'pry'
+
 # frozen_string_literal: true
 
 CARDS = [
@@ -91,7 +93,7 @@ def show_player(player_cards, player_total)
   prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total}"
 end
 
-def hit_me(player_cards) # This is where we have an issue because we are referencing player_cards outside of the method (before it's has been mutated) 
+def hit_me(player_cards)
   values = CARDS.map { |card| card[1] }
   player_cards << values.sample(1).join(' ')
   player_cards.delete('and')
@@ -99,7 +101,8 @@ def hit_me(player_cards) # This is where we have an issue because we are referen
   prompt "You now have: #{handle_join(player_cards)} | Total: #{player_total}"
 end
 
-def player_bust?(player_total)
+def player_bust?(player_cards)
+  player_total = total(player_cards)
   true if player_total > 21
 end
 
