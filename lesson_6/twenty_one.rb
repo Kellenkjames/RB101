@@ -97,11 +97,11 @@ def hit_me(player_cards)
   values = CARDS.map { |card| card[1] }
   player_cards << values.sample(1).join(' ')
   player_cards.delete('and')
-  prompt "You now have: #{handle_join(player_cards)} | Total: #{total(player_cards)}"
+  prompt "You now have: #{handle_join(player_cards)} | Total: #{player_total(player_cards)}"
 end
 
 def player_bust?(player_cards)
-  true if total(player_cards) > 21
+  true if player_total(player_cards) > 21
 end
 
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
