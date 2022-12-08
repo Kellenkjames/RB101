@@ -107,9 +107,10 @@ end
 
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
+  dealer_total = total(dealer_cards)
 
   loop do
-    break if total(dealer_cards) >= 17
+    break if dealer_total >= 17
 
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
