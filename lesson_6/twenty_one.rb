@@ -72,63 +72,57 @@ dealer_cards = shuffle(CARDS)
 player_hold = 0
 dealer_hold = 0
 
-# Keep track of each player's total score (cache into local variable instead of calling method each time)
-player_total = total(player_cards)
-dealer_total = total(dealer_cards)
-
-def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
-  show_player(player_cards, player_total)
-  player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+  show_player(player_cards)
+  player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def show_dealer(dealer_cards)
-  prompt "Dealer has: #{dealer_cards[0]} and unknown card"
+def show_dealer(cards)
+  prompt "Dealer has: #{cards[0]} and unknown card"
 end
 
-def show_player(player_cards, player_total)
-  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total}"
+def show_player(cards)
+  prompt "You have: #{cards[0]} and #{cards[1]} | Total: #{total(cards)}"
 end
 
-def hit_me(player_cards)
+def hit_me(cards)
   values = CARDS.map { |card| card[1] }
-  player_cards << values.sample(1).join(' ')
-  player_cards.delete('and')
-  player_total = total(player_cards)
-  prompt "You now have: #{handle_join(player_cards)} | Total: #{player_total}"
+  cards << values.sample(1).join(' ')
+  cards.delete('and')
+  prompt "You now have: #{handle_join(cards)} | Total: #{total(cards)}"
 end
 
-def player_bust?(player_cards)
-  player_total = total(player_cards)
-  true if player_total > 21
+def player_bust?(cards)
+  true if total(cards) > 21
 end
 
-def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
 
   loop do
-    break if dealer_total >= 17
+    break if total(dealer_cards) >= 17
 
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
   end
 
-  dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+  dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
-def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
   if player_bust?(player_cards)
     prompt 'Player Bust ❌ Dealer Wins.'
     play_again?
   else
-    prompt "You Chose To Hold With: #{player_total}"
+    prompt "You Chose To Hold With: #{total(player_cards)}"
     player_hold += 1
-    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+    dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
-def player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
     prompt 'hit or stay? Enter h (hit) or s (stay)'
     answer = gets.chomp.downcase
@@ -137,7 +131,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_tot
     break if answer == 's' || player_bust?(player_cards)
   end
 
-  player_wins?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+  player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def dealer_busted(dealer_cards)
@@ -146,22 +140,22 @@ def dealer_busted(dealer_cards)
   play_again?
 end
 
-def both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold)
   if player_hold == 1 && dealer_hold == 1
     compare_cards(player_cards, dealer_cards)
     display_results(player_cards, dealer_cards)
   else
-    player_turn(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+    player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
-def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
   if total(dealer_cards) > 21
     dealer_busted(dealer_cards)
   else
     prompt "Dealer Chose To Hold With: #{total(dealer_cards)}"
     dealer_hold += 1
-    both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+    both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
 
@@ -171,7 +165,7 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_hold = 0
   dealer_hold = 0
-  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def game_reset?(answer)
@@ -228,4 +222,4 @@ def display_results(player_cards, dealer_cards)
   end
 end
 
-initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total, dealer_total)
+initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
