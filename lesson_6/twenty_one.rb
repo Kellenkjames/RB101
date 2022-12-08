@@ -1,3 +1,5 @@
+require 'pry'
+
 # frozen_string_literal: true
 
 CARDS = [
@@ -72,6 +74,10 @@ dealer_cards = shuffle(CARDS)
 player_hold = 0
 dealer_hold = 0
 
+def player_total(player_cards)
+  player_total = total(player_cards) # Caching the player's total instead of calling the method each time.
+end
+
 def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
@@ -84,7 +90,7 @@ def show_dealer(dealer_cards)
 end
 
 def show_player(player_cards)
-  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{total(player_cards)}"
+  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total(player_cards)}"
 end
 
 def hit_me(player_cards)
