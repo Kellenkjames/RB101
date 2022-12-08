@@ -95,7 +95,8 @@ def hit_me(player_cards)
   values = CARDS.map { |card| card[1] }
   player_cards << values.sample(1).join(' ')
   player_cards.delete('and')
-  prompt "You now have: #{handle_join(player_cards)} | Total: #{total(player_cards)}"
+  player_total = total(player_cards) #* player_total variable must be local to this method because of mutation
+  prompt "You now have: #{handle_join(player_cards)} | Total: #{player_total}"
 end
 
 def player_bust?(player_cards)
