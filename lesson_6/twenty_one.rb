@@ -72,10 +72,6 @@ dealer_cards = shuffle(CARDS)
 player_hold = 0
 dealer_hold = 0
 
-# Keep track of each player's totals
-player_total = total(player_cards)
-dealer_total = total(dealer_cards)
-
 def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
@@ -145,7 +141,8 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def dealer_busted(dealer_cards)
-  prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{total(dealer_cards)}"
+  dealer_total = total(dealer_cards)
+  prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
   prompt 'Dealer Busts! Player Wins 🏆'
   play_again?
 end
@@ -160,10 +157,11 @@ def both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
-  if total(dealer_cards) > 21
+  dealer_total = total(dealer_cards)
+  if dealer_total > 21
     dealer_busted(dealer_cards)
   else
-    prompt "Dealer Chose To Hold With: #{total(dealer_cards)}"
+    prompt "Dealer Chose To Hold With: #{dealer_total}"
     dealer_hold += 1
     both_players_hold?(player_cards, dealer_cards, player_hold, dealer_hold)
   end
@@ -175,6 +173,8 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_hold = 0
   dealer_hold = 0
+  player_total = 0
+  dealer_total = 0
   initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
@@ -201,7 +201,9 @@ end
 
 # both player and dealer stays - compare cards
 def compare_cards(player_cards, dealer_cards)
-  { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
+  player_total = total(player_cards)
+  dealer_total = total(dealer_cards)
+  { 'Player': player_total, 'Dealer': dealer_total }
 end
 
 def player_won
@@ -223,9 +225,11 @@ def player_lost
 end
 
 def display_results(player_cards, dealer_cards)
+  player_total = total(player_cards)
+  dealer_total = total(dealer_cards)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
     player_won
-  elsif total(player_cards) == total(dealer_cards)
+  elsif player_total == dealer_total
     tie_game
   else
     player_lost
