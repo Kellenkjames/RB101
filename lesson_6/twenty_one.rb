@@ -197,7 +197,7 @@ end
 
 # both player and dealer stays - compare cards
 def compare_cards(player_cards, dealer_cards)
-  { 'Player': total(player_cards), 'Dealer': total(dealer_cards) }
+  { 'Player': player_total(player_cards), 'Dealer': total(dealer_cards) }
 end
 
 def player_won
