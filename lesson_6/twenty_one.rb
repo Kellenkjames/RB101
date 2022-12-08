@@ -120,11 +120,13 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
+  player_total = total(player_cards)
+
   if player_bust?(player_cards)
     prompt 'Player Bust ❌ Dealer Wins.'
     play_again?
   else
-    prompt "You Chose To Hold With: #{total(player_cards)}"
+    prompt "You Chose To Hold With: #{player_total}"
     player_hold += 1
     dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
