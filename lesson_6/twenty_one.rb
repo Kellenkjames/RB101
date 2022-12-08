@@ -76,10 +76,10 @@ dealer_hold = 0
 player_total = total(player_cards)
 dealer_total = total(dealer_cards)
 
-def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
+def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
-  show_player(player_cards, player_total)
+  show_player(player_cards)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
@@ -87,7 +87,8 @@ def show_dealer(dealer_cards)
   prompt "Dealer has: #{dealer_cards[0]} and unknown card"
 end
 
-def show_player(player_cards, player_total)
+def show_player(player_cards)
+  player_total = total(player_cards)
   prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total}"
 end
 
@@ -100,7 +101,8 @@ def hit_me(player_cards)
 end
 
 def player_bust?(player_cards)
-  true if total(player_cards) > 21
+  player_total = total(player_cards)
+  true if player_total > 21
 end
 
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -170,8 +172,7 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_hold = 0
   dealer_hold = 0
-  player_total = 0
-  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
+  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def game_reset?(answer)
@@ -228,4 +229,4 @@ def display_results(player_cards, dealer_cards)
   end
 end
 
-initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
+initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
