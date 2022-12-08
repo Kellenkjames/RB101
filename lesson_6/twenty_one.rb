@@ -72,10 +72,14 @@ dealer_cards = shuffle(CARDS)
 player_hold = 0
 dealer_hold = 0
 
-def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+# We can cache each player's total in a local variable and just call those local variables instead, like this:
+player_total = total(player_cards)
+dealer_total = total(dealer_cards)
+
+def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
-  show_player(player_cards)
+  show_player(player_cards, player_total)
   player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
@@ -83,8 +87,8 @@ def show_dealer(dealer_cards)
   prompt "Dealer has: #{dealer_cards[0]} and unknown card"
 end
 
-def show_player(player_cards)
-  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{total(player_cards)}"
+def show_player(player_cards, player_total)
+  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total}"
 end
 
 def hit_me(player_cards)
@@ -165,7 +169,7 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_hold = 0
   dealer_hold = 0
-  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+  initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
 end
 
 def game_reset?(answer)
@@ -222,4 +226,4 @@ def display_results(player_cards, dealer_cards)
   end
 end
 
-initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+initialize_game(player_cards, dealer_cards, player_hold, dealer_hold, player_total)
