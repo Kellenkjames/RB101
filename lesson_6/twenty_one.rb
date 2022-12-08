@@ -1,5 +1,3 @@
-require 'pry'
-
 # frozen_string_literal: true
 
 CARDS = [
@@ -75,11 +73,11 @@ player_hold = 0
 dealer_hold = 0
 
 def player_total(player_cards)
-  player_total = total(player_cards) # Caching the player's total instead of invoking the method each time.
+  player_total = total(player_cards)
 end
 
 def dealer_total(dealer_cards)
-  dealer_total = total(dealer_cards) # Caching the dealers's total instead of invoking the method each time.
+  dealer_total = total(dealer_cards)
 end
 
 def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -110,7 +108,7 @@ end
 
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
-  
+
   loop do
     break if dealer_total(dealer_cards) >= 17
 
