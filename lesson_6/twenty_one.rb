@@ -232,9 +232,17 @@ def player_lost
   play_again?
 end
 
+def show_totals(player_cards, dealer_cards)
+  player_total = total(player_cards)
+  dealer_total = total(dealer_cards)
+  prompt "Player has: #{handle_join(player_cards)} | Total: #{player_total}"
+  prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
+end
+
 def display_results(player_cards, dealer_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
+  show_totals(player_cards, dealer_cards)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
     player_won
   elsif player_total == dealer_total
