@@ -89,7 +89,7 @@ def show_player(player_cards)
 end
 
 def hit_me(player_cards)
-  prompt "You chose to hit!"
+  prompt 'You chose to hit!'
   values = CARDS.map { |card| card[1] }
   player_cards << values.sample(1).join(' ')
   player_cards.delete('and')
@@ -109,7 +109,7 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
     break if dealer_total >= 17
 
-    prompt "Dealer hits..."
+    prompt 'Dealer hits...'
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
     dealer_total = total(dealer_cards)
@@ -125,12 +125,11 @@ def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
 
   if player_bust?(player_cards)
     prompt 'Player Busts ❌'
-    prompt 'Dealer Wins'
     play_again?
   else
     prompt "You Chose To Stay With: #{player_total}"
     player_hold += 1
-    prompt "Dealer turn..."
+    prompt 'Dealer turn...'
     dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
@@ -151,7 +150,6 @@ def dealer_busted(dealer_cards)
   dealer_total = total(dealer_cards)
   prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
   prompt 'Player Wins 🏆'
-  prompt 'Dealer Busts'
   play_again?
 end
 
@@ -214,7 +212,6 @@ end
 
 def player_won
   prompt 'Player Wins 🏆'
-  prompt 'Dealer Loses'
   prompt '==========================='
   play_again?
 end
@@ -227,7 +224,6 @@ end
 
 def player_lost
   prompt 'Player Loses ❌'
-  prompt 'Dealer Wins'
   prompt '==========================='
   play_again?
 end
@@ -245,4 +241,3 @@ def display_results(player_cards, dealer_cards)
 end
 
 initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
-
