@@ -88,7 +88,7 @@ def show_player(player_cards)
   prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total}"
 end
 
-def hit_me(player_cards)
+def player_hits(player_cards)
   prompt 'You chose to hit!'
   values = CARDS.map { |card| card[1] }
   player_cards << values.sample(1).join(' ')
@@ -143,7 +143,7 @@ def player_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     prompt 'hit or stay? Enter h (hit) or s (stay)'
     answer = gets.chomp.downcase
 
-    hit_me(player_cards) if answer == 'h'
+    player_hits(player_cards) if answer == 'h'
     break if answer == 's' || player_bust?(player_cards)
   end
 
