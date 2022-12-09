@@ -109,6 +109,7 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
     break if dealer_total >= 17
 
     dealer_cards << values.sample(1).join(' ')
+    prompt "Dealer hits..."
     dealer_cards.delete('and')
     dealer_total = total(dealer_cards)
   end
