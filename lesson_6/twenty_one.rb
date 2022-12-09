@@ -110,6 +110,7 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
 
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
+    dealer_total = total(dealer_cards)
   end
 
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -173,8 +174,6 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_hold = 0
   dealer_hold = 0
-  player_total = 0
-  dealer_total = 0
   initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
