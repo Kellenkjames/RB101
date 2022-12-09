@@ -151,9 +151,8 @@ def player_turn(player_cards, dealer_cards, player_stay, dealer_stay)
   player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
 end
 
-def dealer_busted(dealer_cards)
-  dealer_total = total(dealer_cards)
-  prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
+def dealer_busted(player_cards, dealer_cards)
+  end_of_round(player_cards, dealer_cards)
   prompt 'Player Wins 🏆'
   play_again?
 end
@@ -170,7 +169,7 @@ end
 def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay)
   dealer_total = total(dealer_cards)
   if dealer_total > 21
-    dealer_busted(dealer_cards)
+    dealer_busted(player_cards, dealer_cards)
   else
     prompt "Dealer chose to stay with: #{dealer_total}"
     dealer_stay += 1
