@@ -128,8 +128,9 @@ def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay)
 end
 
 def handle_output(player_cards, dealer_cards)
-  prompt 'Player Busts ❌'
+  prompt 'Player busts ❌'
   end_of_round(player_cards, dealer_cards)
+  prompt 'Dealer wins round'
   play_again?
 end
 
@@ -159,8 +160,9 @@ def player_turn(player_cards, dealer_cards, player_stay, dealer_stay)
 end
 
 def dealer_busted(player_cards, dealer_cards)
+  prompt 'Dealer busts ❌'
   end_of_round(player_cards, dealer_cards)
-  prompt 'Player Wins 🏆'
+  prompt 'Player wins round'
   play_again?
 end
 
@@ -221,7 +223,7 @@ def compare_cards(player_cards, dealer_cards)
 end
 
 def player_won
-  prompt 'Player Wins 🏆'
+  prompt 'Player wins round!'
   prompt '==========================='
   play_again?
 end
@@ -232,8 +234,8 @@ def tie_game
   play_again?
 end
 
-def player_lost
-  prompt 'Player Loses ❌'
+def dealer_won
+  prompt 'Dealer wins round'
   prompt '==========================='
   play_again?
 end
@@ -254,7 +256,7 @@ def display_results(player_cards, dealer_cards)
   elsif player_total == dealer_total
     tie_game
   else
-    player_lost
+    dealer_won
   end
 end
 
