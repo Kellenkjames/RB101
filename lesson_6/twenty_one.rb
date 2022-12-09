@@ -124,7 +124,8 @@ def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
   player_total = total(player_cards)
 
   if player_bust?(player_cards)
-    prompt 'Player Busts ❌ Dealer Wins.'
+    prompt 'Player Busts ❌'
+    prompt 'Dealer Wins'
     play_again?
   else
     prompt "You Chose To Stay With: #{player_total}"
@@ -149,7 +150,8 @@ end
 def dealer_busted(dealer_cards)
   dealer_total = total(dealer_cards)
   prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
-  prompt 'Dealer Busts ❌ Player Wins 🏆'
+  prompt 'Player Wins 🏆'
+  prompt 'Dealer Busts ❌'
   play_again?
 end
 
@@ -211,7 +213,8 @@ def compare_cards(player_cards, dealer_cards)
 end
 
 def player_won
-  prompt 'Player Wins 🏆 Dealer Loses.'
+  prompt 'Player Wins 🏆'
+  prompt 'Dealer Loses'
   prompt '==========================='
   play_again?
 end
@@ -223,7 +226,8 @@ def tie_game
 end
 
 def player_lost
-  prompt 'Player Loses ❌ Dealer Wins.'
+  prompt 'Player Loses ❌'
+  prompt 'Dealer Wins'
   prompt '==========================='
   play_again?
 end
