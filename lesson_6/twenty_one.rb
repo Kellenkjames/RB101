@@ -97,7 +97,7 @@ def player_hits(player_cards)
   prompt "Your cards are now: #{handle_join(player_cards)} | Total: #{player_total}"
 end
 
-def player_bust?(player_cards, dealer_cards)
+def player_bust?(player_cards)
   player_total = total(player_cards)
   true if player_total > 21
 end
@@ -145,7 +145,7 @@ def player_turn(player_cards, dealer_cards, player_stay, dealer_stay)
     answer = gets.chomp.downcase
 
     player_hits(player_cards) if answer == 'h'
-    break if answer == 's' || player_bust?(player_cards, dealer_cards)
+    break if answer == 's' || player_bust?(player_cards)
   end
 
   player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
