@@ -16,6 +16,18 @@ CARDS = [
   %w[C K], %w[D K], %w[H K], %w[S K]
 ].freeze
 
+def shuffle(cards)
+  cards.map { |card| card[1] }.sample(2)
+end
+
+# Keep track of the initial cards that were drawn
+player_cards = shuffle(CARDS)
+dealer_cards = shuffle(CARDS)
+
+# Keep track of each player's decision to stay
+player_stay = 0
+dealer_stay = 0
+
 def prompt(msg)
   puts "=> #{msg}"
 end
@@ -59,18 +71,6 @@ def handle_join(cards, word = 'and')
     values
   end
 end
-
-def shuffle(cards)
-  cards.map { |card| card[1] }.sample(2)
-end
-
-# Keep track of the initial cards that were drawn
-player_cards = shuffle(CARDS)
-dealer_cards = shuffle(CARDS)
-
-# Keep track of each player's decision to stay
-player_stay = 0
-dealer_stay = 0
 
 def initialize_game(player_cards, dealer_cards, player_stay, dealer_stay)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
