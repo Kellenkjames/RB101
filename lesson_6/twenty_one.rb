@@ -76,11 +76,11 @@ def handle_join(cards, word = 'and')
   end
 end
 
-def initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+def initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
   show_player(player_cards)
-  player_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+  player_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
 end
 
 def show_dealer(dealer_cards)
@@ -101,7 +101,7 @@ def player_hits(player_cards)
   prompt "Your cards are now: #{handle_join(player_cards)} | Total: #{player_total}"
 end
 
-def player_bust?(player_cards, dealer_cards)
+def player_bust?(player_cards, dealer_cards, dealer_score)
   player_total = total(player_cards)
   true if player_total > 21
 end
@@ -112,7 +112,7 @@ def dealer_hits(dealer_cards)
   prompt '==========================='
 end
 
-def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
   values = CARDS.map { |card| card[1] }
   dealer_total = total(dealer_cards)
 
@@ -125,34 +125,35 @@ def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_sco
     dealer_hits(dealer_cards)
   end
 
-  dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+  dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
 end
 
-def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
   player_total = total(player_cards)
 
-  if player_bust?(player_cards, dealer_cards)
+  if player_bust?(player_cards, dealer_cards, dealer_score)
     prompt 'Player Busts ❌'
+    dealer_score += 1
     end_of_round(player_cards, dealer_cards)
     play_again?
   else
     prompt "You chose to stay with: #{player_total}"
     player_stay += 1
     prompt 'Dealer turn...'
-    dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+    dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
   end
 end
 
-def player_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+def player_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
   loop do
     prompt 'hit or stay? Enter h (hit) or s (stay)'
     answer = gets.chomp.downcase
 
     player_hits(player_cards) if answer == 'h'
-    break if answer == 's' || player_bust?(player_cards, dealer_cards)
+    break if answer == 's' || player_bust?(player_cards, dealer_cards, dealer_score)
   end
 
-  player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+  player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
 end
 
 def dealer_busted(player_cards, dealer_cards, player_score)
@@ -167,11 +168,11 @@ def both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, pla
     compare_cards(player_cards, dealer_cards)
     display_results(player_cards, dealer_cards, player_score, dealer_score)
   else
-    player_turn(player_cards, dealer_cards, player_stay, dealer_stay)
+    player_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
   end
 end
 
-def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
   dealer_total = total(dealer_cards)
   if dealer_total > 21
     dealer_busted(player_cards, dealer_cards, player_score)
@@ -188,7 +189,7 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_stay = 0
   dealer_stay = 0
-  initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+  initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
 end
 
 def game_reset?(answer)
@@ -258,4 +259,4 @@ def display_results(player_cards, dealer_cards, player_score, dealer_score)
   end
 end
 
-initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, player_score)
+initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
