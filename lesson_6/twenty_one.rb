@@ -102,6 +102,12 @@ def player_bust?(player_cards)
   true if player_total > 21
 end
 
+def dealer_hits(dealer_cards)
+  prompt 'Dealer hits...'
+  prompt "Dealer's cards are now: #{handle_join(dealer_cards)}"
+  prompt '==========================='
+end
+
 def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   values = CARDS.map { |card| card[1] }
   dealer_total = total(dealer_cards)
@@ -109,12 +115,10 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
     break if dealer_total >= 17
 
-    prompt 'Dealer hits...'
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
     dealer_total = total(dealer_cards)
-    prompt "Dealer's cards are now: #{handle_join(dealer_cards)}"
-    prompt '==========================='
+    dealer_hits(dealer_cards)
   end
 
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
