@@ -28,10 +28,6 @@ dealer_cards = shuffle(CARDS)
 player_stay = 0
 dealer_stay = 0
 
-# Keep track of each player's score
-player_score = 0
-dealer_score = 0
-
 def prompt(msg)
   puts "=> #{msg}"
 end
@@ -76,11 +72,11 @@ def handle_join(cards, word = 'and')
   end
 end
 
-def initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+def initialize_game(player_cards, dealer_cards, player_stay, dealer_stay)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
   show_player(player_cards)
-  player_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+  player_turn(player_cards, dealer_cards, player_stay, dealer_stay)
 end
 
 def show_dealer(dealer_cards)
@@ -101,7 +97,7 @@ def player_hits(player_cards)
   prompt "Your cards are now: #{handle_join(player_cards)} | Total: #{player_total}"
 end
 
-def player_bust?(player_cards, dealer_cards, dealer_score)
+def player_bust?(player_cards, dealer_cards)
   player_total = total(player_cards)
   true if player_total > 21
 end
@@ -112,7 +108,7 @@ def dealer_hits(dealer_cards)
   prompt '==========================='
 end
 
-def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay)
   values = CARDS.map { |card| card[1] }
   dealer_total = total(dealer_cards)
 
@@ -125,61 +121,59 @@ def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_sco
     dealer_hits(dealer_cards)
   end
 
-  dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+  dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay)
 end
 
-def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
   player_total = total(player_cards)
 
-  if player_bust?(player_cards, dealer_cards, dealer_score)
+  if player_bust?(player_cards, dealer_cards)
     prompt 'Player Busts ❌'
-    dealer_score += 1
     end_of_round(player_cards, dealer_cards)
     play_again?
   else
     prompt "You chose to stay with: #{player_total}"
     player_stay += 1
     prompt 'Dealer turn...'
-    dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+    dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay)
   end
 end
 
-def player_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+def player_turn(player_cards, dealer_cards, player_stay, dealer_stay)
   loop do
     prompt 'hit or stay? Enter h (hit) or s (stay)'
     answer = gets.chomp.downcase
 
     player_hits(player_cards) if answer == 'h'
-    break if answer == 's' || player_bust?(player_cards, dealer_cards, dealer_score)
+    break if answer == 's' || player_bust?(player_cards, dealer_cards)
   end
 
-  player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+  player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
 end
 
-def dealer_busted(player_cards, dealer_cards, player_score)
+def dealer_busted(player_cards, dealer_cards)
   end_of_round(player_cards, dealer_cards)
   prompt 'Player Wins 🏆'
-  player_score += 1
   play_again?
 end
 
-def both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+def both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay)
   if player_stay == 1 && dealer_stay == 1
     compare_cards(player_cards, dealer_cards)
-    display_results(player_cards, dealer_cards, player_score, dealer_score)
+    display_results(player_cards, dealer_cards)
   else
-    player_turn(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+    player_turn(player_cards, dealer_cards, player_stay, dealer_stay)
   end
 end
 
-def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay)
   dealer_total = total(dealer_cards)
   if dealer_total > 21
-    dealer_busted(player_cards, dealer_cards, player_score)
+    dealer_busted(player_cards, dealer_cards)
   else
     prompt "Dealer chose to stay with: #{dealer_total}"
     dealer_stay += 1
-    both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+    both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay)
   end
 end
 
@@ -189,7 +183,7 @@ def reset_game
   dealer_cards = shuffle(CARDS)
   player_stay = 0
   dealer_stay = 0
-  initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+  initialize_game(player_cards, dealer_cards, player_stay, dealer_stay)
 end
 
 def game_reset?(answer)
@@ -219,8 +213,7 @@ def compare_cards(player_cards, dealer_cards)
   { 'Player': player_total, 'Dealer': dealer_total }
 end
 
-def player_won(player_score)
-  player_score += 1
+def player_won
   prompt 'Player Wins 🏆'
   prompt '==========================='
   play_again?
@@ -232,8 +225,7 @@ def tie_game
   play_again?
 end
 
-def dealer_won(dealer_score)
-  dealer_score += 1
+def player_lost
   prompt 'Player Loses ❌'
   prompt '==========================='
   play_again?
@@ -246,17 +238,17 @@ def end_of_round(player_cards, dealer_cards)
   prompt "Dealer ends round with: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
 end
 
-def display_results(player_cards, dealer_cards, player_score, dealer_score)
+def display_results(player_cards, dealer_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
   end_of_round(player_cards, dealer_cards)
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
-    player_won(player_score)
+    player_won
   elsif player_total == dealer_total
     tie_game
   else
-    dealer_won(dealer_score)
+    player_lost
   end
 end
 
-initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, player_score, dealer_score)
+initialize_game(player_cards, dealer_cards, player_stay, dealer_stay)
