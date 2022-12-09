@@ -80,20 +80,21 @@ def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def show_dealer(dealer_cards)
-  prompt "Dealer has: #{dealer_cards} and ?"
+  prompt "Dealer has: #{dealer_cards[0]} and ?"
 end
 
 def show_player(player_cards)
   player_total = total(player_cards)
-  prompt "You have: #{player_cards} and #{player_cards} | Total: #{player_total}"
+  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total}"
 end
 
 def hit_me(player_cards)
+  prompt "You chose to hit!"
   values = CARDS.map { |card| card[1] }
   player_cards << values.sample(1).join(' ')
   player_cards.delete('and')
   player_total = total(player_cards)
-  prompt "You now have: #{handle_join(player_cards)} | Total: #{player_total}"
+  prompt "Your cards are now: #{handle_join(player_cards)} | Total: #{player_total}"
 end
 
 def player_bust?(player_cards)
@@ -246,11 +247,11 @@ STEP 1:
 
 => Welcome to Twenty-One!
 => Dealer has ["S", "A"] and ? #* DONE
-=> You have: ["H", "10"] and ["D", "3"], for a total of 13.
+=> You have: ["H", "10"] and ["D", "3"], for a total of 13. #* DONE
 => Would you like to (h)it or (s)tay?
 
 HIT:
-=> You chose to hit!
+=> You chose to hit! 
 => Your cards are now: [["H", "10"], ["D", "3"], ["D", "5"]]
 => Your total is now: 18
 => Would you like to (h)it or (s)tay?
