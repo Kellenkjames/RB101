@@ -85,7 +85,7 @@ end
 
 def show_player(player_cards)
   player_total = total(player_cards)
-  prompt "You have: #{player_cards[0]} and #{player_cards[1]} | Total: #{player_total}"
+  prompt "You have: #{player_cards} and #{player_cards} | Total: #{player_total}"
 end
 
 def hit_me(player_cards)
@@ -245,7 +245,7 @@ Sequence of Events from Launch School Solution:
 STEP 1: 
 
 => Welcome to Twenty-One!
-=> Dealer has ["S", "A"] and ?
+=> Dealer has ["S", "A"] and ? #* DONE
 => You have: ["H", "10"] and ["D", "3"], for a total of 13.
 => Would you like to (h)it or (s)tay?
 
