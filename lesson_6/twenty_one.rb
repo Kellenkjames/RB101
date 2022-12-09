@@ -127,7 +127,7 @@ end
 def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
   player_total = total(player_cards)
 
-  if player_bust?(player_cards, dealer_cards)
+  if player_bust?(player_cards)
     prompt 'Player Busts ❌'
     end_of_round(player_cards, dealer_cards)
     play_again?
