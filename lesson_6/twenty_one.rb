@@ -97,7 +97,7 @@ def player_hits(player_cards)
   prompt "Your cards are now: #{handle_join(player_cards)} | Total: #{player_total}"
 end
 
-def player_bust?(player_cards)
+def player_bust?(player_cards, dealer_cards)
   player_total = total(player_cards)
   true if player_total > 21
 end
@@ -127,8 +127,9 @@ end
 def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
   player_total = total(player_cards)
 
-  if player_bust?(player_cards)
+  if player_bust?(player_cards, dealer_cards)
     prompt 'Player Busts ❌'
+    end_of_round(player_cards, dealer_cards)
     play_again?
   else
     prompt "You chose to stay with: #{player_total}"
@@ -144,7 +145,7 @@ def player_turn(player_cards, dealer_cards, player_stay, dealer_stay)
     answer = gets.chomp.downcase
 
     player_hits(player_cards) if answer == 'h'
-    break if answer == 's' || player_bust?(player_cards)
+    break if answer == 's' || player_bust?(player_cards, dealer_cards)
   end
 
   player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
@@ -234,8 +235,8 @@ end
 def end_of_round(player_cards, dealer_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
-  prompt "Player has: #{handle_join(player_cards)} | Total: #{player_total}"
-  prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
+  prompt "Player ends round with: #{handle_join(player_cards)} | Total: #{player_total}"
+  prompt "Dealer ends round with: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
 end
 
 def display_results(player_cards, dealer_cards)
