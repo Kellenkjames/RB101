@@ -151,7 +151,7 @@ def dealer_busted(dealer_cards)
   dealer_total = total(dealer_cards)
   prompt "Dealer has: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
   prompt 'Player Wins 🏆'
-  prompt 'Dealer Busts ❌'
+  prompt 'Dealer Busts'
   play_again?
 end
 
@@ -246,35 +246,3 @@ end
 
 initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 
-=begin
-
-Sequence of Events from Launch School Solution:
-
-STEP 1: 
-
-=> Welcome to Twenty-One!
-=> Dealer has ["S", "A"] and ? #* DONE
-=> You have: ["H", "10"] and ["D", "3"], for a total of 13. #* DONE
-=> Would you like to (h)it or (s)tay? #* DONE
-
-HIT:
-=> You chose to hit! #* DONE
-=> Your cards are now: [["H", "10"], ["D", "3"], ["D", "5"]] #* DONE
-=> Your total is now: 18 #* DONE
-=> Would you like to (h)it or (s)tay? #* DONE
-
-STAY:
-=> You stayed at 18 #* DONE
-=> Dealer turn... #* DONE
-=> Dealer hits! #* DONE
-=> Dealer's cards are now: [["S", "A"], ["H", "2"], ["H", "3"]]
-=> Dealer hits!
-=> Dealer's cards are now: [["S", "A"], ["H", "2"], ["H", "3"], ["C", "4"]]
-=> Dealer stays at 20
-===============
-=> Dealer has [["S", "A"], ["H", "2"], ["H", "3"], ["C", "4"]], for a total of: 20
-=> Player has [["H", "10"], ["D", "3"], ["D", "5"]], for a total of: 18
-===============
-=> Dealer wins!
-
-=end 
