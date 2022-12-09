@@ -109,10 +109,12 @@ def dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   loop do
     break if dealer_total >= 17
 
-    dealer_cards << values.sample(1).join(' ')
     prompt "Dealer hits..."
+    dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
     dealer_total = total(dealer_cards)
+    prompt "Dealer's cards are now: #{handle_join(dealer_cards)}"
+    prompt '==========================='
   end
 
   dealer_bust?(player_cards, dealer_cards, player_hold, dealer_hold)
@@ -249,18 +251,18 @@ STEP 1:
 => Welcome to Twenty-One!
 => Dealer has ["S", "A"] and ? #* DONE
 => You have: ["H", "10"] and ["D", "3"], for a total of 13. #* DONE
-=> Would you like to (h)it or (s)tay?
+=> Would you like to (h)it or (s)tay? #* DONE
 
 HIT:
-=> You chose to hit! 
-=> Your cards are now: [["H", "10"], ["D", "3"], ["D", "5"]]
-=> Your total is now: 18
-=> Would you like to (h)it or (s)tay?
+=> You chose to hit! #* DONE
+=> Your cards are now: [["H", "10"], ["D", "3"], ["D", "5"]] #* DONE
+=> Your total is now: 18 #* DONE
+=> Would you like to (h)it or (s)tay? #* DONE
 
 STAY:
-=> You stayed at 18
-=> Dealer turn...
-=> Dealer hits!
+=> You stayed at 18 #* DONE
+=> Dealer turn... #* DONE
+=> Dealer hits! #* DONE
 => Dealer's cards are now: [["S", "A"], ["H", "2"], ["H", "3"]]
 => Dealer hits!
 => Dealer's cards are now: [["S", "A"], ["H", "2"], ["H", "3"], ["C", "4"]]
