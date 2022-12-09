@@ -16,6 +16,9 @@ CARDS = [
   %w[C K], %w[D K], %w[H K], %w[S K]
 ].freeze
 
+BUST = 21
+DEALER_MAX = 17
+
 def shuffle(cards)
   cards.map { |card| card[1] }.sample(2)
 end
@@ -56,7 +59,7 @@ def total(cards)
 
   # correct for Aces
   values.select { |value| value == 'A' }.count.times do
-    sum -= 10 if sum > 21
+    sum -= 10 if sum > BUST
   end
 
   sum
@@ -99,7 +102,7 @@ end
 
 def player_bust?(player_cards)
   player_total = total(player_cards)
-  true if player_total > 21
+  true if player_total > BUST
 end
 
 def dealer_hits(dealer_cards)
@@ -113,7 +116,7 @@ def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay)
   dealer_total = total(dealer_cards)
 
   loop do
-    break if dealer_total >= 17
+    break if dealer_total >= DEALER_MAX
 
     dealer_cards << values.sample(1).join(' ')
     dealer_cards.delete('and')
@@ -172,7 +175,7 @@ end
 
 def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay)
   dealer_total = total(dealer_cards)
-  if dealer_total > 21
+  if dealer_total > BUST
     dealer_busted(player_cards, dealer_cards)
   else
     prompt "Dealer chose to stay with: #{dealer_total}"
