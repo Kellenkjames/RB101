@@ -80,7 +80,7 @@ def initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
 end
 
 def show_dealer(dealer_cards)
-  prompt "Dealer has: #{dealer_cards[0]} and unknown card"
+  prompt "Dealer has: #{dealer_cards} and ?"
 end
 
 def show_player(player_cards)
@@ -237,3 +237,36 @@ def display_results(player_cards, dealer_cards)
 end
 
 initialize_game(player_cards, dealer_cards, player_hold, dealer_hold)
+
+=begin
+
+Sequence of Events from Launch School Solution:
+
+STEP 1: 
+
+=> Welcome to Twenty-One!
+=> Dealer has ["S", "A"] and ?
+=> You have: ["H", "10"] and ["D", "3"], for a total of 13.
+=> Would you like to (h)it or (s)tay?
+
+HIT:
+=> You chose to hit!
+=> Your cards are now: [["H", "10"], ["D", "3"], ["D", "5"]]
+=> Your total is now: 18
+=> Would you like to (h)it or (s)tay?
+
+STAY:
+=> You stayed at 18
+=> Dealer turn...
+=> Dealer hits!
+=> Dealer's cards are now: [["S", "A"], ["H", "2"], ["H", "3"]]
+=> Dealer hits!
+=> Dealer's cards are now: [["S", "A"], ["H", "2"], ["H", "3"], ["C", "4"]]
+=> Dealer stays at 20
+===============
+=> Dealer has [["S", "A"], ["H", "2"], ["H", "3"], ["C", "4"]], for a total of: 20
+=> Player has [["H", "10"], ["D", "3"], ["D", "5"]], for a total of: 18
+===============
+=> Dealer wins!
+
+=end 
