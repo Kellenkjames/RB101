@@ -127,6 +127,7 @@ def player_wins?(player_cards, dealer_cards, player_hold, dealer_hold)
   else
     prompt "You Chose To Hold With: #{player_total}"
     player_hold += 1
+    prompt "Dealer turn..."
     dealer_turn(player_cards, dealer_cards, player_hold, dealer_hold)
   end
 end
