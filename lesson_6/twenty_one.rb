@@ -278,4 +278,20 @@ def display_results(player_cards, dealer_cards, dealer_score, player_score)
   end
 end
 
+def reset_scores(dealer_score, player_score)
+  dealer_score = 0
+  player_score = 0
+end 
+
+def show_winner(player_cards, dealer_cards, dealer_score, player_score)
+  if dealer_score == 5
+    prompt "Dealer wins game."
+    reset_scores(dealer_score, player_score)
+  elsif player_score == 5
+    prompt "Player wins game"
+    reset_scores(dealer_score, player_score)
+  end
+end
+
 initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
+show_winner(player_cards, dealer_cards, dealer_score, player_score)
