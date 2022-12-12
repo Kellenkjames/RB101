@@ -242,10 +242,6 @@ Metrics/MethodLength:
   CountComments: false  # count full line comments?
   Max: 15
 
-Metrics/ParameterLists:
-  Description: 'Avoid parameter lists longer than 5 parameters.'
-  Enabled: false
-
 Lint/LiteralInInterpolation:
   Description: 'Avoid interpolating literals in strings'
   AutoCorrect: false

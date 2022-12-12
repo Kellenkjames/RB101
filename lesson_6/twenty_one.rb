@@ -179,6 +179,7 @@ def both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, dea
   end
 end
 
+# rubocop:disable Metrics/ParameterLists
 def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   dealer_total = total(dealer_cards)
   if dealer_total > BUST
@@ -190,6 +191,7 @@ def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
     both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
   end
 end
+# rubocop:enable Metrics/ParameterLists
 
 def reset_game(dealer_score)
   system 'clear'
