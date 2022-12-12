@@ -114,7 +114,8 @@ def dealer_hits(dealer_cards)
   prompt '==========================='
 end
 
-def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+# rubocop:disable Metrics/ParameterLists
+def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   values = CARDS.map { |card| card[1] }
   dealer_total = total(dealer_cards)
 
@@ -127,8 +128,9 @@ def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sco
     dealer_hits(dealer_cards)
   end
 
-  dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+  dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
 end
+# rubocop:enable Metrics/ParameterLists
 
 def dealer_wins(player_cards, dealer_cards, dealer_score)
   prompt 'Player busts ❌'
