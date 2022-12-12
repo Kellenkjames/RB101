@@ -78,12 +78,14 @@ def handle_join(cards, word = 'and')
   end
 end
 
-def initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+# rubocop:disable Metrics/ParameterLists
+def initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   prompt 'Welcome to Twenty-One! 🃏 ♣ ♠️ ♦ ♥️'
   show_dealer(dealer_cards)
   show_player(player_cards)
-  player_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+  player_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
 end
+# rubocop:enable Metrics/ParameterLists
 
 def show_dealer(dealer_cards)
   prompt "Dealer has: #{dealer_cards[0]} and ?"
@@ -132,7 +134,7 @@ def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sco
 end
 # rubocop:enable Metrics/ParameterLists
 
-def dealer_wins(player_cards, dealer_cards, dealer_score)
+def dealer_wins(player_cards, dealer_cards)
   prompt 'Player busts ❌'
   end_of_round(player_cards, dealer_cards)
   prompt 'Dealer wins'
@@ -145,7 +147,7 @@ def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
 
   if player_bust?(player_cards)
     dealer_score += 1
-    dealer_wins(player_cards, dealer_cards, dealer_score)
+    dealer_wins(player_cards, dealer_cards)
   else
     prompt "You chose to stay with: #{player_total}"
     player_stay += 1
@@ -165,7 +167,7 @@ def player_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sco
     break if answer == 's' || player_bust?(player_cards)
   end
 
-  player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
+  player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score) ? player_score += 1 : player_score += 0
 end
 # rubocop:enable Metrics/ParameterLists
 
@@ -221,14 +223,14 @@ def game_reset?(answer, dealer_score, player_score)
   end
 end
 
-def play_again?(dealer_score)
+def play_again?(dealer_score, player_score)
   answer = nil
   loop do
     prompt 'Do you want to play again? y (yes) or n (no)'
     answer = gets.chomp.downcase
     break if %w[y n].include?(answer)
   end
-  game_reset?(answer, dealer_score)
+  game_reset?(answer, dealer_score, player_score)
 end
 
 def compare_cards(player_cards, dealer_cards)
@@ -266,7 +268,7 @@ def display_results(player_cards, dealer_cards, dealer_score, player_score)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
   end_of_round(player_cards, dealer_cards)
-  
+
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
     player_won(dealer_score, player_score)
   elsif player_total == dealer_total
