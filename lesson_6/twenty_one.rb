@@ -155,7 +155,8 @@ def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
 end
 # rubocop:enable Metrics/ParameterLists
 
-def player_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+# rubocop:disable Metrics/ParameterLists
+def player_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   loop do
     prompt 'hit or stay? Enter h (hit) or s (stay)'
     answer = gets.chomp.downcase
@@ -164,8 +165,9 @@ def player_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sco
     break if answer == 's' || player_bust?(player_cards)
   end
 
-  player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+  player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
 end
+# rubocop:enable Metrics/ParameterLists
 
 def player_wins(player_cards, dealer_cards)
   prompt 'Dealer busts ❌'
