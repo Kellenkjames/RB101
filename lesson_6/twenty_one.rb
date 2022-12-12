@@ -1,3 +1,5 @@
+require 'pry'
+
 # frozen_string_literal: true
 
 CARDS = [
@@ -130,7 +132,7 @@ end
 def handle_output(player_cards, dealer_cards)
   prompt 'Player busts ❌'
   end_of_round(player_cards, dealer_cards)
-  prompt 'Dealer wins round'
+  prompt 'Dealer wins'
   play_again?
 end
 
@@ -138,7 +140,9 @@ def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
   player_total = total(player_cards)
 
   if player_bust?(player_cards)
+    # binding.pry
     handle_output(player_cards, dealer_cards)
+    puts "Hello"
   else
     prompt "You chose to stay with: #{player_total}"
     player_stay += 1
@@ -162,7 +166,7 @@ end
 def dealer_busted(player_cards, dealer_cards)
   prompt 'Dealer busts ❌'
   end_of_round(player_cards, dealer_cards)
-  prompt 'Player wins round'
+  prompt 'Player wins'
   play_again?
 end
 
@@ -243,8 +247,8 @@ end
 def end_of_round(player_cards, dealer_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
-  prompt "Player ends round with: #{handle_join(player_cards)} | Total: #{player_total}"
-  prompt "Dealer ends round with: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
+  prompt "Player ends with: #{handle_join(player_cards)} | Total: #{player_total}"
+  prompt "Dealer ends with: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
 end
 
 def display_results(player_cards, dealer_cards)
