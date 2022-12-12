@@ -182,7 +182,7 @@ end
 def both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   if player_stay == 1 && dealer_stay == 1
     compare_cards(player_cards, dealer_cards)
-    display_results(player_cards, dealer_cards, dealer_score)
+    display_results(player_cards, dealer_cards, dealer_score, player_score)
   else
     player_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   end
@@ -278,4 +278,4 @@ def display_results(player_cards, dealer_cards, dealer_score, player_score)
   end
 end
 
-initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
