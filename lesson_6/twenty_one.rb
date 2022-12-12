@@ -132,6 +132,7 @@ def handle_output(player_cards, dealer_cards)
   end_of_round(player_cards, dealer_cards)
   prompt 'Dealer wins round'
   play_again?
+  dealer_score + 1
 end
 
 def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
