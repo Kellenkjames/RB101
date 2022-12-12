@@ -139,7 +139,8 @@ def dealer_wins(player_cards, dealer_cards, dealer_score)
   play_again?(dealer_score)
 end
 
-def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+# rubocop:disable Metrics/ParameterLists
+def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   player_total = total(player_cards)
 
   if player_bust?(player_cards)
@@ -149,9 +150,10 @@ def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
     prompt "You chose to stay with: #{player_total}"
     player_stay += 1
     prompt 'Dealer turn...'
-    dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+    dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   end
 end
+# rubocop:enable Metrics/ParameterLists
 
 def player_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
   loop do
