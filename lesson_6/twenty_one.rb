@@ -1,5 +1,3 @@
-require 'pry'
-
 # frozen_string_literal: true
 
 CARDS = [
@@ -129,7 +127,7 @@ def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay)
   dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay)
 end
 
-def handle_output(player_cards, dealer_cards)
+def dealer_wins(player_cards, dealer_cards)
   prompt 'Player busts ❌'
   end_of_round(player_cards, dealer_cards)
   prompt 'Dealer wins'
@@ -140,9 +138,7 @@ def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
   player_total = total(player_cards)
 
   if player_bust?(player_cards)
-    # binding.pry
-    handle_output(player_cards, dealer_cards)
-    puts "Hello"
+    dealer_wins(player_cards, dealer_cards)
   else
     prompt "You chose to stay with: #{player_total}"
     player_stay += 1
@@ -163,7 +159,7 @@ def player_turn(player_cards, dealer_cards, player_stay, dealer_stay)
   player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
 end
 
-def dealer_busted(player_cards, dealer_cards)
+def player_wins(player_cards, dealer_cards)
   prompt 'Dealer busts ❌'
   end_of_round(player_cards, dealer_cards)
   prompt 'Player wins'
@@ -182,7 +178,7 @@ end
 def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay)
   dealer_total = total(dealer_cards)
   if dealer_total > BUST
-    dealer_busted(player_cards, dealer_cards)
+    player_wins(player_cards, dealer_cards)
   else
     prompt "Dealer chose to stay with: #{dealer_total}"
     dealer_stay += 1
