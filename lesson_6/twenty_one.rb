@@ -1,5 +1,3 @@
-require 'pry'
-
 # frozen_string_literal: true
 
 CARDS = [
@@ -20,6 +18,9 @@ CARDS = [
 
 BUST = 21
 DEALER_MAX = 17
+
+dealer_score = 0
+player_score = 0
 
 def shuffle(cards)
   cards.map { |card| card[1] }.sample(2)
@@ -129,8 +130,6 @@ def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sco
   dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
 end
 
-dealer_score = 0 # The only way to give a method access to an outside variable is to pass it in as an arg
-
 def dealer_wins(player_cards, dealer_cards, dealer_score)
   prompt 'Player busts ❌'
   end_of_round(player_cards, dealer_cards)
@@ -143,7 +142,6 @@ def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
 
   if player_bust?(player_cards)
     dealer_score += 1
-    binding.pry
     dealer_wins(player_cards, dealer_cards, dealer_score)
   else
     prompt "You chose to stay with: #{player_total}"
@@ -181,9 +179,10 @@ def both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, dea
   end
 end
 
-def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   dealer_total = total(dealer_cards)
   if dealer_total > BUST
+    player_score += 1
     player_wins(player_cards, dealer_cards)
   else
     prompt "Dealer chose to stay with: #{dealer_total}"
