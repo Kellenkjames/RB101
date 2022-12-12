@@ -132,7 +132,6 @@ def handle_output(player_cards, dealer_cards)
   end_of_round(player_cards, dealer_cards)
   prompt 'Dealer wins round'
   play_again?
-  dealer_score + 1
 end
 
 def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay)
@@ -165,7 +164,6 @@ def dealer_busted(player_cards, dealer_cards)
   end_of_round(player_cards, dealer_cards)
   prompt 'Player wins round'
   play_again?
-  player_score + 1
 end
 
 def both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay)
@@ -225,7 +223,7 @@ def compare_cards(player_cards, dealer_cards)
 end
 
 def player_won
-  prompt 'Player wins round!'
+  prompt 'Player wins'
   prompt '==========================='
   play_again?
 end
@@ -237,7 +235,7 @@ def tie_game
 end
 
 def dealer_won
-  prompt 'Dealer wins round'
+  prompt 'Dealer wins'
   prompt '==========================='
   play_again?
 end
