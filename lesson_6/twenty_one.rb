@@ -165,6 +165,7 @@ def dealer_busted(player_cards, dealer_cards)
   end_of_round(player_cards, dealer_cards)
   prompt 'Player wins round'
   play_again?
+  player_score + 1
 end
 
 def both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay)
