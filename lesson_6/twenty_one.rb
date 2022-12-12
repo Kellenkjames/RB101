@@ -240,7 +240,7 @@ def compare_cards(player_cards, dealer_cards)
 end
 
 def player_won(dealer_score, player_score)
-  prompt 'Player wins'
+  prompt 'Player wins round'
   prompt '==========================='
   play_again?(dealer_score, player_score)
 end
@@ -252,7 +252,7 @@ def tie_game(dealer_score, player_score)
 end
 
 def dealer_won(dealer_score, player_score)
-  prompt 'Dealer wins'
+  prompt 'Dealer wins round'
   prompt '==========================='
   play_again?(dealer_score, player_score)
 end
