@@ -196,24 +196,24 @@ def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
   else
     prompt "Dealer chose to stay with: #{dealer_total}"
     dealer_stay += 1
-    both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+    both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   end
 end
 # rubocop:enable Metrics/ParameterLists
 
-def reset_game(dealer_score)
+def reset_game(dealer_score, player_score)
   system 'clear'
   player_cards = shuffle(CARDS)
   dealer_cards = shuffle(CARDS)
   player_stay = 0
   dealer_stay = 0
-  initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score)
+  initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
 end
 
-def game_reset?(answer, dealer_score)
+def game_reset?(answer, dealer_score, player_score)
   case answer
   when 'y'
-    reset_game(dealer_score)
+    reset_game(dealer_score, player_score)
   when 'n'
     prompt 'Thanks for Playing Twenty-One. Goodbye!'
   else
@@ -237,22 +237,22 @@ def compare_cards(player_cards, dealer_cards)
   { 'Player': player_total, 'Dealer': dealer_total }
 end
 
-def player_won(dealer_score)
+def player_won(dealer_score, player_score)
   prompt 'Player wins'
   prompt '==========================='
-  play_again?(dealer_score)
+  play_again?(dealer_score, player_score)
 end
 
-def tie_game(dealer_score)
+def tie_game(dealer_score, player_score)
   prompt "It's a tie 👯"
   prompt '==========================='
-  play_again?(dealer_score)
+  play_again?(dealer_score, player_score)
 end
 
-def dealer_won(dealer_score)
+def dealer_won(dealer_score, player_score)
   prompt 'Dealer wins'
   prompt '==========================='
-  play_again?(dealer_score)
+  play_again?(dealer_score, player_score)
 end
 
 def end_of_round(player_cards, dealer_cards)
@@ -262,16 +262,17 @@ def end_of_round(player_cards, dealer_cards)
   prompt "Dealer ends with: #{handle_join(dealer_cards)} | Total: #{dealer_total}"
 end
 
-def display_results(player_cards, dealer_cards, dealer_score)
+def display_results(player_cards, dealer_cards, dealer_score, player_score)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
   end_of_round(player_cards, dealer_cards)
+  
   if compare_cards(player_cards, dealer_cards)[:Player] > compare_cards(player_cards, dealer_cards)[:Dealer]
-    player_won(dealer_score)
+    player_won(dealer_score, player_score)
   elsif player_total == dealer_total
-    tie_game(dealer_score)
+    tie_game(dealer_score, player_score)
   else
-    dealer_won(dealer_score)
+    dealer_won(dealer_score, player_score)
   end
 end
 
