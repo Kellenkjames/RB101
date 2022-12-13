@@ -29,7 +29,7 @@ DEALER_MAX = 17
 player_stay = 0
 dealer_stay = 0
 
-# Keep track of dealer and player_scores
+# Keep track of dealer and player scores
 dealer_score = 0
 player_score = 0
 
@@ -247,7 +247,7 @@ def compare_cards(player_cards, dealer_cards)
 end
 
 def player_won(dealer_score, player_score)
-  prompt 'Player wins round!'
+  prompt 'Player wins!'
   player_score += 1
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
@@ -263,7 +263,7 @@ def tie_game(dealer_score, player_score)
 end
 
 def dealer_won(dealer_score, player_score)
-  prompt 'Dealer wins round'
+  prompt 'Dealer wins!'
   dealer_score += 1
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
