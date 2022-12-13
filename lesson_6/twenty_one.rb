@@ -177,6 +177,9 @@ def player_wins(player_cards, dealer_cards, dealer_score, player_score)
   prompt 'Dealer busts ❌'
   end_of_round(player_cards, dealer_cards)
   prompt 'Player wins'
+  player_score += 1
+  show_game_score(dealer_score, player_score)
+  game_winner?(dealer_score, player_score)
   play_again?(dealer_score, player_score)
 end
 
@@ -195,9 +198,6 @@ end
 def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   dealer_total = total(dealer_cards)
   if dealer_total > BUST
-    player_score += 1
-    game_winner?(dealer_score, player_score)
-    show_game_score(dealer_score, player_score)
     player_wins(player_cards, dealer_cards, dealer_score, player_score)
   else
     prompt "Dealer chose to stay with: #{dealer_total}"
