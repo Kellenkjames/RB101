@@ -138,6 +138,9 @@ def dealer_wins(player_cards, dealer_cards, dealer_score, player_score)
   prompt 'Player busts ❌'
   end_of_round(player_cards, dealer_cards)
   prompt 'Dealer wins'
+  dealer_score += 1
+  show_game_score(dealer_score, player_score)
+  game_winner?(dealer_score, player_score)
   play_again?(dealer_score, player_score)
 end
 
@@ -146,7 +149,6 @@ def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
   player_total = total(player_cards)
 
   if player_bust?(player_cards)
-    dealer_score += 1
     dealer_wins(player_cards, dealer_cards, dealer_score, player_score)
   else
     prompt "You chose to stay with: #{player_total}"
@@ -194,6 +196,8 @@ def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
   dealer_total = total(dealer_cards)
   if dealer_total > BUST
     player_score += 1
+    game_winner?(dealer_score, player_score)
+    show_game_score(dealer_score, player_score)
     player_wins(player_cards, dealer_cards, dealer_score, player_score)
   else
     prompt "Dealer chose to stay with: #{dealer_total}"
@@ -241,7 +245,8 @@ end
 
 def player_won(dealer_score, player_score)
   prompt 'Player wins round'
-  score_keeper(dealer_score, player_score)
+  player_score += 1
+  show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
   prompt '==========================='
   play_again?(dealer_score, player_score)
@@ -249,14 +254,15 @@ end
 
 def tie_game(dealer_score, player_score)
   prompt "It's a tie 👯"
-  score_keeper(dealer_score, player_score)
+  show_game_score(dealer_score, player_score)
   prompt '==========================='
   play_again?(dealer_score, player_score)
 end
 
 def dealer_won(dealer_score, player_score)
   prompt 'Dealer wins round'
-  score_keeper(dealer_score, player_score)
+  dealer_score += 1
+  show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
   prompt '==========================='
   play_again?(dealer_score, player_score)
@@ -283,7 +289,7 @@ def display_results(player_cards, dealer_cards, dealer_score, player_score)
   end
 end
 
-def score_keeper(dealer_score, player_score)
+def show_game_score(dealer_score, player_score)
   prompt "Dealer: #{dealer_score} | Player: #{player_score}"
 end
 
