@@ -241,18 +241,23 @@ end
 
 def player_won(dealer_score, player_score)
   prompt 'Player wins round'
+  score_keeper(dealer_score, player_score)
+  game_winner?(dealer_score, player_score)
   prompt '==========================='
   play_again?(dealer_score, player_score)
 end
 
 def tie_game(dealer_score, player_score)
   prompt "It's a tie 👯"
+  score_keeper(dealer_score, player_score)
   prompt '==========================='
   play_again?(dealer_score, player_score)
 end
 
 def dealer_won(dealer_score, player_score)
   prompt 'Dealer wins round'
+  score_keeper(dealer_score, player_score)
+  game_winner?(dealer_score, player_score)
   prompt '==========================='
   play_again?(dealer_score, player_score)
 end
@@ -278,20 +283,20 @@ def display_results(player_cards, dealer_cards, dealer_score, player_score)
   end
 end
 
-def reset_scores(dealer_score, player_score)
-  dealer_score = 0
-  player_score = 0
-end 
+def score_keeper(dealer_score, player_score)
+  prompt "Dealer: #{dealer_score} | Player: #{player_score}"
+end
 
-def show_winner(player_cards, dealer_cards, dealer_score, player_score)
+def game_winner?(dealer_score, player_score)
   if dealer_score == 5
-    prompt "Dealer wins game."
-    reset_scores(dealer_score, player_score)
+    prompt 'Dealer wins game.'
+    # dealer_score = 0
+    # player_score = 0
   elsif player_score == 5
-    prompt "Player wins game"
-    reset_scores(dealer_score, player_score)
+    prompt 'Player wins game'
+    # dealer_score = 0
+    # player_score = 0
   end
 end
 
 initialize_game(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
-show_winner(player_cards, dealer_cards, dealer_score, player_score)
