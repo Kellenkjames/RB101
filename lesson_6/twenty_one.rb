@@ -1,3 +1,5 @@
+require 'pry'
+
 # frozen_string_literal: true
 
 CARDS = [
@@ -16,23 +18,24 @@ CARDS = [
   %w[C K], %w[D K], %w[H K], %w[S K]
 ].freeze
 
-BUST = 21
-DEALER_MAX = 17
-
-dealer_score = 0
-player_score = 0
-
 def shuffle(cards)
   cards.map { |card| card[1] }.sample(2)
 end
 
+BUST = 21
+DEALER_MAX = 17
+
+# Keep track of each player's "stay" position
+player_stay = 0
+dealer_stay = 0
+
+# Keep track of dealer and player_scores
+dealer_score = 0
+player_score = 0
+
 # Keep track of the initial cards that were drawn
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
-
-# Keep track of each player's decision to stay
-player_stay = 0
-dealer_stay = 0
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -244,7 +247,7 @@ def compare_cards(player_cards, dealer_cards)
 end
 
 def player_won(dealer_score, player_score)
-  prompt 'Player wins round'
+  prompt 'Player wins round!'
   player_score += 1
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
@@ -295,11 +298,11 @@ end
 
 def game_winner?(dealer_score, player_score)
   if dealer_score == 5
-    prompt 'Dealer wins game.'
+    prompt 'Dealer wins game 😎'
     # dealer_score = 0
     # player_score = 0
   elsif player_score == 5
-    prompt 'Player wins game'
+    prompt 'Player wins game 🏆'
     # dealer_score = 0
     # player_score = 0
   end
