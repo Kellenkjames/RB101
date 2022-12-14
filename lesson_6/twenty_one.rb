@@ -23,15 +23,12 @@ end
 BUST = 21
 DEALER_MAX = 17
 
-# Keep track of each player's "stay" position
 player_stay = 0
 dealer_stay = 0
 
-# Keep track of each player's scores
 dealer_score = 0
 player_score = 0
 
-# Keep track of each player's current deck
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
@@ -122,7 +119,6 @@ def dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sco
   values = CARDS.map { |card| card[1] }
   dealer_total = total(dealer_cards)
 
-  # Dealer hits until total is >= 17
   loop do
     break if dealer_total >= DEALER_MAX
 
