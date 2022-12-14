@@ -304,12 +304,10 @@ end
 def game_winner?(dealer_score, player_score)
   if dealer_score == 5
     prompt 'Dealer wins game 😎'
-    # dealer_score = 0
-    # player_score = 0
+    play_again?(dealer_score, player_score)
   elsif player_score == 5
     prompt 'Player wins game 🏆'
-    # dealer_score = 0
-    # player_score = 0
+    play_again?(dealer_score, player_score)
   end
 end
 
