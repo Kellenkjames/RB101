@@ -143,6 +143,7 @@ def dealer_wins(player_cards, dealer_cards, dealer_score, player_score)
   dealer_score += 1
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
+  prompt '==========================='
   play_again?(dealer_score, player_score)
 end
 
@@ -184,6 +185,7 @@ def player_wins(player_cards, dealer_cards, dealer_score, player_score)
   player_score += 1
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
+  prompt '==========================='
   play_again?(dealer_score, player_score)
 end
 
