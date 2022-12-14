@@ -144,6 +144,7 @@ def dealer_wins(player_cards, dealer_cards, dealer_score, player_score)
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
   prompt '==========================='
+  dealer_score = 0 && player_score = 0 if dealer_score == 5 || player_score == 5
   play_again?(dealer_score, player_score)
 end
 
@@ -186,6 +187,7 @@ def player_wins(player_cards, dealer_cards, dealer_score, player_score)
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
   prompt '==========================='
+  dealer_score = 0 && player_score = 0 if dealer_score == 5 || player_score == 5
   play_again?(dealer_score, player_score)
 end
 
@@ -256,6 +258,7 @@ def player_won(dealer_score, player_score)
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
   prompt '==========================='
+  dealer_score = 0 && player_score = 0 if dealer_score == 5 || player_score == 5
   play_again?(dealer_score, player_score)
 end
 
@@ -272,6 +275,7 @@ def dealer_won(dealer_score, player_score)
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
   prompt '==========================='
+  dealer_score = 0 && player_score = 0 if dealer_score == 5 || player_score == 5
   play_again?(dealer_score, player_score)
 end
 
@@ -303,11 +307,9 @@ end
 
 def game_winner?(dealer_score, player_score)
   if dealer_score == 5
-    prompt 'Dealer wins game 😎'
-    play_again?(dealer_score, player_score)
+    prompt 'Dealer wins round 😎'
   elsif player_score == 5
-    prompt 'Player wins game 🏆'
-    play_again?(dealer_score, player_score)
+    prompt 'Player wins round 🏆'
   end
 end
 
