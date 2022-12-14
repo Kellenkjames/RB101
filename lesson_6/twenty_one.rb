@@ -27,11 +27,11 @@ DEALER_MAX = 17
 player_stay = 0
 dealer_stay = 0
 
-# Keep track of dealer and player scores
+# Keep track of each player's scores
 dealer_score = 0
 player_score = 0
 
-# Keep track of the initial cards that were drawn
+# Keep track of each player's current deck
 player_cards = shuffle(CARDS)
 dealer_cards = shuffle(CARDS)
 
