@@ -193,7 +193,7 @@ def player_wins(player_cards, dealer_cards, dealer_score, player_score)
 end
 
 # rubocop:disable Metrics/ParameterLists
-def both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
+def both_players_stay?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   if player_stay == 1 && dealer_stay == 1
     compare_cards(player_cards, dealer_cards)
     display_results(player_cards, dealer_cards, dealer_score, player_score)
@@ -212,7 +212,7 @@ def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
     prompt "Dealer chose to stay with: #{dealer_total}"
     dealer_stay += 1
     prompt '==========================='
-    both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
+    both_players_stay?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   end
 end
 # rubocop:enable Metrics/ParameterLists
