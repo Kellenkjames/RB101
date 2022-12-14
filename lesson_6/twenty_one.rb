@@ -272,8 +272,8 @@ end
 def end_of_round(player_cards, dealer_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
-  prompt "Player ends with: #{handle_join(player_cards).gsub('and,', '').gsub(/\s+/, " ")} | Total: #{player_total}"
-  prompt "Dealer ends with: #{handle_join(dealer_cards).gsub('and,', '').gsub(/\s+/, " ")} | Total: #{dealer_total}"
+  prompt "Player ends with: #{handle_join(player_cards).gsub('and,', '').gsub(/\s+/, ' ')} | Total: #{player_total}"
+  prompt "Dealer ends with: #{handle_join(dealer_cards).gsub('and,', '').gsub(/\s+/, ' ')} | Total: #{dealer_total}"
 end
 
 def display_results(player_cards, dealer_cards, dealer_score, player_score)
