@@ -139,7 +139,7 @@ def dealer_wins(player_cards, dealer_cards, dealer_score, player_score)
   prompt 'Player busts ❌'
   prompt '==========================='
   end_of_round(player_cards, dealer_cards)
-  prompt 'Dealer wins'
+  prompt 'Dealer wins!'
   dealer_score += 1
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
@@ -180,7 +180,7 @@ def player_wins(player_cards, dealer_cards, dealer_score, player_score)
   prompt 'Dealer busts ❌'
   prompt '==========================='
   end_of_round(player_cards, dealer_cards)
-  prompt 'Player wins'
+  prompt 'Player wins!'
   player_score += 1
   show_game_score(dealer_score, player_score)
   game_winner?(dealer_score, player_score)
@@ -258,7 +258,7 @@ def player_won(dealer_score, player_score)
 end
 
 def tie_game(dealer_score, player_score)
-  prompt "It's a tie 👯"
+  prompt "It's a tie!"
   show_game_score(dealer_score, player_score)
   prompt '==========================='
   play_again?(dealer_score, player_score)
