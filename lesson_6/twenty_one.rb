@@ -154,6 +154,7 @@ def player_wins?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
     dealer_wins(player_cards, dealer_cards, dealer_score, player_score)
   else
     prompt "You chose to stay with: #{player_total}"
+    prompt '==========================='
     player_stay += 1
     prompt 'Dealer turn...'
     dealer_turn(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
@@ -205,6 +206,7 @@ def dealer_bust?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_sc
   else
     prompt "Dealer chose to stay with: #{dealer_total}"
     dealer_stay += 1
+    prompt '==========================='
     both_players_hold?(player_cards, dealer_cards, player_stay, dealer_stay, dealer_score, player_score)
   end
 end
@@ -276,6 +278,7 @@ def end_of_round(player_cards, dealer_cards)
   dealer_total = total(dealer_cards)
   prompt "Player ends with: #{handle_join(player_cards).gsub('and,', '').gsub(/\s+/, ' ')} | Total: #{player_total}"
   prompt "Dealer ends with: #{handle_join(dealer_cards).gsub('and,', '').gsub(/\s+/, ' ')} | Total: #{dealer_total}"
+  prompt '==========================='
 end
 
 def display_results(player_cards, dealer_cards, dealer_score, player_score)
