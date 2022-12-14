@@ -66,7 +66,7 @@ def total(cards)
   sum
 end
 
-def handle_join(cards, word = 'and')
+def handle_join!(cards, word = 'and')
   if cards.size == 2
     cards.insert(-2, word).join(' ')
   elsif cards.size > 2
@@ -100,7 +100,7 @@ def player_hits(player_cards)
   player_cards << values.sample(1).join(' ')
   player_cards.delete('and')
   player_total = total(player_cards)
-  prompt "Your cards are now: #{handle_join(player_cards)} | Total: #{player_total}"
+  prompt "Your cards are now: #{handle_join!(player_cards)} | Total: #{player_total}"
 end
 
 def player_bust?(player_cards)
@@ -110,7 +110,7 @@ end
 
 def dealer_hits(dealer_cards)
   prompt 'Dealer hits...'
-  prompt "Dealer's cards are now: #{handle_join(dealer_cards)}"
+  prompt "Dealer's cards are now: #{handle_join!(dealer_cards)}"
   prompt '==========================='
 end
 
@@ -279,8 +279,8 @@ end
 def end_of_round(player_cards, dealer_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
-  prompt "Player ends with: #{handle_join(player_cards).gsub('and,', '').gsub(/\s+/, ' ')} | Total: #{player_total}"
-  prompt "Dealer ends with: #{handle_join(dealer_cards).gsub('and,', '').gsub(/\s+/, ' ')} | Total: #{dealer_total}"
+  prompt "Player ends with: #{handle_join!(player_cards).gsub('and,', '').gsub(/\s+/, ' ')} | Total: #{player_total}"
+  prompt "Dealer ends with: #{handle_join!(dealer_cards).gsub('and,', '').gsub(/\s+/, ' ')} | Total: #{dealer_total}"
   prompt '==========================='
 end
 
