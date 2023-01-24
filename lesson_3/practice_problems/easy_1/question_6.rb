@@ -4,8 +4,5 @@
 
 famous_words = "seven years ago..."
 
-# first method 
 famous_words.prepend('Four score and ')
-
-# second method
 famous_words.insert(0, 'Four score and ')
