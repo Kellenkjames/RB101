@@ -8,4 +8,12 @@ end
 
 greeting
 
-#* Nothing should happen. `greeting` will not be initialized with any value
+=begin
+
+Explanation:
+
+* `greeting` is `nil`. Typically, when you reference an uninitialized variable, Ruby will raise an exception, stating that it's undefined. 
+
+* However, when you initialize a local variable within an `if` clause, even if that `if` clause doesn't get executed, the local variable is initialized to `nil`.
+
+=end
