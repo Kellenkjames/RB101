@@ -20,7 +20,7 @@ puts "result is #{result}"
 
 =begin
 
-* This is a local variable scope issue. The `limit` variable is initialized outside of the method (in the main scope). Methods have a self-contained inner scope and cannot access variables initialized in the outer scope; unless the object is passed in as an argument to the method invocation.
+* This is a local variable scope issue. The `limit` variable is initialized outside of the method (in the main scope). Methods have self-contained inner scope and cannot access variables initialized in the outer scope; unless the object is passed in as an argument to the method.
 
 How would you fix this so that it works?
 
