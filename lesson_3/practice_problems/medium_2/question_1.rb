@@ -12,12 +12,14 @@ puts c.object_id  # 60
 
 =begin
 
-Explanation: 
+Explanation:
 
-`a` and `b` reference different objects. Although the two objects look the same, i.e, they both have the value of "forty two"; they are still different objects. 
+`a` and `b` reference different objects. Although the two objects look the same, i.e, they both have the value of "forty two"; they are still different objects.
 
 Meanwhile, the object ids show that `a` and `c` reference the same object. This is because `c` was initialized to the object referenced by `a`.
 
-* Takeway: When a variable is initialized, it will always have a different object_id -- even if it has the SAME value as another object. 
+* Takeway: When a variable references a String object, it will have a different object_id; EVEN if it has the same value as another object (as shown above).
 
-=end 
+* This is not the case with Integers.
+
+=end
