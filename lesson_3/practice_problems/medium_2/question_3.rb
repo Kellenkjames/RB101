@@ -27,6 +27,10 @@ puts "My array looks like this now: #{my_array}"
 
 # Reason: The `Array#<<` method mutates the calling object when passed into the method -- it changes the original array.
 
-#* Takeaway: In both cases, Ruby passes the arguments "by value", but unlike some other languages, the value that gets passed is a reference to some object; it's not a copy.
+#_____________________________________
 
-#*  Re-assignment creates a new `String` object. When we attach an additional element to an array using the << operator, Ruby simply keeps using the same object that was passed in, and appends the new element to it.
+#* Takeaways: In both cases, Ruby passes the arguments "by value", but unlike some other languages, the value that gets passed is a reference to some object; it's not a copy.
+
+#*  Re-assignment creates a new `String` object. 
+
+#* When we attach an additional element to an array using the << operator, Ruby simply keeps using the same object that was passed in, and appends the new element to it.
